@@ -11,11 +11,11 @@ import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/addition
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/cancellation_policy_screen.dart';
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/car/car_ticket_deatils_screen.dart';
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/ferrry/ferry_ticket_deatils_screen.dart';
+import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/flight/flight_tickets_details_screen.dart';
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/hotel_rservations_screen.dart';
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/rate_your_experience.dart';
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/required_information_Screen.dart';
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/restaurant_reservations_screen.dart';
-import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/flight/flight_tickets_details_screen.dart';
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/train/train_ticket_deatils_screen.dart';
 import 'package:tralever_module/ui/shared/appbar.dart';
 import 'package:tralever_module/ui/shared/dilog_box.dart';
@@ -76,7 +76,6 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
           "",
       timezone: 1,
     );
-
     super.initState();
   }
 
@@ -296,11 +295,27 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                   // itemCount: date.length,
                   //shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
+                    print(
+                        "ITINERARY_DETAILS===>${itineraryDetailScreenController.itineraryDetailsListModel?.name}");
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5),
                       child: GestureDetector(
                         onTap: () {
-                          itineraryDetailScreenController.selectValue = index;
+                          setState(() {
+                            itineraryDetailScreenController.selectValue = index;
+                            print(
+                                'ItineraryDetailScreenController=======>${itineraryDetailScreenController.selectValue}');
+                            if (itineraryDetailScreenController.selectValue ==
+                                index) {
+                              itineraryDetailScreenController.update();
+                              itineraryDetailScreenController
+                                  .itineraryDetailsListModel
+                                  ?.itinerary[index]
+                                  .name;
+                              print(
+                                  'ITINERARY_NAME====>${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[index].name}');
+                            }
+                          });
                         },
                         child: Container(
                           decoration: BoxDecoration(

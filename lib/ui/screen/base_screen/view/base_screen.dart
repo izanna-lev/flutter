@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tralever_module/custem_class/constant/app_colors.dart';
 import 'package:tralever_module/custem_class/constant/app_icons.dart';
-import 'package:tralever_module/ui/screen/chats/controller/chat_screen_controller.dart';
+
 import '../../../../custem_class/constant/app_functions.dart';
 import '../../../../custem_class/constant/app_settings.dart';
 import '../../../../custem_class/utils/globle.dart';
@@ -20,7 +20,6 @@ class BaseScreen extends StatefulWidget {
 
 class _BaseScreenState extends State<BaseScreen> {
   BaseScreenController baseScreenController = Get.find<BaseScreenController>();
-  ChatController chatController = Get.find<ChatController>();
   DateTime? currentBackPressTime;
   Future<bool> onWillPop() {
     DateTime now = DateTime.now();
@@ -36,9 +35,6 @@ class _BaseScreenState extends State<BaseScreen> {
   @override
   void initState() {
     baseScreenController.update();
-
-    /// chatController.userChatListData(0);
-
     super.initState();
   }
 

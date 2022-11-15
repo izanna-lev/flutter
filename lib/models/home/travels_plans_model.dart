@@ -29,15 +29,15 @@ class TravelPlansModel {
 
   factory TravelPlansModel.fromJson(Map<String, dynamic> json) =>
       TravelPlansModel(
-        code: json["code"],
-        message: json["message"],
+        code: json["code"] ?? 0,
+        message: json["message"] ?? "",
         data: List<TravelPlansListModel>.from(
             json["data"].map((x) => TravelPlansListModel.fromJson(x))),
-        page: json["page"],
-        limit: json["limit"],
-        size: json["size"],
-        hasMore: json["hasMore"],
-        format: json["format"],
+        page: json["page"] ?? 0,
+        limit: json["limit"] ?? 0,
+        size: json["size"] ?? 0,
+        hasMore: json["hasMore"] ?? false,
+        format: json["format"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -73,13 +73,13 @@ class TravelPlansListModel {
 
   factory TravelPlansListModel.fromJson(Map<String, dynamic> json) =>
       TravelPlansListModel(
-        id: json["_id"],
-        name: json["name"],
-        price: json["price"],
-        duration: json["duration"],
-        itineraryStatus: json["itineraryStatus"],
-        description: json["description"],
-        image: json["image"],
+        id: json["_id"] ?? "",
+        name: json["name"] ?? "",
+        price: json["price"] ?? 0,
+        duration: json["duration"] ?? 0,
+        itineraryStatus: json["itineraryStatus"] ?? 0,
+        description: json["description"] ?? "",
+        image: json["image"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {

@@ -4,14 +4,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart' as mimeee;
 import 'package:mime_type/mime_type.dart';
+import 'package:tralever_module/custem_class/utils/globle.dart';
 
 import '../custem_class/constant/app_functions.dart';
-
-import '../custem_class/utils/globle.dart';
 import 'over&loding.dart';
 
 enum RequestType { Get, Post }
@@ -23,17 +21,22 @@ class API {
     required String url,
     RequestType requestType = RequestType.Post,
     bool showLoader = true,
+    Map<String, String>? header,
     bool showToast = false,
     dynamic body,
   }) async {
     try {
       if (await checkConnection()) {
         if (showLoader) LoadingOverlay.of().show();
-        Map<String, String> header = {'Content-Type': 'application/json'};
-        if (userController.userModel != null) {
-          header
-              .addAll({"Authorization": userController.userModel!.accessToken});
+        // Map<String, String> header = {'Content-Type': 'application/json'};
+        if (userController.rowndSignInDetailsModel != null) {
+          header?.addAll({
+            "Authorization": userController.rowndSignInModel!.data.accessToken
+          });
+          print(
+              'USER-TOKEN${userController.rowndSignInModel!.data.accessToken}');
         }
+
         log("URl ===> $url");
         log("HEADER ===> $header");
         log("BODY ===> $body");
@@ -80,6 +83,7 @@ class API {
       String multiPartImageKeyName = "image",
       Map<String, String>? header,
       required String url,
+      required String token,
       encoding}) async {
     try {
       bool connection = await checkConnection();
@@ -88,18 +92,27 @@ class API {
         log("URl ===> $url");
 
         log("BODY ===> $field");
-
+        print("before loading");
         if (showLoader) LoadingOverlay.of().show();
+        print("after loading");
+
         var request = http.MultipartRequest(
           'POST',
           Uri.parse(url),
         );
 
-        Map<String, String> header = {'Content-Type': 'form-data/multipart'};
-        if (userController.userModel != null) {
-          header
-              .addAll({"Authorization": userController.userModel!.accessToken});
+        Map<String, String> header = {
+          'Content-Type': 'form-data/multipart',
+          'Authorization': token
+        };
+        if (userController.rowndSignInDetailsModel != null) {
+          header.addAll({
+            "Authorization": userController.rowndSignInModel!.data.accessToken
+          });
+          print(
+              'USER-TOKEN${userController.rowndSignInModel!.data.accessToken}');
         }
+
         log("HEADER ===> $header");
         if (header != null) request.headers.addAll(header);
         if (field != null) request.fields.addAll(field);
@@ -129,9 +142,10 @@ class API {
         var res = await response.stream.bytesToString();
 
         var resDecode = jsonDecode(res);
-        log("RETURN RESPONSE BODY CREATE ====== $resDecode");
+        log("MULTIPART RETURN RESPONSE BODY CREATE ====== $resDecode");
         if (resDecode["code"] == 100) {
           if (showLoader) LoadingOverlay.of().hide();
+          flutterToast(resDecode["message"]);
 
           return resDecode;
         } else if (resDecode["code"] == 401) {

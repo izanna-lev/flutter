@@ -51,7 +51,7 @@ class CardData {
 
   factory CardData.fromJson(Map<String, dynamic> json) => CardData(
         userRef: json["userRef"],
-        lastDigitsOfCard: json["lastDigitsOfCard"] ?? 0,
+        lastDigitsOfCard: json["lastDigitsOfCard"],
         cardType: json["cardType"],
         country: json["country"],
         deleted: json["deleted"],

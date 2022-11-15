@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import '../../models/settings/app_detail_model.dart';
 import '../../models/settings/delete_account_model.dart';
 import '../../models/settings/faq_model.dart';
@@ -11,6 +12,7 @@ class ContactRepo {
   }) async {
     var responseBody = await API.apiHandler(
       url: APIRoutes.contactAdmin,
+      header: {'Content-Type': 'application/json'},
       body: jsonEncode({"message": message}),
     );
     if (responseBody != null) {
@@ -23,6 +25,7 @@ class ContactRepo {
   static Future<FaqListModel?> fetchFaqs(int page) async {
     var responseBody = await API.apiHandler(
         url: APIRoutes.faqsList,
+        header: {'Content-Type': 'application/json'},
         showLoader: false,
         body: jsonEncode({"page": page}));
     print("============="
@@ -33,6 +36,7 @@ class ContactRepo {
   static Future<AppDetailModel?> getStaticData() async {
     var responseBody = await API.apiHandler(
       url: APIRoutes.appDetailList,
+      header: {'Content-Type': 'application/json'},
       showLoader: false,
     );
     return AppDetailModel.fromJson(responseBody!);
@@ -41,6 +45,7 @@ class ContactRepo {
   static Future deleteAccountRepo({required String userRef}) async {
     var responseBody = await API.apiHandler(
       url: APIRoutes.userDelete,
+      header: {'Content-Type': 'application/json'},
       requestType: RequestType.Post,
       body: jsonEncode({"userRef": userRef}),
     );

@@ -97,7 +97,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
                     RequestFormTextfield(
                       formFieldType: RequestFormFieldType.cvv,
                       textCapitalization: TextCapitalization.none,
-                      textInputAction: TextInputAction.done,
+                      textInputAction: TextInputAction.next,
                       controller: addCardController.cvvController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -116,14 +116,6 @@ class _AddCardScreenState extends State<AddCardScreen> {
                               await addCardController.cadAdd();
                           if (response != null) {
                             Get.toNamed(CardAddedSuccessfully.routeName);
-
-                            /// textEditingController is clear
-                            // addCardController.cardHolderNameController.clear();
-                            // addCardController.cardNumberController.clear();
-                            // addCardController.monthController.clear();
-                            // addCardController.yearController.clear();
-                            // addCardController.cvvController.clear();
-
                           }
                           // Get.toNamed(CardAddedSuccessfully.routeName);
                         }

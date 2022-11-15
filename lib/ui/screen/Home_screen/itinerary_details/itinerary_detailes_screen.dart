@@ -67,6 +67,7 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
 
   ItineraryDetailScreenController itineraryDetailScreenController =
       Get.find<ItineraryDetailScreenController>();
+  String? itineraryDetails;
 
   @override
   void initState() {
@@ -76,6 +77,8 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
           "",
       timezone: 1,
     );
+    print(
+        ' itineraryDetail_id===>${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].id}');
     super.initState();
   }
 
@@ -296,7 +299,7 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                   //shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
                     print(
-                        "ITINERARY_DETAILS===>${itineraryDetailScreenController.itineraryDetailsListModel?.name}");
+                        "ITINERARY_DETAILS===>${itineraryDetailScreenController.itineraryDetailsListModel?.id}");
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5),
                       child: GestureDetector(
@@ -312,8 +315,251 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                                   .itineraryDetailsListModel
                                   ?.itinerary[index]
                                   .name;
+                            }
+                            if (itineraryDetailScreenController
+                                    .itineraryDetailsListModel?.dates[index] ==
+                                itineraryDetailScreenController
+                                    .itineraryDetailsListModel
+                                    ?.itinerary[index]
+                                    .date) {
+                              itineraryDetailScreenController.update();
                               print(
-                                  'ITINERARY_NAME====>${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[index].name}');
+                                  'ITINERARY_DATE_DETAILS===>${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[index].date}');
+                              ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: itineraryDetailScreenController
+                                          .itineraryDetailsListModel
+                                          ?.itinerary
+                                          .length
+
+                                      /// Dummy Data Displaying
+                                      ??
+                                      icon.length,
+
+                                  ///   itemCount: icon.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    var type = itineraryDetailScreenController
+                                            .itineraryDetailsListModel
+                                            ?.itinerary[index]
+                                            .detailType ??
+                                        "";
+                                    var itineraryId =
+                                        itineraryDetailScreenController
+                                                .itineraryDetailsListModel
+                                                ?.itinerary[index]
+                                                .id ??
+                                            "";
+                                    var name = itineraryDetailScreenController
+                                            .itineraryDetailsListModel
+                                            ?.itinerary[index]
+                                            .name ??
+                                        "";
+                                    return TimelineTile(
+                                      isFirst: index == 0 ? true : false,
+                                      isLast: index == icon.length - 1
+                                          ? true
+                                          : false,
+                                      afterLineStyle:
+                                          const LineStyle(thickness: 1.5),
+                                      beforeLineStyle:
+                                          const LineStyle(thickness: 1.5),
+                                      indicatorStyle: IndicatorStyle(
+                                        width: 28,
+                                        height: 28,
+                                        indicator: Image.asset(
+                                          index == 0 && type == 4
+                                              ? AppIcons.flightIcon
+                                              : index == 1 && type == 1
+                                                  ? AppIcons.hotelIcon
+                                                  : index == 2 && type == 2
+                                                      ? AppIcons.restaurantIcon
+                                                      : index == 3 && type == 3
+                                                          ? AppIcons
+                                                              .activitiesIcon
+                                                          : index == 4 &&
+                                                                  type == 8
+                                                              ? AppIcons
+                                                                  .notificationRound
+                                                              : index == 5 &&
+                                                                      type == 6
+                                                                  ? AppIcons
+                                                                      .ferryIcon
+                                                                  : index == 6 &&
+                                                                          type ==
+                                                                              5
+                                                                      ? AppIcons
+                                                                          .trainIcon
+                                                                      : index == 7 &&
+                                                                              type ==
+                                                                                  7
+                                                                          ? AppIcons
+                                                                              .carIcon
+                                                                          : AppIcons
+                                                                              .carIcon,
+                                        ),
+                                      ),
+                                      alignment: TimelineAlign.manual,
+                                      lineXY: 0.35,
+                                      endChild: Row(
+                                        children: [
+                                          const SizedBox(width: 15),
+                                          GestureDetector(
+                                            onTap: () {
+                                              if (index == 0 && type == 4) {
+                                                itineraryDetailScreenController
+                                                    .itineraryDetails(
+                                                      itineraryRef: itineraryId,
+                                                      timezone: 4, //
+                                                    )
+                                                    .then((value) => Get.toNamed(
+                                                        FlightTicketsDetailsScreen
+                                                            .routeName));
+                                              } else if (index == 1 &&
+                                                  type == 1) {
+                                                itineraryDetailScreenController
+                                                    .itineraryDetails(
+                                                      itineraryRef: itineraryId,
+                                                      timezone: 1,
+                                                    )
+                                                    .then((value) => Get.toNamed(
+                                                        HotelReservationsScreen
+                                                            .routeName));
+                                              } else if (index == 2 &&
+                                                  type == 2) {
+                                                itineraryDetailScreenController
+                                                    .itineraryDetails(
+                                                      itineraryRef: itineraryId,
+                                                      timezone: 2,
+                                                    )
+                                                    .then((value) => Get.toNamed(
+                                                        RestaurantReservationsScreen
+                                                            .routeName));
+                                              } else if (index == 3 &&
+                                                  type == 3) {
+                                                itineraryDetailScreenController
+                                                    .itineraryDetails(
+                                                      itineraryRef: itineraryId,
+                                                      timezone: 3,
+                                                    )
+                                                    .then((value) => Get.toNamed(
+                                                        ActivityDetailsScreen
+                                                            .routeName));
+                                              } else if (index == 4 &&
+                                                  type == 8) {
+                                                itineraryDetailScreenController
+                                                    .itineraryDetails(
+                                                      itineraryRef: itineraryId,
+                                                      timezone: 8,
+                                                    )
+                                                    .then((value) => Get.toNamed(
+                                                        RequiredInformationScreen
+                                                            .routeName));
+                                              } else if (index == 5 &&
+                                                  type == 6) {
+                                                itineraryDetailScreenController
+                                                    .itineraryDetails(
+                                                      itineraryRef: itineraryId,
+                                                      timezone: 6,
+                                                    )
+                                                    .then((value) => Get.toNamed(
+                                                        FerryTicketDetailsScreen
+                                                            .routeName));
+                                              } else if (index == 6 &&
+                                                  type == 5) {
+                                                itineraryDetailScreenController
+                                                    .itineraryDetails(
+                                                      itineraryRef: itineraryId,
+                                                      timezone: 5,
+                                                    )
+                                                    .then((value) => Get.toNamed(
+                                                        TrainTicketDetailsScreen
+                                                            .routeName));
+                                              } else if (index == 7 &&
+                                                  type == 7) {
+                                                itineraryDetailScreenController
+                                                    .itineraryDetails(
+                                                      itineraryRef: itineraryId,
+                                                      timezone: 7,
+                                                    )
+                                                    .then((value) => Get.toNamed(
+                                                        CarTicketDetailsScreen
+                                                            .routeName));
+                                              } else {
+                                                /// data is blank this screen is dummy Screen
+                                                Get.toNamed(
+                                                    FerryTicketDetailsScreen
+                                                        .routeName);
+                                              }
+                                            },
+                                            child: Text(
+                                              index == 0 && type == 4
+                                                  ? name
+                                                  : index == 1 && type == 1
+                                                      ? name
+                                                      : index == 2 && type == 2
+                                                          ? name
+                                                          : index == 3 &&
+                                                                  type == 3
+                                                              ? name
+                                                              : index == 4 &&
+                                                                      type == 8
+                                                                  ? name
+                                                                  : index == 5 &&
+                                                                          type ==
+                                                                              6
+                                                                      ? name
+                                                                      : index == 6 &&
+                                                                              type == 5
+                                                                          ? name
+                                                                          : index == 7 && type == 7
+                                                                              ? name
+                                                                              : "Dummy Text",
+                                              style: const TextStyle(
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.w600,
+                                                decoration:
+                                                    TextDecoration.underline,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      startChild: Row(
+                                        children: [
+                                          const SizedBox(width: 10),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: [
+                                              const SizedBox(height: 15),
+                                              index == 4
+                                                  ? const Text("Notes")
+                                                  : Text(
+                                                      itineraryDetailScreenController
+                                                              .itineraryDetailsListModel
+                                                              ?.itinerary[index]
+                                                              .date
+                                                              .toString() ??
+                                                          "15:12",
+                                                    ),
+                                              Text(
+                                                itineraryDetailScreenController
+                                                        .itineraryDetailsListModel
+                                                        ?.itinerary[index]
+                                                        .date
+                                                        .toString() ??
+                                                    "10/10/2022",
+                                              ),
+                                              const SizedBox(height: 15),
+                                            ],
+                                          ),
+                                          const SizedBox(width: 10),
+                                        ],
+                                      ),
+                                    );
+                                  });
                             }
                           });
                         },
@@ -356,194 +602,194 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
             ),
             const SizedBox(height: 15),
 
-            ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: itineraryDetailScreenController
-                        .itineraryDetailsListModel?.itinerary.length
-
-                    /// Dummy Data Displaying
-                    ??
-                    icon.length,
-
-                ///   itemCount: icon.length,
-                itemBuilder: (BuildContext context, int index) {
-                  var type = itineraryDetailScreenController
-                          .itineraryDetailsListModel
-                          ?.itinerary[index]
-                          .detailType ??
-                      "";
-                  var itineraryId = itineraryDetailScreenController
-                          .itineraryDetailsListModel?.itinerary[index].id ??
-                      "";
-                  var name = itineraryDetailScreenController
-                          .itineraryDetailsListModel?.itinerary[index].name ??
-                      "";
-                  return TimelineTile(
-                    isFirst: index == 0 ? true : false,
-                    isLast: index == icon.length - 1 ? true : false,
-                    afterLineStyle: const LineStyle(thickness: 1.5),
-                    beforeLineStyle: const LineStyle(thickness: 1.5),
-                    indicatorStyle: IndicatorStyle(
-                      width: 28,
-                      height: 28,
-                      indicator: Image.asset(
-                        index == 0 && type == 4
-                            ? AppIcons.flightIcon
-                            : index == 1 && type == 1
-                                ? AppIcons.hotelIcon
-                                : index == 2 && type == 2
-                                    ? AppIcons.restaurantIcon
-                                    : index == 3 && type == 3
-                                        ? AppIcons.activitiesIcon
-                                        : index == 4 && type == 8
-                                            ? AppIcons.notificationRound
-                                            : index == 5 && type == 6
-                                                ? AppIcons.ferryIcon
-                                                : index == 6 && type == 5
-                                                    ? AppIcons.trainIcon
-                                                    : index == 7 && type == 7
-                                                        ? AppIcons.carIcon
-                                                        : AppIcons.carIcon,
-                      ),
-                    ),
-                    alignment: TimelineAlign.manual,
-                    lineXY: 0.35,
-                    endChild: Row(
-                      children: [
-                        const SizedBox(width: 15),
-                        GestureDetector(
-                          onTap: () {
-                            if (index == 0 && type == 4) {
-                              itineraryDetailScreenController
-                                  .itineraryDetails(
-                                    itineraryRef: itineraryId,
-                                    timezone: 4, //
-                                  )
-                                  .then((value) => Get.toNamed(
-                                      FlightTicketsDetailsScreen.routeName));
-                            } else if (index == 1 && type == 1) {
-                              itineraryDetailScreenController
-                                  .itineraryDetails(
-                                    itineraryRef: itineraryId,
-                                    timezone: 1,
-                                  )
-                                  .then((value) => Get.toNamed(
-                                      HotelReservationsScreen.routeName));
-                            } else if (index == 2 && type == 2) {
-                              itineraryDetailScreenController
-                                  .itineraryDetails(
-                                    itineraryRef: itineraryId,
-                                    timezone: 2,
-                                  )
-                                  .then((value) => Get.toNamed(
-                                      RestaurantReservationsScreen.routeName));
-                            } else if (index == 3 && type == 3) {
-                              itineraryDetailScreenController
-                                  .itineraryDetails(
-                                    itineraryRef: itineraryId,
-                                    timezone: 3,
-                                  )
-                                  .then((value) => Get.toNamed(
-                                      ActivityDetailsScreen.routeName));
-                            } else if (index == 4 && type == 8) {
-                              itineraryDetailScreenController
-                                  .itineraryDetails(
-                                    itineraryRef: itineraryId,
-                                    timezone: 8,
-                                  )
-                                  .then((value) => Get.toNamed(
-                                      RequiredInformationScreen.routeName));
-                            } else if (index == 5 && type == 6) {
-                              itineraryDetailScreenController
-                                  .itineraryDetails(
-                                    itineraryRef: itineraryId,
-                                    timezone: 6,
-                                  )
-                                  .then((value) => Get.toNamed(
-                                      FerryTicketDetailsScreen.routeName));
-                            } else if (index == 6 && type == 5) {
-                              itineraryDetailScreenController
-                                  .itineraryDetails(
-                                    itineraryRef: itineraryId,
-                                    timezone: 5,
-                                  )
-                                  .then((value) => Get.toNamed(
-                                      TrainTicketDetailsScreen.routeName));
-                            } else if (index == 7 && type == 7) {
-                              itineraryDetailScreenController
-                                  .itineraryDetails(
-                                    itineraryRef: itineraryId,
-                                    timezone: 7,
-                                  )
-                                  .then((value) => Get.toNamed(
-                                      CarTicketDetailsScreen.routeName));
-                            } else {
-                              /// data is blank this screen is dummy Screen
-                              Get.toNamed(FerryTicketDetailsScreen.routeName);
-                            }
-                          },
-                          child: Text(
-                            index == 0 && type == 4
-                                ? name
-                                : index == 1 && type == 1
-                                    ? name
-                                    : index == 2 && type == 2
-                                        ? name
-                                        : index == 3 && type == 3
-                                            ? name
-                                            : index == 4 && type == 8
-                                                ? name
-                                                : index == 5 && type == 6
-                                                    ? name
-                                                    : index == 6 && type == 5
-                                                        ? name
-                                                        : index == 7 &&
-                                                                type == 7
-                                                            ? name
-                                                            : "Dummy Text",
-                            style: const TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w600,
-                              decoration: TextDecoration.underline,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    startChild: Row(
-                      children: [
-                        const SizedBox(width: 10),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            const SizedBox(height: 15),
-                            index == 4
-                                ? const Text("Notes")
-                                : Text(
-                                    itineraryDetailScreenController
-                                            .itineraryDetailsListModel
-                                            ?.itinerary[index]
-                                            .date
-                                            .toString() ??
-                                        "15:12",
-                                  ),
-                            Text(
-                              itineraryDetailScreenController
-                                      .itineraryDetailsListModel
-                                      ?.itinerary[index]
-                                      .date
-                                      .toString() ??
-                                  "10/10/2022",
-                            ),
-                            const SizedBox(height: 15),
-                          ],
-                        ),
-                        const SizedBox(width: 10),
-                      ],
-                    ),
-                  );
-                }),
+            // ListView.builder(
+            //     shrinkWrap: true,
+            //     physics: const NeverScrollableScrollPhysics(),
+            //     itemCount: itineraryDetailScreenController
+            //             .itineraryDetailsListModel?.itinerary.length
+            //
+            //         /// Dummy Data Displaying
+            //         ??
+            //         icon.length,
+            //
+            //     ///   itemCount: icon.length,
+            //     itemBuilder: (BuildContext context, int index) {
+            //       var type = itineraryDetailScreenController
+            //               .itineraryDetailsListModel
+            //               ?.itinerary[index]
+            //               .detailType ??
+            //           "";
+            //       var itineraryId = itineraryDetailScreenController
+            //               .itineraryDetailsListModel?.itinerary[index].id ??
+            //           "";
+            //       var name = itineraryDetailScreenController
+            //               .itineraryDetailsListModel?.itinerary[index].name ??
+            //           "";
+            //       return TimelineTile(
+            //         isFirst: index == 0 ? true : false,
+            //         isLast: index == icon.length - 1 ? true : false,
+            //         afterLineStyle: const LineStyle(thickness: 1.5),
+            //         beforeLineStyle: const LineStyle(thickness: 1.5),
+            //         indicatorStyle: IndicatorStyle(
+            //           width: 28,
+            //           height: 28,
+            //           indicator: Image.asset(
+            //             index == 0 && type == 4
+            //                 ? AppIcons.flightIcon
+            //                 : index == 1 && type == 1
+            //                     ? AppIcons.hotelIcon
+            //                     : index == 2 && type == 2
+            //                         ? AppIcons.restaurantIcon
+            //                         : index == 3 && type == 3
+            //                             ? AppIcons.activitiesIcon
+            //                             : index == 4 && type == 8
+            //                                 ? AppIcons.notificationRound
+            //                                 : index == 5 && type == 6
+            //                                     ? AppIcons.ferryIcon
+            //                                     : index == 6 && type == 5
+            //                                         ? AppIcons.trainIcon
+            //                                         : index == 7 && type == 7
+            //                                             ? AppIcons.carIcon
+            //                                             : AppIcons.carIcon,
+            //           ),
+            //         ),
+            //         alignment: TimelineAlign.manual,
+            //         lineXY: 0.35,
+            //         endChild: Row(
+            //           children: [
+            //             const SizedBox(width: 15),
+            //             GestureDetector(
+            //               onTap: () {
+            //                 if (index == 0 && type == 4) {
+            //                   itineraryDetailScreenController
+            //                       .itineraryDetails(
+            //                         itineraryRef: itineraryId,
+            //                         timezone: 4, //
+            //                       )
+            //                       .then((value) => Get.toNamed(
+            //                           FlightTicketsDetailsScreen.routeName));
+            //                 } else if (index == 1 && type == 1) {
+            //                   itineraryDetailScreenController
+            //                       .itineraryDetails(
+            //                         itineraryRef: itineraryId,
+            //                         timezone: 1,
+            //                       )
+            //                       .then((value) => Get.toNamed(
+            //                           HotelReservationsScreen.routeName));
+            //                 } else if (index == 2 && type == 2) {
+            //                   itineraryDetailScreenController
+            //                       .itineraryDetails(
+            //                         itineraryRef: itineraryId,
+            //                         timezone: 2,
+            //                       )
+            //                       .then((value) => Get.toNamed(
+            //                           RestaurantReservationsScreen.routeName));
+            //                 } else if (index == 3 && type == 3) {
+            //                   itineraryDetailScreenController
+            //                       .itineraryDetails(
+            //                         itineraryRef: itineraryId,
+            //                         timezone: 3,
+            //                       )
+            //                       .then((value) => Get.toNamed(
+            //                           ActivityDetailsScreen.routeName));
+            //                 } else if (index == 4 && type == 8) {
+            //                   itineraryDetailScreenController
+            //                       .itineraryDetails(
+            //                         itineraryRef: itineraryId,
+            //                         timezone: 8,
+            //                       )
+            //                       .then((value) => Get.toNamed(
+            //                           RequiredInformationScreen.routeName));
+            //                 } else if (index == 5 && type == 6) {
+            //                   itineraryDetailScreenController
+            //                       .itineraryDetails(
+            //                         itineraryRef: itineraryId,
+            //                         timezone: 6,
+            //                       )
+            //                       .then((value) => Get.toNamed(
+            //                           FerryTicketDetailsScreen.routeName));
+            //                 } else if (index == 6 && type == 5) {
+            //                   itineraryDetailScreenController
+            //                       .itineraryDetails(
+            //                         itineraryRef: itineraryId,
+            //                         timezone: 5,
+            //                       )
+            //                       .then((value) => Get.toNamed(
+            //                           TrainTicketDetailsScreen.routeName));
+            //                 } else if (index == 7 && type == 7) {
+            //                   itineraryDetailScreenController
+            //                       .itineraryDetails(
+            //                         itineraryRef: itineraryId,
+            //                         timezone: 7,
+            //                       )
+            //                       .then((value) => Get.toNamed(
+            //                           CarTicketDetailsScreen.routeName));
+            //                 } else {
+            //                   /// data is blank this screen is dummy Screen
+            //                   Get.toNamed(FerryTicketDetailsScreen.routeName);
+            //                 }
+            //               },
+            //               child: Text(
+            //                 index == 0 && type == 4
+            //                     ? name
+            //                     : index == 1 && type == 1
+            //                         ? name
+            //                         : index == 2 && type == 2
+            //                             ? name
+            //                             : index == 3 && type == 3
+            //                                 ? name
+            //                                 : index == 4 && type == 8
+            //                                     ? name
+            //                                     : index == 5 && type == 6
+            //                                         ? name
+            //                                         : index == 6 && type == 5
+            //                                             ? name
+            //                                             : index == 7 &&
+            //                                                     type == 7
+            //                                                 ? name
+            //                                                 : "Dummy Text",
+            //                 style: const TextStyle(
+            //                   fontSize: 10,
+            //                   fontWeight: FontWeight.w600,
+            //                   decoration: TextDecoration.underline,
+            //                 ),
+            //               ),
+            //             ),
+            //           ],
+            //         ),
+            //         startChild: Row(
+            //           children: [
+            //             const SizedBox(width: 10),
+            //             Column(
+            //               crossAxisAlignment: CrossAxisAlignment.end,
+            //               children: [
+            //                 const SizedBox(height: 15),
+            //                 index == 4
+            //                     ? const Text("Notes")
+            //                     : Text(
+            //                         itineraryDetailScreenController
+            //                                 .itineraryDetailsListModel
+            //                                 ?.itinerary[index]
+            //                                 .date
+            //                                 .toString() ??
+            //                             "15:12",
+            //                       ),
+            //                 Text(
+            //                   itineraryDetailScreenController
+            //                           .itineraryDetailsListModel
+            //                           ?.itinerary[index]
+            //                           .date
+            //                           .toString() ??
+            //                       "10/10/2022",
+            //                 ),
+            //                 const SizedBox(height: 15),
+            //               ],
+            //             ),
+            //             const SizedBox(width: 10),
+            //           ],
+            //         ),
+            //       );
+            //     }),
             const SizedBox(height: 20),
 
             ///  materialButton

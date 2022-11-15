@@ -71,9 +71,9 @@ class ItineraryRequestFormController extends GetxController {
       contactNumber: contactNumberController.text.trim(),
       phoneCode: countryCode.toString(),
       plannedDate: dateInput.text,
-      plannedTraveller: howManyAreTravelingController.text.trim(),
+      travellers: howManyAreTravelingController.text.trim(),
       location: locationController.text.trim(),
-      travellers: value1.isEmpty
+      plannedTraveller: value1.isEmpty
           ? 1
           : value2.isNotEmpty
               ? 2

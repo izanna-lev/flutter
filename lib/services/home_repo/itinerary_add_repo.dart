@@ -13,12 +13,12 @@ class ItineraryAddRepo {
     required String contactNumber,
     required String phoneCode,
     required String plannedDate,
-    required String plannedTraveller,
+    required int plannedTraveller,
     required String location,
-    required int travellers,
+    required String travellers,
   }) async {
     var responseBody = await API.apiHandler(
-      url: APIRoutes.itineraryAdd,
+      url: APIRoutes.itineraryRequestAdd,
       showLoader: false,
       requestType: RequestType.Post,
       header: {

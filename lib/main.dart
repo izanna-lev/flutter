@@ -3,20 +3,20 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:rownd_flutter_plugin/state/global_state.dart';
+import 'package:tralever_module/custem_class/utils/local_storage.dart';
 import 'package:tralever_module/ui/screen/base_screen/view/base_screen.dart';
 import 'package:tralever_module/ui/screen/login/view/splash_screen.dart';
 
 import 'custem_class/constant/app_settings.dart';
 import 'custem_class/utils/bindinges.dart';
 import 'custem_class/utils/globle.dart';
-import 'custem_class/utils/local_storage.dart';
 import 'custem_class/utils/localization_serivce.dart';
 import 'custem_class/utils/routes.dart';
 
 void main() async {
   globalVerbInit();
   await GetStorage.init();
-  await getInitialRoute();
+  // await getInitialRoute();
   runApp(MultiProvider(
     providers: [ChangeNotifierProvider(create: (_) => GlobalStateNotifier())],
     child: const MyApp(),
@@ -24,32 +24,12 @@ void main() async {
   // runApp(MyApp());
 }
 
-// getInitialRoute() async {
-//   final rownd = RowndStateEventChannel();
-//   if (LocalStorage.isUserLogin() == true) {
-//     LocalStorage.getUserDetails();
-//     print("isAuthenticated${BaseScreen.routeName}");
-//     initialRoute = BaseScreen.routeName;
-//     // if (userController.userModel?.user != null)
-//     // if (userController.rowndSignInDetailsModel?.traveller != null) {
-//     //   print(
-//     //       "isAuthenticated${rownd.stateNotifier.state.auth?.isAuthenticated}");
-//     //   initialRoute = BaseScreen.routeName;
-//     // }
-//     // else {
-//     //   initialRoute = SplashScreen.routeName;
-//     // }
-//   } else {
-//     initialRoute = SplashScreen.routeName;
-//   }
-// }
-
 getInitialRoute() async {
-  if (LocalStorage.getOnBoarding()) {
+  if (LocalStorage.isUserSignIn()) {
     LocalStorage.getUserDetail();
 
     if (userController.rowndSignInModel != null) {
-      print("rowndSignInModel===>${userController.rowndSignInModel}");
+      // print("rowndSignInModel===>${userController.rowndSignInModel}");
       initialRoute = BaseScreen.routeName;
     } else {
       initialRoute = SplashScreen.routeName;

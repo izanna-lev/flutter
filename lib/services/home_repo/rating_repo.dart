@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import '../../models/home/rating_model.dart';
+import '../../models/home/tating_model.dart';
 import '../api_handler.dart';
 import '../api_routes.dart';
 
@@ -15,6 +15,7 @@ class RatingDetailsRepo {
       url: APIRoutes.ratingAdd,
       showLoader: false,
       requestType: RequestType.Post,
+      header: {'Content-Type': 'application/json'},
       body: jsonEncode({
         "itineraryRef": itineraryRef,
         "experience": experience,

@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:get_storage/get_storage.dart';
-import '../../models/login/user_model.dart';
+import 'package:tralever_module/models/login/rownd_sign_in_model.dart';
+
 import 'globle.dart';
 
 class LocalStorage {
@@ -15,28 +14,60 @@ class LocalStorage {
     return prefs.read("ONBOARDING") ?? false;
   }
 
-  static saveUserDetails() {
-    log("saveUserDetails ${userController.userModel!.toJson()}");
-
-    prefs.write("LOGIN_USER_DATA", userController.userModel!.toJson());
-    LocalStorage.setUserLogin();
+  static setUserDetail(RowndSignInModel value) {
+    print("set user detail---${value}");
+    userController.rowndSignInModel = value;
+    prefs.write("USER_DETAIL", userController.rowndSignInModel!.toJson());
+    prefs.write("USER_TOKEN", userController.rowndSignInModel!.toJson());
+    LocalStorage.setUserSignIn();
+    LocalStorage.saveUserToken();
   }
 
-  static bool getUserDetails() {
-    Map<String, dynamic>? userModel = prefs.read("LOGIN_USER_DATA");
-    log("getUserDetails $userModel");
-    if (userModel != null) {
-      userController.userModel = UserModel.fromJson(userModel);
+  static bool getUserDetail() {
+    Map<String, dynamic>? rowndSignInModel = prefs.read("USER_DETAIL");
+    if (rowndSignInModel != null) {
+      userController.rowndSignInModel =
+          RowndSignInModel.fromJson(rowndSignInModel);
     }
-    return userController.userModel == null ? false : true;
+    return userController.rowndSignInModel == null ? false : true;
   }
 
-  static setUserLogin() {
-    prefs.write("IS_USER_LOGIN", true);
+  static saveUserToken() {
+    prefs.write("USER_TOKEN", userController.rowndSignInModel!.toJson());
+    print("USER_TOKEN==>${userController.rowndSignInModel!.toJson()}");
   }
 
-  static bool isUserLogin() {
-    return prefs.read("IS_USER_LOGIN") ?? false;
+  static getUserToken() {
+    prefs.read("USER_TOKEN") ?? "";
+  }
+
+  // static saveUserDetails() {
+  //   log("saveUserDetails ${userController.rowndSignInDetailsModel!.toJson()}");
+  //
+  //   prefs.write(
+  //       "SIGN_In_USER_DATA", userController.rowndSignInDetailsModel!.toJson());
+  //   //LocalStorage.setUserLogin();
+  // }
+  //
+  // static bool getUserDetails() {
+  //   final rownd = RowndStateEventChannel();
+  //
+  //   Map<String, dynamic>? rowndSignInDetailsModel =
+  //       prefs.read("SIGN_In_USER_DATA");
+  //   log("getUserDetails $rowndSignInDetailsModel");
+  //   if (rowndSignInDetailsModel != null) {
+  //     userController.rowndSignInDetailsModel =
+  //         RowndSignInDetailsModel.fromJson(rowndSignInDetailsModel);
+  //   }
+  //   return userController.rowndSignInDetailsModel == null ? false : true;
+  // }
+
+  static setUserSignIn() {
+    prefs.write("IS_USER_SIGNIN", true);
+  }
+
+  static bool isUserSignIn() {
+    return prefs.read("IS_USER_SIGNIN") ?? false;
   }
 
   static setFCMToken(String value) {
@@ -59,8 +90,9 @@ class LocalStorage {
 
   static clearData() {
     // prefs.remove("USER_FCM_TOKEN");
-    prefs.remove("LOGIN_USER_DATA");
-    prefs.remove("IS_USER_LOGIN");
+    prefs.remove("USER_DETAIL");
+    prefs.remove("IS_USER_SIGNIN");
+    print('CLEAR_USER_DATA${clearData}');
   }
 }
 

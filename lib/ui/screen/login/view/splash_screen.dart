@@ -1,7 +1,9 @@
 import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:tralever_module/ui/screen/login/view/onboarding_screen.dart';
+
 import '../../../../custem_class/constant/app_images.dart';
 import '../../../../custem_class/utils/local_storage.dart';
 import '../../base_screen/view/base_screen.dart';
@@ -22,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(const Duration(seconds: 1), () async {
       if (LocalStorage.getOnBoarding()) {
-        if (LocalStorage.getUserDetails()) {
+        if (LocalStorage.getUserDetail()) {
           Get.offAllNamed(BaseScreen.routeName);
         } else {
           Get.offAllNamed(LoginScreen.routeName);

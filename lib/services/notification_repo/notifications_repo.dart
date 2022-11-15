@@ -10,6 +10,7 @@ class NotificationRepo {
     required String userFilter,
   }) async {
     var responseBody = await API.apiHandler(
+      header: {'Content-Type': 'application/json'},
       url: APIRoutes.notificationList,
       showLoader: false,
       requestType: RequestType.Post,

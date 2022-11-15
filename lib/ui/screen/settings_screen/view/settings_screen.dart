@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rownd_flutter_plugin/rownd.dart';
+import 'package:rownd_flutter_plugin/state/global_state.dart';
 import 'package:tralever_module/custem_class/constant/app_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import '../../../../custem_class/constant/app_icons.dart';
 import '../../../../custem_class/utils/local_storage.dart';
+import '../../../../custem_class/utils/size_config.dart';
 import '../../../shared/dilog_box.dart';
 import '../../login/view/login_screen.dart';
 import '../controller/about_screen_controller.dart';
@@ -23,85 +27,99 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
   AboutScreenController aboutScreenController =
       Get.find<AboutScreenController>();
+
   // @override
   // void initState() {
   //   aboutScreenController.getStaticData();
   //   super.initState();
   // }
+  @override
+  void dispose() {
+    GlobalStateNotifier().dispose();
+    super.dispose();
+  }
+
+  final _rownd = RowndPlugin();
+  @override
+  void initState() {
+    super.initState();
+    // Provider.of<GlobalStateNotifier>(context, listen: false);
+  }
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig.init(context);
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            settingSell(
-              img: AppIcons.aboutIcon,
-              text: "About Us",
+          child: Column(
+        children: [
+          settingSell(
+            img: AppIcons.aboutIcon,
+            text: "About Us",
+            icon: Icons.navigate_next_sharp,
+            onTap: () {
+              Get.toNamed(AboutUsScreen.routeName);
+            },
+          ),
+          settingSell(
+            img: AppIcons.teramsIcon,
+            text: "Terms & Conditions",
+            icon: Icons.navigate_next_sharp,
+            onTap: () async {
+              var url = aboutScreenController
+                      .appDetailDataModel?.termsAndConditions ??
+                  "";
+              if (await canLaunch(url)) {
+                await launch(url);
+              } else {
+                throw "Failed to open LinkedIn";
+              }
+            },
+          ),
+          settingSell(
+            img: AppIcons.privacyPolicyIcon,
+            text: "Privacy Policy",
+            icon: Icons.navigate_next_sharp,
+            onTap: () {
+              launch(
+                aboutScreenController.appDetailDataModel?.privacyPolicy ?? "",
+              );
+            },
+          ),
+          settingSell(
+              img: AppIcons.contactAdminIcon,
+              text: "Contact Admin",
               icon: Icons.navigate_next_sharp,
               onTap: () {
-                Get.toNamed(AboutUsScreen.routeName);
-              },
-            ),
-            settingSell(
-              img: AppIcons.teramsIcon,
-              text: "Terms & Conditions",
-              icon: Icons.navigate_next_sharp,
-              onTap: () async {
-                var url = aboutScreenController
-                        .appDetailDataModel?.termsAndConditions ??
-                    "";
-                if (await canLaunch(url)) {
-                  await launch(url);
-                } else {
-                  throw "Failed to open LinkedIn";
-                }
-              },
-            ),
-            settingSell(
-              img: AppIcons.privacyPolicyIcon,
-              text: "Privacy Policy",
-              icon: Icons.navigate_next_sharp,
-              onTap: () {
-                launch(
-                  aboutScreenController.appDetailDataModel?.privacyPolicy ?? "",
-                );
-              },
-            ),
-            settingSell(
-                img: AppIcons.contactAdminIcon,
-                text: "Contact Admin",
-                icon: Icons.navigate_next_sharp,
-                onTap: () {
-                  Get.toNamed(ContactAdminScreen.routeName);
-                }),
-            settingSell(
-              img: AppIcons.faqIcon,
-              text: "FAQs",
-              icon: Icons.navigate_next_sharp,
-              onTap: () {
-                Get.toNamed(FAQScreen.routeName);
-              },
-            ),
-            settingSell(
-              img: AppIcons.removeUserIcon,
-              text: "Delete Account",
-              icon: Icons.navigate_next_sharp,
-              onTap: () {
-                deleteAccount();
-              },
-            ),
-            settingSell(
-              img: AppIcons.logoutIcon,
-              text: "Logout",
-              onTap: () {
-                logoutBox();
-              },
-            ),
-          ],
-        ),
-      ),
+                Get.toNamed(ContactAdminScreen.routeName);
+              }),
+          settingSell(
+            img: AppIcons.faqIcon,
+            text: "FAQs",
+            icon: Icons.navigate_next_sharp,
+            onTap: () {
+              Get.toNamed(FAQScreen.routeName);
+            },
+          ),
+          settingSell(
+            img: AppIcons.removeUserIcon,
+            text: "Delete Account",
+            icon: Icons.navigate_next_sharp,
+            onTap: () {
+              deleteAccount();
+            },
+          ),
+          settingSell(
+            img: AppIcons.logoutIcon,
+            text: "Logout",
+            onTap: () {
+              logoutBox();
+            },
+          ),
+        ],
+      )),
     );
   }
 
@@ -117,12 +135,18 @@ class _SettingScreenState extends State<SettingScreen> {
       yesonTap: () {
         Get.back();
         LocalStorage.clearData();
+        signout();
         Get.offAllNamed(LoginScreen.routeName);
+        // Get.offAllNamed(LoginScreen.routeName)?.then((value) => signout());
       },
       color: AppColors.appBlueColor,
       okText: "YES",
       noText: "NO",
     );
+  }
+
+  Future? signout() {
+    _rownd.signOut();
   }
 
   deleteAccount() {

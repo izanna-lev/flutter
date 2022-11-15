@@ -21,9 +21,7 @@ enum RequestFormFieldType {
   cvv,
   month,
   year,
-  typehere,
-  // formDate,
-  // toDate,
+  typehere
 }
 
 class RequestFormTextfield extends StatefulWidget {
@@ -194,10 +192,6 @@ class _RequestFormTextfieldState extends State<RequestFormTextfield> {
         return "Year".tr;
       case RequestFormFieldType.typehere:
         return "Type Here";
-      // case RequestFormFieldType.formDate:
-      //   return "DD-MM-YYYY";
-      // case RequestFormFieldType.toDate:
-      //   return "DD-MM-YYYY";
 
       default:
         break;
@@ -290,10 +284,6 @@ class _RequestFormTextfieldState extends State<RequestFormTextfield> {
         return TextInputType.number;
       case RequestFormFieldType.year:
         return TextInputType.number;
-      // case RequestFormFieldType.formDate:
-      //   return TextInputType.number;
-      // case RequestFormFieldType.toDate:
-      //   return TextInputType.number;
 
       default:
         break;

@@ -1,3 +1,143 @@
-PODFILE CHECKSUM: 145db09314730361a62c5d7f3d6085f6bbd43761
+PODS:
+  - AnyCodable-FlightSchool (0.6.7)
+  - CodeScanner_Rownd (2.2.1)
+  - connectivity_plus (0.0.1):
+    - Flutter
+    - ReachabilitySwift
+  - Flutter (1.0.0)
+  - fluttertoast (0.0.2):
+    - Flutter
+    - Toast
+  - Get (2.0.1)
+  - google_maps_flutter_ios (0.0.1):
+    - Flutter
+    - GoogleMaps
+  - GoogleMaps (7.2.0):
+    - GoogleMaps/Maps (= 7.2.0)
+  - GoogleMaps/Base (7.2.0)
+  - GoogleMaps/Maps (7.2.0):
+    - GoogleMaps/Base
+  - image_cropper (0.0.4):
+    - Flutter
+    - TOCropViewController (~> 2.6.1)
+  - image_picker_ios (0.0.1):
+    - Flutter
+  - JWTDecode (3.0.0)
+  - LBBottomSheet (1.0.24)
+  - path_provider_ios (0.0.1):
+    - Flutter
+  - permission_handler_apple (9.0.4):
+    - Flutter
+  - ReachabilitySwift (5.0.0)
+  - ReSwift (6.1.0)
+  - ReSwiftThunk (2.0.1):
+    - ReSwift (~> 6.0)
+    - ReSwiftThunk/Core (= 2.0.1)
+  - ReSwiftThunk/Core (2.0.1):
+    - ReSwift (~> 6.0)
+  - Rownd (1.8.3):
+    - AnyCodable-FlightSchool (~> 0.6.5)
+    - CodeScanner_Rownd (~> 2.2.1)
+    - Get (~> 2.0.1)
+    - JWTDecode (~> 3.0.0)
+    - LBBottomSheet (~> 1.0.24)
+    - ReSwift (~> 6.1.0)
+    - ReSwiftThunk (~> 2.0.1)
+    - Sodium (~> 0.9.1)
+    - SwiftKeychainWrapper (~> 4.0.1)
+  - rownd_flutter_plugin (1.0.0):
+    - Flutter
+    - Rownd (~> 1.8.3)
+  - shared_preferences_ios (0.0.1):
+    - Flutter
+  - Sodium (0.9.1)
+  - SwiftKeychainWrapper (4.0.1)
+  - Toast (4.0.0)
+  - TOCropViewController (2.6.1)
+  - url_launcher_ios (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
+  - Flutter (from `Flutter`)
+  - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
+  - google_maps_flutter_ios (from `.symlinks/plugins/google_maps_flutter_ios/ios`)
+  - image_cropper (from `.symlinks/plugins/image_cropper/ios`)
+  - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
+  - path_provider_ios (from `.symlinks/plugins/path_provider_ios/ios`)
+  - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
+  - rownd_flutter_plugin (from `.symlinks/plugins/rownd_flutter_plugin/ios`)
+  - shared_preferences_ios (from `.symlinks/plugins/shared_preferences_ios/ios`)
+  - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
+
+SPEC REPOS:
+  trunk:
+    - AnyCodable-FlightSchool
+    - CodeScanner_Rownd
+    - Get
+    - GoogleMaps
+    - JWTDecode
+    - LBBottomSheet
+    - ReachabilitySwift
+    - ReSwift
+    - ReSwiftThunk
+    - Rownd
+    - Sodium
+    - SwiftKeychainWrapper
+    - Toast
+    - TOCropViewController
+
+EXTERNAL SOURCES:
+  connectivity_plus:
+    :path: ".symlinks/plugins/connectivity_plus/ios"
+  Flutter:
+    :path: Flutter
+  fluttertoast:
+    :path: ".symlinks/plugins/fluttertoast/ios"
+  google_maps_flutter_ios:
+    :path: ".symlinks/plugins/google_maps_flutter_ios/ios"
+  image_cropper:
+    :path: ".symlinks/plugins/image_cropper/ios"
+  image_picker_ios:
+    :path: ".symlinks/plugins/image_picker_ios/ios"
+  path_provider_ios:
+    :path: ".symlinks/plugins/path_provider_ios/ios"
+  permission_handler_apple:
+    :path: ".symlinks/plugins/permission_handler_apple/ios"
+  rownd_flutter_plugin:
+    :path: ".symlinks/plugins/rownd_flutter_plugin/ios"
+  shared_preferences_ios:
+    :path: ".symlinks/plugins/shared_preferences_ios/ios"
+  url_launcher_ios:
+    :path: ".symlinks/plugins/url_launcher_ios/ios"
+
+SPEC CHECKSUMS:
+  AnyCodable-FlightSchool: 261cbe76757802b17d471b9059b21e6fa5edf57b
+  CodeScanner_Rownd: 43ea1ea198c17653c32c31e797e274c0d7a695ae
+  connectivity_plus: 413a8857dd5d9f1c399a39130850d02fe0feaf7e
+  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  fluttertoast: 74526702fea2c060ea55dde75895b7e1bde1c86b
+  Get: d2c1fa40936760c47dcd3956e9eb26dc39fd76ba
+  google_maps_flutter_ios: 66201f392bf62d500f07670a30488a247b9bb5b9
+  GoogleMaps: 65ce5426e2398bb81433c8076f2ab6419c2c5537
+  image_cropper: 60c2789d1f1a78c873235d4319ca0c34a69f2d98
+  image_picker_ios: b786a5dcf033a8336a657191401bfdf12017dabb
+  JWTDecode: 82480a7173f8a811954e7e14a2b59f688ca4222a
+  LBBottomSheet: 1d1a27847388b1a0fc266b439bcc9b386f792886
+  path_provider_ios: 14f3d2fd28c4fdb42f44e0f751d12861c43cee02
+  permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
+  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+  ReSwift: eab3c01e4279ba81b54a61e4fd6499634d20123a
+  ReSwiftThunk: 7ca5145764be6f30b62db88a52d170133954629e
+  Rownd: 1376ad20509a91fd852e7dedc38937437ca7137e
+  rownd_flutter_plugin: 807dcccda5a2d34cb55e8a24b0b1087926886131
+  shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
+  Sodium: 23d11554ecd556196d313cf6130d406dfe7ac6da
+  SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
+  Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
+  TOCropViewController: edfd4f25713d56905ad1e0b9f5be3fbe0f59c863
+  url_launcher_ios: 839c58cdb4279282219f5e248c3321761ff3c4de
+
+PODFILE CHECKSUM: 775997f741c536251164e3eacf6e34abf2eb7a17
 
 COCOAPODS: 1.11.3

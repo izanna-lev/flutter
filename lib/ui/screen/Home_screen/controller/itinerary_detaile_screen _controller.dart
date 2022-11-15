@@ -5,7 +5,7 @@ import 'package:tralever_module/services/home_repo/itinerary_details_repo.dart';
 import 'package:tralever_module/services/home_repo/rating_repo.dart';
 
 import '../../../../models/home/itinerary_details_model.dart';
-import '../../../../models/home/rating_model.dart';
+import '../../../../models/home/tating_model.dart';
 
 class ItineraryDetailScreenController extends GetxController {
   int _selectValue = 0;

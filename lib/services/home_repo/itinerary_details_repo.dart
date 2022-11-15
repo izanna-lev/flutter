@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:tralever_module/custem_class/utils/globle.dart';
+
 import '../../models/home/itinerary_details_model.dart';
 import '../api_handler.dart';
 import '../api_routes.dart';
@@ -13,6 +15,10 @@ class ItineraryDetailsRepo {
       url: APIRoutes.homeDetails,
       showLoader: false,
       requestType: RequestType.Post,
+      header: {
+        'Content-Type': 'application/json',
+        "Authorization": userController.rowndSignInModel!.data.accessToken
+      },
       body: jsonEncode({
         "itineraryRef": itineraryRef,
         "timezone": timezone,

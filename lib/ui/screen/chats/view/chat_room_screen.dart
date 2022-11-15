@@ -5,6 +5,7 @@ import 'package:tralever_module/custem_class/constant/app_colors.dart';
 import 'package:tralever_module/custem_class/constant/app_icons.dart';
 import 'package:tralever_module/custem_class/constant/app_settings.dart';
 import 'package:tralever_module/ui/screen/chats/view/report_screen.dart';
+import 'package:tralever_module/ui/shared/image_picker_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../custem_class/utils/globle.dart';
 import '../../../shared/request_form_textfild.dart';

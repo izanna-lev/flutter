@@ -46,7 +46,7 @@ void main() async {
 
 getInitialRoute() async {
   if (LocalStorage.getOnBoarding()) {
-    LocalStorage.getUserDetail();
+    //LocalStorage.getUserDetail();
 
     if (userController.rowndSignInModel != null) {
       print("rowndSignInModel===>${userController.rowndSignInModel}");

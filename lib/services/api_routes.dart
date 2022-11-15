@@ -16,6 +16,7 @@ class APIRoutes {
   static const String editProfile = "${url}user/update";
   static const String homeList = "${url}home/list";
   static const String itineraryAdd = "${url}itinerary/add";
+  static const String itineraryRequestAdd = "${url}itineraryRequest/add";
   static const String homeDetails = "${url}home/details";
   static const String notificationList = "${url}notification/userSelectList";
   static const String ratingAdd = "${url}rating/add";

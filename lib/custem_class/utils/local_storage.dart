@@ -18,7 +18,6 @@ class LocalStorage {
     print("set user detail---${value}");
     userController.rowndSignInModel = value;
     prefs.write("USER_DETAIL", userController.rowndSignInModel!.toJson());
-    prefs.write("USER_TOKEN", userController.rowndSignInModel!.toJson());
     LocalStorage.setUserSignIn();
     LocalStorage.saveUserToken();
   }

@@ -141,9 +141,9 @@ class _ItineraryFromScreenState extends State<ItineraryFromScreen> {
                                 value: itineraryRequestController.value1,
                                 groupValue:
                                     itineraryRequestController.radioGroup,
-                                onChanged: (value) {
+                                onChanged: (int? value) {
                                   itineraryRequestController.radioGroup =
-                                      value.toString();
+                                      value!.toInt();
                                 }),
                             radioText(text: "I haven't even started.")
                           ],
@@ -159,9 +159,9 @@ class _ItineraryFromScreenState extends State<ItineraryFromScreen> {
                                 value: itineraryRequestController.value2,
                                 groupValue:
                                     itineraryRequestController.radioGroup,
-                                onChanged: (value) {
+                                onChanged: (int? value) {
                                   itineraryRequestController.radioGroup =
-                                      value.toString();
+                                      value!.toInt();
                                 }),
                             radioText(
                                 text:
@@ -180,9 +180,9 @@ class _ItineraryFromScreenState extends State<ItineraryFromScreen> {
                                 value: itineraryRequestController.value3,
                                 groupValue:
                                     itineraryRequestController.radioGroup,
-                                onChanged: (value) {
+                                onChanged: (int? value) {
                                   itineraryRequestController.radioGroup =
-                                      value.toString();
+                                      value!.toInt();
                                 }),
                             radioText(
                               text:
@@ -205,9 +205,9 @@ class _ItineraryFromScreenState extends State<ItineraryFromScreen> {
                         if (itineraryRequestController
                             .itineraryRequestKey.currentState!
                             .validate()) {
-                          Map<String, dynamic>? response =
-                              await itineraryRequestController
-                                  .itineraryAddData();
+                          var response = await itineraryRequestController
+                              .itineraryAddData();
+
                           if (response != null) {
                             dialogBox();
                           }
@@ -232,6 +232,7 @@ class _ItineraryFromScreenState extends State<ItineraryFromScreen> {
       content: "Your itinerary request has been submitted successfully.",
       contentSize: 1,
       onTap: () {
+        Get.back();
         Get.back();
       },
       color: AppColors.appBlueColor,

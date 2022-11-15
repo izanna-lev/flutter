@@ -43,7 +43,6 @@ class ItineraryAddListModel {
     required this.plannedDate,
     required this.plannedTraveller,
     required this.id,
-    required this.v,
   });
 
   String travellerRef;
@@ -56,7 +55,6 @@ class ItineraryAddListModel {
   DateTime plannedDate;
   int plannedTraveller;
   String id;
-  int v;
 
   factory ItineraryAddListModel.fromJson(Map<String, dynamic> json) =>
       ItineraryAddListModel(
@@ -70,7 +68,6 @@ class ItineraryAddListModel {
         plannedDate: DateTime.parse(json["plannedDate"]),
         plannedTraveller: json["plannedTraveller"],
         id: json["_id"],
-        v: json["__v"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -84,6 +81,5 @@ class ItineraryAddListModel {
         "plannedDate": plannedDate.toIso8601String(),
         "plannedTraveller": plannedTraveller,
         "_id": id,
-        "__v": v,
       };
 }

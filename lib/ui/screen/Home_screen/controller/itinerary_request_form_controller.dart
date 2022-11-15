@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:fl_country_code_picker/fl_country_code_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -18,42 +20,79 @@ class ItineraryRequestFormController extends GetxController {
   TextEditingController howManyAreTravelingController = TextEditingController();
   TextEditingController dateInput = TextEditingController();
   // TextEditingController dateController = TextEditingController();
+  int _value1 = 1;
 
-  String _value1 = "I haven't even started.";
+  int get value1 => _value1;
 
-  String get value1 => _value1;
-
-  set value1(String value) {
+  set value1(int value) {
     _value1 = value;
     update();
   }
 
-  String _value2 = "I have a few things";
+  int _value2 = 2;
 
-  String get value2 => _value2;
+  int get value2 => _value2;
 
-  set value2(String value) {
+  set value2(int value) {
     _value2 = value;
     update();
   }
 
-  String _value3 = "The important stuff";
+  int _value3 = 3;
 
-  String get value3 => _value3;
+  int get value3 => _value3;
 
-  set value3(String value) {
+  set value3(int value) {
     _value3 = value;
     update();
   }
 
-  String _radioGroup = "I haven't even started.";
+  int _radioGroup = 1;
 
-  String get radioGroup => _radioGroup;
+  int get radioGroup => _radioGroup;
 
-  set radioGroup(String value) {
+  set radioGroup(int value) {
     _radioGroup = value;
     update();
   }
+
+  // String _value1 = "I haven't even started.";
+  //
+  // String get value1 => _value1;
+  //
+  // set value1(String value) {
+  //   _value1 = value;
+  //   update();
+  // }
+  //
+  // String _value2 = "I have a few things";
+  //
+  // String get value2 => _value2;
+  //
+  // set value2(String value) {
+  //   _value2 = value;
+  //   update();
+  // }
+  //
+  // String _value3 = "The important stuff";
+  //
+  // String get value3 => _value3;
+  //
+  // set value3(String value) {
+  //   _value3 = value;
+  //   update();
+  // }
+  //
+  // String _radioGroup = "I haven't even started.";
+  //
+  // String get radioGroup => _radioGroup;
+  //
+  // set radioGroup(String value) {
+  //   _radioGroup = value;
+  //   update();
+  // }
+  //
+  //
 
   List<ItineraryAddListModel> _itineraryAdd = [];
 
@@ -69,15 +108,12 @@ class ItineraryRequestFormController extends GetxController {
       firstName: firstnameController.text.trim(),
       lastName: lastnameController.text.trim(),
       contactNumber: contactNumberController.text.trim(),
-      phoneCode: countryCode.toString(),
+      phoneCode: countryCode?.dialCode ?? "+63",
       plannedDate: dateInput.text,
-      travellers: howManyAreTravelingController.text.trim(),
       location: locationController.text.trim(),
-      plannedTraveller: value1.isEmpty
-          ? 1
-          : value2.isNotEmpty
-              ? 2
-              : 3,
+      travellers: int.parse(howManyAreTravelingController.text.trim()),
+      plannedTraveller: _radioGroup,
     );
+    return ItineraryAddModel;
   }
 }

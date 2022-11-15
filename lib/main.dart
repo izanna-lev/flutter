@@ -25,6 +25,7 @@ void main() async {
 }
 
 getInitialRoute() async {
+
   if (LocalStorage.isUserSignIn()) {
     LocalStorage.getUserDetail();
 

@@ -1,9 +1,11 @@
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:tralever_module/services/api_routes.dart';
 import 'package:tralever_module/ui/screen/Home_screen/view/current_screen.dart';
 import 'package:tralever_module/ui/screen/Home_screen/view/past_screen.dart';
 import 'package:tralever_module/ui/screen/Home_screen/view/pending_screen.dart';
+
 import '../../../../custem_class/constant/app_colors.dart';
 import '../../../../custem_class/constant/app_settings.dart';
 
@@ -135,6 +137,7 @@ homeScreenCommonCell({
                       padding: const EdgeInsets.symmetric(
                           horizontal: 15, vertical: 5),
                       child: Text(
+                        "${day} Days",
                         "$day Days",
                         style: const TextStyle(
                           color: Colors.white,

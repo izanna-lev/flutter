@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tralever_module/custem_class/constant/app_colors.dart';
 import 'package:tralever_module/custem_class/constant/app_icons.dart';
 import 'package:tralever_module/custem_class/utils/globle.dart';
+import 'package:tralever_module/services/api_routes.dart';
 import 'package:tralever_module/ui/screen/Home_screen/controller/itinerary_detaile_screen%20_controller.dart';
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/activity_map_details_screen.dart';
+
 import '../../../../custem_class/constant/app_settings.dart';
 import '../../../shared/appbar.dart';
 
 class HotelReservationsScreen extends StatefulWidget {
   static const String routeName = "/HotelReservationsScreen";
 
-  const HotelReservationsScreen({Key? key}) : super(key: key);
+  HotelReservationsScreen({Key? key}) : super(key: key);
+  var data = Get.arguments;
 
   @override
   State<HotelReservationsScreen> createState() =>
@@ -21,6 +23,13 @@ class HotelReservationsScreen extends StatefulWidget {
 class _HotelReservationsScreenState extends State<HotelReservationsScreen> {
   ItineraryDetailScreenController itineraryDetailScreenController =
       Get.find<ItineraryDetailScreenController>();
+  @override
+  void initState() {
+    widget.data;
+    print('HOTEL_RESERVATION_INDEX==>${widget.data}');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,9 +43,14 @@ class _HotelReservationsScreenState extends State<HotelReservationsScreen> {
               children: [
                 imageContainer(
                   context: context,
-                  img: itineraryDetailScreenController.itinerary?.image ??
-                      "https://media.radissonhotels.net/image/radisson-blu-hotel-cebu/exteriorview/16256-116570-f64875903_3xl.jpg?impolicy=HomeHero",
-                  text: itineraryDetailScreenController.itinerary?.name ??
+                  img:
+                      '$imageUrl${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].image}',
+                  // ??
+                  // "https://media.radissonhotels.net/image/radisson-blu-hotel-cebu/exteriorview/16256-116570-f64875903_3xl.jpg?impolicy=HomeHero",
+                  text: itineraryDetailScreenController
+                          .itineraryDetailsListModel
+                          ?.itinerary[widget.data]
+                          .name ??
                       "Radisson Blu Hotel",
                 ),
                 const SizedBox(height: 35),
@@ -49,26 +63,40 @@ class _HotelReservationsScreenState extends State<HotelReservationsScreen> {
                       const Divider(thickness: 1.5),
                       detailTitle(text: "Check In Date & Time"),
                       detailText(
-                          text: itineraryDetailScreenController
-                                  .itinerary?.checkInDateTime
-                                  .toString() ??
-                              "12-Nov-2022 | 11:30 AM"),
+                          text: hotelDateAndTimeConverter(
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].checkInDateTime.toString()}')
+                          // ?? "12-Nov-2022 | 11:30 AM"
+                          ),
                       detailTitle(text: "Check Out Date & Time"),
                       detailText(
-                          text: itineraryDetailScreenController
-                                  .itinerary?.checkOutDateTime
-                                  .toString() ??
-                              "13-Nov-2022 | 12:00 PM"),
+                          text: hotelDateAndTimeConverter(
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].checkOutDateTime.toString()}')
+                          // ?? "13-Nov-2022 | 12:00 PM"
+                          ),
                       detailTitle(text: "Contact Number"),
                       detailText(
                           text: itineraryDetailScreenController
-                                  .itinerary?.contactNumber
+                                  .itineraryDetailsListModel
+                                  ?.itinerary[widget.data]
+                                  .contactNumber
                                   .toString() ??
                               "+62 361 769 2220"),
                       detailTitle(text: "Location"),
                       GestureDetector(
                         onTap: () {
-                          Get.toNamed(ActivityMapDetails.routeName);
+                          Get.toNamed(
+                            ActivityMapDetails.routeName,
+                            arguments: [
+                              itineraryDetailScreenController
+                                  .itineraryDetailsListModel
+                                  ?.itinerary[widget.data]
+                                  .image,
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].location?.coordinates[0]}',
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].location?.coordinates[1]}',
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].location?.location}',
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].name}'
+                            ],
+                          );
                         },
                         child: Container(
                           color: Colors.transparent,
@@ -77,8 +105,10 @@ class _HotelReservationsScreenState extends State<HotelReservationsScreen> {
                             children: [
                               detailText(
                                   text: itineraryDetailScreenController
-                                          .itinerary?.location
-                                          .toString() ??
+                                          .itineraryDetailsListModel
+                                          ?.itinerary[widget.data]
+                                          .location
+                                          ?.location ??
                                       "Cebu City, Philippines"),
                               Image.asset(AppIcons.gpsIcon, height: 21),
                             ],
@@ -88,7 +118,9 @@ class _HotelReservationsScreenState extends State<HotelReservationsScreen> {
                       detailTitle(text: "Description"),
                       detailText(
                         text: itineraryDetailScreenController
-                                .itinerary?.description
+                                .itineraryDetailsListModel
+                                ?.itinerary[widget.data]
+                                .description
                                 .toString() ??
                             "Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text.",
                       )

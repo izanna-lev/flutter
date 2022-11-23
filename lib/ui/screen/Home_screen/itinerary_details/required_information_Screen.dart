@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tralever_module/services/api_routes.dart';
 import 'package:tralever_module/ui/screen/Home_screen/controller/itinerary_detaile_screen%20_controller.dart';
 
 import '../../../../custem_class/constant/app_settings.dart';
@@ -9,7 +10,8 @@ import 'hotel_rservations_screen.dart';
 class RequiredInformationScreen extends StatefulWidget {
   static const String routeName = "/RequiredInformationScreen";
 
-  const RequiredInformationScreen({Key? key}) : super(key: key);
+  RequiredInformationScreen({Key? key}) : super(key: key);
+  var data = Get.arguments;
 
   @override
   State<RequiredInformationScreen> createState() =>
@@ -32,8 +34,9 @@ class _RequiredInformationScreenState extends State<RequiredInformationScreen> {
               children: [
                 imageContainer(
                   context: context,
-                  img: itineraryDetailScreenController.itinerary?.image ??
-                      "https://burst.shopifycdn.com/photos/city-landscape-at-night.jpg?width=1200&format=pjpg&exif=1&iptc=1",
+                  img:
+                      '$imageUrl${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].image}',
+                  // ?? "https://burst.shopifycdn.com/photos/city-landscape-at-night.jpg?width=1200&format=pjpg&exif=1&iptc=1",
                   text: "Notes",
                 ),
                 const SizedBox(height: 35),
@@ -46,7 +49,9 @@ class _RequiredInformationScreenState extends State<RequiredInformationScreen> {
                       const Divider(thickness: 1.5),
                       detailText(
                         text: itineraryDetailScreenController
-                                .itinerary?.description ??
+                                .itineraryDetailsListModel
+                                ?.itinerary[0]
+                                .description ??
                             "Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text. Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text.",
                       ),
                     ],

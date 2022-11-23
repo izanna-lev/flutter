@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pagination_view/pagination_view.dart';
+import 'package:tralever_module/services/api_routes.dart';
+
 import '../../../../models/home/travels_plans_model.dart';
 import '../../../../services/over&loding.dart';
 import '../controller/home_controller.dart';
@@ -34,11 +36,10 @@ class _CurrentScreenState extends State<CurrentScreen> {
                 onTap: () {
                   Get.toNamed(
                     ItineraryDetailScreen.routeName,
-
-                    ///arguments: homeController.travelPlansData[index].id,
+                    arguments: homeController.travelPlansData[index].id,
                   );
                 },
-                image: homeController.travelPlansData[index].image,
+                image: imageUrl + homeController.travelPlansData[index].image,
                 day: homeController.travelPlansData[index].duration.toString(),
                 please: homeController.travelPlansData[index].name,
                 price: homeController.travelPlansData[index].price.toString(),

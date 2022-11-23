@@ -60,9 +60,9 @@ class Rating {
     required this.value,
   });
 
-  int experience;
-  int specialist;
-  int value;
+  double experience;
+  double specialist;
+  double value;
 
   factory Rating.fromJson(Map<String, dynamic> json) => Rating(
         experience: json["experience"],

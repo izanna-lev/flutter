@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tralever_module/services/api_routes.dart';
 import 'package:tralever_module/ui/shared/appbar.dart';
 
 class FlightTicketPreviewScreen extends StatefulWidget {
@@ -21,7 +22,7 @@ class _FlightTicketPreviewScreenState extends State<FlightTicketPreviewScreen> {
       appBar: commonAppbar(titleText: "Ticket Preview"),
       body: Center(
         child: Image.network(
-          Get.arguments,
+          imageUrl + widget.data,
           //"https://image.shutterstock.com/image-vector/pattern-airline-boarding-pass-ticket-260nw-375639655.jpg",
         ),
       ),

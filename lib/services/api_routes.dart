@@ -19,7 +19,8 @@ class APIRoutes {
   static const String itineraryAdd = "${url}itinerary/add";
   static const String itineraryRequestAdd = "${url}itineraryRequest/add";
   static const String homeDetails = "${url}home/details";
-  static const String notificationList = "${url}notification/userSelectList";
+  static const String notificationUserSelectList =
+      "${url}notification/userSelectList";
   static const String ratingAdd = "${url}rating/add";
   static const String cardAdd = "${url}card/add";
   static const String cardList = "${url}card/list";
@@ -35,10 +36,14 @@ class APIRoutes {
 
   ///* Traveller
   static const String rowndSignIn = "${url}traveller/signin";
+  static const String travellerNotificationList =
+      "${url}notification/travellerList";
 }
 
 const resourceAPIPaginationStart = 1;
 const resourceAPIPaginationLimit = 30;
+const travellerNotificationAPIPaginationStart = 1;
+const travellerNotificationAPIPaginationLimit = 30;
 
 enum ContentType { jsonType }
 

@@ -9,7 +9,8 @@ import '../api_routes.dart';
 class ItineraryDetailsRepo {
   static Future<ItineraryDetailsModel?> itineraryDetailsRepo({
     required String itineraryRef,
-    required int timezone,
+    // required timezone,
+    String? date,
   }) async {
     var responseBody = await API.apiHandler(
       url: APIRoutes.homeDetails,
@@ -21,7 +22,8 @@ class ItineraryDetailsRepo {
       },
       body: jsonEncode({
         "itineraryRef": itineraryRef,
-        "timezone": timezone,
+        "timezone": GetLocalTimezone.currentTimeZoneName,
+        "date": date,
       }),
     );
     if (responseBody != null) {

@@ -43,5 +43,26 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>io.flutter.embedded_views_preview</key>
+    <true/>
+    <key>NSCameraUsageDescription</key>
+    <string>This app requires access to the camera to upload your profile photo, camera permission is also required for scanning QR codes provided from Onsite, so that you can earn points which you can redeem afterwards.</string>
+    <key>NSLocalNetworkUsageDescription</key>
+    <string>Allow Permission to Flutter </string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>Please give permission for the location , so that the user can get relevant information about the Sales Officer and will also be able to scan QR Codes provided by Onsite Team through which he can earn points &amp; redeem it.</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Please give permission for the location , so that the user can get relevant information about the Sales Officer and will also be able to scan QR Codes provided by Onsite Team through which he can earn points &amp; redeem it.</string>
+    <key>NSLocationUsageDescription</key>
+    <string>Please give permission for the location , so that the user can get relevant information about the Sales Officer and will also be able to scan QR Codes provided by Onsite Team through which he can earn points &amp; redeem it.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Please give permission for the location , so that the user can get relevant information about the Sales Officer and will also be able to scan QR Codes provided by Onsite Team through which he can earn points &amp; redeem it.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>This app requires access to the photo library to upload your profile photo.</string>
+    <key>UIBackgroundModes</key>
+    <array>
+       <string>fetch</string>
+       <string>remote-notification</string>
+    </array>
 </dict>
 </plist>

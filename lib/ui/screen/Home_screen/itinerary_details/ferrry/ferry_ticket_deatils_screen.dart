@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/ferrry/ferry_details.dart';
 
 import '../../../../../custem_class/constant/app_colors.dart';
 import '../../../../../custem_class/constant/app_settings.dart';
 import '../../../../shared/appbar.dart';
-import 'ferry_details.dart';
 import 'ferry_user_details.dart';
 
 class FerryTicketDetailsScreen extends StatefulWidget {
   static const String routeName = "/FerryTicketDetailsScreen";
 
-  const FerryTicketDetailsScreen({Key? key}) : super(key: key);
+  FerryTicketDetailsScreen({Key? key}) : super(key: key);
+  var data = Get.arguments;
 
   @override
   State<FerryTicketDetailsScreen> createState() =>
@@ -21,6 +23,8 @@ class _FerryTicketDetailsScreenState extends State<FerryTicketDetailsScreen>
   late TabController controller;
   @override
   void initState() {
+    widget.data;
+    print('DATA${widget.data}');
     controller = TabController(vsync: this, length: 2);
     super.initState();
   }
@@ -76,9 +80,9 @@ class _FerryTicketDetailsScreenState extends State<FerryTicketDetailsScreen>
           Expanded(
             child: TabBarView(
               controller: controller,
-              children: const [
-                FerryDetails(),
-                FerryUserDetails(),
+              children: [
+                FerryDetails(index: widget.data),
+                FerryUserDetails(index: widget.data),
               ],
             ),
           ),

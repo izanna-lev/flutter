@@ -10,7 +10,7 @@ class HomeScreenRepo {
   static Future<TravelPlansModel?> homeScreenRepo({
     required int page,
     required int listType,
-    required int itineraryStatus,
+    // required int itineraryStatus,
   }) async {
     var responseBody = await API.apiHandler(
       url: APIRoutes.homeList,
@@ -23,7 +23,7 @@ class HomeScreenRepo {
       body: jsonEncode({
         "page": page,
         "listType": listType,
-        "itineraryStatus": itineraryStatus,
+        // "itineraryStatus": itineraryStatus,
       }),
     );
     if (responseBody != null) {

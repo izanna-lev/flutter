@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tralever_module/custem_class/utils/globle.dart';
+import 'package:tralever_module/services/api_routes.dart';
 import 'package:tralever_module/ui/screen/Home_screen/controller/itinerary_detaile_screen%20_controller.dart';
 
-import '../../../../custem_class/constant/app_colors.dart';
 import '../../../../custem_class/constant/app_icons.dart';
 import '../../../../custem_class/constant/app_settings.dart';
 import '../../../shared/appbar.dart';
@@ -12,7 +13,8 @@ import 'hotel_rservations_screen.dart';
 class ActivityDetailsScreen extends StatefulWidget {
   static const String routeName = "/ActivityDetailsScreen";
 
-  const ActivityDetailsScreen({Key? key}) : super(key: key);
+  ActivityDetailsScreen({Key? key}) : super(key: key);
+  var data = Get.arguments;
 
   @override
   State<ActivityDetailsScreen> createState() => _ActivityDetailsScreenState();
@@ -21,6 +23,13 @@ class ActivityDetailsScreen extends StatefulWidget {
 class _ActivityDetailsScreenState extends State<ActivityDetailsScreen> {
   ItineraryDetailScreenController itineraryDetailScreenController =
       Get.find<ItineraryDetailScreenController>();
+  @override
+  void initState() {
+    widget.data;
+    print('ACTIVITY_DETAILS_INDEX---->${widget.data}');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,9 +43,13 @@ class _ActivityDetailsScreenState extends State<ActivityDetailsScreen> {
               children: [
                 imageContainer(
                   context: context,
-                  img: itineraryDetailScreenController.itinerary?.image ??
-                      "https://storage.googleapis.com/fvallimages/uploads/blog/best-beaches-in-malaysia-2699.jpg",
-                  text: itineraryDetailScreenController.itinerary?.name ??
+                  img: imageUrl +
+                      '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].image}',
+                  // ?? "https://storage.googleapis.com/fvallimages/uploads/blog/best-beaches-in-malaysia-2699.jpg",
+                  text: itineraryDetailScreenController
+                          .itineraryDetailsListModel
+                          ?.itinerary[widget.data]
+                          .name ??
                       "Seco Island - Full Day Tour",
                 ),
                 const SizedBox(height: 35),
@@ -49,15 +62,28 @@ class _ActivityDetailsScreenState extends State<ActivityDetailsScreen> {
                       const Divider(thickness: 1.5),
                       detailTitle(text: "Check Out Date & Time"),
                       detailText(
-                        text: itineraryDetailScreenController
-                                .itinerary?.reservationDateTime
-                                .toString() ??
-                            "13-Nov-2022 | 12:00 PM",
-                      ),
+                          text: hotelDateAndTimeConverter(
+                              itineraryDetailScreenController
+                                      .itineraryDetailsListModel
+                                      ?.itinerary[widget.data]
+                                      .date ??
+                                  "13-Nov-2022 | 12:00 PM")),
                       detailTitle(text: "Location"),
                       GestureDetector(
                         onTap: () {
-                          Get.toNamed(ActivityMapDetails.routeName);
+                          Get.toNamed(
+                            ActivityMapDetails.routeName,
+                            arguments: [
+                              itineraryDetailScreenController
+                                  .itineraryDetailsListModel
+                                  ?.itinerary[widget.data]
+                                  .image,
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].location?.coordinates[0]}',
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].location?.coordinates[1]}',
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].location?.location}',
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].name}'
+                            ],
+                          );
                         },
                         child: Container(
                           color: Colors.transparent,
@@ -66,7 +92,10 @@ class _ActivityDetailsScreenState extends State<ActivityDetailsScreen> {
                             children: [
                               detailText(
                                   text: itineraryDetailScreenController
-                                          .itinerary?.location
+                                          .itineraryDetailsListModel
+                                          ?.itinerary[widget.data]
+                                          .location
+                                          ?.location
                                           .toString() ??
                                       "Cebu City, Philippines"),
                               Image.asset(AppIcons.gpsIcon, height: 21),
@@ -77,7 +106,9 @@ class _ActivityDetailsScreenState extends State<ActivityDetailsScreen> {
                       detailTitle(text: "Description"),
                       detailText(
                         text: itineraryDetailScreenController
-                                .itinerary?.description ??
+                                .itineraryDetailsListModel
+                                ?.itinerary[widget.data]
+                                .description ??
                             "Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text.",
                       ),
                     ],

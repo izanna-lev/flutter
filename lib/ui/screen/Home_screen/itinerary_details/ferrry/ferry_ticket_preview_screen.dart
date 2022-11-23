@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tralever_module/services/api_routes.dart';
 
 import '../../../../shared/appbar.dart';
 
@@ -7,7 +8,7 @@ class FerryTicketPreviewScreen extends StatefulWidget {
   static const String routeName = "/FerryTicketPreviewScreen";
 
   FerryTicketPreviewScreen({Key? key}) : super(key: key);
-  // var data = Get.arguments;
+  var data = Get.arguments;
 
   @override
   State<FerryTicketPreviewScreen> createState() =>
@@ -17,6 +18,7 @@ class FerryTicketPreviewScreen extends StatefulWidget {
 class _FerryTicketPreviewScreenState extends State<FerryTicketPreviewScreen> {
   @override
   void initState() {
+    widget.data;
     super.initState();
   }
 
@@ -27,8 +29,8 @@ class _FerryTicketPreviewScreenState extends State<FerryTicketPreviewScreen> {
       appBar: commonAppbar(titleText: "Ticket Preview"),
       body: Center(
         child: Image.network(
-          //Get.arguments,
-          "https://image.shutterstock.com/image-vector/ticket-ferry-boat-transportation-isolated-260nw-458092201.jpg",
+          imageUrl + widget.data,
+          // "https://image.shutterstock.com/image-vector/ticket-ferry-boat-transportation-isolated-260nw-458092201.jpg",
         ),
       ),
     );

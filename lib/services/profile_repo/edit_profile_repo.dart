@@ -26,6 +26,7 @@ class EditProfileRepo {
   static Future<UserProfileModel?> userProfile() async {
     var responseBody = await API.apiHandler(
         url: APIRoutes.userProfile,
+        showLoader: false,
         requestType: RequestType.Post,
         header: {
           'Authorization': userController.rowndSignInModel!.data.accessToken

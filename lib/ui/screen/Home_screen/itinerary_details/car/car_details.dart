@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tralever_module/custem_class/utils/globle.dart';
 
 import '../../../../../custem_class/constant/app_icons.dart';
 import '../../../../../custem_class/constant/app_settings.dart';
@@ -8,7 +9,9 @@ import '../flight/flight_details.dart';
 import '../hotel_rservations_screen.dart';
 
 class CarDetails extends StatefulWidget {
-  const CarDetails({Key? key}) : super(key: key);
+  int index;
+  var data = Get.arguments;
+  CarDetails({Key? key, required this.index}) : super(key: key);
 
   @override
   State<CarDetails> createState() => _CarDetailsState();
@@ -17,6 +20,12 @@ class CarDetails extends StatefulWidget {
 class _CarDetailsState extends State<CarDetails> {
   ItineraryDetailScreenController itineraryDetailScreenController =
       Get.find<ItineraryDetailScreenController>();
+  @override
+  void initState() {
+    widget.index;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -37,7 +46,10 @@ class _CarDetailsState extends State<CarDetails> {
                 ),
                 detailTitle(text: "Outbound"),
                 detailText(
-                  text: itineraryDetailScreenController.itinerary?.name ??
+                  text: itineraryDetailScreenController
+                          .itineraryDetailsListModel
+                          ?.itinerary[widget.index]
+                          .name ??
                       "Philippines Car | Canda - Cebu City",
                 ),
                 Row(
@@ -48,11 +60,12 @@ class _CarDetailsState extends State<CarDetails> {
                       children: [
                         detailTitle(text: "Depart"),
                         detailText(
-                          text: itineraryDetailScreenController
-                                  .itinerary?.departDateTime
-                                  .toString() ??
-                              "12-Nov-2022 | 11:30\nPM",
-                        ),
+                            text: dateAndTimeConverter(
+                                itineraryDetailScreenController
+                                        .itineraryDetailsListModel
+                                        ?.itinerary[0]
+                                        .departDateTime ??
+                                    "12-Nov-2022 | 11:30\nPM")),
                       ],
                     ),
                     Column(
@@ -60,11 +73,12 @@ class _CarDetailsState extends State<CarDetails> {
                       children: [
                         detailTitle(text: "Arrive"),
                         detailText(
-                          text: itineraryDetailScreenController
-                                  .itinerary?.arrivalDateTime
-                                  .toString() ??
-                              "13-Nov-2022 | 09:00\nAM",
-                        ),
+                            text: dateAndTimeConverter(
+                                itineraryDetailScreenController
+                                        .itineraryDetailsListModel
+                                        ?.itinerary[0]
+                                        .arrivalDateTime ??
+                                    "13-Nov-2022 | 09:00\nAM")),
                       ],
                     ),
                   ],
@@ -84,7 +98,9 @@ class _CarDetailsState extends State<CarDetails> {
                     const SizedBox(width: 10),
                     detailText(
                       text: itineraryDetailScreenController
-                              .itinerary?.flightClass
+                              .itineraryDetailsListModel
+                              ?.itinerary[widget.index]
+                              .flightClass
                               .toString() ??
                           "Economy Class",
                     ),
@@ -106,7 +122,9 @@ class _CarDetailsState extends State<CarDetails> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            detailTitle(text: "Philippines Car"),
+                            detailTitle(
+                                text:
+                                    '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].airline}'),
                             const Text(
                               "SQ221",
                               style: TextStyle(
@@ -143,9 +161,13 @@ class _CarDetailsState extends State<CarDetails> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                flightText(text: "Car depart from canada"),
+                                flightText(
+                                    text:
+                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].depart?.location}'),
                                 const SizedBox(height: 70),
-                                flightText(text: "Car arrives in cebu city")
+                                flightText(
+                                    text:
+                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].arrival?.location}')
                               ],
                             ),
                           ],
@@ -166,7 +188,10 @@ class _CarDetailsState extends State<CarDetails> {
                 const Divider(thickness: 1),
                 detailTitle(text: "Outbound"),
                 detailText(
-                  text: itineraryDetailScreenController.itinerary?.name ??
+                  text: itineraryDetailScreenController
+                          .itineraryDetailsListModel
+                          ?.itinerary[widget.index]
+                          .name ??
                       "Philippines Car | Caticlan - Canada",
                 ),
                 const SizedBox(height: 10),

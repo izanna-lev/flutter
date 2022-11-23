@@ -13,9 +13,7 @@ class HomeController extends GetxController {
   GlobalKey<PaginationViewState> pastKey = GlobalKey<PaginationViewState>();
 
   List<TravelPlansListModel> _travelPlansData = [];
-
   List<TravelPlansListModel> get travelPlansData => _travelPlansData;
-
   set travelPlansData(List<TravelPlansListModel> value) {
     _travelPlansData = value;
     update();
@@ -28,7 +26,7 @@ class HomeController extends GetxController {
     TravelPlansModel? travelPlansModel = await HomeScreenRepo.homeScreenRepo(
       page: start,
       listType: 1,
-      itineraryStatus: 1,
+      // itineraryStatus: 1,
     );
     if (travelPlansModel != null) {
       travelPlansData = travelPlansModel.data;
@@ -51,7 +49,7 @@ class HomeController extends GetxController {
     TravelPlansModel? travelPlansModel = await HomeScreenRepo.homeScreenRepo(
       page: start,
       listType: 2,
-      itineraryStatus: 2,
+      // itineraryStatus: 2,
     );
     if (travelPlansModel != null) {
       travelPlansData = travelPlansModel.data;
@@ -74,7 +72,7 @@ class HomeController extends GetxController {
     TravelPlansModel? travelPlansModel = await HomeScreenRepo.homeScreenRepo(
       page: start,
       listType: 3,
-      itineraryStatus: 3,
+      // itineraryStatus: 3,
     );
     if (travelPlansModel != null) {
       travelPlansData = travelPlansModel.data;

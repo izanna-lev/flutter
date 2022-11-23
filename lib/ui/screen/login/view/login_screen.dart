@@ -32,6 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
   LoginController loginController = Get.find<LoginController>();
   AboutScreenController aboutScreenController =
       Get.find<AboutScreenController>();
+  bool disposed = false;
 
   DateTime? currentBackPressTime;
   Future<bool> onWillPop() {
@@ -57,12 +58,19 @@ class _LoginScreenState extends State<LoginScreen> {
     // );
     _rownd.configure(rowndAppKey);
   }
-
-  @override
-  void dispose() {
-    GlobalStateNotifier().dispose();
-    super.dispose();
-  }
+  //
+  // @override
+  // void dispose() {
+  //   disposed = true;
+  //   super.dispose();
+  // }
+  //
+  // @override
+  // void notifyListeners() {
+  //   if (!disposed) {
+  //     notifyListeners();
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -121,6 +129,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: kDefaultPadding),
                             child: FormInputTextfield(
+                              focusNode: FocusNode(
+                                  canRequestFocus: false,
+                                  descendantsAreFocusable: false),
                               formFieldType: FormFieldType.email,
                               textCapitalization: TextCapitalization.none,
                               textInputAction: TextInputAction.done,
@@ -202,8 +213,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: kDefaultPadding),
-                            child: ChangeNotifierProvider(
-                              create: (_) => _rownd.state(),
+                            child: ChangeNotifierProvider.value(
+                              value: _rownd.state(),
                               builder: (context, child) {
                                 return Consumer<GlobalStateNotifier>(
                                     builder: (_, rownd, __) {

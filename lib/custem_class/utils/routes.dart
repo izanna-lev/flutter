@@ -6,19 +6,20 @@ import 'package:tralever_module/ui/screen/chats/view/allmessages.dart';
 import 'package:tralever_module/ui/screen/login/view/login_screen.dart';
 import 'package:tralever_module/ui/screen/login/view/onboarding_screen.dart';
 import 'package:tralever_module/ui/screen/notification/view/notification_screen.dart';
+
 import '../../ui/screen/Home_screen/itinerary_details/activity_details_screen.dart';
 import '../../ui/screen/Home_screen/itinerary_details/activity_map_details_screen.dart';
 import '../../ui/screen/Home_screen/itinerary_details/additional_information.dart';
 import '../../ui/screen/Home_screen/itinerary_details/cancellation_policy_screen.dart';
 import '../../ui/screen/Home_screen/itinerary_details/car/car_ticket_preview_screen.dart';
 import '../../ui/screen/Home_screen/itinerary_details/ferrry/ferry_ticket_preview_screen.dart';
+import '../../ui/screen/Home_screen/itinerary_details/flight/flight_ticket_preview_screen.dart';
+import '../../ui/screen/Home_screen/itinerary_details/flight/flight_tickets_details_screen.dart';
 import '../../ui/screen/Home_screen/itinerary_details/hotel_rservations_screen.dart';
 import '../../ui/screen/Home_screen/itinerary_details/itinerary_detailes_screen.dart';
 import '../../ui/screen/Home_screen/itinerary_details/rate_your_experience.dart';
 import '../../ui/screen/Home_screen/itinerary_details/required_information_Screen.dart';
 import '../../ui/screen/Home_screen/itinerary_details/restaurant_reservations_screen.dart';
-import '../../ui/screen/Home_screen/itinerary_details/flight/flight_ticket_preview_screen.dart';
-import '../../ui/screen/Home_screen/itinerary_details/flight/flight_tickets_details_screen.dart';
 import '../../ui/screen/Home_screen/itinerary_details/train/train_ticket_preview_screen.dart';
 import '../../ui/screen/Home_screen/view/Itinerary_request_form_screen.dart';
 import '../../ui/screen/Home_screen/view/home_screen.dart';
@@ -74,30 +75,26 @@ final List<GetPage<dynamic>> routes = [
   GetPage(
       name: ManagePaymentScreen.routeName,
       page: () => const ManagePaymentScreen()),
-  GetPage(
-      name: RateYourExperience.routeName,
-      page: () => const RateYourExperience()),
+  GetPage(name: RateYourExperience.routeName, page: () => RateYourExperience()),
   GetPage(
       name: HotelReservationsScreen.routeName,
-      page: () => const HotelReservationsScreen()),
+      page: () => HotelReservationsScreen()),
   GetPage(
       name: RestaurantReservationsScreen.routeName,
-      page: () => const RestaurantReservationsScreen()),
+      page: () => RestaurantReservationsScreen()),
   GetPage(
       name: FlightTicketsDetailsScreen.routeName,
-      page: () => const FlightTicketsDetailsScreen()),
+      page: () => FlightTicketsDetailsScreen()),
   GetPage(
       name: RequiredInformationScreen.routeName,
-      page: () => const RequiredInformationScreen()),
+      page: () => RequiredInformationScreen()),
   GetPage(
       name: FlightTicketPreviewScreen.routeName,
       page: () => FlightTicketPreviewScreen()),
   GetPage(
       name: ActivityDetailsScreen.routeName,
-      page: () => const ActivityDetailsScreen()),
-  GetPage(
-      name: ActivityMapDetails.routeName,
-      page: () => const ActivityMapDetails()),
+      page: () => ActivityDetailsScreen()),
+  GetPage(name: ActivityMapDetails.routeName, page: () => ActivityMapDetails()),
   GetPage(name: ChatRoomScreen.routeName, page: () => const ChatRoomScreen()),
   GetPage(name: ReportScreen.routeName, page: () => const ReportScreen()),
   GetPage(name: FAQScreen.routeName, page: () => const FAQScreen()),
@@ -106,23 +103,22 @@ final List<GetPage<dynamic>> routes = [
       page: () => const MyTransactionScreen()),
   GetPage(
       name: TrainTicketDetailsScreen.routeName,
-      page: () => const TrainTicketDetailsScreen()),
+      page: () => TrainTicketDetailsScreen()),
   GetPage(
       name: FerryTicketDetailsScreen.routeName,
-      page: () => const FerryTicketDetailsScreen()),
+      page: () => FerryTicketDetailsScreen()),
   GetPage(
       name: CarTicketDetailsScreen.routeName,
-      page: () => const CarTicketDetailsScreen()),
+      page: () => CarTicketDetailsScreen()),
   GetPage(
       name: FerryTicketPreviewScreen.routeName,
       page: () => FerryTicketPreviewScreen()),
   GetPage(
       name: TrainTicketPreviewScreen.routeName,
-      page: () => const TrainTicketPreviewScreen()),
+      page: () => TrainTicketPreviewScreen()),
   GetPage(
       name: CarTicketPreviewScreen.routeName,
-      page: () => const CarTicketPreviewScreen()),
-
+      page: () => CarTicketPreviewScreen()),
   GetPage(name: MessageScreen.routeName, page: () => MessageScreen()),
 
   /// GetPage(name: AllMessages.routeName, page: () => AllMessages()),

@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/car/car_ticket_deatils_screen.dart';
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/ferrry/ferry_ticket_deatils_screen.dart';
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/train/train_ticket_deatils_screen.dart';
-import 'package:tralever_module/ui/screen/chats/view/allmessages.dart';
 import 'package:tralever_module/ui/screen/login/view/login_screen.dart';
 import 'package:tralever_module/ui/screen/login/view/onboarding_screen.dart';
 import 'package:tralever_module/ui/screen/notification/view/notification_screen.dart';

@@ -545,6 +545,20 @@ class Itinerary {
 
   String id;
   String itineraryRef;
+  int reservationType;
+  String image;
+  String contactNumber;
+  String description;
+  Arrival location;
+  DateTime reservationDateTime;
+  bool deleted;
+  DateTime createdAt;
+  DateTime updatedAt;
+  int itineraryV;
+  DateTime date;
+  int detailType;
+  Arrival depart;
+  Arrival? arrival;
   String airline;
   int flightClass;
   int trainClass;
@@ -603,6 +617,23 @@ class Itinerary {
         checkInDateTime: json["checkInDateTime"] ?? "",
         checkOutDateTime: json["checkOutDateTime"] ?? "",
         // depart: json["depart"],
+        createdAt: DateTime.parse(json["createdAt"]),
+        updatedAt: DateTime.parse(json["updatedAt"]),
+        itineraryV: json["v"],
+        date: DateTime.parse(json["date"]),
+        detailType: json["detailType"],
+        depart: json["depart"],
+        arrival: (json["arrival"] == null) ? null : json["arrival"],
+        airline: json["airline"],
+        flightClass: json["flightClass"],
+        specialistNote: json["specialistNote"],
+        transportationType: json["transportationType"],
+        arrivalDateTime: json["arrivalDateTime"],
+        departDateTime: json["departDateTime"],
+        tickets: json["tickets"],
+        v: json["__v"],
+        checkInDateTime: json["checkInDateTime"],
+        checkOutDateTime: json["checkOutDateTime"],
       );
 
   Map<String, dynamic> toJson() => {

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../custem_class/constant/app_functions.dart';
+import '../../custem_class/constant/app_icons.dart';
 import '../../custem_class/constant/app_settings.dart';
+import '../screen/settings_screen/view/faq_screen.dart';
 
 final RegExp emailValidatorRegExp =
     RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
@@ -260,5 +262,55 @@ String? validateEmail(String? value) {
     return 'Please enter valid email';
   } else {
     return null;
+  }
+}
+
+class CustomTextField2 extends StatelessWidget {
+  final TextEditingController comment;
+  final String hintText;
+  final Function()? send;
+
+  const CustomTextField2(
+      {Key? key, required this.comment, required this.hintText, this.send})
+      : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(50),
+      child: Container(
+        height: 45,
+        // color: AppColor.textField2Color,
+        color: Colors.pink,
+        // padding: EdgeInsets.only(right: 15),
+        child: Row(
+          children: [
+            Expanded(
+              child: TextFormField(
+                controller: comment,
+                textCapitalization: TextCapitalization.sentences,
+                decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                    ),
+                    fillColor: Colors.transparent,
+                    hintStyle: const TextStyle(fontSize: 15),
+                    filled: true,
+                    hintText: hintText,
+                    border: InputBorder.none),
+              ),
+            ),
+            IconButton(
+              //  onPressed: send, icon: buildWidget(AppImages.send, 20, 22))
+              onPressed: send,
+              icon: Image.asset(
+                AppIcons.chatSendIcon,
+                height: 40,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

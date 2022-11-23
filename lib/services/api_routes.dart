@@ -2,6 +2,7 @@
 const String url = "http://44.209.25.93:3000/api/";
 const String imageUrl =
     "https://app-onsite.s3.amazonaws.com/development/images/small/";
+const String socketBaseUrl = "http://44.209.25.93:3000";
 
 ///ROWND APP KEY
 const String rowndAppKey = "d432a653-54bc-4c1d-a8c8-bf975187a5f8";
@@ -25,6 +26,13 @@ class APIRoutes {
   static const String cardList = "${url}card/list";
   static const String cardRemove = "${url}card/remove";
   static const String userProfile = "${url}user/details";
+  static const String transactionList = "${url}transaction/list";
+  static const String travellerChatList = "${url}traveller/chatList";
+  static const String travellerMessageList = "${url}traveller/messageList";
+  static const String travellerChatImage = "${url}traveller/chatImage";
+  static const String travellerGetChannel = "${url}traveller/getChannel";
+  static const String travellerActions = "${url}traveller/actions";
+  static const String travellerUnread = "${url}traveller/unread";
 
   ///* Traveller
   static const String rowndSignIn = "${url}traveller/signin";

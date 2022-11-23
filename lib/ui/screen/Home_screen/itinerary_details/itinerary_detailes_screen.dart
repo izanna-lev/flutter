@@ -33,6 +33,7 @@ class ItineraryDetailScreen extends StatefulWidget {
   static const String routeName = "/ItineraryDetailScreen";
 
   ItineraryDetailScreen({Key? key}) : super(key: key);
+  var data = Get.arguments;
 
   @override
   State<ItineraryDetailScreen> createState() => _ItineraryDetailScreenState();
@@ -92,6 +93,9 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
     //     DateTime(int.parse(dateAndTimeConverter(
     //         '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].arrivalDateTime}'))));
     // print('DAYS${daysBetween}');
+    var itineraryId = widget.data;
+    itineraryDetailScreenController.itineraryDetails(
+        itineraryRef: itineraryId, timezone: 1);
 
     // itineraryDetailScreenController.itineraryDetails(
     //   itineraryRef: itineraryDetailScreenController.itinerary?.id = itineraryId,

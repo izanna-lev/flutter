@@ -75,6 +75,36 @@ class API {
     }
   }
 
+  static Future<Map<String, dynamic>?> cardAPICall({
+    required String url,
+    RequestType requestType = RequestType.Post,
+    bool showLoader = true,
+    Map<String, String>? header,
+    bool showToast = false,
+    dynamic body,
+  }) async {
+    if (await checkConnection()) {
+      log("URl ===> $url");
+      log("FIELD ===> $body");
+      log("headers ===> $header");
+
+      var request = http.Request('POST', Uri.parse(url));
+      request.bodyFields = body;
+      request.headers.addAll(header!);
+
+      http.StreamedResponse response = await request.send();
+
+      if (response.statusCode == 200) {
+        String json = await response.stream.bytesToString();
+        log("RETURN RESPONSE BODY ===> ${response.statusCode} ${jsonDecode(json)}");
+        return jsonDecode(json);
+      } else {
+        print(response.reasonPhrase);
+      }
+    } else {}
+    return null;
+  }
+
   static Future multiPartAPIHandler(
       {List<File>? fileImage,
       Map<String, String>? field,
@@ -103,6 +133,7 @@ class API {
 
         Map<String, String> header = {
           'Content-Type': 'form-data/multipart',
+          // 'Content-Type': "application/x-www-form-urlencoded",
           'Authorization': token
         };
         if (userController.rowndSignInDetailsModel != null) {

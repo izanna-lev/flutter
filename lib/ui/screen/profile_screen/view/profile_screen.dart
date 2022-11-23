@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tralever_module/custem_class/constant/app_icons.dart';
@@ -7,10 +6,10 @@ import 'package:tralever_module/custem_class/constant/app_settings.dart';
 import 'package:tralever_module/ui/screen/profile_screen/controller/profile_controller.dart';
 import 'package:tralever_module/ui/screen/profile_screen/view/manage_payment_screen.dart';
 import 'package:tralever_module/ui/screen/profile_screen/view/my_transactions_screen.dart';
-
 import '../../../../custem_class/constant/app_colors.dart';
 import '../../../../custem_class/constant/app_images.dart';
 import '../../../../custem_class/utils/globle.dart';
+import '../../../../services/api_routes.dart';
 import '../../../shared/image_picker_controller.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -23,22 +22,19 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  ProfileController profileController = Get.find<ProfileController>();
+  ProfilerController profilerController = Get.find<ProfilerController>();
 
   late String currImageUrl;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    profileController.userProfile();
     // currImageUrl = imageUrl + userController.userModel!.user.image;
     currImageUrl = AppImages.loginBackgroundImage;
   }
 
   @override
   Widget build(BuildContext context) {
-    // final user =    Provider.of<GlobalStateNotifier>(context, listen: false);
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -46,7 +42,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           profileDetails(context),
           SingleChildScrollView(
             child: GetBuilder(
-              builder: (ProfileController profileController) {
+              builder: (ProfilerController profilerController) {
                 return Column(
                   children: [
                     Column(
@@ -79,57 +75,50 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           width: double.infinity,
                           child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: kDefaultPadding),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SizedBox(height: 20),
-                                  Text(
-                                    profileController
-                                            .userProfileDetailsModel?.name ??
-                                        "",
-                                    // userController.userModel?.user.name ?? "",
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: kDefaultPadding),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(height: 20),
+                                const Text(
+                                  // userController.userModel?.user.name ?? "",
 
-                                    // "Steve Walter",
-                                    style: const TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  "Steve Walter",
+                                  style: TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
                                   ),
-                                  Text(
-                                    profileController
-                                            .userProfileDetailsModel?.email ??
-                                        "",
-                                    // '${userController.rowndSignInDetailsModel?.traveller.email}',
-                                    // "example@gmail.com",
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                    ),
+                                ),
+                                const Text(
+                                  // userController.userModel?.user.email ?? "",
+                                  "example@gmail.com",
+                                  style: TextStyle(
+                                    fontSize: 16,
                                   ),
-                                  const SizedBox(height: 25),
-                                  profileSell(
-                                    img: AppIcons.manageCardIcon,
-                                    text: "Manage Payment Methods",
-                                    onTap: () {
-                                      Get.toNamed(
-                                          ManagePaymentScreen.routeName);
-                                    },
-                                    icon: Icons.navigate_next_sharp,
-                                  ),
-                                  const SizedBox(height: 10),
-                                  profileSell(
-                                    img: AppIcons.transactionsIcon,
-                                    text: "My Transactions",
-                                    onTap: () {
-                                      Get.toNamed(
-                                          MyTransactionScreen.routeName);
-                                    },
-                                    icon: Icons.navigate_next_sharp,
-                                  ),
-                                  const SizedBox(height: 20),
-                                ],
-                              )),
+                                ),
+                                const SizedBox(height: 25),
+                                profileSell(
+                                  img: AppIcons.manageCardIcon,
+                                  text: "Manage Payment Methods",
+                                  onTap: () {
+                                    Get.toNamed(ManagePaymentScreen.routeName);
+                                  },
+                                  icon: Icons.navigate_next_sharp,
+                                ),
+                                const SizedBox(height: 10),
+                                profileSell(
+                                  img: AppIcons.transactionsIcon,
+                                  text: "My Transactions",
+                                  onTap: () {
+                                    Get.toNamed(MyTransactionScreen.routeName);
+                                  },
+                                  icon: Icons.navigate_next_sharp,
+                                ),
+                                const SizedBox(height: 20),
+                              ],
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -150,7 +139,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         currImageUrl = imagePickerController.image;
 
         /// call api
-        profileController.editProfile();
+        profilerController.editProfile();
         print("CALL API");
       }
       return Column(

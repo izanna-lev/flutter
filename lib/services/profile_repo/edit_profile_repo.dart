@@ -8,7 +8,7 @@ import '../../models/profile/edit_profile_model.dart';
 import '../api_handler.dart';
 import '../api_routes.dart';
 
-class ProfileRepo {
+class EditProfileRepo {
   static Future<EditProfileModel?> editProfile(
       {File? picture, String? token}) async {
     Map<String, dynamic>? responseBody = await API.multiPartAPIHandler(

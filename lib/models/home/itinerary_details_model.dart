@@ -147,7 +147,7 @@ class Itinerary {
   DateTime date;
   int detailType;
   Arrival depart;
-  Arrival arrival;
+  Arrival? arrival;
   String airline;
   int flightClass;
   String specialistNote;
@@ -177,7 +177,7 @@ class Itinerary {
         date: DateTime.parse(json["date"]),
         detailType: json["detailType"],
         depart: json["depart"],
-        arrival: json["arrival"],
+        arrival: (json["arrival"] == null) ? null : json["arrival"],
         airline: json["airline"],
         flightClass: json["flightClass"],
         specialistNote: json["specialistNote"],

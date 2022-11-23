@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:tralever_module/services/api_routes.dart';
 import 'package:tralever_module/ui/screen/Home_screen/view/current_screen.dart';
 import 'package:tralever_module/ui/screen/Home_screen/view/past_screen.dart';
 import 'package:tralever_module/ui/screen/Home_screen/view/pending_screen.dart';
@@ -111,7 +112,8 @@ homeScreenCommonCell({
             ],
             image: DecorationImage(
               image: NetworkImage(
-                image,
+                //"https://images.allthingsnature.org/moss-on-stones-around-a-waterfall.jpg"
+                imageUrl + image,
               ),
               fit: BoxFit.cover,
             ),
@@ -121,7 +123,7 @@ homeScreenCommonCell({
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: BackdropFilter(
@@ -133,9 +135,10 @@ homeScreenCommonCell({
                       padding: const EdgeInsets.symmetric(
                           horizontal: 15, vertical: 5),
                       child: Text(
-                        day,
+                        "$day Days",
                         style: const TextStyle(
                           color: Colors.white,
+                          fontWeight: FontWeight.w500,
                           fontSize: 12,
                         ),
                       ),
@@ -155,7 +158,7 @@ homeScreenCommonCell({
                 ),
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
                   child: Column(
                     children: [
                       Row(
@@ -173,7 +176,7 @@ homeScreenCommonCell({
                           ),
                           const SizedBox(width: 50),
                           Text(
-                            price,
+                            "\$$price",
                             style: const TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 16,

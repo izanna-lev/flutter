@@ -283,7 +283,7 @@ class _RequestFormTextfieldState extends State<RequestFormTextfield> {
       case RequestFormFieldType.month:
         return TextInputType.number;
       case RequestFormFieldType.year:
-        return TextInputType.number;
+        return TextInputType.datetime;
 
       default:
         break;

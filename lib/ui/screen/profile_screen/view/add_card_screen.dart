@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tralever_module/custem_class/constant/app_settings.dart';
+import 'package:tralever_module/models/profile/add_card_model.dart';
 import 'package:tralever_module/ui/screen/profile_screen/controller/add_card_controller.dart';
 import 'package:tralever_module/ui/screen/profile_screen/view/cars_added_successfully.dart';
 import 'package:tralever_module/ui/shared/appbar.dart';
@@ -38,7 +39,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
                     addCardTitle(text: "Card Holder Name"),
                     RequestFormTextfield(
                       formFieldType: RequestFormFieldType.cardholdername,
-                      textCapitalization: TextCapitalization.none,
+                      textCapitalization: TextCapitalization.characters,
                       textInputAction: TextInputAction.next,
                       controller: addCardController.cardHolderNameController,
                       validator: (value) {
@@ -79,25 +80,26 @@ class _AddCardScreenState extends State<AddCardScreen> {
                         )),
                         const SizedBox(width: 15),
                         Expanded(
-                            child: RequestFormTextfield(
-                          formFieldType: RequestFormFieldType.year,
-                          textCapitalization: TextCapitalization.none,
-                          textInputAction: TextInputAction.next,
-                          controller: addCardController.yearController,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return "Enter Your Year";
-                            }
-                            return null;
-                          },
-                        )),
+                          child: RequestFormTextfield(
+                            formFieldType: RequestFormFieldType.year,
+                            textCapitalization: TextCapitalization.none,
+                            textInputAction: TextInputAction.next,
+                            controller: addCardController.yearController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "Enter Your Year";
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
                       ],
                     ),
                     addCardTitle(text: "Cvv"),
                     RequestFormTextfield(
                       formFieldType: RequestFormFieldType.cvv,
                       textCapitalization: TextCapitalization.none,
-                      textInputAction: TextInputAction.next,
+                      textInputAction: TextInputAction.done,
                       controller: addCardController.cvvController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -112,12 +114,18 @@ class _AddCardScreenState extends State<AddCardScreen> {
                         if (addCardController.addCardKey.currentState!
                             .validate()) {
                           disposeKeyboard();
-                          Map<String, dynamic>? response =
-                              await addCardController.cadAdd();
-                          if (response != null) {
-                            Get.toNamed(CardAddedSuccessfully.routeName);
-                          }
-                          // Get.toNamed(CardAddedSuccessfully.routeName);
+                          addCardController.cadAddData();
+                          // Map<String, dynamic>? responce =
+                          //     await addCardController.cadAddData();
+                          // if (responce != null) {
+                          //   Get.toNamed(CardAddedSuccessfully.routeName);
+                          // }
+
+                          // Map<String, dynamic>? response =
+                          //     await addCardController.cadAddData();
+                          // if (response != null) {
+                          //   Get.toNamed(CardAddedSuccessfully.routeName);
+                          // }
                         }
                       },
                       text: "Add",

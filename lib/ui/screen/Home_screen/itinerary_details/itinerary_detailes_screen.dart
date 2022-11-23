@@ -26,7 +26,8 @@ import '../../../../custem_class/utils/size_config.dart';
 class ItineraryDetailScreen extends StatefulWidget {
   static const String routeName = "/ItineraryDetailScreen";
 
-  const ItineraryDetailScreen({Key? key}) : super(key: key);
+  ItineraryDetailScreen({Key? key}) : super(key: key);
+  var data = Get.arguments;
 
   @override
   State<ItineraryDetailScreen> createState() => _ItineraryDetailScreenState();
@@ -71,14 +72,14 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
 
   @override
   void initState() {
+    var itineraryId = widget.data;
     itineraryDetailScreenController.itineraryDetails(
-      itineraryRef: itineraryDetailScreenController
-              .itineraryDetailsListModel?.itinerary[0].id ??
-          "",
-      timezone: 1,
-    );
-    print(
-        ' itineraryDetail_id===>${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].id}');
+        itineraryRef: itineraryId, timezone: 1);
+
+    // itineraryDetailScreenController.itineraryDetails(
+    //   itineraryRef: itineraryDetailScreenController.itinerary?.id = itineraryId,
+    //   timezone: 1,
+    // );
     super.initState();
   }
 

@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/car/car_ticket_deatils_screen.dart';
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/ferrry/ferry_ticket_deatils_screen.dart';
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/train/train_ticket_deatils_screen.dart';
+import 'package:tralever_module/ui/screen/chats/view/allmessages.dart';
 import 'package:tralever_module/ui/screen/login/view/login_screen.dart';
 import 'package:tralever_module/ui/screen/login/view/onboarding_screen.dart';
 import 'package:tralever_module/ui/screen/notification/view/notification_screen.dart';
@@ -24,6 +25,7 @@ import '../../ui/screen/Home_screen/view/home_screen.dart';
 import '../../ui/screen/base_screen/view/base_screen.dart';
 import '../../ui/screen/chats/view/chat_room_screen.dart';
 import '../../ui/screen/chats/view/chats_screen.dart';
+import '../../ui/screen/chats/view/message_screen.dart';
 import '../../ui/screen/chats/view/report_screen.dart';
 import '../../ui/screen/login/view/splash_screen.dart';
 import '../../ui/screen/profile_screen/view/add_card_screen.dart';
@@ -54,7 +56,7 @@ final List<GetPage<dynamic>> routes = [
       page: () => const ItineraryFromScreen()),
   GetPage(
       name: ItineraryDetailScreen.routeName,
-      page: () => const ItineraryDetailScreen()),
+      page: () => ItineraryDetailScreen()),
   GetPage(
       name: AdditionalInformationScreen.routeName,
       page: () => const AdditionalInformationScreen()),
@@ -120,4 +122,8 @@ final List<GetPage<dynamic>> routes = [
   GetPage(
       name: CarTicketPreviewScreen.routeName,
       page: () => const CarTicketPreviewScreen()),
+
+  GetPage(name: MessageScreen.routeName, page: () => MessageScreen()),
+
+  /// GetPage(name: AllMessages.routeName, page: () => AllMessages()),
 ];

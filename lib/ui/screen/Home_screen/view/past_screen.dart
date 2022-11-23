@@ -34,6 +34,7 @@ class _PastScreenState extends State<PastScreen> {
                 onTap: () {
                   Get.toNamed(
                     ItineraryDetailScreen.routeName,
+                    arguments: homeController.travelPlansData[index].id,
 
                     /// arguments: homeController.travelPlansData[index].id,
                   );

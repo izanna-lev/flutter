@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tralever_module/custem_class/constant/app_colors.dart';
+import 'package:tralever_module/custem_class/constant/app_functions.dart';
 import 'package:tralever_module/custem_class/constant/app_icons.dart';
 import 'package:tralever_module/custem_class/constant/app_settings.dart';
+import 'package:tralever_module/ui/screen/profile_screen/controller/add_card_controller.dart';
+import 'package:tralever_module/ui/screen/profile_screen/controller/my_transations_controller.dart';
 import 'package:tralever_module/ui/shared/material_button.dart';
 
 class MyTransactionScreen extends StatefulWidget {
@@ -15,147 +18,101 @@ class MyTransactionScreen extends StatefulWidget {
 }
 
 class _MyTransactionScreenState extends State<MyTransactionScreen> {
+  MyTransactionsController myTransactionsController =
+      Get.find<MyTransactionsController>();
+
   @override
+  void initState() {
+    myTransactionsController.transactionsData(transactionsType: 1);
+    myTransactionsController.transactionsData(transactionsType: 2);
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        centerTitle: true,
-        leading: IconButton(
-          onPressed: () {
-            Get.back();
-          },
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-            size: 24,
-          ),
-        ),
-        title: const Text(
-          "My Transactions",
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: GestureDetector(
-              onTap: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return Dialog(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: SizedBox(
-                          height: 250,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(height: 10),
-                                Row(
-                                  children: [
-                                    GestureDetector(
-                                        onTap: () {
-                                          Get.back();
-                                        },
-                                        child: const Icon(Icons.clear)),
-                                    const SizedBox(width: 50),
-                                    const Text(
-                                      "Transactions",
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 20),
-                                const Text(
-                                  "Date",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const SizedBox(height: 10),
-                                Row(
-                                  children: const [
-                                    Text(
-                                      "From",
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: TextField(),
-                                    ),
-                                    Text(
-                                      "To",
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: TextField(),
-                                    ),
-                                  ],
-                                ),
-                                const Spacer(),
-                                materialButton(
-                                  onTap: () {
-                                    Get.back();
-                                  },
-                                  text: "Apply Filter",
-                                ),
-                                const SizedBox(height: 20),
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
-                    });
-                print("Filter");
+    return GetBuilder(
+      builder: (MyTransactionsController myTransactionsController) {
+        return Scaffold(
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            elevation: 0,
+            centerTitle: true,
+            leading: IconButton(
+              onPressed: () {
+                Get.back();
               },
-              child: Image.asset(
-                AppIcons.filterIcon,
-                height: 24,
-                width: 24,
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.black,
+                size: 24,
               ),
             ),
-          ),
-        ],
-      ),
-      body: ListView.builder(
-        itemCount: 10,
-        itemBuilder: (BuildContext context, int index) {
-          return Column(
-            children: [
-              paidSell(
-                countryName: "The Philippines",
-                cardNumber: "XXX-XXX-XXX-3258",
-                date: "25-jan-2022",
-                price: "2500",
+            title: const Text(
+              "My Transactions",
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w600,
               ),
-              cancelSell(
-                countryName: "USA Road Trip: The Great Northern Island",
-                cardNumber: "XXX-XXX-XXX-3258",
-                date: "10-Aug-2021",
-                price: "500",
+            ),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: GestureDetector(
+                  onTap: () {
+                    filter(myTransactionsController);
+                  },
+                  child: Image.asset(
+                    AppIcons.filterIcon,
+                    height: 24,
+                    width: 24,
+                  ),
+                ),
               ),
             ],
-          );
-        },
-      ),
+          ),
+          body: ListView.builder(
+            itemCount: myTransactionsController.transactionListData.length,
+            itemBuilder: (BuildContext context, int index) {
+              return
+                  // myTransactionsController.transactionListData.isEmpty
+                  //   ? const Center(
+                  //       child: Text(
+                  //         "NO Data Found",
+                  //         style: TextStyle(color: Colors.pink),
+                  //       ),
+                  //     )
+                  //   :
+                  Column(
+                children: [
+                  myTransactionsController
+                              .transactionListData[index].transactionType ==
+                          1
+                      ? paidSell(
+                          countryName: myTransactionsController
+                              .transactionListData[index].name,
+                          cardNumber: myTransactionsController
+                              .transactionListData[index].lastDigitsCard,
+                          date: myTransactionsController
+                              .transactionListData[index].createdOn,
+                          // "25-jan-2022",
+                          price:
+                              "\$${myTransactionsController.transactionListData[index].price.toString()}")
+                      : cancelSell(
+                          countryName: myTransactionsController
+                              .transactionListData[index].name,
+                          cardNumber: myTransactionsController
+                              .transactionListData[index].lastDigitsCard,
+                          date: myTransactionsController
+                              .transactionListData[index].createdOn,
+                          //"25-jan-2022",
+                          price:
+                              "\$${myTransactionsController.transactionListData[index].price.toString()}"),
+                ],
+              );
+            },
+          ),
+        );
+      },
     );
   }
 
@@ -325,6 +282,157 @@ class _MyTransactionScreenState extends State<MyTransactionScreen> {
         const Divider(thickness: 1),
         const SizedBox(height: 10),
       ],
+    );
+  }
+
+  filter(MyTransactionsController myTransactionsController) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Form(
+            key: myTransactionsController.filterKey,
+            child: Column(
+              children: [
+                const Spacer(),
+                Dialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: SizedBox(
+                    height: 250,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 15),
+                          Row(
+                            children: [
+                              GestureDetector(
+                                  onTap: () {
+                                    Get.back();
+                                  },
+                                  child: const Icon(
+                                    Icons.clear,
+                                    color: Colors.black54,
+                                  )),
+                              const SizedBox(width: 50),
+                              const Text(
+                                "Transactions",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 20),
+                          const Text(
+                            "Date",
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              const Text(
+                                "From",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: filterTextField(
+                                  controller: myTransactionsController
+                                      .fromDateController,
+                                  textInputAction: TextInputAction.next,
+                                  validatorText: "Please enter from Date",
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              const Text(
+                                "To",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: filterTextField(
+                                  controller:
+                                      myTransactionsController.toDateController,
+                                  textInputAction: TextInputAction.done,
+                                  validatorText: "Please enter to Date",
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                            ],
+                          ),
+                          const Spacer(),
+                          materialButton(
+                            onTap: () async {
+                              if (myTransactionsController
+                                  .filterKey.currentState!
+                                  .validate()) {
+                                disposeKeyboard();
+                                Get.back();
+                                var response = await myTransactionsController
+                                    .transactionsData(
+                                  fromDate: myTransactionsController
+                                      .fromDateController.text,
+                                  toDate: myTransactionsController
+                                      .toDateController.text,
+                                );
+                                if (response != null) {
+                                  myTransactionsController.toDateController
+                                      .clear();
+                                  myTransactionsController.fromDateController
+                                      .clear();
+                                }
+                              }
+                            },
+                            text: "Apply Filter",
+                          ),
+                          const SizedBox(height: 25),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                const Spacer(),
+              ],
+            ),
+          );
+        });
+  }
+
+  filterTextField({
+    required TextEditingController controller,
+    required TextInputAction textInputAction,
+    required String validatorText,
+  }) {
+    return TextFormField(
+      controller: controller,
+      textInputAction: textInputAction,
+      keyboardType: TextInputType.number,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return validatorText;
+        }
+        return null;
+      },
+      decoration: const InputDecoration(
+        border: InputBorder.none,
+        hintText: "DD-MM-YYYY",
+        hintStyle: TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
     );
   }
 }

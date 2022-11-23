@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:geolocator_android/geolocator_android.dart';
 import 'package:geolocator_apple/geolocator_apple.dart';
 import 'package:get/get.dart';
@@ -12,14 +12,7 @@ import 'package:tralever_module/ui/screen/profile_screen/view/profile_screen.dar
 import 'package:tralever_module/ui/screen/settings_screen/view/settings_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:tralever_module/ui/screen/chats/view/allmessages.dart';
-import 'package:tralever_module/ui/screen/profile_screen/view/profile_screen.dart';
-import 'package:tralever_module/ui/screen/settings_screen/view/settings_screen.dart';
 import '../../ui/screen/Home_screen/view/home_screen.dart';
-import '../../ui/screen/chats/view/chats_screen.dart';
 import '../../ui/screen/login/view/splash_screen.dart';
 import '../../ui/shared/image_picker_controller.dart';
 import '../../ui/shared/user_controller.dart';
@@ -236,7 +229,6 @@ Future saveFcmToken(String fcmToken) async {
 //   //  return output;
 //   return output;
 // }
-=======
 enum DateTimeFormat { date, time }
 
 String timeFormat(DateTime timestamp) {
@@ -281,19 +273,19 @@ AppBar appBar(
             splashRadius: 10,
             focusNode: FocusNode(canRequestFocus: false),
             enableFeedback: false,
-            icon: Icon(Icons.arrow_back_ios),
+            icon: const Icon(Icons.arrow_back_ios),
             onPressed: () {
               Get.back();
             },
           )
-        : SizedBox(),
+        : const SizedBox(),
     //titleSpacing: 200,
     actions: actions == null ? [] : actions,
     title: Padding(
       padding: const EdgeInsets.only(top: 5),
       child: Text(
         title,
-        style: TextStyle(
+        style: const TextStyle(
             color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
       ),
     ),

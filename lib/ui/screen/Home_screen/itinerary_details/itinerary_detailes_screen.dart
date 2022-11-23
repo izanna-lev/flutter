@@ -84,23 +84,7 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
 
     itineraryDetailScreenController.itineraryDetails(
       itineraryRef: itineraryId,
-      // timezone: GetLocalTimezone.currentTimeZone,
     );
-
-    // daysBetween(
-    //     DateTime(int.parse(dateAndTimeConverter(
-    //         '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].departDateTime}'))),
-    //     DateTime(int.parse(dateAndTimeConverter(
-    //         '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].arrivalDateTime}'))));
-    // print('DAYS${daysBetween}');
-    var itineraryId = widget.data;
-    itineraryDetailScreenController.itineraryDetails(
-        itineraryRef: itineraryId, timezone: 1);
-
-    // itineraryDetailScreenController.itineraryDetails(
-    //   itineraryRef: itineraryDetailScreenController.itinerary?.id = itineraryId,
-    //   timezone: 1,
-    // );
     super.initState();
   }
 
@@ -137,45 +121,7 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                   )
                 : const AppLoader();
           },
-        )
-
-        // body: FutureBuilder(
-        //   future: itineraryDetailScreenController.itineraryDetails(
-        //       itineraryRef: itineraryId, timezone: "Europe/London"),
-        //   builder: (context, snapshot) {
-        //     if (snapshot.hasData) {
-        //       return GetBuilder(
-        //         builder: (ItineraryDetailScreenController
-        //             itineraryDetailScreenController) {
-        //           return Stack(
-        //             children: [
-        //               imageContainer(),
-        //               SingleChildScrollView(
-        //                 child: SizedBox(
-        //                   width: MediaQuery.of(context).size.width,
-        //                   child: Column(
-        //                     children: [
-        //                       const SizedBox(
-        //                         height: 210,
-        //                         width: double.infinity,
-        //                       ),
-        //                       imageContainerDetail(),
-        //                     ],
-        //                   ),
-        //                 ),
-        //               ),
-        //             ],
-        //           );
-        //         },
-        //       );
-        //     } else if (snapshot.hasError) {
-        //       return const Center(child: Text('No data Found'));
-        //     } else {
-        //       return const AppLoader();
-        //     }
-        //   },
-        // ),
-        );
+        ));
   }
 
   imageContainer() {

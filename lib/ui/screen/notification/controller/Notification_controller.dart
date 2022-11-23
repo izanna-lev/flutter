@@ -1,15 +1,31 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pagination_view/pagination_view.dart';
+import 'package:tralever_module/models/notifications_model/traveller_notification_model.dart';
+import 'package:tralever_module/services/notification_repo/notifications_repo.dart';
+
 import '../../../../models/notifications_model/notifications_model.dart';
 import '../../../../services/api_routes.dart';
 
 class NotificationScreenController extends GetxController {
-  int start = resourceAPIPaginationStart;
+  GlobalKey<PaginationViewState> notificationKey =
+      GlobalKey<PaginationViewState>();
+  // int start = resourceAPIPaginationStart;
+  int start = travellerNotificationAPIPaginationStart;
+
   List<NotificationList> _notificationListData = [];
-
   List<NotificationList> get notificationListData => _notificationListData;
-
   set notificationListData(List<NotificationList> value) {
     _notificationListData = value;
+    update();
+  }
+
+  List<TravellerDetailsNotificationList> _travellerDetailsNotificationList = [];
+  List<TravellerDetailsNotificationList> get travellerDetailsNotificationList =>
+      _travellerDetailsNotificationList;
+  set travellerDetailsNotificationList(
+      List<TravellerDetailsNotificationList> value) {
+    _travellerDetailsNotificationList = value;
     update();
   }
 
@@ -37,4 +53,23 @@ class NotificationScreenController extends GetxController {
   //
   //   return [];
   // }
+
+  Future<List<TravellerDetailsNotificationList>> travellerNotificationList(
+      int offset) async {
+    if (offset == 0) start = travellerNotificationAPIPaginationStart;
+    if (start == 0) return [];
+    TravellerNotificationListModel? travellerNotificationListModel =
+        await NotificationRepo.travellerNotificationList(page: start);
+    if (travellerNotificationListModel != null) {
+      travellerDetailsNotificationList = travellerNotificationListModel.data;
+      if (travellerNotificationListModel.size <
+          travellerNotificationListModel.limit) {
+        start = 0;
+      } else {
+        start += 1;
+      }
+      return travellerDetailsNotificationList;
+    }
+    return [];
+  }
 }

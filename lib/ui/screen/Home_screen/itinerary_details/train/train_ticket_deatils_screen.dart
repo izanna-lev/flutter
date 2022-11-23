@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/train/train_details.dart';
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/train/train_user_details.dart';
 
@@ -9,7 +10,8 @@ import '../../../../shared/appbar.dart';
 class TrainTicketDetailsScreen extends StatefulWidget {
   static const String routeName = "/TrainTicketDetailsScreen";
 
-  const TrainTicketDetailsScreen({Key? key}) : super(key: key);
+  TrainTicketDetailsScreen({Key? key}) : super(key: key);
+  var data = Get.arguments;
 
   @override
   State<TrainTicketDetailsScreen> createState() =>
@@ -21,6 +23,8 @@ class _TrainTicketDetailsScreenState extends State<TrainTicketDetailsScreen>
   late TabController controller;
   @override
   void initState() {
+    widget.data;
+    print('TRAIN_TICKET_DATA==>${widget.data}');
     controller = TabController(vsync: this, length: 2);
     super.initState();
   }
@@ -76,9 +80,9 @@ class _TrainTicketDetailsScreenState extends State<TrainTicketDetailsScreen>
           Expanded(
             child: TabBarView(
               controller: controller,
-              children: const [
-                TrainDetails(),
-                TrainUserDetailsScreen(),
+              children: [
+                TrainDetails(index: widget.data),
+                TrainUserDetailsScreen(index: widget.data),
               ],
             ),
           ),

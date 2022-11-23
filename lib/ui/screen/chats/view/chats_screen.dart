@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tralever_module/custem_class/constant/app_settings.dart';
+import 'package:tralever_module/ui/screen/base_screen/controller/base_screen_controller.dart';
 import 'package:tralever_module/ui/screen/chats/view/chat_room_screen.dart';
 
 import '../../../../custem_class/constant/app_colors.dart';
-import '../../../shared/image_picker_controller.dart';
 
 class ChatsScreen extends StatefulWidget {
   static const String routeName = "/ChatsScreen";
@@ -16,6 +16,7 @@ class ChatsScreen extends StatefulWidget {
 }
 
 class _ChatsScreenState extends State<ChatsScreen> {
+  BaseScreenController baseScreenController = Get.find<BaseScreenController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,6 +111,17 @@ class _ChatsScreenState extends State<ChatsScreen> {
             );
           },
         ),
+      ),
+    );
+  }
+
+  appbarText({required String text}) {
+    return Text(
+      text,
+      style: const TextStyle(
+        color: Colors.black,
+        fontSize: 18,
+        fontWeight: FontWeight.w600,
       ),
     );
   }

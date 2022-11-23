@@ -90,4 +90,8 @@ class AppIcons {
       "assets/images/chat_screen _image/ic_add.png";
   static const String chatSendIcon =
       "assets/images/chat_screen _image/ic_send.png";
+
+  //Activity map details:
+  static const String markerIcon =
+      "assets/images/itinerary_details_images/ic_location.png";
 }

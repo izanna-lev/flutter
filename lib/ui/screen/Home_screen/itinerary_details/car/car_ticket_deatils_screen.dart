@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/car/car_user_details.dart';
 
 import '../../../../../custem_class/constant/app_colors.dart';
@@ -9,7 +10,8 @@ import 'car_details.dart';
 class CarTicketDetailsScreen extends StatefulWidget {
   static const String routeName = "/CarTicketDetailsScreen";
 
-  const CarTicketDetailsScreen({Key? key}) : super(key: key);
+  CarTicketDetailsScreen({Key? key}) : super(key: key);
+  var data = Get.arguments;
 
   @override
   State<CarTicketDetailsScreen> createState() => _CarTicketDetailsScreenState();
@@ -20,6 +22,8 @@ class _CarTicketDetailsScreenState extends State<CarTicketDetailsScreen>
   late TabController controller;
   @override
   void initState() {
+    widget.data;
+    print('CAR_TICKET_DATA==>${widget.data}');
     controller = TabController(vsync: this, length: 2);
     super.initState();
   }
@@ -75,9 +79,9 @@ class _CarTicketDetailsScreenState extends State<CarTicketDetailsScreen>
           Expanded(
             child: TabBarView(
               controller: controller,
-              children: const [
-                CarDetails(),
-                CarUserDetailsScreen(),
+              children: [
+                CarDetails(index: widget.data),
+                CarUserDetailsScreen(index: widget.data),
               ],
             ),
           ),

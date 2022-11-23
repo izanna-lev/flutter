@@ -15,7 +15,7 @@ class ItineraryAddRepo {
     required String plannedDate,
     required int plannedTraveller,
     required String location,
-    required String travellers,
+    required int travellers,
   }) async {
     var responseBody = await API.apiHandler(
       url: APIRoutes.itineraryRequestAdd,

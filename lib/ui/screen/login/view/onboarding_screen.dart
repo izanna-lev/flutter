@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tralever_module/custem_class/constant/app_colors.dart';
+
 import '../../../../custem_class/constant/app_images.dart';
 import '../../../../custem_class/constant/app_settings.dart';
 import '../../../../custem_class/utils/local_storage.dart';
@@ -115,7 +116,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                       text: "Skip",
                                     ),
                                   ),
-                                  const SizedBox(width: 10),
+                                  const SizedBox(width: 13),
                                   Expanded(
                                     child: materialButton(
                                       onTap: () {

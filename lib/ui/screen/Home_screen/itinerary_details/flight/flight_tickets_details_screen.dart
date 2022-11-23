@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/flight/flight_user_details.dart';
 import 'package:tralever_module/ui/shared/appbar.dart';
 
@@ -9,7 +10,8 @@ import 'flight_details.dart';
 class FlightTicketsDetailsScreen extends StatefulWidget {
   static const String routeName = "/TicketsDetailsScreen";
 
-  const FlightTicketsDetailsScreen({Key? key}) : super(key: key);
+  FlightTicketsDetailsScreen({Key? key}) : super(key: key);
+  var data = Get.arguments;
 
   @override
   State<FlightTicketsDetailsScreen> createState() =>
@@ -21,6 +23,8 @@ class _FlightTicketsDetailsScreenState extends State<FlightTicketsDetailsScreen>
   late TabController controller;
   @override
   void initState() {
+    widget.data;
+    print('FLIGHT_DATA===>${widget.data}');
     controller = TabController(vsync: this, length: 2);
     super.initState();
   }
@@ -76,9 +80,11 @@ class _FlightTicketsDetailsScreenState extends State<FlightTicketsDetailsScreen>
           Expanded(
             child: TabBarView(
               controller: controller,
-              children: const [
-                FlightDetail(),
-                FlightUserDetails(),
+              children: [
+                FlightDetail(index: widget.data),
+                FlightUserDetails(
+                  index: widget.data,
+                ),
               ],
             ),
           ),

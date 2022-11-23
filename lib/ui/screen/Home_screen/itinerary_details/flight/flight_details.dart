@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tralever_module/custem_class/constant/app_icons.dart';
 import 'package:tralever_module/custem_class/constant/app_settings.dart';
+import 'package:tralever_module/custem_class/utils/globle.dart';
 import 'package:tralever_module/ui/screen/Home_screen/controller/itinerary_detaile_screen%20_controller.dart';
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/hotel_rservations_screen.dart';
 
 class FlightDetail extends StatefulWidget {
-  const FlightDetail({Key? key}) : super(key: key);
+  int index;
+  var data = Get.arguments;
+  FlightDetail({Key? key, required this.index}) : super(key: key);
 
   @override
   State<FlightDetail> createState() => _FlightDetailState();
@@ -24,6 +27,8 @@ class _FlightDetailState extends State<FlightDetail> {
         child: GetBuilder(
           builder: (ItineraryDetailScreenController
               itineraryDetailScreenController) {
+            print(
+                'ITINERARY_NAME==>${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].name}');
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -38,7 +43,10 @@ class _FlightDetailState extends State<FlightDetail> {
                   text: "Outbound",
                 ),
                 detailText(
-                  text: itineraryDetailScreenController.itinerary?.name ??
+                  text: itineraryDetailScreenController
+                          .itineraryDetailsListModel
+                          ?.itinerary[widget.index]
+                          .name ??
                       "Philippines Airlines | Canda - Cebu City",
                 ),
                 Row(
@@ -48,13 +56,13 @@ class _FlightDetailState extends State<FlightDetail> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         detailTitle(text: "Depart"),
-                        //detailText(text: "12-Nov-2022 | 11:30\nPM"),
                         detailText(
-                          text: itineraryDetailScreenController
-                                  .itinerary?.departDateTime
-                                  .toString() ??
-                              "13-Nov-2022 | 09:00\nAM",
-
+                          text: dateAndTimeConverter(
+                              itineraryDetailScreenController
+                                      .itineraryDetailsListModel
+                                      ?.itinerary[0]
+                                      .departDateTime ??
+                                  "13-Nov-2022 | 09:00\nAM"),
                           // text: itineraryDetailScreenController
                           //         .itinerary?.departDateTime.timeZoneName ??
                           //     "13-Nov-2022 | 09:00\nAM",
@@ -66,10 +74,12 @@ class _FlightDetailState extends State<FlightDetail> {
                       children: [
                         detailTitle(text: "Arrive"),
                         detailText(
-                          text: itineraryDetailScreenController
-                                  .itinerary?.arrivalDateTime
-                                  .toString() ??
-                              "13-Nov-2022 | 09:00\nAM",
+                          text: dateAndTimeConverter(
+                              itineraryDetailScreenController
+                                      .itineraryDetailsListModel
+                                      ?.itinerary[0]
+                                      .arrivalDateTime ??
+                                  "13-Nov-2022 | 09:00\nAM"),
                         ),
                       ],
                     ),
@@ -90,10 +100,21 @@ class _FlightDetailState extends State<FlightDetail> {
                     const SizedBox(width: 10),
                     detailText(
                       text: itineraryDetailScreenController
-                              .itinerary?.flightClass
-                              .toString() ??
-                          "Economy Class",
-                    ),
+                                  .itineraryDetailsListModel
+                                  ?.itinerary[widget.index]
+                                  .flightClass ==
+                              1
+                          ? "BUSINESS"
+                          : itineraryDetailScreenController
+                                      .itineraryDetailsListModel
+                                      ?.itinerary[widget.index]
+                                      .flightClass ==
+                                  2
+                              ? "ECONOMY"
+                              : "FIRST CLASS"
+                      // ?? "Economy Class"
+                      ,
+                    )
                   ],
                 ),
                 const SizedBox(height: 10),
@@ -114,7 +135,9 @@ class _FlightDetailState extends State<FlightDetail> {
                           children: [
                             detailTitle(
                               text: itineraryDetailScreenController
-                                      .itinerary?.airline ??
+                                      .itineraryDetailsListModel
+                                      ?.itinerary[widget.index]
+                                      .airline ??
                                   "Philippines Airlines",
                             ),
                             const Text(
@@ -153,9 +176,15 @@ class _FlightDetailState extends State<FlightDetail> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                flightText(text: "Flight depart from canada"),
+                                flightText(
+                                    text:
+                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].depart?.location}'
+                                    // "Flight depart from canada"
+                                    ),
                                 const SizedBox(height: 70),
-                                flightText(text: "Flight arrives in cebu city")
+                                flightText(
+                                    text:
+                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].arrival?.location}')
                               ],
                             ),
                           ],
@@ -176,7 +205,10 @@ class _FlightDetailState extends State<FlightDetail> {
                 const Divider(thickness: 1),
                 detailTitle(text: "Outbound"),
                 detailText(
-                  text: itineraryDetailScreenController.itinerary?.name ??
+                  text: itineraryDetailScreenController
+                          .itineraryDetailsListModel
+                          ?.itinerary[widget.index]
+                          .name ??
                       "Philippines Airlines | Caticlan - Canada",
                 ),
                 const SizedBox(height: 10),

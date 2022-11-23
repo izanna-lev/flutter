@@ -137,7 +137,6 @@ homeScreenCommonCell({
                       padding: const EdgeInsets.symmetric(
                           horizontal: 15, vertical: 5),
                       child: Text(
-                        "${day} Days",
                         "$day Days",
                         style: const TextStyle(
                           color: Colors.white,

@@ -22,7 +22,10 @@ import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/required
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/restaurant_reservations_screen.dart';
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/train/train_ticket_deatils_screen.dart';
 import 'package:tralever_module/ui/screen/chats/view/chats_screen.dart';
+import 'package:tralever_module/ui/screen/profile_screen/controller/add_card_controller.dart';
 import 'package:tralever_module/ui/screen/profile_screen/view/add_card_screen.dart';
+import 'package:tralever_module/ui/screen/profile_screen/view/manage_payment_screen.dart';
+import 'package:tralever_module/ui/screen/profile_screen/view/select_card_Screen.dart';
 import 'package:tralever_module/ui/shared/appbar.dart';
 import 'package:tralever_module/ui/shared/dilog_box.dart';
 import 'package:tralever_module/ui/shared/material_button.dart';
@@ -42,17 +45,6 @@ class ItineraryDetailScreen extends StatefulWidget {
 class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
   var data = Get.arguments;
 
-  List<String> date = [
-    "Oct 11",
-    "Oct 12",
-    "Oct 13",
-    "Oct 14",
-    "Oct 15",
-    "Oct 16",
-    "Oct 16",
-    "Oct 16",
-    "Oct 17"
-  ];
   List<String> icon = [
     AppIcons.flightIcon,
     AppIcons.hotelIcon,
@@ -63,25 +55,15 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
     AppIcons.trainIcon,
     AppIcons.carIcon,
   ];
-  List<String> detail = [
-    "JFK—> MIA 12:00pm flight",
-    "Check in Hotel Blue Star 4:00pm",
-    "Chinese Restaurant 7:00pm",
-    "Perez Art Museum",
-    "Required Information",
-    "Seco Island - Full Day Tour",
-    "Paco Train Station",
-    "Road trip to paco station"
-  ];
 
   ItineraryDetailScreenController itineraryDetailScreenController =
       Get.find<ItineraryDetailScreenController>();
+  AddCardController addCardController = Get.find<AddCardController>();
   double initialRating = 0;
 
   @override
   void initState() {
     var itineraryId = data;
-
     itineraryDetailScreenController.itineraryDetails(
       itineraryRef: itineraryId,
     );
@@ -240,26 +222,25 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                             ],
                           ),
                           const Spacer(),
-                          // itineraryDetailScreenController
-                          //             .itineraryDetailsListModel?.approved ??
-                          //
-                          //         ///false
-                          //         true
                           itineraryDetailScreenController
-                                      .itineraryDetailsListModel
-                                      ?.itineraryStatus ==
-                                  2
+                                      .itineraryDetailsListModel!.approved ==
+                                  true
                               ? GestureDetector(
                                   onTap: () {
-                                    requestDialogBox();
+                                    itineraryDetailScreenController
+                                                .itineraryDetailsListModel
+                                                ?.cancellationRequest ==
+                                            false
+                                        ? requestDialogBox()
+                                        : null;
                                   },
                                   child: Text(
                                     itineraryDetailScreenController
                                                 .itineraryDetailsListModel
                                                 ?.cancellationRequest ==
-                                            true
-                                        ? "Cancellation Requested"
-                                        : "Request Cancellation",
+                                            false
+                                        ? "Request Cancellation"
+                                        : "Cancellation Requested",
                                     style: const TextStyle(
                                       fontFamily: kAppFont,
                                       fontSize: 15,
@@ -276,8 +257,18 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                   ),
                 ),
                 const SizedBox(height: 15),
-                chatButton(onTap: () {
-                  Get.toNamed(ChatsScreen.routeName);
+                chatButton(onTap: () async {
+                  Get.toNamed(ChatsScreen.routeName,
+                      arguments: itineraryDetailScreenController.getChannel(
+                        itineraryRef: await itineraryDetailScreenController
+                                .getChannelModelId?.channelId ??
+                            "",
+                      ));
+                  // itineraryDetailScreenController.getChannel(
+                  //   itineraryRef: itineraryDetailScreenController
+                  //           .getChannelModelId?.channelId ??
+                  //       "",
+                  // );
                 }),
                 const SizedBox(height: 15),
                 Row(
@@ -312,10 +303,8 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                       // itemCount: date.length,
                       ///dummy date
                       itemCount: itineraryDetailScreenController
-                              .itineraryDetailsListModel?.dates.length ??
+                          .itineraryDetailsListModel!.dates.length,
 
-                          /// dummy date
-                          date.length,
                       // itemCount: date.length,
                       //shrinkWrap: true,
                       itemBuilder: (BuildContext context, int index) {
@@ -698,12 +687,17 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
 
                 ///  materialButton
                 ///  Approve Button
+                // itineraryDetailScreenController
+                //                 .itineraryDetailsListModel?.itineraryStatus ==
+                //             1 ||
+                //         itineraryDetailScreenController
+                //                 .itineraryDetailsListModel?.itineraryStatus ==
+                //             3
                 itineraryDetailScreenController
-                                .itineraryDetailsListModel?.itineraryStatus ==
-                            1 ||
-                        itineraryDetailScreenController
-                                .itineraryDetailsListModel?.itineraryStatus ==
-                            3
+                            .itineraryDetailsListModel!.approved ==
+                        true
+
+                    /// required true
                     ? const SizedBox()
                     : Row(
                         children: [
@@ -711,8 +705,9 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                             child: materialButton(
                               onTap: () {
                                 itineraryDetailScreenController
-                                            .itineraryDetailsListModel?.card ??
-                                        true
+                                            .itineraryDetailsListModel!.card ==
+                                        //   false
+                                        false
                                     ? cardNotAddedApproveDialogBox()
                                     : cardAddApproveDialogBox();
 
@@ -724,39 +719,30 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                           const SizedBox(width: 10),
                           Expanded(
                             child: materialButtonWithBorder(
-                              onTap: () {
-                                Get.toNamed(ChatsScreen.routeName);
-                              },
+                              onTap: () {},
                               text: "Request Edits",
                             ),
                           ),
                         ],
                       ),
 
-                const SizedBox(height: 20),
+                const SizedBox(height: 8),
                 itineraryDetailScreenController
-                                .itineraryDetailsListModel?.itineraryStatus ==
-                            1 ||
-                        itineraryDetailScreenController
-                                .itineraryDetailsListModel?.itineraryStatus ==
-                            3
-                    ? const SizedBox()
-                    : const Text(
+                            .itineraryDetailsListModel?.itineraryStatus ==
+                        5
+                    ? const Text(
                         "Rate Your Experience",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
                         ),
-                      ),
+                      )
+                    : const SizedBox(),
                 const SizedBox(height: 10),
                 itineraryDetailScreenController
-                                .itineraryDetailsListModel?.itineraryStatus ==
-                            3 ||
-                        itineraryDetailScreenController
-                                .itineraryDetailsListModel?.itineraryStatus ==
-                            1
-                    ? const SizedBox()
-                    : Row(
+                            .itineraryDetailsListModel?.itineraryStatus ==
+                        5
+                    ? Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           GestureDetector(
@@ -775,7 +761,7 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                                   : Get.toNamed(RateYourExperience.routeName,
                                       arguments: itineraryDetailScreenController
                                           .itineraryDetailsListModel
-                                          ?.itinerary[0]
+                                          ?.itinerary[widget.data]
                                           .itineraryRef);
                             },
                             child: RatingBar.builder(
@@ -806,8 +792,9 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                             ),
                           ),
                         ],
-                      ),
-                const SizedBox(height: 10),
+                      )
+                    : const SizedBox(),
+                const SizedBox(height: 8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -869,12 +856,15 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
       context: context,
       title: "Are you sure you’re ready to approve?",
       content:
-          "By clicking approve, you are letting your specialist know that you are happy with the itinerary provided and ready to pay the amount listed. Your selected payment method will be charged ${itineraryDetailScreenController.itineraryDetailsListModel?.price}  today and your specialist will proceed with bookings. Please click Confirm & Pay to continue.",
+          "By clicking approve, you are letting your specialist know that you are happy with the itinerary provided and ready to pay the amount listed. If you don’t have a payment method added, please click Confirm & Add Card below. Your selected payment method will be charged \$${itineraryDetailScreenController.itineraryDetailsListModel?.price} today and your specialist will proceed with bookings.",
       contentSize: 1,
       noonTap: () {
         Get.back();
       },
-      yesonTap: () {},
+      yesonTap: () {
+        Get.back();
+        Get.toNamed(AddCardScreen.routeName);
+      },
       color: AppColors.appBlueColor,
       okText: "Confirm",
       noText: "Cancel",
@@ -886,16 +876,14 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
       context: context,
       title: "Are you sure you’re ready to approve?",
       content:
-          "By clicking approve, you are letting your specialist know that you are happy with the itinerary provided and ready to pay the amount listed. Your selected payment method will be charged \$2500 today and your specialist will proceed with bookings. Please click Confirm & Pay to continue.",
+          "By clicking approve, you are letting your specialist know that you are happy with the itinerary provided and ready to pay the amount listed. Your selected payment method will be charged\$${itineraryDetailScreenController.itineraryDetailsListModel?.price} today and your specialist will proceed with bookings. Please click Confirm & Pay to continue.",
       contentSize: 1,
       noonTap: () {
         Get.back();
       },
       yesonTap: () {
-        itineraryDetailScreenController.itineraryDetailsListModel?.approved ==
-                true
-            ? Get.toNamed(AddCardScreen.routeName)
-            : null;
+        Get.back();
+        Get.toNamed(SelectCardScreen.routeName);
       },
       color: AppColors.appBlueColor,
       okText: "Confirm",

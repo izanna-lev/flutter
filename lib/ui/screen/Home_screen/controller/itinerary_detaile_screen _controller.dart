@@ -1,9 +1,13 @@
 import 'dart:async';
 
 import 'package:get/get.dart';
+import 'package:tralever_module/services/chats_repo/chatRepo.dart';
+import 'package:tralever_module/services/home_repo/itinerary_approve_repo.dart';
 import 'package:tralever_module/services/home_repo/itinerary_details_repo.dart';
 import 'package:tralever_module/services/home_repo/rating_repo.dart';
 
+import '../../../../models/chats/get_channel_model.dart';
+import '../../../../models/home/itinerary_approve_model.dart';
 import '../../../../models/home/itinerary_details_model.dart';
 import '../../../../models/home/tating_model.dart';
 
@@ -73,6 +77,68 @@ class ItineraryDetailScreenController extends GetxController {
     }
     return itineraryDetailsListModel;
   }
+
+  /// GetChannel APi
+
+  GetChannelModelId? _getChannelModelId;
+
+  GetChannelModelId? get getChannelModelId => _getChannelModelId;
+
+  set getChannelModelId(GetChannelModelId? value) {
+    _getChannelModelId = value;
+    update();
+  }
+
+  Future<GetChannelModelId?> getChannel({
+    required String itineraryRef,
+    // required timezone,
+    String? date,
+  }) async {
+    GetChannelModel? getChannelModel = await ChatRepo.getChannel(
+      itineraryRef: itineraryRef,
+    );
+    if (getChannelModel != null) {
+      getChannelModelId = getChannelModel.data;
+    }
+    return getChannelModelId;
+  }
+
+  ///////////////////////////////////////////////////
+  ////////////////////  itinerary approve  /////////////////////
+  ///////////////////////////////////////////////////
+
+  ItineraryApproveDataModel? _itineraryApproveDataModel;
+
+  ItineraryApproveDataModel? get itineraryApproveDataModel =>
+      _itineraryApproveDataModel;
+
+  set itineraryApproveDataModel(ItineraryApproveDataModel? value) {
+    _itineraryApproveDataModel = value;
+    update();
+  }
+
+  itineraryApprove({
+    required String itineraryRef,
+    required String cardRef,
+  }) async {
+    ItineraryApproveModel? response =
+        await ItineraryApproveRepo.itineraryApproveRepo(
+      itineraryRef: itineraryRef,
+      cardRef: cardRef,
+    );
+    if (response != null) {
+      itineraryApproveDataModel = response.data;
+    }
+    update();
+  }
+
+  /// this is screen api
+  // itineraryDetailScreenController
+  //     .itineraryApprove(
+  // itineraryRef:
+  // itineraryDetailScreenController.itineraryDetailsListModel!.id,
+  // cardRef: addCardController.card!.id,
+  // );
 
   ///////////////////////////////////////////////////
   ////////////////////  Rating  /////////////////////

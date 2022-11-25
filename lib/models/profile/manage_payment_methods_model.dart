@@ -30,17 +30,17 @@ class CardModel {
 }
 
 class CardListData {
-  CardListData({
-    required this.id,
-    required this.userRef,
-    required this.lastDigitsOfCard,
-    required this.cardType,
-    required this.stripeCustomerId,
-    required this.country,
-    required this.deleted,
-    required this.defaultCard,
-    required this.v,
-  });
+  CardListData(
+      {required this.id,
+      required this.userRef,
+      required this.lastDigitsOfCard,
+      required this.cardType,
+      required this.stripeCustomerId,
+      required this.country,
+      required this.deleted,
+      required this.defaultCard,
+      required this.v,
+      required this.selectedCard});
 
   String id;
   String userRef;
@@ -51,6 +51,7 @@ class CardListData {
   bool deleted;
   bool defaultCard;
   int v;
+  bool selectedCard;
 
   factory CardListData.fromJson(Map<String, dynamic> json) => CardListData(
         id: json["_id"] ?? "",
@@ -61,6 +62,7 @@ class CardListData {
         country: json["country"] ?? "",
         deleted: json["deleted"] ?? false,
         defaultCard: json["defaultCard"] ?? false,
+        selectedCard: json["selectedCard"] ?? false,
         v: json["__v"] ?? 0,
       );
 
@@ -74,6 +76,7 @@ class CardListData {
         "deleted": deleted,
         "defaultCard": defaultCard,
         "__v": v,
+        "selectedCard": selectedCard,
       };
 }
 

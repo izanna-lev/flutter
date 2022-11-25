@@ -115,7 +115,8 @@ homeScreenCommonCell({
             image: DecorationImage(
               image: NetworkImage(
                 //"https://images.allthingsnature.org/moss-on-stones-around-a-waterfall.jpg"
-                imageUrl + image,
+                // imageUrl + image,
+                image,
               ),
               fit: BoxFit.cover,
             ),

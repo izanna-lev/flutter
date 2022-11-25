@@ -33,6 +33,7 @@ class APIRoutes {
   static const String travellerGetChannel = "${url}traveller/getChannel";
   static const String travellerActions = "${url}traveller/actions";
   static const String travellerUnread = "${url}traveller/unread";
+  static const String itineraryApprove = "${url}itinerary/approve";
 
   ///* Traveller
   static const String rowndSignIn = "${url}traveller/signin";

@@ -82,8 +82,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               children: [
                                 const SizedBox(height: 20),
                                 const Text(
-                                  // userController.userModel?.user.name ?? "",
-
                                   "Steve Walter",
                                   style: TextStyle(
                                     fontSize: 22,
@@ -91,7 +89,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ),
                                 ),
                                 const Text(
-                                  // userController.userModel?.user.email ?? "",
                                   "example@gmail.com",
                                   style: TextStyle(
                                     fontSize: 16,

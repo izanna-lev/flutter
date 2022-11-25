@@ -183,8 +183,6 @@ class CardRepo {
     );
     if (responseBody != null) {
       return SuccessModel.fromJson(responseBody);
-    } else {
-      return;
     }
   }
 }

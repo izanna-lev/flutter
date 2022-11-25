@@ -5,6 +5,7 @@ import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/train/tr
 import 'package:tralever_module/ui/screen/login/view/login_screen.dart';
 import 'package:tralever_module/ui/screen/login/view/onboarding_screen.dart';
 import 'package:tralever_module/ui/screen/notification/view/notification_screen.dart';
+import 'package:tralever_module/ui/screen/profile_screen/view/select_card_Screen.dart';
 
 import '../../ui/screen/Home_screen/itinerary_details/activity_details_screen.dart';
 import '../../ui/screen/Home_screen/itinerary_details/activity_map_details_screen.dart';
@@ -119,6 +120,8 @@ final List<GetPage<dynamic>> routes = [
       name: CarTicketPreviewScreen.routeName,
       page: () => CarTicketPreviewScreen()),
   GetPage(name: MessageScreen.routeName, page: () => MessageScreen()),
+  GetPage(
+      name: SelectCardScreen.routeName, page: () => const SelectCardScreen()),
 
   /// GetPage(name: AllMessages.routeName, page: () => AllMessages()),
 ];

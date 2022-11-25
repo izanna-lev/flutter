@@ -4,6 +4,7 @@ import 'package:tralever_module/custem_class/constant/app_colors.dart';
 import 'package:tralever_module/custem_class/constant/app_functions.dart';
 import 'package:tralever_module/custem_class/constant/app_icons.dart';
 import 'package:tralever_module/custem_class/constant/app_settings.dart';
+import 'package:tralever_module/custem_class/utils/globle.dart';
 import 'package:tralever_module/ui/screen/profile_screen/controller/add_card_controller.dart';
 import 'package:tralever_module/ui/screen/profile_screen/controller/my_transations_controller.dart';
 import 'package:tralever_module/ui/shared/material_button.dart';
@@ -90,23 +91,25 @@ class _MyTransactionScreenState extends State<MyTransactionScreen> {
                       ? paidSell(
                           countryName: myTransactionsController
                               .transactionListData[index].name,
-                          cardNumber: myTransactionsController
-                              .transactionListData[index].lastDigitsCard,
-                          date: myTransactionsController
-                              .transactionListData[index].createdOn,
-                          // "25-jan-2022",
-                          price:
-                              "\$${myTransactionsController.transactionListData[index].price.toString()}")
+                          cardNumber:
+                              "XXX-XXX-XXX-${myTransactionsController.transactionListData[index].lastDigitsCard}",
+                          date: myTransactionsDate(myTransactionsController
+                              .transactionListData[index].createdOn),
+                          price: myTransactionsController
+                              .transactionListData[index].price
+                              .toString(),
+                        )
                       : cancelSell(
                           countryName: myTransactionsController
                               .transactionListData[index].name,
-                          cardNumber: myTransactionsController
-                              .transactionListData[index].lastDigitsCard,
-                          date: myTransactionsController
-                              .transactionListData[index].createdOn,
-                          //"25-jan-2022",
-                          price:
-                              "\$${myTransactionsController.transactionListData[index].price.toString()}"),
+                          cardNumber:
+                              "XXX-XXX-XXX-${myTransactionsController.transactionListData[index].lastDigitsCard}",
+                          date: myTransactionsDate(myTransactionsController
+                              .transactionListData[index].createdOn),
+                          price: myTransactionsController
+                              .transactionListData[index].price
+                              .toString(),
+                        ),
                 ],
               );
             },

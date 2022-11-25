@@ -21,6 +21,7 @@ class AddCardScreen extends StatefulWidget {
 
 class _AddCardScreenState extends State<AddCardScreen> {
   AddCardController addCardController = Get.find<AddCardController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,6 +29,9 @@ class _AddCardScreenState extends State<AddCardScreen> {
       appBar: commonAppbar(titleText: "Add Card"),
       body: GetBuilder(
         builder: (AddCardController addCardController) {
+          print(
+              "=========================${addCardController.cardRef}=============");
+          addCardController.cardRef = addCardController.addCardDetail?.data.id;
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
             child: SingleChildScrollView(
@@ -95,7 +99,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
                         ),
                       ],
                     ),
-                    addCardTitle(text: "Cvv"),
+                    addCardTitle(text: "CVV"),
                     RequestFormTextfield(
                       formFieldType: RequestFormFieldType.cvv,
                       textCapitalization: TextCapitalization.none,
@@ -115,17 +119,6 @@ class _AddCardScreenState extends State<AddCardScreen> {
                             .validate()) {
                           disposeKeyboard();
                           addCardController.cadAddData();
-                          // Map<String, dynamic>? responce =
-                          //     await addCardController.cadAddData();
-                          // if (responce != null) {
-                          //   Get.toNamed(CardAddedSuccessfully.routeName);
-                          // }
-
-                          // Map<String, dynamic>? response =
-                          //     await addCardController.cadAddData();
-                          // if (response != null) {
-                          //   Get.toNamed(CardAddedSuccessfully.routeName);
-                          // }
                         }
                       },
                       text: "Add",

@@ -51,7 +51,12 @@ class MyTransactionsController extends GetxController {
       fromDate: fromDateController.text.trim(),
       toDate: toDateController.text.trim(),
     );
-    transactionListData = request!.data;
+    if (request != null) {
+      transactionListData = request.data;
+      fromDateController.clear();
+      toDateController.clear();
+    }
+
     update();
   }
 }

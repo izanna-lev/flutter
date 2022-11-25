@@ -106,6 +106,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     style: const TextStyle(
                                       fontSize: 16,
                                     ),
+
                                   ),
                                   const SizedBox(height: 25),
                                   profileSell(

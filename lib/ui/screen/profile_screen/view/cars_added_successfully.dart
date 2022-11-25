@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tralever_module/custem_class/constant/app_icons.dart';
 import 'package:tralever_module/custem_class/constant/app_settings.dart';
+import 'package:tralever_module/ui/screen/profile_screen/controller/add_card_controller.dart';
 import 'package:tralever_module/ui/shared/material_button.dart';
 
 class CardAddedSuccessfully extends StatefulWidget {
@@ -14,6 +15,8 @@ class CardAddedSuccessfully extends StatefulWidget {
 }
 
 class _CardAddedSuccessfullyState extends State<CardAddedSuccessfully> {
+  AddCardController addCardController = Get.find<AddCardController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,11 +58,13 @@ class _CardAddedSuccessfullyState extends State<CardAddedSuccessfully> {
             ),
             const SizedBox(height: 20),
             materialButton(
-                onTap: () {
-                  Get.back();
-                  Get.back();
-                },
-                text: "Back to Settings"),
+              onTap: () {
+                addCardController.cardListShow();
+                Get.back();
+                Get.back();
+              },
+              text: "Back to Settings",
+            ),
             const Spacer(),
           ],
         ),

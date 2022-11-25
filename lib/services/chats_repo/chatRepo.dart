@@ -6,7 +6,9 @@ import '../api_handler.dart';
 import '../api_routes.dart';
 
 class ChatRepo {
-  static Future getChannel(String businessRef) async {
+  static Future getChannel({
+    required String itineraryRef,
+  }) async {
     var responseBody = await API.apiHandler(
         url: APIRoutes.travellerGetChannel,
         showLoader: false,
@@ -14,7 +16,7 @@ class ChatRepo {
           'Content-Type': 'application/json',
           'Authorization': userController.rowndSignInModel!.data.accessToken
         },
-        body: jsonEncode({"userId": businessRef}));
+        body: jsonEncode({"itineraryRef": itineraryRef}));
     if (responseBody != null) {
       return responseBody;
     } else {

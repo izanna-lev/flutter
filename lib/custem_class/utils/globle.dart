@@ -146,6 +146,17 @@ String hotelDateAndTimeConverter(String day) {
   return outputDate;
 }
 
+/// my transactions Date
+String myTransactionsDate(String day) {
+  var localDate = DateTime.parse(day);
+  var inputFormat = DateFormat("yyyy-MM-dd hh:mm:ss");
+  var inputDate = inputFormat.parse(localDate.toString());
+  var outputFormat = DateFormat("dd-MMM-yyyy");
+  // .add_jm()
+  var outputDate = outputFormat.format(inputDate);
+  return outputDate;
+}
+
 appLaunchUrl({required Uri url}) async {
   if (!await launchUrl(url)) {
     throw 'Could not launch $url';

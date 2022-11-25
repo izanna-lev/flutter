@@ -12,7 +12,7 @@ class EditProfileRepo {
   static Future<EditProfileModel?> editProfile(
       {File? picture, String? token}) async {
     Map<String, dynamic>? responseBody = await API.multiPartAPIHandler(
-        token: token.toString(),
+        token: userController.rowndSignInModel!.data.accessToken,
         url: APIRoutes.editProfile,
         field: {"data": jsonEncode({})},
         fileImage: picture == null ? null : [picture],

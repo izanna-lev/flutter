@@ -88,6 +88,7 @@ class LocalStorage {
   // saveUserDetails(UserModel data) {
 
   static clearData() {
+    prefs.erase();
     // prefs.remove("USER_FCM_TOKEN");
     prefs.remove("USER_DETAIL");
     prefs.remove("IS_USER_SIGNIN");

@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get/get.dart';
-import 'package:pagination_view/pagination_view.dart';
 import 'package:tralever_module/custem_class/constant/app_settings.dart';
-import 'package:tralever_module/ui/screen/base_screen/controller/base_screen_controller.dart';
 import 'package:tralever_module/services/api_routes.dart';
+import 'package:tralever_module/ui/screen/base_screen/controller/base_screen_controller.dart';
 import 'package:tralever_module/ui/screen/chats/controller/chat_screen_controller.dart';
-import 'package:tralever_module/ui/screen/chats/view/chat_room_screen.dart';
+
 import '../../../../custem_class/constant/app_colors.dart';
 import '../../../../custem_class/utils/globle.dart';
-import '../../../../models/chats/chat_list_model.dart';
-import '../../../../services/over&loding.dart';
-import '../../../shared/image_picker_controller.dart';
 import 'message_screen.dart';
 
 class ChatsScreen extends StatefulWidget {
@@ -42,6 +37,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
           builder: (ChatScreenController chatController) {
             return ListView.builder(
               itemCount: chatScreenController.chatData.length,
+              // itemCount: 10,
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
                   onTap: () {

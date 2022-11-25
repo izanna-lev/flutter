@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tralever_module/custem_class/constant/app_colors.dart';
 import 'package:tralever_module/custem_class/constant/app_settings.dart';
 import 'package:tralever_module/custem_class/utils/globle.dart';
 import 'package:tralever_module/models/notifications_model/traveller_notification_model.dart';
-import 'package:tralever_module/services/api_routes.dart';
+import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/itinerary_detailes_screen.dart';
+
+import '../../../../services/api_routes.dart';
 
 class NotificationView extends StatefulWidget {
   TravellerDetailsNotificationList travellerDetailsNotificationList;
@@ -20,7 +23,9 @@ class _NotificationViewState extends State<NotificationView> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
       child: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          Get.to(() => ItineraryDetailScreen());
+        },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -44,7 +44,7 @@ class BaseBinding extends Bindings {
         fenix: true);
     Get.lazyPut<ChatScreenController>(() => ChatScreenController(),
         fenix: true);
-    Get.lazyPut<ProfilerController>(() => ProfilerController(), fenix: true);
+    Get.lazyPut<ProfileController>(() => ProfileController(), fenix: true);
     Get.lazyPut<MyTransactionsController>(() => MyTransactionsController(),
         fenix: true);
 

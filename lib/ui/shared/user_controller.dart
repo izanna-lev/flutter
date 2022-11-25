@@ -7,6 +7,7 @@ import '../../models/login/user_model.dart';
 
 class UserController extends GetxController {
   String? rowndAcessToken;
+  String? fcmToken;
 
   UserModel? _userModel;
   UserModel? get userModel => _userModel;

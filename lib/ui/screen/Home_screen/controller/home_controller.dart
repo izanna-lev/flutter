@@ -60,7 +60,6 @@ class HomeController extends GetxController {
       }
       return travelPlansData;
     }
-
     return [];
   }
 

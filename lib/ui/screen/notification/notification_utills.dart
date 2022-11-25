@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:ui';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -11,6 +12,7 @@ import 'package:get/get.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:tralever_module/custem_class/utils/local_storage.dart';
+import 'package:tralever_module/ui/screen/notification/view/notification_screen.dart';
 
 class NotificationUtils {
   static const notificationChannelId = "onsite_notification";
@@ -57,17 +59,22 @@ class NotificationUtils {
     initializationSettingsAndroid =
         const AndroidInitializationSettings('drawable/appicon');
 
-    const IOSInitializationSettings initializationSettingsIOS =
-        IOSInitializationSettings();
+    DarwinInitializationSettings initializationSettingsIOS =
+        DarwinInitializationSettings(
+            defaultPresentAlert: true,
+            defaultPresentBadge: true,
+            defaultPresentSound: true,
+            onDidReceiveLocalNotification: onDidReceiveLocalNotification);
     InitializationSettings initializationSettings = InitializationSettings(
         android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
 
     // initialise the plugin
     await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onSelectNotification: (String? payload) async {
+        onDidReceiveNotificationResponse:
+            (NotificationResponse? payload) async {
       // notification tapped
       if (payload != null) {
-        Map<String, dynamic> data = jsonDecode(payload);
+        Map<String, dynamic> data = jsonDecode('${payload.payload}');
         await handleNotificationData(data);
       }
     });
@@ -94,6 +101,33 @@ class NotificationUtils {
 
     //this function listen all notification
     notificationListeners();
+  }
+
+  BuildContext? context;
+  void onDidReceiveLocalNotification(
+    int? id,
+    String? title,
+    String? body,
+    String? payload,
+  ) async {
+    // display a dialog with the notification details, tap ok to go to another page
+    showDialog(
+      context: context!,
+      builder: (BuildContext context) => CupertinoAlertDialog(
+        title: Text(title!),
+        content: Text(body!),
+        actions: [
+          CupertinoDialogAction(
+            isDefaultAction: true,
+            child: Text('Ok'),
+            onPressed: () async {
+              Navigator.of(context, rootNavigator: true).pop();
+              await Get.toNamed(NotificationScreen.routeName);
+            },
+          )
+        ],
+      ),
+    );
   }
 
   void scheduleNotification(
@@ -156,7 +190,6 @@ class NotificationUtils {
         body: message.notification?.body,
         data: message.data,
       );
-
       return;
     }
   }
@@ -169,10 +202,10 @@ class NotificationUtils {
     final didNotificationLaunchApp =
         notificationAppLaunchDetails?.didNotificationLaunchApp ?? false;
     if (didNotificationLaunchApp && notificationUnread) {
-      if (notificationAppLaunchDetails!.payload != null) {
+      if (notificationAppLaunchDetails!.notificationResponse?.payload != null) {
         notificationUnread = false;
-        handleNotificationData(
-            jsonDecode(notificationAppLaunchDetails.payload!));
+        handleNotificationData(jsonDecode(
+            '${notificationAppLaunchDetails.notificationResponse?.payload}'));
       }
     }
   }

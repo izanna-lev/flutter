@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:tralever_module/custem_class/utils/globle.dart';
 import 'package:tralever_module/models/login/rownd_sign_in_model.dart';
 
 import '../api_handler.dart';
@@ -30,16 +31,15 @@ class LoginRepo {
 
   static Future<RowndSignInModel?> rowndSignIn(
       {String? fcmToken, required String token}) async {
-    var responseBody = await API.multiPartAPIHandler(
-        url: APIRoutes.rowndSignIn,
-        showLoader: true,
-        field: {
-          "data": jsonEncode({
-            "fcmToken": "",
-            "device": Platform.isAndroid ? "android" : "ios",
-          })
-        },
-        token: token.toString());
+    var responseBody = await API.apiHandler(
+      url: APIRoutes.rowndSignIn,
+      showLoader: true,
+      header: {'Authorization': token},
+      body: jsonEncode({
+        "fcmToken": userController.fcmToken,
+        "device": Platform.isAndroid ? "android" : "ios",
+      }),
+    );
     if (responseBody != null) {
       return RowndSignInModel.fromJson(responseBody);
     }

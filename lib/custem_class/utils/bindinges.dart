@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:tralever_module/ui/screen/Home_screen/controller/home_controller.dart';
 import 'package:tralever_module/ui/screen/Home_screen/controller/itinerary_request_form_controller.dart';
 import 'package:tralever_module/ui/screen/base_screen/controller/base_screen_controller.dart';
+import 'package:tralever_module/ui/screen/chats/controller/message_screen_controller.dart';
 import 'package:tralever_module/ui/screen/login/controller/login_controller.dart';
 import 'package:tralever_module/ui/screen/notification/controller/Notification_controller.dart';
 import 'package:tralever_module/ui/screen/profile_screen/controller/my_transations_controller.dart';
@@ -45,9 +46,9 @@ class BaseBinding extends Bindings {
     Get.lazyPut<ChatScreenController>(() => ChatScreenController(),
         fenix: true);
     Get.lazyPut<ProfileController>(() => ProfileController(), fenix: true);
+    Get.lazyPut<MessageScreenController>(() => MessageScreenController(),
+        fenix: true);
     Get.lazyPut<MyTransactionsController>(() => MyTransactionsController(),
         fenix: true);
-
-    ///Get.lazyPut<AllChatController>(() => AllChatController(), fenix: true);
   }
 }

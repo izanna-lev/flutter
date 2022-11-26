@@ -464,6 +464,8 @@ class ItineraryDetailsListModel {
     required this.additionalInformation,
     required this.itinerary,
     required this.rating,
+    required this.specialistRef,
+    required this.specialistName,
   });
 
   String id;
@@ -476,6 +478,8 @@ class ItineraryDetailsListModel {
   bool cancellationRequest;
   int itineraryStatus;
   String additionalInformation;
+  String specialistRef;
+  String specialistName;
   List<Itinerary> itinerary;
   double rating;
 
@@ -492,6 +496,8 @@ class ItineraryDetailsListModel {
         cancellationRequest: json["cancellationRequest"] ?? false,
         itineraryStatus: json["itineraryStatus"] ?? 0,
         additionalInformation: json["additionalInformation"] ?? "",
+        specialistRef: json["specialistRef"] ?? "",
+        specialistName: json["specialistName"] ?? "",
         itinerary: List<Itinerary>.from(
             (json["itinerary"] ?? []).map((x) => Itinerary.fromJson(x))),
         rating: json["rating"] ?? 0,
@@ -509,39 +515,43 @@ class ItineraryDetailsListModel {
         "cancellationRequest": cancellationRequest,
         "itineraryStatus": itineraryStatus,
         "additionalInformation": additionalInformation,
+        "specialistName": specialistName,
+        "specialistRef": specialistRef,
         "itinerary": List<dynamic>.from(itinerary.map((x) => x.toJson())),
         "rating": rating,
       };
 }
 
 class Itinerary {
-  Itinerary(
-      {required this.id,
-      required this.itineraryRef,
-      required this.airline,
-      required this.flightClass,
-      required this.day,
-      required this.departDateTime,
-      required this.arrivalDateTime,
-      required this.depart,
-      required this.arrival,
-      required this.specialistNote,
-      required this.transportationType,
-      required this.deleted,
-      required this.v,
-      required this.tickets,
-      required this.date,
-      required this.detailType,
-      required this.name,
-      required this.reservationType,
-      required this.image,
-      required this.contactNumber,
-      required this.phoneCode,
-      required this.description,
-      required this.location,
-      required this.checkInDateTime,
-      required this.checkOutDateTime,
-      required this.trainClass});
+  Itinerary({
+    required this.id,
+    required this.itineraryRef,
+    required this.airline,
+    required this.flightClass,
+    required this.day,
+    required this.departDateTime,
+    required this.arrivalDateTime,
+    required this.depart,
+    required this.arrival,
+    required this.specialistNote,
+    required this.transportationType,
+    required this.deleted,
+    required this.v,
+    required this.tickets,
+    required this.date,
+    required this.detailType,
+    required this.name,
+    required this.reservationType,
+    required this.image,
+    required this.contactNumber,
+    required this.phoneCode,
+    required this.description,
+    required this.location,
+    required this.checkInDateTime,
+    required this.checkOutDateTime,
+    required this.trainClass,
+    required this.otherUserName,
+  });
 
   String id;
   String itineraryRef;
@@ -569,6 +579,7 @@ class Itinerary {
   Arrival? location;
   String checkInDateTime;
   String checkOutDateTime;
+  String otherUserName;
 
   factory Itinerary.fromJson(Map<String, dynamic> json) => Itinerary(
         id: json["_id"] ?? "",
@@ -602,6 +613,7 @@ class Itinerary {
             : Arrival.fromJson(json["location"]),
         checkInDateTime: json["checkInDateTime"] ?? "",
         checkOutDateTime: json["checkOutDateTime"] ?? "",
+        otherUserName: json["otherUserName"] ?? "",
         // depart: json["depart"],
       );
 
@@ -631,7 +643,8 @@ class Itinerary {
         "location": location == null ? null : location!.toJson(),
         "checkInDateTime": checkInDateTime,
         "checkOutDateTime": checkOutDateTime,
-        "trainClass": trainClass
+        "trainClass": trainClass,
+        "otherUserName": otherUserName,
       };
 }
 

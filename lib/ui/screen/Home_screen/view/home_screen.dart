@@ -8,6 +8,7 @@ import 'package:tralever_module/ui/screen/Home_screen/view/pending_screen.dart';
 
 import '../../../../custem_class/constant/app_colors.dart';
 import '../../../../custem_class/constant/app_settings.dart';
+import '../../chats/view/soket_managet.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = "/HomeScreen";
@@ -23,6 +24,9 @@ class _HomeScreenState extends State<HomeScreen>
   late TabController controller;
   @override
   void initState() {
+    Future.delayed(const Duration(milliseconds: 5), () {
+      SocketManager.connectSocket();
+    });
     controller = TabController(vsync: this, length: 3, initialIndex: 1);
     super.initState();
   }
@@ -114,9 +118,7 @@ homeScreenCommonCell({
             ],
             image: DecorationImage(
               image: NetworkImage(
-                //"https://images.allthingsnature.org/moss-on-stones-around-a-waterfall.jpg"
-                // imageUrl + image,
-                image,
+                imageUrl + image,
               ),
               fit: BoxFit.cover,
             ),

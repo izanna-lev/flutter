@@ -269,47 +269,57 @@ class CustomTextField2 extends StatelessWidget {
   final TextEditingController comment;
   final String hintText;
   final Function()? send;
+  final Function()? attachFile;
 
-  const CustomTextField2(
-      {Key? key, required this.comment, required this.hintText, this.send})
-      : super(key: key);
+  const CustomTextField2({
+    Key? key,
+    required this.comment,
+    required this.hintText,
+    this.send,
+    this.attachFile,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(50),
-      child: Container(
-        height: 45,
-        // color: AppColor.textField2Color,
-        color: Colors.pink,
-        // padding: EdgeInsets.only(right: 15),
-        child: Row(
-          children: [
-            Expanded(
-              child: TextFormField(
-                controller: comment,
-                textCapitalization: TextCapitalization.sentences,
-                decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.only(
-                      left: 20,
-                      right: 20,
-                    ),
-                    fillColor: Colors.transparent,
-                    hintStyle: const TextStyle(fontSize: 15),
-                    filled: true,
-                    hintText: hintText,
-                    border: InputBorder.none),
-              ),
+      borderRadius: BorderRadius.circular(5),
+      child: Row(
+        children: [
+          IconButton(
+            onPressed: attachFile,
+            icon: Image.asset(AppIcons.chatAddIcon),
+          ),
+          Expanded(
+            child: TextFormField(
+              controller: comment,
+              textCapitalization: TextCapitalization.sentences,
+              decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                    borderSide: const BorderSide(color: Colors.transparent),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                    borderSide: const BorderSide(color: Colors.transparent),
+                  ),
+                  contentPadding: const EdgeInsets.only(
+                    left: 10,
+                    right: 5,
+                  ),
+                  fillColor: const Color(0xffEBEBEB),
+                  hintStyle: const TextStyle(fontSize: 15),
+                  filled: true,
+                  hintText: hintText),
             ),
-            IconButton(
-              //  onPressed: send, icon: buildWidget(AppImages.send, 20, 22))
-              onPressed: send,
-              icon: Image.asset(
-                AppIcons.chatSendIcon,
-                height: 40,
-              ),
+          ),
+          IconButton(
+            //  onPressed: send, icon: buildWidget(AppImages.send, 20, 22))
+            onPressed: send,
+            icon: Image.asset(
+              AppIcons.chatSendIcon,
+              height: 40,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

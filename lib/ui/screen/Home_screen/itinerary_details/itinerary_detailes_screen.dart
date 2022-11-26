@@ -31,6 +31,7 @@ import 'package:tralever_module/ui/shared/dilog_box.dart';
 import 'package:tralever_module/ui/shared/material_button.dart';
 
 import '../../../../custem_class/utils/size_config.dart';
+import '../../chats/view/message_screen.dart';
 
 class ItineraryDetailScreen extends StatefulWidget {
   static const String routeName = "/ItineraryDetailScreen";
@@ -258,17 +259,7 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                 ),
                 const SizedBox(height: 15),
                 chatButton(onTap: () async {
-                  Get.toNamed(ChatsScreen.routeName,
-                      arguments: itineraryDetailScreenController.getChannel(
-                        itineraryRef: await itineraryDetailScreenController
-                                .getChannelModelId?.channelId ??
-                            "",
-                      ));
-                  // itineraryDetailScreenController.getChannel(
-                  //   itineraryRef: itineraryDetailScreenController
-                  //           .getChannelModelId?.channelId ??
-                  //       "",
-                  // );
+                  getChannelId();
                 }),
                 const SizedBox(height: 15),
                 Row(
@@ -719,7 +710,9 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                           const SizedBox(width: 10),
                           Expanded(
                             child: materialButtonWithBorder(
-                              onTap: () {},
+                              onTap: () {
+                                getChannelId();
+                              },
                               text: "Request Edits",
                             ),
                           ),
@@ -822,6 +815,26 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
     );
   }
 
+  getChannelId() async {
+    Get.toNamed(MessageScreen.routeName, arguments: {
+      "channelRef":
+          itineraryDetailScreenController.itineraryDetailsListModel!.id,
+      "specialistName": itineraryDetailScreenController
+          .itineraryDetailsListModel!.specialistName,
+      "specialistRef": itineraryDetailScreenController
+          .itineraryDetailsListModel!.specialistRef
+    });
+    // GetChannelModel? response = await itineraryDetailScreenController.getChannel(
+    //   itineraryRef: itineraryDetailScreenController
+    //       .itineraryDetailsListModel!.id,
+    // );
+    // if(response != null && response!.data!.channelId.isNotEmpty) {
+    //   Get.toNamed(MessageScreen.routeName, arguments: {"channelRef":response!.data!.channelId, "specialistName":itineraryDetailScreenController
+    //       .itineraryDetailsListModel!.specialistName, "specialistRef":itineraryDetailScreenController
+    //       .itineraryDetailsListModel!.specialistRef});
+    // }
+  }
+
   requestDialogBox() {
     return showCustomDialogItinerary(
       context: context,
@@ -838,11 +851,7 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
       },
       yesonTap: () {
         setState(() {
-          itineraryDetailScreenController
-                      .itineraryDetailsListModel?.cancellationRequest ==
-                  true
-              ? Get.toNamed(ChatsScreen.routeName)
-              : Get.back();
+          getChannelId();
         });
       },
       color: AppColors.appBlueColor,

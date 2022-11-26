@@ -49,7 +49,7 @@ class API {
           response =
               await http.post(Uri.parse(url), headers: header, body: body);
         }
-        log("RESPONSE ${url}  RETURN RESPONSE BODY CREATE ======> ${response.body}");
+        log("RESPONSE $url  RETURN RESPONSE BODY CREATE ======> ${response.body}");
         if (showLoader) LoadingOverlay.of().hide();
         if (response.body.isNotEmpty) {
           var res = jsonDecode(response.body);
@@ -96,7 +96,7 @@ class API {
 
       if (response.statusCode == 200) {
         String json = await response.stream.bytesToString();
-        log("RETURN RESPONSE BODY ===> ${response.statusCode} ${jsonDecode(json)}");
+        log("RETURN RESPONSE BODY $url ===> ${response.statusCode} ${jsonDecode(json)}");
         return jsonDecode(json);
       } else {
         print(response.reasonPhrase);
@@ -173,7 +173,7 @@ class API {
         var res = await response.stream.bytesToString();
 
         var resDecode = jsonDecode(res);
-        log("MULTIPART RETURN RESPONSE BODY CREATE ====== $resDecode");
+        log("MULTIPART RETURN RESPONSE BODY CREATE $url ====== $resDecode");
         if (resDecode["code"] == 100) {
           if (showLoader) LoadingOverlay.of().hide();
           flutterToast(resDecode["message"]);

@@ -34,6 +34,7 @@ class APIRoutes {
   static const String travellerActions = "${url}traveller/actions";
   static const String travellerUnread = "${url}traveller/unread";
   static const String itineraryApprove = "${url}itinerary/approve";
+  static const String reportAdd = "${url}report/add";
 
   ///* Traveller
   static const String rowndSignIn = "${url}traveller/signin";

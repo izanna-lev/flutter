@@ -257,15 +257,21 @@ extension DateTimeFormatExtension on DateTimeFormat {
     }
   }
 
-  static String displayMSGTimeFromTimestamp(DateTime timestamp) {
-    var v = DateTime.now().difference(timestamp);
+  static String displayMSGTimeFromTimestamp(DateTime date) {
+    var v = DateTime.now().difference(date);
     if (v.inHours < 24) {
-      return timeFormat(timestamp);
+      return timeFormat(date.toLocal());
     } else {
-      var outputFormat = DateFormat('MM-dd-yyyy');
-      var outputDate = outputFormat.format(timestamp);
+      var outputFormat = DateFormat('d MMM yy, hh:mma');
+      var outputDate = outputFormat.format(date.toLocal());
       return outputDate;
     }
+  }
+
+  static DateTime getUTCDateFromString(String strDate) {
+    var outputFormat = DateFormat('yyyy-MM-dd\'T\'HH:mm:ss.sssZ');
+    var outputDate = outputFormat.parse(strDate, true);
+    return outputDate;
   }
 }
 

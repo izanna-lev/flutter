@@ -34,6 +34,7 @@ class _PendingScreenState extends State<PendingScreen> {
       body: GetBuilder(
         builder: (HomeController homeController) {
           return PaginationView(
+
             key: homeController.pendingKey,
             scrollDirection: Axis.vertical,
             physics: const AlwaysScrollableScrollPhysics(),
@@ -147,7 +148,7 @@ class _PendingScreenState extends State<PendingScreen> {
   text({required String pleaseName}) {
     return Text(
       pleaseName,
-      // maxLines: 2,
+      // maxLines: 2,p
       style: const TextStyle(
         fontWeight: FontWeight.w600,
         fontSize: 16,

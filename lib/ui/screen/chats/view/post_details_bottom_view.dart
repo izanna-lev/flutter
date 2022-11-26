@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../shared/textfild_common.dart';
 
 class PostDetailsBottomView extends StatelessWidget {
   final TextEditingController comment;
-  final Function()? send;
+  final Function() send;
+  final Function() attachFile;
   final String hintText;
   final bool isAddRequired;
 
   const PostDetailsBottomView(
       {Key? key,
       required this.comment,
-      this.send,
+      required this.send,
+      required this.attachFile,
       required this.hintText,
       this.isAddRequired = false})
       : super(key: key);
@@ -36,6 +37,7 @@ class PostDetailsBottomView extends StatelessWidget {
               comment: comment,
               hintText: hintText,
               send: send,
+              attachFile: attachFile,
             ),
           ),
           // getHeightSizedBox(h: 15),

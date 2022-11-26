@@ -95,8 +95,9 @@ final List<GetPage<dynamic>> routes = [
       name: ActivityDetailsScreen.routeName,
       page: () => ActivityDetailsScreen()),
   GetPage(name: ActivityMapDetails.routeName, page: () => ActivityMapDetails()),
-  GetPage(name: ChatRoomScreen.routeName, page: () => const ChatRoomScreen()),
-  GetPage(name: ReportScreen.routeName, page: () => const ReportScreen()),
+
+  ///GetPage(name: ChatRoomScreen.routeName, page: () => const ChatRoomScreen()),
+  GetPage(name: ReportScreen.routeName, page: () => ReportScreen()),
   GetPage(name: FAQScreen.routeName, page: () => const FAQScreen()),
   GetPage(
       name: MyTransactionScreen.routeName,

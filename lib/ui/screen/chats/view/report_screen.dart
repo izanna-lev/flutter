@@ -3,16 +3,19 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:tralever_module/custem_class/constant/app_colors.dart';
 import 'package:tralever_module/custem_class/constant/app_functions.dart';
+import 'package:tralever_module/services/chats_repo/chatRepo.dart';
 import 'package:tralever_module/ui/shared/appbar.dart';
 import 'package:tralever_module/ui/shared/dilog_box.dart';
 import 'package:tralever_module/ui/shared/material_button.dart';
 
 import '../../../../custem_class/constant/app_settings.dart';
+import '../../../../models/chats/chat_list_model.dart';
 
 class ReportScreen extends StatefulWidget {
   static const String routeName = "/ReportScreen";
 
-  const ReportScreen({Key? key}) : super(key: key);
+  ReportScreen({Key? key}) : super(key: key);
+  String specialistRef = Get.arguments;
 
   @override
   State<ReportScreen> createState() => _ReportScreenState();
@@ -53,11 +56,16 @@ class _ReportScreenState extends State<ReportScreen> {
               ),
               const SizedBox(height: 30),
               materialButton(
-                onTap: () {
+                onTap: () async {
                   if (reportController.text.isEmpty) {
                     flutterToast("Please Enter Some Words");
                   } else {
-                    dialogBox();
+                    SuccessResponse? response = await ChatRepo.reportUser(
+                        specialistRef: widget.specialistRef,
+                        reason: reportController.text.trim());
+                    if (response != null) {
+                      showSuccessDialogBox();
+                    }
                   }
                 },
                 text: "Submit",
@@ -69,7 +77,7 @@ class _ReportScreenState extends State<ReportScreen> {
     );
   }
 
-  dialogBox() {
+  showSuccessDialogBox() {
     return showCustomDialog(
       context: context,
       content:

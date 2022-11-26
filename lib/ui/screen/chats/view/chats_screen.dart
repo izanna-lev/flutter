@@ -34,20 +34,21 @@ class _ChatsScreenState extends State<ChatsScreen> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
         child: GetBuilder(
-          builder: (ChatScreenController chatController) {
+          builder: (ChatScreenController chatScreenController) {
             return ListView.builder(
               itemCount: chatScreenController.chatData.length,
               // itemCount: 10,
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
                   onTap: () {
-                    ///Get.toNamed(ChatRoomScreen.routeName);
-                    Get.toNamed(MessageScreen.routeName);
-                    // Get.to(() => ChatView(
-                    //       channelRef: allChatData.channelRef,
-                    //       businessRef: allChatData.chatUserDetail.id,
-                    //       userName: allChatData.chatUserDetail.name,
-                    //     ));
+                    Get.toNamed(MessageScreen.routeName, arguments: {
+                      "channelRef":
+                          chatScreenController.chatData[index].channelRef,
+                      "specialistRef":
+                          chatScreenController.chatData[index].specialistRef,
+                      "specialistName":
+                          chatScreenController.chatData[index].specialistName
+                    });
                   },
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,

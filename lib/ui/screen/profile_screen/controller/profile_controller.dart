@@ -28,6 +28,13 @@ class ProfileController extends GetxController {
     update();
   }
 
+  UserProfileModel? _userProfileModel;
+  UserProfileModel? get userProfileModel => _userProfileModel;
+  set userProfileModel(UserProfileModel? value) {
+    _userProfileModel = value;
+    userController.onUpdateUser();
+  }
+
   Future editProfile() async {
     EditProfileModel? response = await EditProfileRepo.editProfile(
       picture: imagePickerController.image.isEmpty
@@ -45,13 +52,13 @@ class ProfileController extends GetxController {
     UserProfileModel? userProfileModel = await EditProfileRepo.userProfile();
     if (userProfileModel != null) {
       userProfileDetailsModel = userProfileModel.data;
-      updateRowndUser(userProfileModel);
+      updateUserProfile(userProfileModel.data);
     }
     // return userProfileDetailsModel;
   }
 
-  updateRowndUser(UserProfileModel userProfileModel) {
-    userProfileModel.data = userProfileModel.data;
-    update();
+  updateUserProfile(UserProfileDetailsModel user) {
+    userProfileModel?.data = user;
+    userController.onUpdateUserProfile();
   }
 }

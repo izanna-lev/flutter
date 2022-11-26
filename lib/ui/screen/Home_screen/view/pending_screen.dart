@@ -33,36 +33,65 @@ class _PendingScreenState extends State<PendingScreen> {
     return Scaffold(
       body: GetBuilder(
         builder: (HomeController homeController) {
-          return homeController.travelPlansData != null
-              ? PaginationView(
-                  key: homeController.pendingKey,
-                  scrollDirection: Axis.vertical,
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  pullToRefresh: true,
-                  bottomLoader: const AppLoader(),
-                  itemBuilder: (BuildContext context,
-                      TravelPlansListModel travelPlansListModel, int index) {
-                    return homeScreenCommonCell(
-                      onTap: () {
-                        Get.toNamed(
-                          ItineraryDetailScreen.routeName,
-                          arguments: homeController.travelPlansData[index].id,
-                        );
-                      },
-                      image:
-                          // imageUrl +
-                          homeController.travelPlansData[index].image,
-                      day: homeController.travelPlansData[index].duration
-                          .toString(),
-                      please: homeController.travelPlansData[index].name,
-                      price: homeController.travelPlansData[index].price
-                          .toString(),
-                      pleaseDetail:
-                          homeController.travelPlansData[index].description,
-                    );
-                  },
-                  pageFetch: homeController.pendingData,
-                  onEmpty: Center(
+          return PaginationView(
+            key: homeController.pendingKey,
+            scrollDirection: Axis.vertical,
+            physics: const AlwaysScrollableScrollPhysics(),
+            pullToRefresh: true,
+            bottomLoader: const AppLoader(),
+            itemBuilder: (BuildContext context,
+                TravelPlansListModel travelPlansListModel, int index) {
+              return homeScreenCommonCell(
+                onTap: () {
+                  Get.toNamed(
+                    ItineraryDetailScreen.routeName,
+                    arguments: homeController.travelPlansData[index].id,
+                  );
+                },
+                image:
+                    // imageUrl +
+                    homeController.travelPlansData[index].image,
+                day: homeController.travelPlansData[index].duration.toString(),
+                please: homeController.travelPlansData[index].name,
+                price: homeController.travelPlansData[index].price.toString(),
+                pleaseDetail: homeController.travelPlansData[index].description,
+              );
+            },
+            pageFetch: homeController.pendingData,
+            onEmpty: homeController.travelPlansData.isEmpty
+                ? Center(
+                    child: Column(
+                      children: [
+                        const Spacer(),
+                        Image.asset(
+                          AppImages.baseScreenPendingImage,
+                          width: 198,
+                          height: 200,
+                        ),
+                        const SizedBox(height: 20),
+                        const Text(
+                          "Request New Itinerary",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 40),
+                          child: Text(
+                            "Click the icon to submit your itinerary request. Once received, you will be matched with a specialist to create your travel plans. They will appear here.",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                        const Spacer(),
+                      ],
+                    ),
+                  )
+                : Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -79,51 +108,19 @@ class _PendingScreenState extends State<PendingScreen> {
                       ],
                     ),
                   ),
-                  onError: (error) {
-                    return const Center(
-                      child: Text("No comments here yet."),
-                    );
-                  },
-                  initialLoader: GetPlatform.isAndroid
-                      ? const Center(
-                          child: AppLoader(),
-                        )
-                      : const Center(
-                          child: CupertinoActivityIndicator(),
-                        ),
-                )
-              : Center(
-                  child: Column(
-                    children: [
-                      const Spacer(),
-                      Image.asset(
-                        AppImages.baseScreenPendingImage,
-                        width: 198,
-                        height: 200,
-                      ),
-                      const SizedBox(height: 20),
-                      const Text(
-                        "Request New Itinerary",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 40),
-                        child: Text(
-                          "Click the icon to submit your itinerary request. Once received, you will be matched with a specialist to create your travel plans. They will appear here.",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 14,
-                          ),
-                        ),
-                      ),
-                      const Spacer(),
-                    ],
+            onError: (error) {
+              return const Center(
+                child: Text("No comments here yet."),
+              );
+            },
+            initialLoader: GetPlatform.isAndroid
+                ? const Center(
+                    child: AppLoader(),
+                  )
+                : const Center(
+                    child: CupertinoActivityIndicator(),
                   ),
-                );
+          );
         },
       ),
       floatingActionButton:

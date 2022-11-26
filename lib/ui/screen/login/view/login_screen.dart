@@ -8,6 +8,7 @@ import 'package:rownd_flutter_plugin/state/global_state.dart';
 import 'package:tralever_module/custem_class/constant/app_images.dart';
 import 'package:tralever_module/custem_class/constant/app_settings.dart';
 import 'package:tralever_module/custem_class/utils/globle.dart';
+import 'package:tralever_module/custem_class/utils/local_storage.dart';
 import 'package:tralever_module/services/api_routes.dart';
 import 'package:tralever_module/ui/screen/base_screen/view/base_screen.dart';
 import 'package:tralever_module/ui/screen/login/controller/login_controller.dart';
@@ -235,7 +236,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                             userController
                                                 .rowndSignIn(
                                                     token:
-                                                        "${rownd.state.auth?.accessToken}")
+                                                        "${rownd.state.auth?.accessToken}",
+                                                    fcmToken: LocalStorage
+                                                        .getFCMToken())
                                                 .then((value) {
                                               print(
                                                   "ROWND-ACCESS-TOKEN----->${rownd.state.auth?.accessToken}");
@@ -256,7 +259,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                               userController
                                                   .rowndSignIn(
                                                       token:
-                                                          "${rownd.state.auth?.accessToken}")
+                                                          "${rownd.state.auth?.accessToken}",
+                                                      fcmToken: LocalStorage
+                                                          .getFCMToken())
                                                   .then((value) =>
                                                       Get.offAllNamed(BaseScreen
                                                           .routeName));

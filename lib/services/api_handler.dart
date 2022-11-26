@@ -30,9 +30,11 @@ class API {
         if (showLoader) LoadingOverlay.of().show();
         // Map<String, String> header = {'Content-Type': 'application/json'};
         if (userController.rowndSignInDetailsModel != null) {
-          header?.addAll({
-            "Authorization": userController.rowndSignInModel!.data.accessToken
-          });
+          if (header!["Authorization"] == null) {
+            header?.addAll({
+              "Authorization": userController.rowndSignInModel!.data.accessToken
+            });
+          }
           print(
               'USER-TOKEN${userController.rowndSignInModel!.data.accessToken}');
         }

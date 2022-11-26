@@ -19,7 +19,7 @@ class LocalStorage {
     userController.rowndSignInModel = value;
     prefs.write("USER_DETAIL", userController.rowndSignInModel!.toJson());
     LocalStorage.setUserSignIn();
-    LocalStorage.saveUserToken();
+    // LocalStorage.saveUserToken();
   }
 
   static bool getUserDetail() {
@@ -88,7 +88,7 @@ class LocalStorage {
   // saveUserDetails(UserModel data) {
 
   static clearData() {
-    prefs.erase();
+    // prefs.erase();
     // prefs.remove("USER_FCM_TOKEN");
     prefs.remove("USER_DETAIL");
     prefs.remove("IS_USER_SIGNIN");

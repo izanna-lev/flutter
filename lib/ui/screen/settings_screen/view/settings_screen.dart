@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:rownd_flutter_plugin/rownd.dart';
 import 'package:rownd_flutter_plugin/state/global_state.dart';
 import 'package:tralever_module/custem_class/constant/app_colors.dart';
+import 'package:tralever_module/services/api_routes.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../custem_class/constant/app_icons.dart';
@@ -42,6 +43,7 @@ class _SettingScreenState extends State<SettingScreen> {
   final _rownd = RowndPlugin();
   @override
   void initState() {
+    _rownd.configure(rowndAppKey);
     super.initState();
     // Provider.of<GlobalStateNotifier>(context, listen: false);
   }
@@ -134,8 +136,13 @@ class _SettingScreenState extends State<SettingScreen> {
       },
       yesonTap: () {
         Get.back();
-        LocalStorage.clearData();
-        signout();
+        if (_rownd.state().state.auth?.isAuthenticated ?? false) {
+          _rownd.signOut();
+          print("Sign Out====>${_rownd.signOut}");
+          LocalStorage.clearData();
+          print('CLEAER_DATA${LocalStorage.clearData}');
+        }
+        // signout();
         Get.offAllNamed(LoginScreen.routeName);
         // Get.offAllNamed(LoginScreen.routeName)?.then((value) => signout());
       },

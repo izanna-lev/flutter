@@ -19,8 +19,8 @@ class UserProfileModel {
 
   factory UserProfileModel.fromJson(Map<String, dynamic> json) =>
       UserProfileModel(
-        code: json["code"],
-        message: json["message"],
+        code: json["code"] ?? 0,
+        message: json["message"] ?? "",
         data: UserProfileDetailsModel.fromJson(json["data"]),
       );
 

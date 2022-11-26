@@ -22,7 +22,6 @@ UserController userController = Get.put(UserController());
 String initialRoute = SplashScreen.routeName;
 late AppImagePicker appImagePicker;
 String? currentTimezone;
-//
 int initialTab = 0;
 // bool isGuestUser = false;
 
@@ -89,27 +88,27 @@ String dayFormatConverter(String day) {
 }
 
 String getItineraryDate(String date) {
-  var localDate = DateTime.parse(date);
+  var localDate = DateTime.parse(date).toLocal();
 
   var inputFormat = DateFormat('yyyy-MM-dd');
   var inputDate = inputFormat.parse(localDate.toString());
 
   var outputFormat = DateFormat('MM/dd/yyyy');
   var outputDate = outputFormat.format(inputDate);
-
+  print('OUTPUT_DATE-->${outputDate.toString()}');
   return outputDate.toString();
 }
 
 String getItineraryTime(String time) {
-  var localDate = DateTime.parse(time);
+  var localTime = DateTime.parse(time).toLocal();
 
   var inputFormat = DateFormat('yyyy-MM-dd');
-  var inputDate = inputFormat.parse(localDate.toString());
+  var inputTime = inputFormat.parse(localTime.toString());
 
   var outputFormat = DateFormat('hh:mm');
-  var outputDate = outputFormat.format(inputDate);
-
-  return outputDate.toString();
+  var outputTime = outputFormat.format(inputTime);
+  print('OUTPUT_TIME--->${outputTime}');
+  return outputTime.toString();
 }
 
 ///* nov 23 dayConverter:

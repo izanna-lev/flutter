@@ -75,6 +75,7 @@ class NotificationUtils {
       // notification tapped
       if (payload != null) {
         Map<String, dynamic> data = jsonDecode('${payload.payload}');
+        print('PAYLOAD_ID----->${payload.id}');
         await handleNotificationData(data);
       }
     });

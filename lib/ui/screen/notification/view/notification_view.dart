@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:tralever_module/custem_class/constant/app_colors.dart';
 import 'package:tralever_module/custem_class/constant/app_settings.dart';
 import 'package:tralever_module/custem_class/utils/globle.dart';
@@ -24,7 +23,8 @@ class _NotificationViewState extends State<NotificationView> {
       padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
       child: GestureDetector(
         onTap: () {
-          Get.to(() => ItineraryDetailScreen());
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ItineraryDetailScreen()));
         },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,

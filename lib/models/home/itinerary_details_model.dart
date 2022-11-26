@@ -481,7 +481,7 @@ class ItineraryDetailsListModel {
   String specialistRef;
   String specialistName;
   List<Itinerary> itinerary;
-  double rating;
+  int rating;
 
   factory ItineraryDetailsListModel.fromJson(Map<String, dynamic> json) =>
       ItineraryDetailsListModel(
@@ -690,19 +690,19 @@ class Ticket {
   String image;
   String name;
   bool deleted;
-  DateTime createdAt;
-  DateTime updatedAt;
+  String createdAt;
+  String updatedAt;
   int v;
 
   factory Ticket.fromJson(Map<String, dynamic> json) => Ticket(
-        id: json["_id"],
-        transportationRef: json["transportationRef"],
-        image: json["image"],
-        name: json["name"],
-        deleted: json["deleted"],
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
-        v: json["__v"],
+        id: json["_id"] ?? "",
+        transportationRef: json["transportationRef"] ?? "",
+        image: json["image"] ?? "",
+        name: json["name"] ?? "",
+        deleted: json["deleted"] ?? false,
+        createdAt: json["createdAt"] ?? "",
+        updatedAt: json["updatedAt"] ?? "",
+        v: json["__v"] ?? 0,
       );
 
   Map<String, dynamic> toJson() => {
@@ -711,8 +711,8 @@ class Ticket {
         "image": image,
         "name": name,
         "deleted": deleted,
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
+        "createdAt": createdAt,
+        "updatedAt": updatedAt,
         "__v": v,
       };
 }

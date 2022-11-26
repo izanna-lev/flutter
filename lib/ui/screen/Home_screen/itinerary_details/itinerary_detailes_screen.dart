@@ -24,7 +24,6 @@ import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/train/tr
 import 'package:tralever_module/ui/screen/chats/view/chats_screen.dart';
 import 'package:tralever_module/ui/screen/profile_screen/controller/add_card_controller.dart';
 import 'package:tralever_module/ui/screen/profile_screen/view/add_card_screen.dart';
-import 'package:tralever_module/ui/screen/profile_screen/view/manage_payment_screen.dart';
 import 'package:tralever_module/ui/screen/profile_screen/view/select_card_Screen.dart';
 import 'package:tralever_module/ui/shared/appbar.dart';
 import 'package:tralever_module/ui/shared/dilog_box.dart';
@@ -406,24 +405,41 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                           width: 28,
                           height: 28,
                           indicator: Image.asset(
-                            index == 0 && type == 4
+                            type == 4
                                 ? AppIcons.flightIcon
-                                : index == 1 && type == 1
+                                : type == 1
                                     ? AppIcons.hotelIcon
-                                    : index == 2 && type == 2
+                                    : type == 2
                                         ? AppIcons.restaurantIcon
-                                        : index == 3 && type == 3
+                                        : type == 3
                                             ? AppIcons.activitiesIcon
-                                            : index == 4 && type == 8
+                                            : type == 8
                                                 ? AppIcons.notificationRound
-                                                : index == 5 && type == 6
+                                                : type == 6
                                                     ? AppIcons.ferryIcon
-                                                    : index == 6 && type == 5
+                                                    : type == 5
                                                         ? AppIcons.trainIcon
-                                                        : index == 7 &&
-                                                                type == 7
+                                                        : type == 7
                                                             ? AppIcons.carIcon
                                                             : AppIcons.carIcon,
+                            // index == 0 && type == 4
+                            //     ? AppIcons.flightIcon
+                            //     : index == 1 && type == 1
+                            //         ? AppIcons.hotelIcon
+                            //         : index == 2 && type == 2
+                            //             ? AppIcons.restaurantIcon
+                            //             : index == 3 && type == 3
+                            //                 ? AppIcons.activitiesIcon
+                            //                 : index == 4 && type == 8
+                            //                     ? AppIcons.notificationRound
+                            //                     : index == 5 && type == 6
+                            //                         ? AppIcons.ferryIcon
+                            //                         : index == 6 && type == 5
+                            //                             ? AppIcons.trainIcon
+                            //                             : index == 7 &&
+                            //                                     type == 7
+                            //                                 ? AppIcons.carIcon
+                            //                                 : AppIcons.carIcon,
                           ),
                         ),
                         alignment: TimelineAlign.manual,

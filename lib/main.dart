@@ -28,9 +28,10 @@ void main() async {
   await Firebase.initializeApp();
   print('-- main: Firebase.initializeApp');
   await GetStorage.init();
+  await getInitialRoute();
   globalVerbInit();
   requestPermission();
-  userController.fcmToken = await FirebaseMessaging.instance.getToken();
+  // fcmToken = await FirebaseMessaging.instance.getToken();
   // FirebaseMessaging.instance.requestPermission();
   // await FirebaseMessaging.instance.getInitialMessage().then((value) async => {
   //       if (value != null)
@@ -53,7 +54,6 @@ void main() async {
     providers: [ChangeNotifierProvider.value(value: GlobalStateNotifier())],
     child: const MyApp(),
   ));
-  // await getInitialRoute();
 
   // runApp(MyApp());
 }
@@ -62,7 +62,7 @@ getInitialRoute() async {
   if (LocalStorage.isUserSignIn()) {
     LocalStorage.getUserDetail();
 
-    if (userController.rowndSignInModel != null) {
+    if (userController.rowndSignInModel?.data.traveller != null) {
       initialRoute = BaseScreen.routeName;
     } else {
       initialRoute = SplashScreen.routeName;

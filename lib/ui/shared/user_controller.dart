@@ -7,7 +7,7 @@ import '../../models/login/user_model.dart';
 
 class UserController extends GetxController {
   String? rowndAcessToken;
-  String? fcmToken;
+  // String? fcmToken;
 
   UserModel? _userModel;
   UserModel? get userModel => _userModel;
@@ -32,13 +32,15 @@ class UserController extends GetxController {
     // onUpdateUser();
   }
 
-  Future<RowndSignInDetailsModel?> rowndSignIn({required String token}) async {
+  Future<RowndSignInDetailsModel?> rowndSignIn(
+      {required String token, String? fcmToken}) async {
     RowndSignInModel? rowndSignInModel =
-        await LoginRepo.rowndSignIn(token: token);
+        await LoginRepo.rowndSignIn(token: token, fcmToken: fcmToken);
     if (rowndSignInModel != null) {
       LocalStorage.setUserDetail(rowndSignInModel);
       rowndSignInDetailsModel = rowndSignInModel.data;
     }
+    return rowndSignInDetailsModel;
   }
 
   updateProfilePic(dynamic url) {
@@ -65,6 +67,11 @@ class UserController extends GetxController {
   onUpdateUser() {
     // LocalStorage.saveUserDetails();
     print("onUpdateUser");
+    update();
+  }
+
+  onUpdateUserProfile() {
+    LocalStorage.setUserDetail(rowndSignInModel!);
     update();
   }
 }

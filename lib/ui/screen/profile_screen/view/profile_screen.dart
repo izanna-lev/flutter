@@ -28,9 +28,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   late String currImageUrl;
   @override
   void initState() {
-    // TODO: implement initState
-    super.initState();
     profileController.userProfile();
+    profileController.update();
+    super.initState();
+
     // currImageUrl = imageUrl + userController.userModel!.user.image;
     currImageUrl = AppImages.loginBackgroundImage;
   }
@@ -86,9 +87,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 children: [
                                   const SizedBox(height: 20),
                                   Text(
-                                    profileController
-                                            .userProfileDetailsModel?.name ??
-                                        "",
+                                    profileController.userProfileDetailsModel!
+                                            .name.isEmpty
+                                        ? ""
+                                        : profileController
+                                            .userProfileDetailsModel!.name,
                                     // userController.userModel?.user.name ?? "",
 
                                     // "Steve Walter",
@@ -98,15 +101,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     ),
                                   ),
                                   Text(
-                                    profileController
-                                            .userProfileDetailsModel?.email ??
-                                        "",
+                                    profileController.userProfileDetailsModel!
+                                            .email.isEmpty
+                                        ? ""
+                                        : profileController
+                                            .userProfileDetailsModel!.email,
                                     // '${userController.rowndSignInDetailsModel?.traveller.email}',
                                     // "example@gmail.com",
                                     style: const TextStyle(
                                       fontSize: 16,
                                     ),
-
                                   ),
                                   const SizedBox(height: 25),
                                   profileSell(

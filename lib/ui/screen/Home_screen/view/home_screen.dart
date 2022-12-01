@@ -77,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen>
             ),
           ],
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 10),
         Expanded(
           child: TabBarView(
             controller: controller,
@@ -193,7 +193,12 @@ homeScreenCommonCell({
                       Row(
                         children: [
                           Expanded(
-                            child: Text(pleaseDetail),
+                            child: Text(
+                              pleaseDetail,
+                              maxLines: 2,
+                              style: const TextStyle(
+                                  overflow: TextOverflow.ellipsis),
+                            ),
                           ),
                           const SizedBox(width: 100),
                         ],

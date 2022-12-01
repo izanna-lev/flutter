@@ -57,10 +57,9 @@ class _TrainDetailsState extends State<TrainDetails> {
                         detailText(
                             text: dateAndTimeConverter(
                                 itineraryDetailScreenController
-                                        .itineraryDetailsListModel
-                                        ?.itinerary[0]
-                                        .departDateTime ??
-                                    "12-Nov-2022 | 11:30\nPM")),
+                                    .itineraryDetailsListModel!
+                                    .itinerary[0]
+                                    .date)),
                       ],
                     ),
                     Column(
@@ -70,10 +69,9 @@ class _TrainDetailsState extends State<TrainDetails> {
                         detailText(
                             text: dateAndTimeConverter(
                                 itineraryDetailScreenController
-                                        .itineraryDetailsListModel
-                                        ?.itinerary[0]
-                                        .arrivalDateTime ??
-                                    "13-Nov-2022 | 09:00\nAM")),
+                                    .itineraryDetailsListModel!
+                                    .itinerary[0]
+                                    .date)),
                       ],
                     ),
                   ],
@@ -166,11 +164,11 @@ class _TrainDetailsState extends State<TrainDetails> {
                               children: [
                                 flightText(
                                     text:
-                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].depart?.location}'),
+                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].location}'),
                                 const SizedBox(height: 70),
                                 flightText(
                                     text:
-                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].arrival?.location}'
+                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].location}'
                                     // itineraryDetailScreenController
                                     //         .itinerary?.name ??
                                     //     "Train arrives in cebu city",

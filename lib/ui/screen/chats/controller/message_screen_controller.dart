@@ -24,6 +24,17 @@ class MessageScreenController extends GetxController {
     update();
   }
 
+  // ItineraryDetailsListModel _itineraryDetailsListModel =
+  //     ItineraryDetailsListModel.fromJson({});
+  //
+  // ItineraryDetailsListModel get itineraryDetailsListModel =>
+  //     _itineraryDetailsListModel;
+  //
+  // set itineraryDetailsListModel(ItineraryDetailsListModel value) {
+  //   _itineraryDetailsListModel = value;
+  //   update();
+  // }
+
   Future<void> getMessageList({
     required String channelId,
     required int page,

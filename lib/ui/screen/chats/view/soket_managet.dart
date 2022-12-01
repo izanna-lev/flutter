@@ -37,7 +37,7 @@ class SocketManager {
     socket!.onConnect((_) {
       debugPrint(
           'socket connected ${userController.rowndSignInModel!.data.traveller.id}');
-      getMessagesListener();
+      SocketManager.getMessagesListener();
     });
     socket!.onConnecting((data) => debugPrint("SOCKET onConnecting $data"));
     socket!.onConnectError((data) => debugPrint("SOCKET onConnectError $data"));
@@ -53,6 +53,34 @@ class SocketManager {
     }
   }
 
+  // static void subscribeChannel() {
+  //   if (socket!.connected) {
+  //     socket!.emit("subscribe_channel", channelRef);
+  //   }
+  // }
+
+  static void subscribeChannel() {
+    if (socket!.connected) {
+      socket!.emit("subscribe_channel", {
+        "channelRef": channelRef,
+        "id": userController.rowndSignInModel!.data.traveller.id
+      });
+    }
+  }
+
+  static void subscribeUser() {
+    if (socket!.connected) {
+      socket!.emit("subscribe_user",
+          {"userRef": userController.rowndSignInModel!.data.traveller.id});
+    }
+  }
+  // static void subscribeUser() {
+  //   if (socket!.connected) {
+  //     socket!.emit(
+  //         "subscribe_user", userController.rowndSignInModel!.data.traveller.id);
+  //   }
+  // }
+
   static void sendMessage(Map message) {
     if (socket!.connected) {
       print("Emit Message: ${message}");
@@ -61,32 +89,42 @@ class SocketManager {
   }
 
   static void getMessagesListener() {
-    print("getMessagesListener");
+    print("getMessagesListener}");
     SocketManager.socket!.on('message', (data) {
       debugPrint("GET message $data");
+
       Message newMsg = Message.fromJson(data);
       if (newMsg.channelRef == channelRef) {
         updateMessageList(newMsg);
       }
       updateChatList(newMsg);
+      print("===========================>${data}");
     });
   }
 
   static void updateMessageList(Message msg) {
-    messageScreenController.messageList.add(msg);
+    messageScreenController.messageList.insert(0, msg);
+    messageScreenController.update();
   }
 
   static void updateChatList(Message msg) {
+    print("updateChatList $msg");
     List<ChatListModel> tempData = chatScreenController.chatData;
     final int index =
         tempData.indexWhere((element) => element.channelRef == channelRef);
+    print("Index $index");
     if (index != -1) {
       tempData[index].message = msg;
     }
     tempData.sort((msg1, msg2) {
-      return DateTime.parse(msg1.message.createdOn)
-          .compareTo(DateTime.parse(msg2.message.createdOn));
+      if (msg1.message.createdOn.isNotEmpty &&
+          msg2.message.createdOn.isNotEmpty) {
+        return DateTime.parse(msg1.message.createdOn)
+            .compareTo(DateTime.parse(msg2.message.createdOn));
+      }
+      return 0;
     });
+
     chatScreenController.chatData = tempData;
   }
 }

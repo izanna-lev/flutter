@@ -78,9 +78,9 @@ class _ActivityDetailsScreenState extends State<ActivityDetailsScreen> {
                                   .itineraryDetailsListModel
                                   ?.itinerary[widget.data]
                                   .image,
-                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].location?.coordinates[0]}',
-                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].location?.coordinates[1]}',
-                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].location?.location}',
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].location}',
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].location}',
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].location}',
                               '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].name}'
                             ],
                           );
@@ -92,12 +92,9 @@ class _ActivityDetailsScreenState extends State<ActivityDetailsScreen> {
                             children: [
                               detailText(
                                   text: itineraryDetailScreenController
-                                          .itineraryDetailsListModel
-                                          ?.itinerary[widget.data]
-                                          .location
-                                          ?.location
-                                          .toString() ??
-                                      "Cebu City, Philippines"),
+                                      .itineraryDetailsListModel!
+                                      .itinerary[widget.data]
+                                      .location),
                               Image.asset(AppIcons.gpsIcon, height: 21),
                             ],
                           ),

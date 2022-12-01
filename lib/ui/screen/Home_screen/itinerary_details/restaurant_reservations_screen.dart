@@ -45,14 +45,10 @@ class _RestaurantReservationsScreenState
               children: [
                 imageContainer(
                   context: context,
-                  img: imageUrl +
-                      '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].image}',
-                  // ?? "https://res.cloudinary.com/culturemap-com/image/upload/ar_4:3,c_fill,g_faces:center,w_980/v1565881156/photos/300250_original.jpg",
+                  img:
+                      '$imageUrl${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].image}',
                   text: itineraryDetailScreenController
-                          .itineraryDetailsListModel
-                          ?.itinerary[widget.index]
-                          .name ??
-                      "SALU, the Filipino Restaurant",
+                      .itineraryDetailsListModel!.itinerary[widget.index].name,
                 ),
                 const SizedBox(height: 35),
                 Padding(
@@ -86,9 +82,9 @@ class _RestaurantReservationsScreenState
                                   .itineraryDetailsListModel
                                   ?.itinerary[widget.index]
                                   .image,
-                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].location?.coordinates[0]}',
-                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].location?.coordinates[1]}',
-                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].location?.location}',
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].location}',
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].location}',
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].location}',
                               '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].name}'
                             ],
                           );
@@ -98,15 +94,17 @@ class _RestaurantReservationsScreenState
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              detailText(
-                                  text: itineraryDetailScreenController
-                                          .itineraryDetailsListModel
-                                          ?.itinerary[widget.index]
-                                          .location
-                                          ?.location
-                                          .toString() ??
-                                      "Cebu City, Philippines"),
-                              Image.asset(AppIcons.gpsIcon, height: 21),
+                              Expanded(
+                                child: detailText(
+                                    text: itineraryDetailScreenController
+                                        .itineraryDetailsListModel!
+                                        .itinerary[widget.index]
+                                        .location),
+                              ),
+                              Image.asset(
+                                AppIcons.gpsIcon,
+                                height: 21,
+                              )
                             ],
                           ),
                         ),

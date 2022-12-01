@@ -29,7 +29,7 @@ class MessageScreen extends StatefulWidget {
 
 class _MessageScreenState extends State<MessageScreen> {
   final MessageScreenController messageScreenController =
-      Get.put(MessageScreenController());
+      Get.find<MessageScreenController>();
   final ChatScreenController chatScreenController =
       Get.put(ChatScreenController());
 
@@ -38,7 +38,8 @@ class _MessageScreenState extends State<MessageScreen> {
     messageScreenController.getMessageList(
         channelId: widget.channelRef, page: 1);
     SocketManager.channelRef = widget.channelRef;
-    SocketManager.getMessagesListener();
+    SocketManager.subscribeChannel();
+    SocketManager.subscribeUser();
     super.initState();
   }
 
@@ -65,7 +66,10 @@ class _MessageScreenState extends State<MessageScreen> {
             title: GetBuilder(builder: (MessageScreenController controller) {
               return Text(
                 widget.otherUsername == ""
-                    ? controller.itinerary.otherUserName
+
+                    /// this dummy text
+                    // ? controller.itineraryDetailsListModel.specialistName
+                    ? widget.otherUsername
                     : widget.otherUsername,
                 style: const TextStyle(
                   color: Colors.black,
@@ -85,6 +89,8 @@ class _MessageScreenState extends State<MessageScreen> {
           ),
           body: GetBuilder(
             builder: (MessageScreenController controller) {
+              print("THIS IS MESSAGE");
+              print("GetBuilder LENGHT ${controller.messageList.length}");
               return widget.channelRef == "" && controller.messageList.isEmpty
                   ? GetPlatform.isAndroid
                       ? const Center(

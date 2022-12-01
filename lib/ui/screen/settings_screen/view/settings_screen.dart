@@ -191,38 +191,32 @@ class _SettingScreenState extends State<SettingScreen> {
         onTap: onTap,
         child: Column(
           children: [
-            Card(
-              elevation: 5,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    const SizedBox(width: 10),
-                    Image.asset(
-                      img,
-                      height: 25,
-                      width: 25,
-                      color: AppColors.appBlueColor,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  const SizedBox(width: 10),
+                  Image.asset(
+                    img,
+                    height: 25,
+                    width: 25,
+                    color: AppColors.appBlueColor,
+                  ),
+                  const SizedBox(width: 15),
+                  Text(
+                    text.tr,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
                     ),
-                    const SizedBox(width: 15),
-                    Text(
-                      text.tr,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    const Spacer(),
-                    Icon(
-                      icon,
-                      size: 35,
-                      color: Colors.black45,
-                    ),
-                  ],
-                ),
+                  ),
+                  const Spacer(),
+                  Icon(
+                    icon,
+                    size: 35,
+                    color: Colors.black45,
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 10),

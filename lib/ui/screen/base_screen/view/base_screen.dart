@@ -117,6 +117,7 @@ class _BaseScreenState extends State<BaseScreen> {
       elevation: 100,
       child: Container(
         decoration: const BoxDecoration(
+          color: Colors.white,
           boxShadow: [
             BoxShadow(
               color: Colors.grey,

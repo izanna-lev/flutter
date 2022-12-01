@@ -53,7 +53,7 @@ class _FerryDetailsState extends State<FerryDetails> {
                   text: itineraryDetailScreenController
                           .itineraryDetailsListModel
                           ?.itinerary[widget.index]
-                          .name ??
+                          .airline ??
                       "Philippines Airlines | Canda - Cebu City",
                 ),
                 Row(
@@ -204,7 +204,7 @@ class _FerryDetailsState extends State<FerryDetails> {
                   text: itineraryDetailScreenController
                           .itineraryDetailsListModel
                           ?.itinerary[widget.index]
-                          .name
+                          .airline
                           .toString() ??
                       "Philippines Ferry | Caticlan - Canada",
                 ),

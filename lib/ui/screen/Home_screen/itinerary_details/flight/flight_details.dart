@@ -28,7 +28,7 @@ class _FlightDetailState extends State<FlightDetail> {
           builder: (ItineraryDetailScreenController
               itineraryDetailScreenController) {
             print(
-                'ITINERARY_NAME==>${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].name}');
+                'ITINERARY_NAME==>${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].airline}');
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -46,7 +46,7 @@ class _FlightDetailState extends State<FlightDetail> {
                   text: itineraryDetailScreenController
                           .itineraryDetailsListModel
                           ?.itinerary[widget.index]
-                          .name ??
+                          .airline ??
                       "Philippines Airlines | Canda - Cebu City",
                 ),
                 Row(
@@ -206,7 +206,7 @@ class _FlightDetailState extends State<FlightDetail> {
                   text: itineraryDetailScreenController
                           .itineraryDetailsListModel
                           ?.itinerary[widget.index]
-                          .name ??
+                          .airline ??
                       "Philippines Airlines | Caticlan - Canada",
                 ),
                 const SizedBox(height: 10),

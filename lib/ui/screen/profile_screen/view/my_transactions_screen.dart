@@ -7,7 +7,10 @@ import 'package:tralever_module/custem_class/constant/app_settings.dart';
 import 'package:tralever_module/custem_class/utils/globle.dart';
 import 'package:tralever_module/ui/screen/profile_screen/controller/add_card_controller.dart';
 import 'package:tralever_module/ui/screen/profile_screen/controller/my_transations_controller.dart';
+import 'package:tralever_module/ui/screen/profile_screen/view/to_date_picker.dart';
 import 'package:tralever_module/ui/shared/material_button.dart';
+
+import 'from_date_picker.dart';
 
 class MyTransactionScreen extends StatefulWidget {
   static const String routeName = "/MyTransactionScreen";
@@ -302,7 +305,7 @@ class _MyTransactionScreenState extends State<MyTransactionScreen> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: SizedBox(
-                    height: 250,
+                    height: 220,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Column(
@@ -337,65 +340,51 @@ class _MyTransactionScreenState extends State<MyTransactionScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Row(
-                            children: [
-                              const Text(
-                                "From",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400,
+                          const SizedBox(height: 10),
+                          Expanded(
+                            child: Row(
+                              children: const [
+                                Text(
+                                  "From",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(width: 8),
-                              Expanded(
-                                child: filterTextField(
-                                  controller: myTransactionsController
-                                      .fromDateController,
-                                  textInputAction: TextInputAction.next,
-                                  validatorText: "Please enter from Date",
+                                SizedBox(width: 8),
+                                Expanded(
+                                  child: FormDemoDatePiker(),
                                 ),
-                              ),
-                              const SizedBox(width: 8),
-                              const Text(
-                                "To",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400,
+                                SizedBox(width: 8),
+                                Text(
+                                  "To",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(width: 8),
-                              Expanded(
-                                child: filterTextField(
-                                  controller:
-                                      myTransactionsController.toDateController,
-                                  textInputAction: TextInputAction.done,
-                                  validatorText: "Please enter to Date",
+                                SizedBox(width: 8),
+                                Expanded(
+                                  child: ToDemoDatePiker(),
                                 ),
-                              ),
-                              const SizedBox(width: 8),
-                            ],
+                                SizedBox(width: 8),
+                              ],
+                            ),
                           ),
-                          const Spacer(),
+                          //const Spacer(),
                           materialButton(
-                            onTap: () async {
+                            onTap: () {
                               if (myTransactionsController
                                   .filterKey.currentState!
                                   .validate()) {
                                 disposeKeyboard();
                                 Get.back();
-                                var response = await myTransactionsController
-                                    .transactionsData(
+                                myTransactionsController.transactionsData(
                                   fromDate: myTransactionsController
                                       .fromDateController.text,
                                   toDate: myTransactionsController
                                       .toDateController.text,
                                 );
-                                if (response != null) {
-                                  myTransactionsController.toDateController
-                                      .clear();
-                                  myTransactionsController.fromDateController
-                                      .clear();
-                                }
                               }
                             },
                             text: "Apply Filter",

@@ -37,7 +37,7 @@ class _FerryDetailsState extends State<FerryDetails> {
           builder: (ItineraryDetailScreenController
               itineraryDetailScreenController) {
             print(
-                'LOCATION${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].arrival?.location.toString()}');
+                'LOCATION${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].location.toString()}');
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -64,12 +64,11 @@ class _FerryDetailsState extends State<FerryDetails> {
                       children: [
                         detailTitle(text: "Depart"),
                         detailText(
-                            text: dateAndTimeConverter(
-                                itineraryDetailScreenController
-                                        .itineraryDetailsListModel
-                                        ?.itinerary[0]
-                                        .departDateTime ??
-                                    "12-Nov-2022 | 11:30\nPM")),
+                          text: dateAndTimeConverter(
+                            itineraryDetailScreenController
+                                .itineraryDetailsListModel!.itinerary[0].date,
+                          ),
+                        ),
                       ],
                     ),
                     Column(
@@ -79,10 +78,10 @@ class _FerryDetailsState extends State<FerryDetails> {
                         detailText(
                             text: dateAndTimeConverter(
                                 itineraryDetailScreenController
-                                        .itineraryDetailsListModel
-                                        ?.itinerary[0]
-                                        .arrivalDateTime ??
-                                    "13-Nov-2022 | 09:00\nAM")),
+                                    .itineraryDetailsListModel!
+                                    .itinerary[0]
+                                    .date
+                                    .toString())),
                       ],
                     ),
                   ],
@@ -177,15 +176,11 @@ class _FerryDetailsState extends State<FerryDetails> {
                               children: [
                                 flightText(
                                     text:
-                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].depart?.location}'
-                                    // "Ferry depart from canada"
-                                    ),
+                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].location}'),
                                 const SizedBox(height: 70),
                                 flightText(
                                     text:
-                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].arrival?.location}'
-                                    // "Ferry arrives in cebu city"
-                                    )
+                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].location}')
                               ],
                             ),
                           ],

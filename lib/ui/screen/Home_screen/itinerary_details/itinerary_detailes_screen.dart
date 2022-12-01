@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 import 'package:tralever_module/custem_class/constant/app_colors.dart';
 import 'package:tralever_module/custem_class/constant/app_functions.dart';
@@ -223,8 +225,13 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                           ),
                           const Spacer(),
                           itineraryDetailScreenController
-                                      .itineraryDetailsListModel!.approved ==
-                                  true
+                                          .itineraryDetailsListModel!
+                                          .itineraryStatus ==
+                                      2 &&
+                                  itineraryDetailScreenController
+                                          .itineraryDetailsListModel!
+                                          .approved ==
+                                      true
                               ? GestureDetector(
                                   onTap: () {
                                     itineraryDetailScreenController
@@ -257,27 +264,38 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                   ),
                 ),
                 const SizedBox(height: 15),
-                chatButton(onTap: () async {
-                  getChannelId();
-                }),
-                const SizedBox(height: 15),
+                itineraryDetailScreenController
+                                .itineraryDetailsListModel!.itineraryStatus ==
+                            3 ||
+                        itineraryDetailScreenController
+                                .itineraryDetailsListModel!.itineraryStatus ==
+                            5
+                    ? const SizedBox()
+                    : chatButton(onTap: () async {
+                        getChannelId();
+                      }),
+                itineraryDetailScreenController
+                                .itineraryDetailsListModel!.itineraryStatus ==
+                            3 ||
+                        itineraryDetailScreenController
+                                .itineraryDetailsListModel!.itineraryStatus ==
+                            5
+                    ? const SizedBox()
+                    : const SizedBox(height: 15),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       itineraryDetailScreenController
-                              .itineraryDetailsListModel?.name
-                              .toString() ??
-                          "The Surat",
-                      // "The Philippines",
+                          .itineraryDetailsListModel!.name
+                          .toString(),
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                       ),
                     ),
                     Text(
-                      '\$${itineraryDetailScreenController.itineraryDetailsListModel?.price}',
-                      // "\$2500"
+                      '\$${itineraryDetailScreenController.itineraryDetailsListModel!.price}',
                       style: const TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 18,
@@ -321,7 +339,8 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                                 itineraryDetailScreenController
                                     .itineraryDetails(
                                   itineraryRef: itineraryDetailScreenController
-                                      .itineraryDetailsListModel!.id,
+                                      .itineraryDetailsListModel!.id
+                                      .toString(),
                                   date:
                                       "${itineraryDetailScreenController.itineraryDetailsListModel?.dates[index]}",
                                   // timezone: GetLocalTimezone.currentTimeZone
@@ -373,30 +392,46 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: itineraryDetailScreenController
-                            .itineraryDetailsListModel?.itinerary.length
-
-                        /// Dummy Data Displaying
-                        ??
-                        icon.length,
-
-                    ///   itemCount: icon.length,
+                        .itineraryDetailsListModel!.itinerary.length,
                     itemBuilder: (BuildContext context, int index) {
                       var type = itineraryDetailScreenController
-                              .itineraryDetailsListModel
-                              ?.itinerary[index]
-                              .detailType ??
-                          "";
-                      var itineraryId = itineraryDetailScreenController
-                              .itineraryDetailsListModel?.itinerary[index].id ??
-                          "";
+                          .itineraryDetailsListModel!
+                          .itinerary[index]
+                          .detailType;
+                      var itineraryId = widget.data;
+                      // itineraryDetailScreenController
+                      // .itineraryDetailsListModel!.itinerary[index].id;
+                      var location = itineraryDetailScreenController
+                          .itineraryDetailsListModel!.itinerary[index].location;
                       var name = itineraryDetailScreenController
-                              .itineraryDetailsListModel
-                              ?.itinerary[index]
-                              .name ??
-                          "";
+                          .itineraryDetailsListModel!.itinerary[index].name;
+
+                      var description = itineraryDetailScreenController
+                          .itineraryDetailsListModel!
+                          .itinerary[index]
+                          .description;
+                      // var location = itineraryDetailScreenController
+                      //             .itineraryDetailsListModel!
+                      //             .itinerary[index]
+                      //             .date ==
+                      //         itineraryDetailScreenController
+                      //             .itineraryDetailsListModel!
+                      //             .itinerary[index]
+                      //             .arrivalDateTime
+                      //     ? itineraryDetailScreenController
+                      //         .itineraryDetailsListModel!
+                      //         .itinerary[index]
+                      //         .arrival!
+                      //         .location
+                      //     : itineraryDetailScreenController
+                      //         .itineraryDetailsListModel!
+                      //         .itinerary[index]
+                      //         .depart!
+                      //         .location;
+
                       return TimelineTile(
                         isFirst: index == 0 ? true : false,
-                        isLast: index == icon.length - 1 ? true : false,
+                        isLast: index == true,
                         afterLineStyle: const LineStyle(
                           thickness: 1.5,
                         ),
@@ -414,7 +449,7 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                                         : type == 3
                                             ? AppIcons.activitiesIcon
                                             : type == 8
-                                                ? AppIcons.notificationRound
+                                                ? AppIcons.requestInfoIcon
                                                 : type == 6
                                                     ? AppIcons.ferryIcon
                                                     : type == 5
@@ -453,81 +488,107 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                                   itineraryDetailScreenController
                                       .itineraryDetails(
                                         itineraryRef: itineraryId,
-                                        // timezone: currentTimezone, //
+                                        // date:
+                                        //timezone: currentTimezone,
                                       )
-                                      .then((value) => Get.toNamed(
+                                      .then(
+                                        (value) => Get.toNamed(
                                           FlightTicketsDetailsScreen.routeName,
-                                          arguments: index));
+                                          arguments: index,
+                                        ),
+                                      );
                                 } else if (type == 1) {
                                   itineraryDetailScreenController
                                       .itineraryDetails(
                                         itineraryRef: itineraryId,
                                         // timezone: currentTimezone,
                                       )
-                                      .then((value) => Get.toNamed(
+                                      .then(
+                                        (value) => Get.toNamed(
                                           HotelReservationsScreen.routeName,
-                                          arguments: index));
+                                          arguments: index,
+                                        ),
+                                      );
                                 } else if (type == 2) {
                                   itineraryDetailScreenController
                                       .itineraryDetails(
                                         itineraryRef: itineraryId,
                                         // timezone: currentTimezone,
                                       )
-                                      .then((value) => Get.toNamed(
+                                      .then(
+                                        (value) => Get.toNamed(
                                           RestaurantReservationsScreen
                                               .routeName,
-                                          arguments: index));
+                                          arguments: index,
+                                        ),
+                                      );
                                 } else if (type == 3) {
                                   itineraryDetailScreenController
                                       .itineraryDetails(
                                         itineraryRef: itineraryId,
                                         // timezone: currentTimezone,
                                       )
-                                      .then((value) => Get.toNamed(
+                                      .then(
+                                        (value) => Get.toNamed(
                                           ActivityDetailsScreen.routeName,
-                                          arguments: index));
+                                          arguments: index,
+                                        ),
+                                      );
                                 } else if (type == 8) {
                                   itineraryDetailScreenController
                                       .itineraryDetails(
                                         itineraryRef: itineraryId,
                                         // timezone: currentTimezone,
                                       )
-                                      .then((value) => Get.toNamed(
+                                      .then(
+                                        (value) => Get.toNamed(
                                           RequiredInformationScreen.routeName,
-                                          arguments: index));
+                                          arguments: index,
+                                        ),
+                                      );
                                 } else if (type == 6) {
                                   itineraryDetailScreenController
                                       .itineraryDetails(
                                         itineraryRef: itineraryId,
                                         // timezone: currentTimezone,
                                       )
-                                      .then((value) => Get.toNamed(
+                                      .then(
+                                        (value) => Get.toNamed(
                                           FerryTicketDetailsScreen.routeName,
-                                          arguments: index));
+                                          arguments: index,
+                                        ),
+                                      );
                                 } else if (type == 5) {
                                   itineraryDetailScreenController
                                       .itineraryDetails(
                                         itineraryRef: itineraryId,
                                         // timezone: currentTimezone,
                                       )
-                                      .then((value) => Get.toNamed(
+                                      .then(
+                                        (value) => Get.toNamed(
                                           TrainTicketDetailsScreen.routeName,
-                                          arguments: index));
+                                          arguments: index,
+                                        ),
+                                      );
                                 } else if (type == 7) {
                                   itineraryDetailScreenController
                                       .itineraryDetails(
                                         itineraryRef: itineraryId,
                                         // timezone: currentTimezone,
                                       )
-                                      .then((value) => Get.toNamed(
+                                      .then(
+                                        (value) => Get.toNamed(
                                           CarTicketDetailsScreen.routeName,
-                                          arguments: index));
-                                } else {
-                                  /// data is blank this screen is dummy Screen
-                                  Get.toNamed(
-                                      FerryTicketDetailsScreen.routeName,
-                                      arguments: index);
+                                          arguments: index,
+                                        ),
+                                      );
                                 }
+                                // else {
+                                /// data is blank this screen is dummy Screen
+                                //   Get.toNamed(
+                                //       FerryTicketDetailsScreen.routeName,
+                                //       arguments: index);
+                                // }
 
                                 // if (index == 0 && type == 4) {
                                 //   itineraryDetailScreenController
@@ -610,7 +671,7 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                               },
                               child: Text(
                                 type == 4
-                                    ? name
+                                    ? location
                                     : type == 1
                                         ? "Check In $name"
                                         : type == 2
@@ -618,13 +679,13 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                                             : type == 3
                                                 ? name
                                                 : type == 8
-                                                    ? name
+                                                    ? description
                                                     : type == 6
-                                                        ? name
+                                                        ? location
                                                         : type == 5
-                                                            ? name
+                                                            ? location
                                                             : type == 7
-                                                                ? name
+                                                                ? location
                                                                 : "Dummy Text",
 
                                 // itineraryDetailScreenController
@@ -661,6 +722,67 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                                   decoration: TextDecoration.underline,
                                 ),
                               ),
+                              // child: Text(
+                              //   type == 4
+                              //       ? itineraryDetailScreenController
+                              //           .itineraryDetailsListModel!
+                              //           .itinerary[index]
+                              //           .date
+                              //       : type == 1
+                              //           ? "Check In $name"
+                              //           : type == 2
+                              //               ? name
+                              //               : type == 3
+                              //                   ? name
+                              //                   : type == 8
+                              //                       ? description
+                              //                       : type == 6
+                              //                           ? name
+                              //                           : type == 5
+                              //                               ? itineraryDetailScreenController
+                              //                                   .itineraryDetailsListModel!
+                              //                                   .itinerary[
+                              //                                       index]
+                              //                                   .depart!
+                              //                                   .location
+                              //                               : type == 7
+                              //                                   ? name
+                              //                                   : "Dummy Text",
+                              //
+                              //   // itineraryDetailScreenController
+                              //   //             .itineraryDetailsListModel
+                              //   //             ?.itinerary[index]
+                              //   //             .name !=
+                              //   //         null
+                              //   //     ? "${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[index].description}"
+                              //   //     : "${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[index].specialistNote}",
+                              //   // index == 0 && type == 4
+                              //   //     ? name
+                              //   //     : index == 1 && type == 1
+                              //   //         ? name
+                              //   //         : index == 2 && type == 2
+                              //   //             ? name
+                              //   //             : index == 3 && type == 3
+                              //   //                 ? name
+                              //   //                 : index == 4 && type == 8
+                              //   //                     ? name
+                              //   //                     : index == 5 && type == 6
+                              //   //                         ? name
+                              //   //                         : index == 6 &&
+                              //   //                                 type == 5
+                              //   //                             ? name
+                              //   //                             : index == 7 &&
+                              //   //                                     type == 7
+                              //   //                                 ? name
+                              //   //                                 : "Dummy Text",
+                              //   maxLines: 2,
+                              //   style: const TextStyle(
+                              //     overflow: TextOverflow.ellipsis,
+                              //     fontSize: 10,
+                              //     fontWeight: FontWeight.w600,
+                              //     decoration: TextDecoration.underline,
+                              //   ),
+                              // ),
                             ),
                           ],
                         ),
@@ -673,11 +795,11 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                                 const SizedBox(height: 15),
                                 index == 4
                                     ? const Text("Notes")
-                                    : Text(getItineraryTime(
-                                            '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[index].date}')
-                                        // ??
-                                        //         "15:12",
+                                    : Text(
+                                        getItineraryTime(
+                                          '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[index].date}',
                                         ),
+                                      ),
                                 Text(
                                   getItineraryDate(
                                       '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[index].date}'),
@@ -694,46 +816,46 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
 
                 ///  materialButton
                 ///  Approve Button
+
                 // itineraryDetailScreenController
-                //                 .itineraryDetailsListModel?.itineraryStatus ==
-                //             1 ||
-                //         itineraryDetailScreenController
-                //                 .itineraryDetailsListModel?.itineraryStatus ==
-                //             3
+                //                 .itineraryDetailsListModel!.approved ==
+                //             true &&
                 itineraryDetailScreenController
-                            .itineraryDetailsListModel!.approved ==
-                        true
+                            .itineraryDetailsListModel!.itineraryStatus ==
+                        2
+                    ? itineraryDetailScreenController
+                                .itineraryDetailsListModel!.approved ==
+                            false
+                        ? Row(
+                            children: [
+                              Expanded(
+                                child: materialButton(
+                                  onTap: () {
+                                    itineraryDetailScreenController
+                                                .itineraryDetailsListModel!
+                                                .card ==
+                                            false
+                                        ? cardNotAddedApproveDialogBox()
+                                        : cardAddApproveDialogBox();
 
-                    /// required true
-                    ? const SizedBox()
-                    : Row(
-                        children: [
-                          Expanded(
-                            child: materialButton(
-                              onTap: () {
-                                itineraryDetailScreenController
-                                            .itineraryDetailsListModel!.card ==
-                                        //   false
-                                        false
-                                    ? cardNotAddedApproveDialogBox()
-                                    : cardAddApproveDialogBox();
-
-                                ///Get.toNamed(ManagePaymentScreen.routeName);
-                              },
-                              text: "Approve",
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                          Expanded(
-                            child: materialButtonWithBorder(
-                              onTap: () {
-                                getChannelId();
-                              },
-                              text: "Request Edits",
-                            ),
-                          ),
-                        ],
-                      ),
+                                    ///Get.toNamed(ManagePaymentScreen.routeName);
+                                  },
+                                  text: "Approve",
+                                ),
+                              ),
+                              const SizedBox(width: 10),
+                              Expanded(
+                                child: materialButtonWithBorder(
+                                  onTap: () {
+                                    getChannelId();
+                                  },
+                                  text: "Request Edits",
+                                ),
+                              ),
+                            ],
+                          )
+                        : const SizedBox()
+                    : const SizedBox(),
 
                 const SizedBox(height: 8),
                 itineraryDetailScreenController
@@ -867,7 +989,11 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
       },
       yesonTap: () {
         setState(() {
-          getChannelId();
+          Get.back();
+
+          itineraryDetailScreenController
+              .itineraryCancellationRequest(itineraryRef: widget.data)
+              .then((value) => getChannelId());
         });
       },
       color: AppColors.appBlueColor,

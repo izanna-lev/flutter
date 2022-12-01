@@ -30,7 +30,6 @@ class EditProfileRepo {
         requestType: RequestType.Post,
         header: {
           'Authorization': userController.rowndSignInModel!.data.accessToken
-          // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNjM2ZjIyOTlkMjZjZWNhNzIzY2ZkNDYzIiwiZW1haWwiOiJ0ZXN0eWVhcjUxQGdtYWlsLmNvbSIsInRva2VuTGlmZSI6IjdkIiwicm9sZSI6InVzZXIifSwiaWF0IjoxNjY4NDI1OTEyLCJleHAiOjE2NjkwMzA3MTJ9.F9AAzuoEjltivWXwKWlrgBi0KyQoMHPdeZgX3R2y1cU'
         });
     if (responseBody != null) {
       return UserProfileModel.fromJson(responseBody);

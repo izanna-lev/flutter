@@ -115,7 +115,8 @@ class _SelectCardScreenState extends State<SelectCardScreen> {
                     // var response = await
                     itineraryDetailScreenController.itineraryApprove(
                       itineraryRef: itineraryDetailScreenController
-                          .itineraryDetailsListModel!.id,
+                          .itineraryDetailsListModel!.id
+                          .toString(),
                       cardRef: addCardController.cardList[index].id,
                     );
 

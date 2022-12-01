@@ -10,6 +10,7 @@ import '../../../../models/chats/get_channel_model.dart';
 import '../../../../models/home/itinerary_approve_model.dart';
 import '../../../../models/home/itinerary_details_model.dart';
 import '../../../../models/home/tating_model.dart';
+import '../../../../models/login/successModel.dart';
 
 class ItineraryDetailScreenController extends GetxController {
   double? _overallRating;
@@ -132,16 +133,22 @@ class ItineraryDetailScreenController extends GetxController {
     update();
   }
 
-  /// this is screen api
-  // itineraryDetailScreenController
-  //     .itineraryApprove(
-  // itineraryRef:
-  // itineraryDetailScreenController.itineraryDetailsListModel!.id,
-  // cardRef: addCardController.card!.id,
-  // );
+  /////////////////////////////////////
+  /// Cancellation Request API ///
+  /////////////////////////////////////
+  itineraryCancellationRequest({
+    required String itineraryRef,
+  }) async {
+    SuccessModel? successModel =
+        await ItineraryDetailsRepo.itineraryCancellationRequest(
+            itineraryRef: itineraryRef);
+    if (successModel != null) {
+      return successModel;
+    }
+  }
 
   ///////////////////////////////////////////////////
-  ////////////////////  Rating  /////////////////////
+  ///  Rating  ///
   ///////////////////////////////////////////////////
   RatingData? _ratingData;
   RatingData? get ratingData => _ratingData;

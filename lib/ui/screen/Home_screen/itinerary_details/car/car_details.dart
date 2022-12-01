@@ -47,10 +47,7 @@ class _CarDetailsState extends State<CarDetails> {
                 detailTitle(text: "Outbound"),
                 detailText(
                   text: itineraryDetailScreenController
-                          .itineraryDetailsListModel
-                          ?.itinerary[widget.index]
-                          .name ??
-                      "Philippines Car | Canda - Cebu City",
+                      .itineraryDetailsListModel!.itinerary[widget.index].name,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -60,12 +57,14 @@ class _CarDetailsState extends State<CarDetails> {
                       children: [
                         detailTitle(text: "Depart"),
                         detailText(
-                            text: dateAndTimeConverter(
-                                itineraryDetailScreenController
-                                        .itineraryDetailsListModel
-                                        ?.itinerary[0]
-                                        .departDateTime ??
-                                    "12-Nov-2022 | 11:30\nPM")),
+                          text: dateAndTimeConverter(
+                            itineraryDetailScreenController
+                                .itineraryDetailsListModel!
+                                .itinerary[widget.data]
+                                .date
+                                .toString(),
+                          ),
+                        ),
                       ],
                     ),
                     Column(
@@ -73,12 +72,14 @@ class _CarDetailsState extends State<CarDetails> {
                       children: [
                         detailTitle(text: "Arrive"),
                         detailText(
-                            text: dateAndTimeConverter(
-                                itineraryDetailScreenController
-                                        .itineraryDetailsListModel
-                                        ?.itinerary[0]
-                                        .arrivalDateTime ??
-                                    "13-Nov-2022 | 09:00\nAM")),
+                          text: dateAndTimeConverter(
+                            itineraryDetailScreenController
+                                .itineraryDetailsListModel!
+                                .itinerary[widget.data]
+                                .date
+                                .toString(),
+                          ),
+                        ),
                       ],
                     ),
                   ],
@@ -98,11 +99,10 @@ class _CarDetailsState extends State<CarDetails> {
                     const SizedBox(width: 10),
                     detailText(
                       text: itineraryDetailScreenController
-                              .itineraryDetailsListModel
-                              ?.itinerary[widget.index]
-                              .flightClass
-                              .toString() ??
-                          "Economy Class",
+                          .itineraryDetailsListModel!
+                          .itinerary[widget.data]
+                          .flightClass
+                          .toString(),
                     ),
                   ],
                 ),
@@ -163,11 +163,11 @@ class _CarDetailsState extends State<CarDetails> {
                               children: [
                                 flightText(
                                     text:
-                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].depart?.location}'),
+                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].location}'),
                                 const SizedBox(height: 70),
                                 flightText(
                                     text:
-                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].arrival?.location}')
+                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].location}')
                               ],
                             ),
                           ],

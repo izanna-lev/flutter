@@ -58,11 +58,10 @@ class _FlightDetailState extends State<FlightDetail> {
                         detailTitle(text: "Depart"),
                         detailText(
                           text: dateAndTimeConverter(
-                              itineraryDetailScreenController
-                                      .itineraryDetailsListModel
-                                      ?.itinerary[0]
-                                      .departDateTime ??
-                                  "13-Nov-2022 | 09:00\nAM"),
+                            itineraryDetailScreenController
+                                .itineraryDetailsListModel!.itinerary[0].date,
+                          ),
+
                           // text: itineraryDetailScreenController
                           //         .itinerary?.departDateTime.timeZoneName ??
                           //     "13-Nov-2022 | 09:00\nAM",
@@ -76,10 +75,9 @@ class _FlightDetailState extends State<FlightDetail> {
                         detailText(
                           text: dateAndTimeConverter(
                               itineraryDetailScreenController
-                                      .itineraryDetailsListModel
-                                      ?.itinerary[0]
-                                      .arrivalDateTime ??
-                                  "13-Nov-2022 | 09:00\nAM"),
+                                  .itineraryDetailsListModel!
+                                  .itinerary[0]
+                                  .date),
                         ),
                       ],
                     ),
@@ -178,13 +176,13 @@ class _FlightDetailState extends State<FlightDetail> {
                               children: [
                                 flightText(
                                     text:
-                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].depart?.location}'
+                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].location}'
                                     // "Flight depart from canada"
                                     ),
                                 const SizedBox(height: 70),
                                 flightText(
                                     text:
-                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].arrival?.location}')
+                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].location}')
                               ],
                             ),
                           ],

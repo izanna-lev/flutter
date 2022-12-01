@@ -206,7 +206,7 @@ class _FlightDetailState extends State<FlightDetail> {
                   text: itineraryDetailScreenController
                           .itineraryDetailsListModel
                           ?.itinerary[widget.index]
-                          .name ??
+                          .location ??
                       "Philippines Airlines | Caticlan - Canada",
                 ),
                 const SizedBox(height: 10),

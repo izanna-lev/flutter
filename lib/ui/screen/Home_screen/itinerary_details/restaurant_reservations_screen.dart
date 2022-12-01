@@ -61,16 +61,13 @@ class _RestaurantReservationsScreenState
                       detailTitle(text: "Date & Time"),
                       detailText(
                           text: hotelDateAndTimeConverter(
-                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].date.toString()}')
-                          // ?? "12-Nov-2022 | 11:30 AM",
-                          ),
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].date.toString()}')),
                       detailTitle(text: "Contact Number"),
                       detailText(
                         text: itineraryDetailScreenController
-                                .itineraryDetailsListModel
-                                ?.itinerary[widget.index]
-                                .contactNumber ??
-                            "+62 361 769 2220",
+                            .itineraryDetailsListModel!
+                            .itinerary[widget.index]
+                            .contactNumber,
                       ),
                       detailTitle(text: "Location"),
                       GestureDetector(
@@ -82,8 +79,8 @@ class _RestaurantReservationsScreenState
                                   .itineraryDetailsListModel
                                   ?.itinerary[widget.index]
                                   .image,
-                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].location}',
-                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].location}',
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].coordinates[0]}',
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].coordinates[1]}',
                               '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].location}',
                               '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].name}'
                             ],

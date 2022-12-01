@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tralever_module/custem_class/constant/app_icons.dart';
-import 'package:tralever_module/custem_class/utils/globle.dart';
 import 'package:tralever_module/services/api_routes.dart';
 import 'package:tralever_module/ui/screen/Home_screen/controller/itinerary_detaile_screen%20_controller.dart';
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/activity_map_details_screen.dart';
 
 import '../../../../custem_class/constant/app_settings.dart';
+import '../../../../custem_class/utils/globle.dart';
 import '../../../shared/appbar.dart';
 
 class HotelReservationsScreen extends StatefulWidget {
   static const String routeName = "/HotelReservationsScreen";
 
   HotelReservationsScreen({Key? key}) : super(key: key);
-  var data = Get.arguments;
+  var index = Get.arguments;
 
   @override
   State<HotelReservationsScreen> createState() =>
@@ -25,8 +25,8 @@ class _HotelReservationsScreenState extends State<HotelReservationsScreen> {
       Get.find<ItineraryDetailScreenController>();
   @override
   void initState() {
-    widget.data;
-    print('HOTEL_RESERVATION_INDEX==>${widget.data}');
+    widget.index;
+    print('HOTEL_RESERVATION_INDEX==>${widget.index}');
     super.initState();
   }
 
@@ -34,7 +34,7 @@ class _HotelReservationsScreenState extends State<HotelReservationsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: commonAppbar(titleText: "Accomodation Reservations"),
+      appBar: commonAppbar(titleText: "Hotel Reservations"),
       body: SingleChildScrollView(
         child: GetBuilder(
           builder: (ItineraryDetailScreenController
@@ -44,12 +44,10 @@ class _HotelReservationsScreenState extends State<HotelReservationsScreen> {
                 imageContainer(
                   context: context,
                   img:
-                      '$imageUrl${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].image}',
-                  // ??
-                  // "https://media.radissonhotels.net/image/radisson-blu-hotel-cebu/exteriorview/16256-116570-f64875903_3xl.jpg?impolicy=HomeHero",
+                      '$imageUrl${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].image}',
                   text: itineraryDetailScreenController
                           .itineraryDetailsListModel
-                          ?.itinerary[widget.data]
+                          ?.itinerary[widget.index]
                           .name ??
                       "Radisson Blu Hotel",
                 ),
@@ -64,20 +62,28 @@ class _HotelReservationsScreenState extends State<HotelReservationsScreen> {
                       detailTitle(text: "Check In Date & Time"),
                       detailText(
                           text: hotelDateAndTimeConverter(
-                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].checkInDateTime.toString()}')
-                          // ?? "12-Nov-2022 | 11:30 AM"
-                          ),
+                              itineraryDetailScreenController
+                                  .itineraryDetailsListModel!
+                                  .itinerary[widget.index]
+                                  .checkInDateTime)),
                       detailTitle(text: "Check Out Date & Time"),
                       detailText(
-                          text: hotelDateAndTimeConverter(
-                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].checkOutDateTime.toString()}')
-                          // ?? "13-Nov-2022 | 12:00 PM"
-                          ),
+                          text: itineraryDetailScreenController
+                                  .itineraryDetailsListModel!
+                                  .itinerary[widget.index]
+                                  .checkOutDateTime
+                                  .isEmpty
+                              ? ""
+                              : hotelDateAndTimeConverter(
+                                  itineraryDetailScreenController
+                                      .itineraryDetailsListModel!
+                                      .itinerary[widget.index]
+                                      .checkOutDateTime)),
                       detailTitle(text: "Contact Number"),
                       detailText(
                           text: itineraryDetailScreenController
                                   .itineraryDetailsListModel
-                                  ?.itinerary[widget.data]
+                                  ?.itinerary[widget.index]
                                   .contactNumber
                                   .toString() ??
                               "+62 361 769 2220"),
@@ -89,12 +95,12 @@ class _HotelReservationsScreenState extends State<HotelReservationsScreen> {
                             arguments: [
                               itineraryDetailScreenController
                                   .itineraryDetailsListModel
-                                  ?.itinerary[widget.data]
+                                  ?.itinerary[widget.index]
                                   .image,
-                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].coordinates[0]}',
-                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].coordinates[1]}',
-                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].location}',
-                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].name}'
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].coordinates[0]}',
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].coordinates[1]}',
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].location}',
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].name}'
                             ],
                           );
                         },
@@ -106,7 +112,7 @@ class _HotelReservationsScreenState extends State<HotelReservationsScreen> {
                               detailText(
                                   text: itineraryDetailScreenController
                                       .itineraryDetailsListModel!
-                                      .itinerary[widget.data]
+                                      .itinerary[widget.index]
                                       .location),
                               Image.asset(AppIcons.gpsIcon, height: 21),
                             ],
@@ -117,7 +123,7 @@ class _HotelReservationsScreenState extends State<HotelReservationsScreen> {
                       detailText(
                         text: itineraryDetailScreenController
                                 .itineraryDetailsListModel
-                                ?.itinerary[widget.data]
+                                ?.itinerary[widget.index]
                                 .description
                                 .toString() ??
                             "Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text.",

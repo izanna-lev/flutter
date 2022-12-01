@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 import 'package:tralever_module/custem_class/constant/app_colors.dart';
 import 'package:tralever_module/custem_class/constant/app_functions.dart';
@@ -23,7 +21,6 @@ import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/rate_you
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/required_information_Screen.dart';
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/restaurant_reservations_screen.dart';
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/train/train_ticket_deatils_screen.dart';
-import 'package:tralever_module/ui/screen/chats/view/chats_screen.dart';
 import 'package:tralever_module/ui/screen/profile_screen/controller/add_card_controller.dart';
 import 'package:tralever_module/ui/screen/profile_screen/view/add_card_screen.dart';
 import 'package:tralever_module/ui/screen/profile_screen/view/select_card_Screen.dart';

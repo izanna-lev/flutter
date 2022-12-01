@@ -64,7 +64,7 @@ class ItineraryDetailsListModel {
   int itineraryStatus;
   String additionalInformation;
   List<Itinerary> itinerary;
-  int rating;
+  dynamic rating;
 
   factory ItineraryDetailsListModel.fromJson(Map<String, dynamic> json) =>
       ItineraryDetailsListModel(
@@ -82,7 +82,7 @@ class ItineraryDetailsListModel {
         cancellationRequest: json["cancellationRequest"] ?? false,
         itineraryStatus: json["itineraryStatus"] ?? 0,
         additionalInformation: json["additionalInformation"] ?? "",
-        rating: json["rating"] ?? 0,
+        rating: json["rating"],
         itinerary: List<Itinerary>.from(
             json["itinerary"].map((x) => Itinerary.fromJson(x))),
       );

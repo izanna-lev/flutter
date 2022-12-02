@@ -1,18 +1,19 @@
 import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
+
 import '../../custem_class/constant/app_settings.dart';
 
 class ImagePickerController extends GetxController {
   String? tag;
+
   String _image = "";
-
   String get image => _image;
-
   set image(String value) {
     _image = value;
     update();

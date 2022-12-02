@@ -72,8 +72,8 @@ class ItineraryDetailsListModel {
         name: json["name"] ?? "",
         price: json["price"] ?? 0,
         image: json["image"] ?? "",
-        dates: List<DateTime>.from(
-            (json["dates"] ?? []).map((x) => DateTime.parse(x))),
+        dates:
+            List<DateTime>.from((json["dates"]).map((x) => DateTime.parse(x))),
         card: json["card"] ?? false,
         approved: json["approved"] ?? false,
         specialistRef: json["specialistRef"] ?? "",

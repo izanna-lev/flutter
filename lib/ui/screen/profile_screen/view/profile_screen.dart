@@ -155,9 +155,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         currImageUrl = imagePickerController.image;
 
         /// call api
-        profileController.editProfile(
-          picture: File(imagePickerController.image),
-        );
+        profileController.editProfile();
         print("CALL API");
       }
       return Column(

@@ -27,8 +27,6 @@ class _FlightDetailState extends State<FlightDetail> {
         child: GetBuilder(
           builder: (ItineraryDetailScreenController
               itineraryDetailScreenController) {
-            print(
-                'ITINERARY_NAME==>${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].airline}');
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -43,6 +41,7 @@ class _FlightDetailState extends State<FlightDetail> {
                   text: "Outbound",
                 ),
                 detailText(
+
                   text:
                       "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].arrivalLocation}",
 
@@ -98,13 +97,13 @@ class _FlightDetailState extends State<FlightDetail> {
                     detailText(
                       text: itineraryDetailScreenController
                                   .itineraryDetailsListModel
-                                  ?.itinerary[widget.index]
+                                  ?.itinerary[0]
                                   .flightClass ==
                               1
                           ? "BUSINESS"
                           : itineraryDetailScreenController
                                       .itineraryDetailsListModel
-                                      ?.itinerary[widget.index]
+                                      ?.itinerary[0]
                                       .flightClass ==
                                   2
                               ? "ECONOMY"
@@ -130,6 +129,7 @@ class _FlightDetailState extends State<FlightDetail> {
                           children: [
                             detailTitle(
                               text: itineraryDetailScreenController
+
                                   .itineraryDetailsListModel!
                                   .itinerary[widget.index]
                                   .airline,
@@ -215,6 +215,7 @@ class _FlightDetailState extends State<FlightDetail> {
                 const Divider(thickness: 1),
                 detailTitle(text: "Outbound"),
                 detailText(
+
                   text:
                       "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].departLocation}",
 

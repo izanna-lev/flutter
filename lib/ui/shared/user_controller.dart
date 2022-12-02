@@ -64,6 +64,11 @@ class UserController extends GetxController {
     onUpdateUser();
   }
 
+  updateRowndUser(RowndSignInDetailsModel rowndSignInDetailsModel) {
+    rowndSignInDetailsModel.traveller;
+    onUpdateUser();
+  }
+
   onUpdateUser() {
     // LocalStorage.saveUserDetails();
     print("onUpdateUser");

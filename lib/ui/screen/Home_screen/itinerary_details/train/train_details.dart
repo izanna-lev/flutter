@@ -126,14 +126,14 @@ class _TrainDetailsState extends State<TrainDetails> {
                               text:
                                   '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].airline}',
                             ),
-                            const Text(
-                              "SQ221",
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
+                            // const Text(
+                            //   "SQ221",
+                            //   style: TextStyle(
+                            //     fontSize: 16,
+                            //     color: Colors.black,
+                            //     fontWeight: FontWeight.w500,
+                            //   ),
+                            // ),
                           ],
                         ),
                         const SizedBox(height: 8),

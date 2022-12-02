@@ -88,7 +88,8 @@ String dayFormatConverter(String day) {
 }
 
 String getItineraryDate(String date) {
-  var localDate = DateTime.parse(date).toLocal();
+  var localDate = DateTime.parse(date);
+  // .toLocal();
 
   var inputFormat = DateFormat('yyyy-MM-dd');
   var inputDate = inputFormat.parse(localDate.toString());
@@ -100,12 +101,13 @@ String getItineraryDate(String date) {
 }
 
 String getItineraryTime(String time) {
-  var localTime = DateTime.parse(time).toLocal();
+  var localTime = DateTime.parse(time);
+  // .toLocal();
 
   var inputFormat = DateFormat('yyyy-MM-dd');
   var inputTime = inputFormat.parse(localTime.toString());
 
-  var outputFormat = DateFormat('hh:mm');
+  var outputFormat = DateFormat('HH:mm');
   var outputTime = outputFormat.format(localTime);
   print('OUTPUT_TIME--->${outputTime}');
   return outputTime.toString();
@@ -127,7 +129,29 @@ String dateAndTimeConverter(String date) {
   var localDate = DateTime.parse(date).toLocal();
   var inputFormat = DateFormat("yyyy-MM-dd hh:mm:ss");
   var inputDate = inputFormat.parse(localDate.toString());
-  var outputFormat = DateFormat("dd-MMM-yyyy | h:mm\na");
+  var outputFormat = DateFormat("dd-MMM-yyyy | hh:mm\na");
+  // .add_jm()
+  var outputDate = outputFormat.format(inputDate);
+  return outputDate;
+}
+
+String flightDepartDateAndTimeConverter(String date) {
+  var localDate = DateTime.parse(date);
+  // .toLocal();
+  var inputFormat = DateFormat("yyyy-MM-dd hh:mm:ss");
+  var inputDate = inputFormat.parse(localDate.toString());
+  var outputFormat = DateFormat("dd-MMM-yyyy | hh:mm\na");
+  // .add_jm()
+  var outputDate = outputFormat.format(inputDate);
+  return outputDate;
+}
+
+String flightDepartArriveTimeConverter(String date) {
+  var localDate = DateTime.parse(date);
+  // .toLocal();
+  var inputFormat = DateFormat("yyyy-MM-dd hh:mm:ss");
+  var inputDate = inputFormat.parse(localDate.toString());
+  var outputFormat = DateFormat("hh:mm a");
   // .add_jm()
   var outputDate = outputFormat.format(inputDate);
   return outputDate;

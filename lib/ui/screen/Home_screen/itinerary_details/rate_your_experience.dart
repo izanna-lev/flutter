@@ -50,7 +50,7 @@ class _RateYourExperienceState extends State<RateYourExperience> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         RatingBar.builder(
-                          initialRating: 1,
+                          //  initialRating: 1,
                           minRating: 1,
                           direction: Axis.horizontal,
                           allowHalfRating: true,
@@ -77,7 +77,7 @@ class _RateYourExperienceState extends State<RateYourExperience> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         RatingBar.builder(
-                          initialRating: 2,
+                          // initialRating: 2,
                           minRating: 1,
                           direction: Axis.horizontal,
                           allowHalfRating: true,
@@ -103,7 +103,7 @@ class _RateYourExperienceState extends State<RateYourExperience> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         RatingBar.builder(
-                          initialRating: 3,
+                          //  initialRating: 3,
                           minRating: 1,
                           direction: Axis.horizontal,
                           allowHalfRating: true,
@@ -159,6 +159,9 @@ class _RateYourExperienceState extends State<RateYourExperience> {
       onTap: () {
         Get.back();
         Get.back();
+        itineraryDetailScreenController.itineraryDetails(
+          itineraryRef: widget.data,
+        );
       },
       color: AppColors.appBlueColor,
       okText: "Ok",

@@ -29,6 +29,8 @@ class _TrainDetailsState extends State<TrainDetails> {
         child: GetBuilder(
           builder: (ItineraryDetailScreenController
               itineraryDetailScreenController) {
+            print(
+                'TRAIN_NAME===>${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].airline}');
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -42,9 +44,7 @@ class _TrainDetailsState extends State<TrainDetails> {
                 detailTitle(text: "Outbound"),
                 detailText(
                   text: itineraryDetailScreenController
-                          .itineraryDetailsListModel
-                          ?.itinerary[widget.index]
-                          .name ??
+                          .itineraryDetailsListModel?.itinerary[0].airline ??
                       "Philippines Train | Canda - Cebu City",
                 ),
                 Row(
@@ -92,13 +92,13 @@ class _TrainDetailsState extends State<TrainDetails> {
                     detailText(
                       text: itineraryDetailScreenController
                                   .itineraryDetailsListModel
-                                  ?.itinerary[widget.index]
+                                  ?.itinerary[0]
                                   .trainClass ==
                               1
                           ? "STANDARD"
                           : itineraryDetailScreenController
                                       .itineraryDetailsListModel
-                                      ?.itinerary[widget.index]
+                                      ?.itinerary[0]
                                       .flightClass ==
                                   2
                               ? "BUSINESS"
@@ -126,14 +126,14 @@ class _TrainDetailsState extends State<TrainDetails> {
                               text:
                                   '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].airline}',
                             ),
-                            const Text(
-                              "SQ221",
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
+                            // const Text(
+                            //   "SQ221",
+                            //   style: TextStyle(
+                            //     fontSize: 16,
+                            //     color: Colors.black,
+                            //     fontWeight: FontWeight.w500,
+                            //   ),
+                            // ),
                           ],
                         ),
                         const SizedBox(height: 8),
@@ -194,9 +194,7 @@ class _TrainDetailsState extends State<TrainDetails> {
                 detailTitle(text: "Outbound"),
                 detailText(
                     text: itineraryDetailScreenController
-                            .itineraryDetailsListModel
-                            ?.itinerary[widget.index]
-                            .name
+                            .itineraryDetailsListModel?.itinerary[0].airline
                             .toString() ??
                         "Philippines Train | Caticlan - Canada"),
                 const SizedBox(height: 10),

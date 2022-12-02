@@ -11,21 +11,18 @@ class RatingModel {
     required this.message,
     required this.data,
     required this.format,
-    required this.timestamp,
   });
 
   int code;
   String message;
   RatingData data;
-  String format;
-  DateTime timestamp;
+  dynamic format;
 
   factory RatingModel.fromJson(Map<String, dynamic> json) => RatingModel(
         code: json["code"],
         message: json["message"],
         data: RatingData.fromJson(json["data"]),
         format: json["format"],
-        timestamp: DateTime.parse(json["timestamp"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -33,7 +30,6 @@ class RatingModel {
         "message": message,
         "data": data.toJson(),
         "format": format,
-        "timestamp": timestamp.toIso8601String(),
       };
 }
 
@@ -60,9 +56,9 @@ class Rating {
     required this.value,
   });
 
-  double experience;
-  double specialist;
-  double value;
+  dynamic experience;
+  dynamic specialist;
+  dynamic value;
 
   factory Rating.fromJson(Map<String, dynamic> json) => Rating(
         experience: json["experience"],

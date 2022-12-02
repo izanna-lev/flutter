@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 import 'package:tralever_module/custem_class/constant/app_colors.dart';
 import 'package:tralever_module/custem_class/constant/app_functions.dart';
@@ -23,7 +21,6 @@ import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/rate_you
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/required_information_Screen.dart';
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/restaurant_reservations_screen.dart';
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/train/train_ticket_deatils_screen.dart';
-import 'package:tralever_module/ui/screen/chats/view/chats_screen.dart';
 import 'package:tralever_module/ui/screen/profile_screen/controller/add_card_controller.dart';
 import 'package:tralever_module/ui/screen/profile_screen/view/add_card_screen.dart';
 import 'package:tralever_module/ui/screen/profile_screen/view/select_card_Screen.dart';
@@ -583,6 +580,7 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                                 type == 8
                                     ? const Text("Notes")
                                     : Text(
+                                        // '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[index].date}',
                                         getItineraryTime(
                                           '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[index].date}',
                                         ),
@@ -662,22 +660,24 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              itineraryDetailScreenController.update();
-                              itineraryDetailScreenController.overallRating !=
-                                          null &&
-                                      itineraryDetailScreenController
-                                              .specialistRating !=
-                                          null &&
-                                      itineraryDetailScreenController
-                                              .valueRating !=
-                                          null
-                                  ? flutterToast(
-                                      "Your Rating is all ready done")
-                                  : Get.toNamed(RateYourExperience.routeName,
-                                      arguments: itineraryDetailScreenController
-                                          .itineraryDetailsListModel
-                                          ?.itinerary[widget.data]
-                                          .itineraryRef);
+                              if (itineraryDetailScreenController
+                                      .itineraryDetailsListModel!.isRated ==
+                                  false) {
+                                itineraryDetailScreenController.update();
+                                itineraryDetailScreenController
+                                                .overallRating !=
+                                            null &&
+                                        itineraryDetailScreenController
+                                                .specialistRating !=
+                                            null &&
+                                        itineraryDetailScreenController
+                                                .valueRating !=
+                                            null
+                                    ? flutterToast(
+                                        "Your Rating is all ready done")
+                                    : Get.toNamed(RateYourExperience.routeName,
+                                        arguments: widget.data);
+                              } else {}
                             },
                             child: RatingBar.builder(
                               initialRating: double.parse(

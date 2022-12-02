@@ -35,8 +35,7 @@ class _RequiredInformationScreenState extends State<RequiredInformationScreen> {
                 imageContainer(
                   context: context,
                   img:
-                      '$imageUrl${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].image}',
-                  // ?? "https://burst.shopifycdn.com/photos/city-landscape-at-night.jpg?width=1200&format=pjpg&exif=1&iptc=1",
+                      '$imageUrl${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.data].image}',
                   text: "Notes",
                 ),
                 const SizedBox(height: 35),
@@ -49,10 +48,9 @@ class _RequiredInformationScreenState extends State<RequiredInformationScreen> {
                       const Divider(thickness: 1.5),
                       detailText(
                         text: itineraryDetailScreenController
-                                .itineraryDetailsListModel
-                                ?.itinerary[0]
-                                .description ??
-                            "Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text. Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text.",
+                            .itineraryDetailsListModel!
+                            .itinerary[widget.data]
+                            .description,
                       ),
                     ],
                   ),

@@ -583,6 +583,7 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                                 type == 8
                                     ? const Text("Notes")
                                     : Text(
+                                        // '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[index].date}',
                                         getItineraryTime(
                                           '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[index].date}',
                                         ),
@@ -662,22 +663,24 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              itineraryDetailScreenController.update();
-                              itineraryDetailScreenController.overallRating !=
-                                          null &&
-                                      itineraryDetailScreenController
-                                              .specialistRating !=
-                                          null &&
-                                      itineraryDetailScreenController
-                                              .valueRating !=
-                                          null
-                                  ? flutterToast(
-                                      "Your Rating is all ready done")
-                                  : Get.toNamed(RateYourExperience.routeName,
-                                      arguments: itineraryDetailScreenController
-                                          .itineraryDetailsListModel
-                                          ?.itinerary[widget.data]
-                                          .itineraryRef);
+                              if (itineraryDetailScreenController
+                                      .itineraryDetailsListModel!.isRated ==
+                                  false) {
+                                itineraryDetailScreenController.update();
+                                itineraryDetailScreenController
+                                                .overallRating !=
+                                            null &&
+                                        itineraryDetailScreenController
+                                                .specialistRating !=
+                                            null &&
+                                        itineraryDetailScreenController
+                                                .valueRating !=
+                                            null
+                                    ? flutterToast(
+                                        "Your Rating is all ready done")
+                                    : Get.toNamed(RateYourExperience.routeName,
+                                        arguments: widget.data);
+                              } else {}
                             },
                             child: RatingBar.builder(
                               initialRating: double.parse(

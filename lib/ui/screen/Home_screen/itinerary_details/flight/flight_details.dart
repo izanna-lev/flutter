@@ -28,7 +28,7 @@ class _FlightDetailState extends State<FlightDetail> {
           builder: (ItineraryDetailScreenController
               itineraryDetailScreenController) {
             print(
-                'ITINERARY_NAME==>${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].name}');
+                'ITINERARY_NAME==>${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].airline}');
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -45,6 +45,7 @@ class _FlightDetailState extends State<FlightDetail> {
                 detailText(
                   text:
                       "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].arrivalLocation}",
+
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -216,6 +217,7 @@ class _FlightDetailState extends State<FlightDetail> {
                 detailText(
                   text:
                       "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].departLocation}",
+
                 ),
                 const SizedBox(height: 10),
                 Row(

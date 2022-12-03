@@ -234,7 +234,7 @@ class SuccessResponse {
         message: json["message"] ?? "",
       );
 
-  Map<dynamic, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "code": code,
         "message": message,
       };

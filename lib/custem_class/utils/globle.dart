@@ -107,7 +107,7 @@ String getItineraryTime(String time) {
   var inputFormat = DateFormat('yyyy-MM-dd');
   var inputTime = inputFormat.parse(localTime.toString());
 
-  var outputFormat = DateFormat('HH:mm');
+  var outputFormat = DateFormat('hh:mm');
   var outputTime = outputFormat.format(localTime);
   print('OUTPUT_TIME--->${outputTime}');
   return outputTime.toString();

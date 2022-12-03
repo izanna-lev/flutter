@@ -65,6 +65,7 @@ class ItineraryDetailsListModel {
   int itineraryStatus;
   String additionalInformation;
   List<Itinerary> itinerary;
+
   dynamic rating;
   bool isRated;
 
@@ -84,7 +85,7 @@ class ItineraryDetailsListModel {
         cancellationRequest: json["cancellationRequest"] ?? false,
         itineraryStatus: json["itineraryStatus"] ?? 0,
         additionalInformation: json["additionalInformation"] ?? "",
-        rating: json["rating"],
+        rating: json["rating"] ?? 0,
         itinerary: List<Itinerary>.from(
             json["itinerary"].map((x) => Itinerary.fromJson(x))),
         isRated: json["isRated"] ?? false,

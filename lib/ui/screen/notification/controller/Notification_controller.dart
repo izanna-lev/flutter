@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:pagination_view/pagination_view.dart';
 import 'package:tralever_module/models/notifications_model/traveller_notification_model.dart';
 import 'package:tralever_module/services/notification_repo/notifications_repo.dart';
@@ -71,5 +72,22 @@ class NotificationScreenController extends GetxController {
       return travellerDetailsNotificationList;
     }
     return [];
+  }
+
+  notificationDateAndTime(DateTime timestamp) {
+    var v = DateTime.now().difference(timestamp);
+    if (v.inHours < 24) {
+      return "${"today".tr} ${timeFormat(timestamp)}";
+    } else {
+      var outputFormat = DateFormat('dd-MMM-yyyy');
+      var outputDate = outputFormat.format(timestamp);
+      return outputDate;
+    }
+  }
+
+  timeFormat(DateTime timestamp) {
+    var outputFormat = DateFormat('h:mm a');
+    var outputDate = outputFormat.format(timestamp);
+    return outputDate;
   }
 }

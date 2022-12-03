@@ -95,7 +95,12 @@ class _FerryDetailsState extends State<FerryDetails> {
                       size: 14,
                     ),
                     const SizedBox(width: 10),
-                    detailText(text: "4hrs 30 min"),
+                    detailText(
+                      text: itineraryDetailScreenController
+                          .itineraryDetailsListModel!
+                          .itinerary[widget.index]
+                          .transportDuration,
+                    ),
                     const SizedBox(width: 10),
                     Image.asset(AppIcons.ferryTicketIcon, height: 14),
                     const SizedBox(width: 10),
@@ -105,13 +110,13 @@ class _FerryDetailsState extends State<FerryDetails> {
                                   .itinerary[widget.index]
                                   .trainClass ==
                               1
-                          ? "STANDARD"
+                          ? "Standard Class"
                           : itineraryDetailScreenController
                                       .itineraryDetailsListModel!
                                       .itinerary[widget.index]
                                       .trainClass ==
                                   2
-                              ? "BUSINESS"
+                              ? "Business Class"
                               : "",
                     ),
                   ],

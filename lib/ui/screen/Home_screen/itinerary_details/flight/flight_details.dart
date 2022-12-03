@@ -43,7 +43,6 @@ class _FlightDetailState extends State<FlightDetail> {
                 detailText(
                   text:
                       "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].arrivalLocation}",
-
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -89,24 +88,29 @@ class _FlightDetailState extends State<FlightDetail> {
                       size: 14,
                     ),
                     const SizedBox(width: 10),
-                    detailText(text: "4hrs 30 min"),
+                    detailText(
+                      text: itineraryDetailScreenController
+                          .itineraryDetailsListModel!
+                          .itinerary[widget.index]
+                          .transportDuration,
+                    ),
                     const SizedBox(width: 10),
                     Image.asset(AppIcons.flightTicketIcon, height: 14),
                     const SizedBox(width: 10),
                     detailText(
                       text: itineraryDetailScreenController
                                   .itineraryDetailsListModel
-                                  ?.itinerary[0]
+                                  ?.itinerary[widget.index]
                                   .flightClass ==
                               1
-                          ? "BUSINESS"
+                          ? "Business Class"
                           : itineraryDetailScreenController
                                       .itineraryDetailsListModel
-                                      ?.itinerary[0]
+                                      ?.itinerary[widget.index]
                                       .flightClass ==
                                   2
-                              ? "ECONOMY"
-                              : "FIRST CLASS",
+                              ? "Economy Class"
+                              : "First Class",
                     )
                   ],
                 ),
@@ -128,7 +132,6 @@ class _FlightDetailState extends State<FlightDetail> {
                           children: [
                             detailTitle(
                               text: itineraryDetailScreenController
-
                                   .itineraryDetailsListModel!
                                   .itinerary[widget.index]
                                   .airline,
@@ -216,7 +219,6 @@ class _FlightDetailState extends State<FlightDetail> {
                 detailText(
                   text:
                       "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].departLocation}",
-
                 ),
                 const SizedBox(height: 10),
                 Row(

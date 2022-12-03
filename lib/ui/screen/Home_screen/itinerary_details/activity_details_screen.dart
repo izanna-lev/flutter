@@ -65,7 +65,7 @@ class _ActivityDetailsScreenState extends State<ActivityDetailsScreen> {
                           text: hotelDateAndTimeConverter(
                               itineraryDetailScreenController
                                       .itineraryDetailsListModel
-                                      ?.itinerary[0]
+                                      ?.itinerary[widget.index]
                                       .date ??
                                   "13-Nov-2022 | 12:00 PM")),
                       detailTitle(text: "Location"),
@@ -78,12 +78,10 @@ class _ActivityDetailsScreenState extends State<ActivityDetailsScreen> {
                                   .itineraryDetailsListModel
                                   ?.itinerary[widget.index]
                                   .image,
-
-                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].location}',
-                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].location}',
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].coordinates[0]}',
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].coordinates[1]}',
                               '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].location}',
                               '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].name}'
-
                             ],
                           );
                         },
@@ -95,7 +93,7 @@ class _ActivityDetailsScreenState extends State<ActivityDetailsScreen> {
                               detailText(
                                   text: itineraryDetailScreenController
                                       .itineraryDetailsListModel!
-                                      .itinerary[0]
+                                      .itinerary[widget.index]
                                       .location),
                               Image.asset(AppIcons.gpsIcon, height: 21),
                             ],

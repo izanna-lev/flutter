@@ -34,7 +34,7 @@ class _HotelReservationsScreenState extends State<HotelReservationsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: commonAppbar(titleText: "Accomodation Reservations"),
+      appBar: commonAppbar(titleText: "Hotel Reservations"),
       body: SingleChildScrollView(
         child: GetBuilder(
           builder: (ItineraryDetailScreenController
@@ -46,10 +46,7 @@ class _HotelReservationsScreenState extends State<HotelReservationsScreen> {
                   img:
                       '$imageUrl${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].image}',
                   text: itineraryDetailScreenController
-                          .itineraryDetailsListModel
-                          ?.itinerary[widget.index]
-                          .name ??
-                      "Radisson Blu Hotel",
+                      .itineraryDetailsListModel!.itinerary[widget.index].name,
                 ),
                 const SizedBox(height: 35),
                 Padding(

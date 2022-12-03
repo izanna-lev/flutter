@@ -27,7 +27,6 @@ class _FlightDetailState extends State<FlightDetail> {
         child: GetBuilder(
           builder: (ItineraryDetailScreenController
               itineraryDetailScreenController) {
-
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -42,7 +41,6 @@ class _FlightDetailState extends State<FlightDetail> {
                   text: "Outbound",
                 ),
                 detailText(
-
                   text:
                       "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].arrivalLocation}",
                 ),
@@ -134,7 +132,6 @@ class _FlightDetailState extends State<FlightDetail> {
                           children: [
                             detailTitle(
                               text: itineraryDetailScreenController
-
                                   .itineraryDetailsListModel!
                                   .itinerary[widget.index]
                                   .airline,
@@ -220,7 +217,6 @@ class _FlightDetailState extends State<FlightDetail> {
                 const Divider(thickness: 1),
                 detailTitle(text: "Outbound"),
                 detailText(
-
                   text:
                       "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].departLocation}",
                 ),

@@ -35,9 +35,9 @@ class ProfileController extends GetxController {
     userController.onUpdateUser();
   }
 
-  Future editProfile({File? picture}) async {
+  Future editProfile({File? image}) async {
     EditProfileModel? response = await EditProfileRepo.editProfile(
-      picture: imagePickerController.image.isEmpty
+      image: imagePickerController.image.isEmpty
           ? null
           : File(imagePickerController.image),
     );

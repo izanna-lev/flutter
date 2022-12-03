@@ -120,7 +120,7 @@ class ChatRepo {
         token: userController.rowndSignInModel!.data.accessToken,
         url: APIRoutes.travellerChatImage,
         field: {"data": jsonEncode({})},
-        fileImage: picture == null ? null : [picture],
+        fileImage: picture,
         multiPartImageKeyName: "picture",
         encoding: Encoding.getByName("utf-8"));
     return responseBody == null ? null : SuccessModel.fromJson(responseBody);

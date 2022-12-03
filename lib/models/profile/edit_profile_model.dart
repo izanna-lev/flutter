@@ -21,9 +21,9 @@ class EditProfileModel {
 
   factory EditProfileModel.fromJson(Map<String, dynamic> json) =>
       EditProfileModel(
-        code: json["code"],
-        message: json["message"],
-        data: UserData.fromJson(json["data"]),
+        code: json["code"] ?? 0,
+        message: json["message"] ?? "",
+        data: UserData.fromJson(json["data"] ?? {}),
       );
 
   Map<String, dynamic> toJson() => {

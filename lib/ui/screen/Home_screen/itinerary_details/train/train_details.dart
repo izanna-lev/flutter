@@ -30,7 +30,7 @@ class _TrainDetailsState extends State<TrainDetails> {
           builder: (ItineraryDetailScreenController
               itineraryDetailScreenController) {
             print(
-                'TRAIN_NAME===>${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].airline}');
+                'TRAIN_NAME===>${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].airline}');
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -43,7 +43,6 @@ class _TrainDetailsState extends State<TrainDetails> {
                 ),
                 detailTitle(text: "Outbound"),
                 detailText(
-
                   text:
                       "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].arrivalLocation}",
                 ),
@@ -102,13 +101,12 @@ class _TrainDetailsState extends State<TrainDetails> {
                     const SizedBox(width: 10),
                     detailText(
                       text: itineraryDetailScreenController
-                         .itineraryDetailsListModel!
+                                  .itineraryDetailsListModel!
                                   .itinerary[widget.index]
                                   .trainClass ==
                               1
                           ? "Standard Class"
                           : itineraryDetailScreenController
-
                                       .itineraryDetailsListModel!
                                       .itinerary[widget.index]
                                       .trainClass ==
@@ -136,7 +134,7 @@ class _TrainDetailsState extends State<TrainDetails> {
                           children: [
                             detailTitle(
                               text:
-                                  '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].airline}',
+                                  '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].airline}',
                             ),
                             // const Text(
                             //   "SQ221",
@@ -219,7 +217,6 @@ class _TrainDetailsState extends State<TrainDetails> {
                 const Divider(thickness: 1),
                 detailTitle(text: "Outbound"),
                 detailText(
-
                   text:
                       "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].departLocation}",
                 ),

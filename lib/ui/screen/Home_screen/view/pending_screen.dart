@@ -34,7 +34,6 @@ class _PendingScreenState extends State<PendingScreen> {
       body: GetBuilder(
         builder: (HomeController homeController) {
           return PaginationView(
-
             key: homeController.pendingKey,
             scrollDirection: Axis.vertical,
             physics: const AlwaysScrollableScrollPhysics(),

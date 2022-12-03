@@ -78,8 +78,8 @@ class _ActivityDetailsScreenState extends State<ActivityDetailsScreen> {
                                   .itineraryDetailsListModel
                                   ?.itinerary[widget.data]
                                   .image,
-                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].coordinates[0]}',
-                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].coordinates[1]}',
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].location}',
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].location}',
                               '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].location}',
                               '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].name}'
                             ],

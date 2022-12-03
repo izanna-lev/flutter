@@ -41,11 +41,8 @@ class _TrainDetailsState extends State<TrainDetails> {
                 ),
                 detailTitle(text: "Outbound"),
                 detailText(
-                  text: itineraryDetailScreenController
-                          .itineraryDetailsListModel
-                          ?.itinerary[widget.index]
-                          .name ??
-                      "Philippines Train | Canda - Cebu City",
+                  text:
+                      "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].arrivalLocation}",
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -55,11 +52,14 @@ class _TrainDetailsState extends State<TrainDetails> {
                       children: [
                         detailTitle(text: "Depart"),
                         detailText(
-                            text: dateAndTimeConverter(
-                                itineraryDetailScreenController
-                                    .itineraryDetailsListModel!
-                                    .itinerary[0]
-                                    .date)),
+                          text: flightDepartDateAndTimeConverter(
+                            itineraryDetailScreenController
+                                .itineraryDetailsListModel!
+                                .itinerary[widget.index]
+                                .departDateTime
+                                .toString(),
+                          ),
+                        ),
                       ],
                     ),
                     Column(
@@ -67,11 +67,14 @@ class _TrainDetailsState extends State<TrainDetails> {
                       children: [
                         detailTitle(text: "Arrive"),
                         detailText(
-                            text: dateAndTimeConverter(
-                                itineraryDetailScreenController
-                                    .itineraryDetailsListModel!
-                                    .itinerary[0]
-                                    .date)),
+                          text: flightDepartDateAndTimeConverter(
+                            itineraryDetailScreenController
+                                .itineraryDetailsListModel!
+                                .itinerary[widget.index]
+                                .arrivalDateTime
+                                .toString(),
+                          ),
+                        ),
                       ],
                     ),
                   ],
@@ -91,18 +94,18 @@ class _TrainDetailsState extends State<TrainDetails> {
                     const SizedBox(width: 10),
                     detailText(
                       text: itineraryDetailScreenController
-                                  .itineraryDetailsListModel
-                                  ?.itinerary[widget.index]
+                                  .itineraryDetailsListModel!
+                                  .itinerary[widget.index]
                                   .trainClass ==
                               1
                           ? "STANDARD"
                           : itineraryDetailScreenController
-                                      .itineraryDetailsListModel
-                                      ?.itinerary[widget.index]
-                                      .flightClass ==
+                                      .itineraryDetailsListModel!
+                                      .itinerary[widget.index]
+                                      .trainClass ==
                                   2
                               ? "BUSINESS"
-                              : "" ?? "Economy Class",
+                              : "",
                     ),
                   ],
                 ),
@@ -126,14 +129,14 @@ class _TrainDetailsState extends State<TrainDetails> {
                               text:
                                   '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].airline}',
                             ),
-                            const Text(
-                              "SQ221",
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
+                            // const Text(
+                            //   "SQ221",
+                            //   style: TextStyle(
+                            //     fontSize: 16,
+                            //     color: Colors.black,
+                            //     fontWeight: FontWeight.w500,
+                            //   ),
+                            // ),
                           ],
                         ),
                         const SizedBox(height: 8),
@@ -142,9 +145,25 @@ class _TrainDetailsState extends State<TrainDetails> {
                           children: [
                             Column(
                               children: [
-                                flightText(text: "02:00 AM"),
+                                flightText(
+                                  text: flightDepartArriveTimeConverter(
+                                    itineraryDetailScreenController
+                                        .itineraryDetailsListModel!
+                                        .itinerary[widget.index]
+                                        .departDateTime
+                                        .toString(),
+                                  ),
+                                ),
                                 const SizedBox(height: 70),
-                                flightText(text: "06:30 PM"),
+                                flightText(
+                                  text: flightDepartArriveTimeConverter(
+                                    itineraryDetailScreenController
+                                        .itineraryDetailsListModel!
+                                        .itinerary[widget.index]
+                                        .arrivalDateTime
+                                        .toString(),
+                                  ),
+                                ),
                               ],
                             ),
                             Column(
@@ -164,15 +183,13 @@ class _TrainDetailsState extends State<TrainDetails> {
                               children: [
                                 flightText(
                                     text:
-                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].location}'),
+                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].departLocation}'
+                                    // "Flight depart from canada"
+                                    ),
                                 const SizedBox(height: 70),
                                 flightText(
                                     text:
-                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].location}'
-                                    // itineraryDetailScreenController
-                                    //         .itinerary?.name ??
-                                    //     "Train arrives in cebu city",
-                                    )
+                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].arrivalLocation}')
                               ],
                             ),
                           ],
@@ -193,19 +210,43 @@ class _TrainDetailsState extends State<TrainDetails> {
                 const Divider(thickness: 1),
                 detailTitle(text: "Outbound"),
                 detailText(
-                    text: itineraryDetailScreenController
-                            .itineraryDetailsListModel
-                            ?.itinerary[widget.index]
-                            .name
-                            .toString() ??
-                        "Philippines Train | Caticlan - Canada"),
+                  text:
+                      "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].departLocation}",
+                ),
                 const SizedBox(height: 10),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    detailTitle(text: "Depart"),
-                    const Spacer(),
-                    detailTitle(text: "Arrive"),
-                    const Spacer(),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        detailTitle(text: "Depart"),
+                        detailText(
+                          text: flightDepartDateAndTimeConverter(
+                            itineraryDetailScreenController
+                                .itineraryDetailsListModel!
+                                .itinerary[widget.index]
+                                .departDateTime
+                                .toString(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        detailTitle(text: "Arrive"),
+                        detailText(
+                          text: flightDepartDateAndTimeConverter(
+                            itineraryDetailScreenController
+                                .itineraryDetailsListModel!
+                                .itinerary[widget.index]
+                                .arrivalDateTime
+                                .toString(),
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ],

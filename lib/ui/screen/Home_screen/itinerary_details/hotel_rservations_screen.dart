@@ -34,7 +34,7 @@ class _HotelReservationsScreenState extends State<HotelReservationsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: commonAppbar(titleText: "Hotel Reservations"),
+      appBar: commonAppbar(titleText: "Accomodation Reservations"),
       body: SingleChildScrollView(
         child: GetBuilder(
           builder: (ItineraryDetailScreenController

@@ -27,8 +27,6 @@ class _FlightDetailState extends State<FlightDetail> {
         child: GetBuilder(
           builder: (ItineraryDetailScreenController
               itineraryDetailScreenController) {
-            print(
-                'ITINERARY_NAME==>${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].airline}');
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -43,11 +41,8 @@ class _FlightDetailState extends State<FlightDetail> {
                   text: "Outbound",
                 ),
                 detailText(
-                  text: itineraryDetailScreenController
-                          .itineraryDetailsListModel
-                          ?.itinerary[widget.index]
-                          .airline ??
-                      "Philippines Airlines | Canda - Cebu City",
+                  text:
+                      "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].arrivalLocation}",
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -57,14 +52,13 @@ class _FlightDetailState extends State<FlightDetail> {
                       children: [
                         detailTitle(text: "Depart"),
                         detailText(
-                          text: dateAndTimeConverter(
+                          text: flightDepartDateAndTimeConverter(
                             itineraryDetailScreenController
-                                .itineraryDetailsListModel!.itinerary[0].date,
+                                .itineraryDetailsListModel!
+                                .itinerary[widget.index]
+                                .departDateTime
+                                .toString(),
                           ),
-
-                          // text: itineraryDetailScreenController
-                          //         .itinerary?.departDateTime.timeZoneName ??
-                          //     "13-Nov-2022 | 09:00\nAM",
                         ),
                       ],
                     ),
@@ -73,11 +67,13 @@ class _FlightDetailState extends State<FlightDetail> {
                       children: [
                         detailTitle(text: "Arrive"),
                         detailText(
-                          text: dateAndTimeConverter(
-                              itineraryDetailScreenController
-                                  .itineraryDetailsListModel!
-                                  .itinerary[0]
-                                  .date),
+                          text: flightDepartDateAndTimeConverter(
+                            itineraryDetailScreenController
+                                .itineraryDetailsListModel!
+                                .itinerary[widget.index]
+                                .arrivalDateTime
+                                .toString(),
+                          ),
                         ),
                       ],
                     ),
@@ -109,9 +105,7 @@ class _FlightDetailState extends State<FlightDetail> {
                                       .flightClass ==
                                   2
                               ? "ECONOMY"
-                              : "FIRST CLASS"
-                      // ?? "Economy Class"
-                      ,
+                              : "FIRST CLASS",
                     )
                   ],
                 ),
@@ -133,19 +127,18 @@ class _FlightDetailState extends State<FlightDetail> {
                           children: [
                             detailTitle(
                               text: itineraryDetailScreenController
-                                      .itineraryDetailsListModel
-                                      ?.itinerary[widget.index]
-                                      .airline ??
-                                  "Philippines Airlines",
+                                  .itineraryDetailsListModel!
+                                  .itinerary[widget.index]
+                                  .airline,
                             ),
-                            const Text(
-                              "SQ221",
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
+                            // const Text(
+                            //   "SQ221",
+                            //   style: TextStyle(
+                            //     fontSize: 16,
+                            //     color: Colors.black,
+                            //     fontWeight: FontWeight.w500,
+                            //   ),
+                            // ),
                           ],
                         ),
                         const SizedBox(height: 8),
@@ -154,9 +147,25 @@ class _FlightDetailState extends State<FlightDetail> {
                           children: [
                             Column(
                               children: [
-                                flightText(text: "02:00 AM"),
+                                flightText(
+                                  text: flightDepartArriveTimeConverter(
+                                    itineraryDetailScreenController
+                                        .itineraryDetailsListModel!
+                                        .itinerary[widget.index]
+                                        .departDateTime
+                                        .toString(),
+                                  ),
+                                ),
                                 const SizedBox(height: 70),
-                                flightText(text: "06:30 PM"),
+                                flightText(
+                                  text: flightDepartArriveTimeConverter(
+                                    itineraryDetailScreenController
+                                        .itineraryDetailsListModel!
+                                        .itinerary[widget.index]
+                                        .arrivalDateTime
+                                        .toString(),
+                                  ),
+                                ),
                               ],
                             ),
                             Column(
@@ -176,13 +185,13 @@ class _FlightDetailState extends State<FlightDetail> {
                               children: [
                                 flightText(
                                     text:
-                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].location}'
+                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].departLocation}'
                                     // "Flight depart from canada"
                                     ),
                                 const SizedBox(height: 70),
                                 flightText(
                                     text:
-                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].location}')
+                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].arrivalLocation}')
                               ],
                             ),
                           ],
@@ -203,19 +212,43 @@ class _FlightDetailState extends State<FlightDetail> {
                 const Divider(thickness: 1),
                 detailTitle(text: "Outbound"),
                 detailText(
-                  text: itineraryDetailScreenController
-                          .itineraryDetailsListModel
-                          ?.itinerary[widget.index]
-                          .airline ??
-                      "Philippines Airlines | Caticlan - Canada",
+                  text:
+                      "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].departLocation}",
                 ),
                 const SizedBox(height: 10),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    detailTitle(text: "Depart"),
-                    const Spacer(),
-                    detailTitle(text: "Arrive"),
-                    const Spacer(),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        detailTitle(text: "Depart"),
+                        detailText(
+                          text: flightDepartDateAndTimeConverter(
+                            itineraryDetailScreenController
+                                .itineraryDetailsListModel!
+                                .itinerary[widget.index]
+                                .departDateTime
+                                .toString(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        detailTitle(text: "Arrive"),
+                        detailText(
+                          text: flightDepartDateAndTimeConverter(
+                            itineraryDetailScreenController
+                                .itineraryDetailsListModel!
+                                .itinerary[widget.index]
+                                .arrivalDateTime
+                                .toString(),
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ],

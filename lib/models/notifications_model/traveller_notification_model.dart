@@ -71,8 +71,8 @@ class TravellerDetailsNotificationList {
   String image;
   NotificationFrom notificationFrom;
   bool seen;
-  String createdOn;
-  String updatedOn;
+  DateTime createdOn;
+  DateTime updatedOn;
   int v;
 
   factory TravellerDetailsNotificationList.fromJson(
@@ -89,8 +89,8 @@ class TravellerDetailsNotificationList {
             notificationFromValues.map[json["notificationFrom"]] ??
                 NotificationFrom.values[0],
         seen: json["seen"] ?? false,
-        createdOn: json["createdOn"] ?? "",
-        updatedOn: json["updatedOn"] ?? "",
+        createdOn: DateTime.parse(json["createdOn"] ?? ""),
+        updatedOn: DateTime.parse(json["updatedOn"] ?? ""),
         v: json["__v"] ?? 0,
       );
 

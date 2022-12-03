@@ -351,11 +351,11 @@ class _MyTransactionScreenState extends State<MyTransactionScreen> {
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
-                                // SizedBox(width: 8),
+                                SizedBox(width: 8),
                                 Expanded(
                                   child: FormDemoDatePiker(),
                                 ),
-                                //SizedBox(width: 8),
+                                SizedBox(width: 8),
                                 Text(
                                   "To",
                                   style: TextStyle(
@@ -363,11 +363,11 @@ class _MyTransactionScreenState extends State<MyTransactionScreen> {
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
-                                // SizedBox(width: 8),
+                                SizedBox(width: 8),
                                 Expanded(
                                   child: ToDemoDatePiker(),
                                 ),
-                                // SizedBox(width: 8),
+                                SizedBox(width: 8),
                               ],
                             ),
                           ),

@@ -43,6 +43,7 @@ class _TrainDetailsState extends State<TrainDetails> {
                 ),
                 detailTitle(text: "Outbound"),
                 detailText(
+
                   text:
                       "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].arrivalLocation}",
 
@@ -97,13 +98,14 @@ class _TrainDetailsState extends State<TrainDetails> {
                     const SizedBox(width: 10),
                     detailText(
                       text: itineraryDetailScreenController
-                                  .itineraryDetailsListModel!
+                         .itineraryDetailsListModel!
                                   .itinerary[widget.index]
 
                                   .trainClass ==
                               1
                           ? "STANDARD"
                           : itineraryDetailScreenController
+
                                       .itineraryDetailsListModel!
                                       .itinerary[widget.index]
                                       .trainClass ==
@@ -214,6 +216,7 @@ class _TrainDetailsState extends State<TrainDetails> {
                 const Divider(thickness: 1),
                 detailTitle(text: "Outbound"),
                 detailText(
+
                   text:
                       "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].departLocation}",
                 ),

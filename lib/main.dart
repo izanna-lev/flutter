@@ -28,7 +28,7 @@ void main() async {
   await Firebase.initializeApp();
   print('-- main: Firebase.initializeApp');
   await GetStorage.init();
-  await getInitialRoute();
+  // await getInitialRoute();
   globalVerbInit();
   requestPermission();
   // fcmToken = await FirebaseMessaging.instance.getToken();

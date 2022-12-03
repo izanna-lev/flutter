@@ -48,6 +48,7 @@ class _FerryDetailsState extends State<FerryDetails> {
                 ),
                 detailTitle(text: "Outbound"),
                 detailText(
+
                   text:
                       "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].arrivalLocation}",
                 ),
@@ -217,6 +218,7 @@ class _FerryDetailsState extends State<FerryDetails> {
                 const Divider(thickness: 1),
                 detailTitle(text: "Outbound"),
                 detailText(
+
                   text:
                       "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].departLocation}",
                 ),

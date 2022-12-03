@@ -21,7 +21,6 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    super.initState();
     Timer(const Duration(seconds: 1), () async {
       if (LocalStorage.getOnBoarding()) {
         if (LocalStorage.getUserDetail()) {
@@ -33,6 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Get.offAllNamed(OnBoardingScreen.routeName);
       }
     });
+    super.initState();
   }
   // void initState() {
   //   super.initState();

@@ -14,7 +14,7 @@ class EditProfileRepo {
     Map<String, dynamic>? responseBody = await API.multiPartAPIHandler(
         token: userController.rowndSignInModel!.data.accessToken,
         url: APIRoutes.editProfile,
-        field: {"data": jsonEncode({})},
+        // field: {"image": picture.toString()},
         fileImage: picture == null ? null : [picture],
         multiPartImageKeyName: "picture",
         encoding: Encoding.getByName("utf-8"));

@@ -1,15 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:tralever_module/custem_class/constant/app_settings.dart';
-import 'package:tralever_module/services/api_routes.dart';
-import 'package:tralever_module/services/over&loding.dart';
 import 'package:tralever_module/ui/screen/Home_screen/controller/itinerary_detaile_screen%20_controller.dart';
-import 'package:tralever_module/ui/shared/appbar.dart';
+
+import '../../../../custem_class/constant/app_settings.dart';
+import '../../../../services/api_routes.dart';
+import '../../../shared/appbar.dart';
 
 class ActivityMapDetails extends StatefulWidget {
   static const String routeName = "/ActivityMapDetails";
@@ -73,36 +72,37 @@ class _ActivityMapDetailsState extends State<ActivityMapDetails> {
     return true;
   }
 
-  Future<void> _getCurrentPosition() async {
-    final hasPermission = await _handleLocationPermission();
+  // Future<void> _getCurrentPosition() async {
+  //   final hasPermission = await _handleLocationPermission();
+  //
+  //   if (!hasPermission) return;
+  //   await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
+  //       .then((Position position) {
+  //     setState(() => currentPosition = position);
+  //     _getAddressFromLatLng(currentPosition!);
+  //   }).catchError((e) {
+  //     debugPrint(e);
+  //   });
+  // }
 
-    if (!hasPermission) return;
-    await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
-        .then((Position position) {
-      setState(() => currentPosition = position);
-      _getAddressFromLatLng(currentPosition!);
-    }).catchError((e) {
-      debugPrint(e);
-    });
-  }
-
-  Future<void> _getAddressFromLatLng(Position position) async {
-    await placemarkFromCoordinates(
-            currentPosition!.latitude, currentPosition!.longitude)
-        .then((List<Placemark> placemarks) {
-      Placemark place = placemarks[0];
-      setState(() {
-        _currentAddress =
-            '${place.street}, ${place.subLocality}, ${place.subAdministrativeArea}, ${place.postalCode}';
-      });
-    }).catchError((e) {
-      debugPrint(e);
-    });
-  }
+  // Future<void> _getAddressFromLatLng(Position position) async {
+  //   await placemarkFromCoordinates(
+  //           currentPosition!.latitude, currentPosition!.longitude)
+  //       .then((List<Placemark> placemarks) {
+  //     Placemark place = placemarks[0];
+  //     setState(() {
+  //       _currentAddress =
+  //           '${place.street}, ${place.subLocality}, ${place.subAdministrativeArea}, ${place.postalCode}';
+  //     });
+  //   }).catchError((e) {
+  //     debugPrint(e);
+  //   });
+  // }
 
   // void _onMapCreated(GoogleMapController controller) {
   //   _controller.complete(controller);
   // }
+
   @override
   void initState() {
     var image = widget.data[0];
@@ -115,9 +115,10 @@ class _ActivityMapDetailsState extends State<ActivityMapDetails> {
     print('activityName===>${activityName}');
     print('location_LATITUDE===>${locationCordinates}');
     print('location_LONGITUDE===>${locationLong}');
-    addCustomIcon();
-    _getCurrentPosition();
-    currentPosition;
+    // addCustomIcon();
+    // _getCurrentPosition();
+    // currentPosition;
+    _handleLocationPermission();
     super.initState();
   }
 
@@ -129,105 +130,94 @@ class _ActivityMapDetailsState extends State<ActivityMapDetails> {
         body: GetBuilder(
           builder: (ItineraryDetailScreenController
               itineraryDetailScreenController) {
-            return currentPosition != null
-                ? Stack(
-                    alignment: Alignment.bottomCenter,
-                    children: [
-                      GoogleMap(
-                        // zoomControlsEnabled: false,
-                        markers: {
-                          Marker(
-                            markerId: const MarkerId("onsite"),
-                            position: LatLng(
-                                // 21.1702, 72.8311
-                                double.parse('${widget.data[1]}') ??
-                                    currentPosition!.latitude,
-                                double.parse('${widget.data[2]}') ??
-                                    currentPosition!.longitude),
-                            draggable: true,
-                            onTap: () {
-                              print(
-                                  'LATITUDE===>${double.parse('${widget.data[1]}')}');
-                              print(
-                                  'LONGITUDE===>${double.parse('${widget.data[2]}')}');
-
-                              print(
-                                  'CURRENT_LATITUDE---->${double.parse('${currentPosition!.latitude}')}');
-                              print(
-                                  'CURRENT_LONGITUDE---->${double.parse('${currentPosition!.longitude}')}');
-                            },
-                            icon: markerIcon,
-                          )
-                        },
-                        myLocationEnabled: true,
-                        mapType: MapType.terrain,
-                        onMapCreated: (GoogleMapController controller) {
-                          _controller.complete(controller);
-                        },
-                        initialCameraPosition: CameraPosition(
-                          zoom: 3,
-                          target: LatLng(
-                              // 21.1702, 72.8311
-                              double.parse('${widget.data[1]}') ??
-                                  currentPosition!.latitude,
-                              double.parse('${widget.data[2]}') ??
-                                  currentPosition!.longitude),
-                          // LatLng(37.422131, -122.08480),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 50, horizontal: kDefaultPadding),
-                        child: Container(
-                          height: 180,
+            return Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                GoogleMap(
+                  // zoomControlsEnabled: false,
+                  markers: {
+                    Marker(
+                      markerId: const MarkerId("onsite"),
+                      position: LatLng(
+                          // 21.1702, 72.8311
+                          double.parse('${widget.data[2]}'),
+                          double.parse('${widget.data[1]}')),
+                      draggable: true,
+                      onTap: () {
+                        print(
+                            'LATITUDE===>${double.parse('${widget.data[2]}')}');
+                        print(
+                            'LONGITUDE===>${double.parse('${widget.data[1]}')}');
+                      },
+                      icon: markerIcon,
+                    )
+                  },
+                  myLocationEnabled: true,
+                  mapType: MapType.terrain,
+                  onMapCreated: (GoogleMapController controller) {
+                    _controller.complete(controller);
+                  },
+                  initialCameraPosition: CameraPosition(
+                    zoom: 13,
+                    target: LatLng(
+                        // 21.1702, 72.8311
+                        double.parse('${widget.data[2]}'),
+                        double.parse('${widget.data[1]}')),
+                    // LatLng(37.422131, -122.08480),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 50, horizontal: kDefaultPadding),
+                  child: Container(
+                    height: 180,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        image: DecorationImage(
+                          image: NetworkImage(imageUrl + widget.data[0]
+                              // "https://www.hlimg.com/images/things2do/738X538/dumas-beach_1506004479t.jpg"
+                              ),
+                          fit: BoxFit.cover,
+                        )),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Container(
                           width: double.infinity,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              image: DecorationImage(
-                                image: NetworkImage(imageUrl + widget.data[0]
-                                    // "https://www.hlimg.com/images/things2do/738X538/dumas-beach_1506004479t.jpg"
-                                    ),
-                                fit: BoxFit.cover,
-                              )),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Container(
-                                width: double.infinity,
-                                decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.only(
-                                    bottomRight: Radius.circular(20),
-                                    bottomLeft: Radius.circular(20),
-                                  ),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 10, horizontal: 10),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        widget.data[4] ?? "Radisson Blu Hotel",
-                                        // ?? "Seco Island - Full Day Tour",
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      Text(widget.data[3] ??
-                                          "Cebu City, Philippines"),
-                                    ],
-                                  ),
-                                ),
-                              )
-                            ],
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(20),
+                              bottomLeft: Radius.circular(20),
+                            ),
                           ),
-                        ),
-                      )
-                    ],
-                  )
-                : const AppLoader();
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  widget.data[4] ?? "Radisson Blu Hotel",
+                                  // ?? "Seco Island - Full Day Tour",
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                    widget.data[3] ?? "Cebu City, Philippines"),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            );
+            // : const AppLoader();
           },
         ));
   }

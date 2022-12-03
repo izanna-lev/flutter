@@ -121,7 +121,7 @@ class _BaseScreenState extends State<BaseScreen> {
           boxShadow: [
             BoxShadow(
               color: Colors.grey,
-              blurRadius: 1.5,
+              blurRadius: 2.5,
             ),
           ],
         ),

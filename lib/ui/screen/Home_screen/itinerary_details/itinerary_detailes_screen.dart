@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 import 'package:tralever_module/custem_class/constant/app_colors.dart';
 import 'package:tralever_module/custem_class/constant/app_functions.dart';
@@ -23,7 +21,6 @@ import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/rate_you
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/required_information_Screen.dart';
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/restaurant_reservations_screen.dart';
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/train/train_ticket_deatils_screen.dart';
-import 'package:tralever_module/ui/screen/chats/view/chats_screen.dart';
 import 'package:tralever_module/ui/screen/profile_screen/controller/add_card_controller.dart';
 import 'package:tralever_module/ui/screen/profile_screen/view/add_card_screen.dart';
 import 'package:tralever_module/ui/screen/profile_screen/view/select_card_Screen.dart';
@@ -386,6 +383,8 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                       }),
                 ),
                 const SizedBox(height: 15),
+
+                // const SizedBox(height: 20),
                 ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -397,6 +396,8 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                           .itinerary[index]
                           .detailType;
                       var itineraryId = widget.data;
+                      // itineraryDetailScreenController
+                      // .itineraryDetailsListModel!.itinerary[index].id;
                       var location = itineraryDetailScreenController
                           .itineraryDetailsListModel!.itinerary[index].location;
                       var name = itineraryDetailScreenController
@@ -406,6 +407,24 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                           .itineraryDetailsListModel!
                           .itinerary[index]
                           .description;
+                      // var location = itineraryDetailScreenController
+                      //             .itineraryDetailsListModel!
+                      //             .itinerary[index]
+                      //             .date ==
+                      //         itineraryDetailScreenController
+                      //             .itineraryDetailsListModel!
+                      //             .itinerary[index]
+                      //             .arrivalDateTime
+                      //     ? itineraryDetailScreenController
+                      //         .itineraryDetailsListModel!
+                      //         .itinerary[index]
+                      //         .arrival!
+                      //         .location
+                      //     : itineraryDetailScreenController
+                      //         .itineraryDetailsListModel!
+                      //         .itinerary[index]
+                      //         .depart!
+                      //         .location;
 
                       return TimelineTile(
                         isFirst: index == 0 ? true : false,
@@ -434,7 +453,25 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                                                         ? AppIcons.trainIcon
                                                         : type == 7
                                                             ? AppIcons.carIcon
-                                                            : "",
+                                                            : AppIcons.carIcon,
+                            // index == 0 && type == 4
+                            //     ? AppIcons.flightIcon
+                            //     : index == 1 && type == 1
+                            //         ? AppIcons.hotelIcon
+                            //         : index == 2 && type == 2
+                            //             ? AppIcons.restaurantIcon
+                            //             : index == 3 && type == 3
+                            //                 ? AppIcons.activitiesIcon
+                            //                 : index == 4 && type == 8
+                            //                     ? AppIcons.notificationRound
+                            //                     : index == 5 && type == 6
+                            //                         ? AppIcons.ferryIcon
+                            //                         : index == 6 && type == 5
+                            //                             ? AppIcons.trainIcon
+                            //                             : index == 7 &&
+                            //                                     type == 7
+                            //                                 ? AppIcons.carIcon
+                            //                                 : AppIcons.carIcon,
                           ),
                         ),
                         alignment: TimelineAlign.manual,
@@ -543,6 +580,91 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                                         ),
                                       );
                                 }
+                                // else {
+                                /// data is blank this screen is dummy Screen
+                                //   Get.toNamed(
+                                //       FerryTicketDetailsScreen.routeName,
+                                //       arguments: index);
+                                // }
+
+                                // if (index == 0 && type == 4) {
+                                //   itineraryDetailScreenController
+                                //       .itineraryDetails(
+                                //         itineraryRef: itineraryId,
+                                //         // timezone: currentTimezone, //
+                                //       )
+                                //       .then((value) => Get.toNamed(
+                                //           FlightTicketsDetailsScreen.routeName,
+                                //           arguments: index));
+                                // } else if (index == 1 && type == 1) {
+                                //   itineraryDetailScreenController
+                                //       .itineraryDetails(
+                                //         itineraryRef: itineraryId,
+                                //         // timezone: currentTimezone,
+                                //       )
+                                //       .then((value) => Get.toNamed(
+                                //           HotelReservationsScreen.routeName,
+                                //           arguments: index));
+                                // } else if (index == 2 && type == 2) {
+                                //   itineraryDetailScreenController
+                                //       .itineraryDetails(
+                                //         itineraryRef: itineraryId,
+                                //         // timezone: currentTimezone,
+                                //       )
+                                //       .then((value) => Get.toNamed(
+                                //           RestaurantReservationsScreen
+                                //               .routeName,
+                                //           arguments: index));
+                                // } else if (index == 3 && type == 3) {
+                                //   itineraryDetailScreenController
+                                //       .itineraryDetails(
+                                //         itineraryRef: itineraryId,
+                                //         // timezone: currentTimezone,
+                                //       )
+                                //       .then((value) => Get.toNamed(
+                                //           ActivityDetailsScreen.routeName,
+                                //           arguments: index));
+                                // } else if (index == 4 && type == 8) {
+                                //   itineraryDetailScreenController
+                                //       .itineraryDetails(
+                                //         itineraryRef: itineraryId,
+                                //         // timezone: currentTimezone,
+                                //       )
+                                //       .then((value) => Get.toNamed(
+                                //           RequiredInformationScreen.routeName));
+                                // } else if (index == 5 && type == 6) {
+                                //   itineraryDetailScreenController
+                                //       .itineraryDetails(
+                                //         itineraryRef: itineraryId,
+                                //         // timezone: currentTimezone,
+                                //       )
+                                //       .then((value) => Get.toNamed(
+                                //           FerryTicketDetailsScreen.routeName,
+                                //           arguments: index));
+                                // } else if (index == 6 && type == 5) {
+                                //   itineraryDetailScreenController
+                                //       .itineraryDetails(
+                                //         itineraryRef: itineraryId,
+                                //         // timezone: currentTimezone,
+                                //       )
+                                //       .then((value) => Get.toNamed(
+                                //           TrainTicketDetailsScreen.routeName,
+                                //           arguments: index));
+                                // } else if (index == 7 && type == 7) {
+                                //   itineraryDetailScreenController
+                                //       .itineraryDetails(
+                                //         itineraryRef: itineraryId,
+                                //         // timezone: currentTimezone,
+                                //       )
+                                //       .then((value) => Get.toNamed(
+                                //           CarTicketDetailsScreen.routeName,
+                                //           arguments: index));
+                                // } else {
+                                //   /// data is blank this screen is dummy Screen
+                                //   Get.toNamed(
+                                //       FerryTicketDetailsScreen.routeName,
+                                //       arguments: index);
+                                // }
                               },
                               child: Text(
                                 type == 4
@@ -562,6 +684,33 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                                                             : type == 7
                                                                 ? location
                                                                 : "Dummy Text",
+
+                                // itineraryDetailScreenController
+                                //             .itineraryDetailsListModel
+                                //             ?.itinerary[index]
+                                //             .name !=
+                                //         null
+                                //     ? "${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[index].description}"
+                                //     : "${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[index].specialistNote}",
+                                // index == 0 && type == 4
+                                //     ? name
+                                //     : index == 1 && type == 1
+                                //         ? name
+                                //         : index == 2 && type == 2
+                                //             ? name
+                                //             : index == 3 && type == 3
+                                //                 ? name
+                                //                 : index == 4 && type == 8
+                                //                     ? name
+                                //                     : index == 5 && type == 6
+                                //                         ? name
+                                //                         : index == 6 &&
+                                //                                 type == 5
+                                //                             ? name
+                                //                             : index == 7 &&
+                                //                                     type == 7
+                                //                                 ? name
+                                //                                 : "Dummy Text",
                                 maxLines: 2,
                                 style: const TextStyle(
                                   overflow: TextOverflow.ellipsis,
@@ -570,6 +719,67 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                                   decoration: TextDecoration.underline,
                                 ),
                               ),
+                              // child: Text(
+                              //   type == 4
+                              //       ? itineraryDetailScreenController
+                              //           .itineraryDetailsListModel!
+                              //           .itinerary[index]
+                              //           .date
+                              //       : type == 1
+                              //           ? "Check In $name"
+                              //           : type == 2
+                              //               ? name
+                              //               : type == 3
+                              //                   ? name
+                              //                   : type == 8
+                              //                       ? description
+                              //                       : type == 6
+                              //                           ? name
+                              //                           : type == 5
+                              //                               ? itineraryDetailScreenController
+                              //                                   .itineraryDetailsListModel!
+                              //                                   .itinerary[
+                              //                                       index]
+                              //                                   .depart!
+                              //                                   .location
+                              //                               : type == 7
+                              //                                   ? name
+                              //                                   : "Dummy Text",
+                              //
+                              //   // itineraryDetailScreenController
+                              //   //             .itineraryDetailsListModel
+                              //   //             ?.itinerary[index]
+                              //   //             .name !=
+                              //   //         null
+                              //   //     ? "${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[index].description}"
+                              //   //     : "${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[index].specialistNote}",
+                              //   // index == 0 && type == 4
+                              //   //     ? name
+                              //   //     : index == 1 && type == 1
+                              //   //         ? name
+                              //   //         : index == 2 && type == 2
+                              //   //             ? name
+                              //   //             : index == 3 && type == 3
+                              //   //                 ? name
+                              //   //                 : index == 4 && type == 8
+                              //   //                     ? name
+                              //   //                     : index == 5 && type == 6
+                              //   //                         ? name
+                              //   //                         : index == 6 &&
+                              //   //                                 type == 5
+                              //   //                             ? name
+                              //   //                             : index == 7 &&
+                              //   //                                     type == 7
+                              //   //                                 ? name
+                              //   //                                 : "Dummy Text",
+                              //   maxLines: 2,
+                              //   style: const TextStyle(
+                              //     overflow: TextOverflow.ellipsis,
+                              //     fontSize: 10,
+                              //     fontWeight: FontWeight.w600,
+                              //     decoration: TextDecoration.underline,
+                              //   ),
+                              // ),
                             ),
                           ],
                         ),
@@ -580,7 +790,7 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 const SizedBox(height: 15),
-                                type == 8
+                                index == 4
                                     ? const Text("Notes")
                                     : Text(
                                         getItineraryTime(
@@ -604,6 +814,9 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                 ///  materialButton
                 ///  Approve Button
 
+                // itineraryDetailScreenController
+                //                 .itineraryDetailsListModel!.approved ==
+                //             true &&
                 itineraryDetailScreenController
                             .itineraryDetailsListModel!.itineraryStatus ==
                         2

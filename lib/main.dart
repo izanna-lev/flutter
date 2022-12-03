@@ -28,7 +28,7 @@ void main() async {
   await Firebase.initializeApp();
   print('-- main: Firebase.initializeApp');
   await GetStorage.init();
-  await getInitialRoute();
+  // await getInitialRoute();
   globalVerbInit();
   requestPermission();
   // fcmToken = await FirebaseMessaging.instance.getToken();
@@ -43,7 +43,7 @@ void main() async {
   print('currentTimezone${GetLocalTimezone.currentTimeZoneName}');
   await registerPlatformInstance();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  // await NotificationUtils().init();
+  await NotificationUtils().init();
   await FirebaseMessaging.instance.getToken().then((token) async {
     if (token != null) {
       log("FCM_TOKEN=====>$token");

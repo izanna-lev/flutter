@@ -11,7 +11,7 @@ class FlightTicketsDetailsScreen extends StatefulWidget {
   static const String routeName = "/TicketsDetailsScreen";
 
   FlightTicketsDetailsScreen({Key? key}) : super(key: key);
-  var data = Get.arguments;
+  var index = Get.arguments;
 
   @override
   State<FlightTicketsDetailsScreen> createState() =>
@@ -23,8 +23,8 @@ class _FlightTicketsDetailsScreenState extends State<FlightTicketsDetailsScreen>
   late TabController controller;
   @override
   void initState() {
-    widget.data;
-    print('FLIGHT_DATA===>${widget.data}');
+    widget.index;
+    print('FLIGHT_DATA===>${widget.index}');
     controller = TabController(vsync: this, length: 2);
     super.initState();
   }
@@ -81,9 +81,9 @@ class _FlightTicketsDetailsScreenState extends State<FlightTicketsDetailsScreen>
             child: TabBarView(
               controller: controller,
               children: [
-                FlightDetail(index: widget.data),
+                FlightDetail(index: widget.index),
                 FlightUserDetails(
-                  index: widget.data,
+                  index: widget.index,
                 ),
               ],
             ),

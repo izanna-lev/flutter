@@ -143,6 +143,8 @@ class Itinerary {
     required this.arrivalLocation,
     required this.departDateTime,
     required this.arrivalDateTime,
+    // required this.userCarDetails,
+
   });
 
   String id;
@@ -175,6 +177,8 @@ class Itinerary {
   String arrivalLocation;
   String departDateTime;
   String arrivalDateTime;
+  //UserCarDetails userCarDetails;
+
 
   factory Itinerary.fromJson(Map<String, dynamic> json) => Itinerary(
         id: json["_id"] ?? "",
@@ -209,6 +213,8 @@ class Itinerary {
         arrivalLocation: json["arrivalLocation"] ?? "",
         arrivalDateTime: json["arrivalDateTime"] ?? "",
         departDateTime: json["departDateTime"] ?? "",
+        // userCarDetails: json["userCarDetails"],
+
       );
 
   Map<String, dynamic> toJson() => {
@@ -241,6 +247,8 @@ class Itinerary {
         "departLocation": departLocation,
         "arrivalLocation": arrivalLocation,
         "departDateTime": departDateTime,
+
+        // "userCarDetails": userCarDetails,
         "arrivalDateTime": arrivalDateTime
       };
 }
@@ -286,6 +294,30 @@ class Ticket {
         "createdAt": createdAt,
         "updatedAt": updatedAt,
         "__v": v,
+      };
+}
+
+class UserCarDetails {
+  UserCarDetails({
+    required this.driverName,
+    required this.carImage,
+    required this.noOfTravellers,
+  });
+
+  String driverName;
+  String carImage;
+  String noOfTravellers;
+
+  factory UserCarDetails.fromJson(Map<String, dynamic> json) => UserCarDetails(
+        driverName: json["driverName"] ?? "",
+        carImage: json["carImage"] ?? "",
+        noOfTravellers: json["noOfTravellers"] ?? "",
+      );
+
+  Map<String, dynamic> toJson() => {
+        "driverName": driverName,
+        "carImage": carImage,
+        "noOfTravellers": noOfTravellers,
       };
 }
 

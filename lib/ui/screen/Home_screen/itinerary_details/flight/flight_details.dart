@@ -41,7 +41,6 @@ class _FlightDetailState extends State<FlightDetail> {
                   text: "Outbound",
                 ),
                 detailText(
-
                   text:
                       "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].arrivalLocation}",
 
@@ -215,18 +214,44 @@ class _FlightDetailState extends State<FlightDetail> {
                 const Divider(thickness: 1),
                 detailTitle(text: "Outbound"),
                 detailText(
-
                   text:
                       "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].departLocation}",
 
                 ),
                 const SizedBox(height: 10),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    detailTitle(text: "Depart"),
-                    const Spacer(),
-                    detailTitle(text: "Arrive"),
-                    const Spacer(),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        detailTitle(text: "Depart"),
+                        detailText(
+                          text: flightDepartDateAndTimeConverter(
+                            itineraryDetailScreenController
+                                .itineraryDetailsListModel!
+                                .itinerary[widget.index]
+                                .departDateTime
+                                .toString(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        detailTitle(text: "Arrive"),
+                        detailText(
+                          text: flightDepartDateAndTimeConverter(
+                            itineraryDetailScreenController
+                                .itineraryDetailsListModel!
+                                .itinerary[widget.index]
+                                .arrivalDateTime
+                                .toString(),
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ],

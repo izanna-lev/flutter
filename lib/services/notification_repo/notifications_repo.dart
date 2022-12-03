@@ -36,7 +36,9 @@ class NotificationRepo {
         url: APIRoutes.travellerNotificationList,
         showLoader: false,
         requestType: RequestType.Post,
-        body: jsonEncode({"page": page}));
+        body: jsonEncode({
+          "page": page,
+        }));
     if (responseBody != null) {
       return TravellerNotificationListModel.fromJson(responseBody);
     }

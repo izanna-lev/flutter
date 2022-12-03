@@ -108,7 +108,7 @@ class API {
   }
 
   static Future multiPartAPIHandler(
-      {List<File>? fileImage,
+      {File? fileImage,
       Map<String, String>? field,
       File? thumbnail,
       bool showLoader = true,
@@ -150,21 +150,29 @@ class API {
         if (header != null) request.headers.addAll(header);
         if (field != null) request.fields.addAll(field);
 
+        // if (fileImage != null) {
+        //   fileImage.forEach((element) async {
+        //     String? mimeType = mime(element.path);
+        //     debugPrint(mimeType);
+        //     request.files.add(
+        //       await http.MultipartFile.fromPath(
+        //         multiPartImageKeyName,
+        //         element.path,
+        //         contentType: mimeee.MediaType(
+        //           mimeType!.split("/")[0],
+        //           mimeType.split("/")[1],
+        //         ),
+        //       ),
+        //     );
+        //   });
+        // }
         if (fileImage != null) {
-          fileImage.forEach((element) async {
-            String? mimeType = mime(element.path);
-            debugPrint(mimeType);
-            request.files.add(
-              await http.MultipartFile.fromPath(
-                multiPartImageKeyName,
-                element.path,
-                contentType: mimeee.MediaType(
-                  mimeType!.split("/")[0],
-                  mimeType.split("/")[1],
-                ),
-              ),
-            );
-          });
+          String? mimeType = mime(fileImage.path);
+          debugPrint(mimeType);
+          request.files.add(await http.MultipartFile.fromPath(
+              multiPartImageKeyName, fileImage.path,
+              contentType: mimeee.MediaType(
+                  mimeType!.split("/")[0], mimeType.split("/")[1])));
         }
         if (thumbnail != null) {
           request.files.add(await http.MultipartFile.fromPath(

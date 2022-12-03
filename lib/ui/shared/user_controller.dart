@@ -64,8 +64,8 @@ class UserController extends GetxController {
     onUpdateUser();
   }
 
-  updateRowndUser(RowndSignInDetailsModel rowndSignInDetailsModel) {
-    rowndSignInDetailsModel.traveller;
+  updateRowndUser() {
+    rowndSignInDetailsModel?.traveller;
     onUpdateUser();
   }
 

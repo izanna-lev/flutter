@@ -160,10 +160,10 @@ String flightDepartArriveTimeConverter(String date) {
 ///* Hotel,Restaurant and activity Date-Time:
 
 String hotelDateAndTimeConverter(String day) {
-  var localDate = DateTime.parse(day);
+  var localDate = DateTime.parse(day).toLocal();
   var inputFormat = DateFormat("yyyy-MM-dd hh:mm:ss");
   var inputDate = inputFormat.parse(localDate.toString());
-  var outputFormat = DateFormat("dd-MMM-yyyy |").add_jm();
+  var outputFormat = DateFormat("dd-MMM-yyyy |  h:mm a");
   // .add_jm()
   var outputDate = outputFormat.format(inputDate);
   return outputDate;

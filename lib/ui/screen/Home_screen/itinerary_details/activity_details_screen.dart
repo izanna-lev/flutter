@@ -14,7 +14,7 @@ class ActivityDetailsScreen extends StatefulWidget {
   static const String routeName = "/ActivityDetailsScreen";
 
   ActivityDetailsScreen({Key? key}) : super(key: key);
-  var data = Get.arguments;
+  var index = Get.arguments;
 
   @override
   State<ActivityDetailsScreen> createState() => _ActivityDetailsScreenState();
@@ -25,8 +25,8 @@ class _ActivityDetailsScreenState extends State<ActivityDetailsScreen> {
       Get.find<ItineraryDetailScreenController>();
   @override
   void initState() {
-    widget.data;
-    print('ACTIVITY_DETAILS_INDEX---->${widget.data}');
+    widget.index;
+    print('ACTIVITY_DETAILS_INDEX---->${widget.index}');
     super.initState();
   }
 
@@ -44,11 +44,11 @@ class _ActivityDetailsScreenState extends State<ActivityDetailsScreen> {
                 imageContainer(
                   context: context,
                   img: imageUrl +
-                      '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].image}',
+                      '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].image}',
                   // ?? "https://storage.googleapis.com/fvallimages/uploads/blog/best-beaches-in-malaysia-2699.jpg",
                   text: itineraryDetailScreenController
                           .itineraryDetailsListModel
-                          ?.itinerary[widget.data]
+                          ?.itinerary[widget.index]
                           .name ??
                       "Seco Island - Full Day Tour",
                 ),
@@ -65,7 +65,7 @@ class _ActivityDetailsScreenState extends State<ActivityDetailsScreen> {
                           text: hotelDateAndTimeConverter(
                               itineraryDetailScreenController
                                       .itineraryDetailsListModel
-                                      ?.itinerary[widget.data]
+                                      ?.itinerary[0]
                                       .date ??
                                   "13-Nov-2022 | 12:00 PM")),
                       detailTitle(text: "Location"),
@@ -76,12 +76,14 @@ class _ActivityDetailsScreenState extends State<ActivityDetailsScreen> {
                             arguments: [
                               itineraryDetailScreenController
                                   .itineraryDetailsListModel
-                                  ?.itinerary[widget.data]
+                                  ?.itinerary[widget.index]
                                   .image,
-                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].location}',
-                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].location}',
-                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].location}',
-                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.data].name}'
+
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].location}',
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].location}',
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].location}',
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].name}'
+
                             ],
                           );
                         },
@@ -93,7 +95,7 @@ class _ActivityDetailsScreenState extends State<ActivityDetailsScreen> {
                               detailText(
                                   text: itineraryDetailScreenController
                                       .itineraryDetailsListModel!
-                                      .itinerary[widget.data]
+                                      .itinerary[0]
                                       .location),
                               Image.asset(AppIcons.gpsIcon, height: 21),
                             ],
@@ -104,7 +106,7 @@ class _ActivityDetailsScreenState extends State<ActivityDetailsScreen> {
                       detailText(
                         text: itineraryDetailScreenController
                                 .itineraryDetailsListModel
-                                ?.itinerary[widget.data]
+                                ?.itinerary[widget.index]
                                 .description ??
                             "Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text.",
                       ),

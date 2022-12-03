@@ -29,6 +29,8 @@ class _TrainDetailsState extends State<TrainDetails> {
         child: GetBuilder(
           builder: (ItineraryDetailScreenController
               itineraryDetailScreenController) {
+            print(
+                'TRAIN_NAME===>${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].airline}');
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -43,6 +45,7 @@ class _TrainDetailsState extends State<TrainDetails> {
                 detailText(
                   text:
                       "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].arrivalLocation}",
+
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -96,6 +99,7 @@ class _TrainDetailsState extends State<TrainDetails> {
                       text: itineraryDetailScreenController
                                   .itineraryDetailsListModel!
                                   .itinerary[widget.index]
+
                                   .trainClass ==
                               1
                           ? "STANDARD"
@@ -213,6 +217,7 @@ class _TrainDetailsState extends State<TrainDetails> {
                   text:
                       "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].departLocation}",
                 ),
+
                 const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

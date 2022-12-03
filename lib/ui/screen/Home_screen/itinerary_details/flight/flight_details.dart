@@ -43,6 +43,7 @@ class _FlightDetailState extends State<FlightDetail> {
                 detailText(
                   text:
                       "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].arrivalLocation}",
+
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -95,13 +96,13 @@ class _FlightDetailState extends State<FlightDetail> {
                     detailText(
                       text: itineraryDetailScreenController
                                   .itineraryDetailsListModel
-                                  ?.itinerary[widget.index]
+                                  ?.itinerary[0]
                                   .flightClass ==
                               1
                           ? "BUSINESS"
                           : itineraryDetailScreenController
                                       .itineraryDetailsListModel
-                                      ?.itinerary[widget.index]
+                                      ?.itinerary[0]
                                       .flightClass ==
                                   2
                               ? "ECONOMY"
@@ -127,6 +128,7 @@ class _FlightDetailState extends State<FlightDetail> {
                           children: [
                             detailTitle(
                               text: itineraryDetailScreenController
+
                                   .itineraryDetailsListModel!
                                   .itinerary[widget.index]
                                   .airline,
@@ -214,6 +216,7 @@ class _FlightDetailState extends State<FlightDetail> {
                 detailText(
                   text:
                       "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].departLocation}",
+
                 ),
                 const SizedBox(height: 10),
                 Row(

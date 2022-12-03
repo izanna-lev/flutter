@@ -74,8 +74,8 @@ class ItineraryDetailsListModel {
         name: json["name"] ?? "",
         price: json["price"] ?? 0,
         image: json["image"] ?? "",
-        dates: List<DateTime>.from(
-            (json["dates"] ?? []).map((x) => DateTime.parse(x))),
+        dates:
+            List<DateTime>.from((json["dates"]).map((x) => DateTime.parse(x))),
         card: json["card"] ?? false,
         approved: json["approved"] ?? false,
         specialistRef: json["specialistRef"] ?? "",
@@ -144,6 +144,7 @@ class Itinerary {
     required this.departDateTime,
     required this.arrivalDateTime,
     // required this.userCarDetails,
+
   });
 
   String id;
@@ -177,6 +178,7 @@ class Itinerary {
   String departDateTime;
   String arrivalDateTime;
   //UserCarDetails userCarDetails;
+
 
   factory Itinerary.fromJson(Map<String, dynamic> json) => Itinerary(
         id: json["_id"] ?? "",
@@ -212,6 +214,7 @@ class Itinerary {
         arrivalDateTime: json["arrivalDateTime"] ?? "",
         departDateTime: json["departDateTime"] ?? "",
         // userCarDetails: json["userCarDetails"],
+
       );
 
   Map<String, dynamic> toJson() => {
@@ -244,8 +247,9 @@ class Itinerary {
         "departLocation": departLocation,
         "arrivalLocation": arrivalLocation,
         "departDateTime": departDateTime,
-        "arrivalDateTime": arrivalDateTime,
+
         // "userCarDetails": userCarDetails,
+        "arrivalDateTime": arrivalDateTime
       };
 }
 

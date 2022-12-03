@@ -30,21 +30,25 @@ class _FerryUserDetailsState extends State<FerryUserDetails> {
               itineraryDetailScreenController) {
             return ListView.builder(
                 itemCount: itineraryDetailScreenController
-                    .itineraryDetailsListModel?.itinerary[0].tickets.length,
+                    .itineraryDetailsListModel!.itinerary[0].tickets.length,
                 itemBuilder: (BuildContext context, int index) {
                   return userDetails(
-                    name:
-                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[index].tickets[index].name}',
-                    img: imageUrl +
-                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[index].tickets[index].image}',
-                    // "https://image.shutterstock.com/image-vector/ticket-ferry-boat-transportation-isolated-260nw-458092201.jpg",
+                    name: itineraryDetailScreenController
+                        .itineraryDetailsListModel!
+                        .itinerary[0]
+                        .tickets[0]
+                        .name,
+                    img:
+                        '$imageUrl${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[0].tickets[0].image}',
                     ticketOnTap: () {
-                      Get.toNamed(FerryTicketPreviewScreen.routeName,
-                          arguments: itineraryDetailScreenController
-                              .itineraryDetailsListModel
-                              ?.itinerary[index]
-                              .tickets[index]
-                              .image);
+                      Get.toNamed(
+                        FerryTicketPreviewScreen.routeName,
+                        arguments: itineraryDetailScreenController
+                            .itineraryDetailsListModel!
+                            .itinerary[0]
+                            .tickets[0]
+                            .image,
+                      );
                     },
                   );
                 });

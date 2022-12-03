@@ -22,6 +22,7 @@ class _NotificationViewState extends State<NotificationView> {
       Get.find<NotificationScreenController>();
   @override
   Widget build(BuildContext context) {
+
     return GetBuilder(
       builder: (NotificationScreenController notificationScreenController) {
         return Padding(

@@ -145,7 +145,7 @@ class Itinerary {
     required this.departDateTime,
     required this.arrivalDateTime,
     required this.transportDuration,
-    // required this.userCarDetails,
+    required this.userCarDetails,
   });
 
   String id;
@@ -179,7 +179,7 @@ class Itinerary {
   String departDateTime;
   String arrivalDateTime;
   String transportDuration;
-  // UserCarDetails userCarDetails;
+  UserCarDetails? userCarDetails;
 
   factory Itinerary.fromJson(Map<String, dynamic> json) => Itinerary(
         id: json["_id"] ?? "",
@@ -215,7 +215,9 @@ class Itinerary {
         arrivalDateTime: json["arrivalDateTime"] ?? "",
         departDateTime: json["departDateTime"] ?? "",
         transportDuration: json["transportDuration"] ?? "",
-        // userCarDetails: json["userCarDetails"],
+        userCarDetails: json["userCarDetails"] == null
+            ? null
+            : UserCarDetails.fromJson(json["userCarDetails"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -250,7 +252,8 @@ class Itinerary {
         "departDateTime": departDateTime,
         "arrivalDateTime": arrivalDateTime,
         "transportDuration": transportDuration,
-        // "userCarDetails": userCarDetails,
+        "userCarDetails":
+            userCarDetails == null ? null : userCarDetails?.toJson(),
       };
 }
 

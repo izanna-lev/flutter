@@ -27,25 +27,47 @@ class _CarUserDetailsScreenState extends State<CarUserDetailsScreen> {
         child: GetBuilder(
           builder: (ItineraryDetailScreenController
               itineraryDetailScreenController) {
-            return ListView.builder(
-                itemCount: itineraryDetailScreenController
-                    .itineraryDetailsListModel?.itinerary[0].tickets.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return userDetails(
-                    name:
-                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[index].tickets[index].name}',
-                    img: imageUrl +
-                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[index].tickets[index].image}',
-                    ticketOnTap: () {
-                      Get.toNamed(CarTicketPreviewScreen.routeName,
-                          arguments: itineraryDetailScreenController
-                              .itineraryDetailsListModel
-                              ?.itinerary[index]
-                              .tickets[index]
-                              .image);
-                    },
-                  );
-                });
+            print(
+                'bhfbgbdbvdfvd${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].userCarDetails!.driverName.length}');
+            return
+                // ListView.builder(
+                //   itemCount: itineraryDetailScreenController
+                //       .itineraryDetailsListModel
+                //       ?.itinerary[widget.index]
+                //       .userCarDetails
+                //       ?.driverName
+                //       .length,
+                //   itemBuilder: (BuildContext context, int index) {
+                //     return userDetails(
+                //       name:
+                //           '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[index].userCarDetails?.driverName}',
+                //       img: imageUrl +
+                //           '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[index].userCarDetails?.carImage}',
+                //       ticketOnTap: () {
+                //         Get.toNamed(CarTicketPreviewScreen.routeName,
+                //             arguments: itineraryDetailScreenController
+                //                 .itineraryDetailsListModel
+                //                 ?.itinerary[index]
+                //                 .userCarDetails
+                //                 ?.carImage);
+                //       },
+                //     );
+                //   });
+
+                userDetails(
+              name:
+                  '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].userCarDetails?.driverName}',
+              img: imageUrl +
+                  '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].userCarDetails?.carImage}',
+              ticketOnTap: () {
+                Get.toNamed(CarTicketPreviewScreen.routeName,
+                    arguments: itineraryDetailScreenController
+                        .itineraryDetailsListModel
+                        ?.itinerary[widget.index]
+                        .userCarDetails
+                        ?.carImage);
+              },
+            );
           },
         ),
       ),

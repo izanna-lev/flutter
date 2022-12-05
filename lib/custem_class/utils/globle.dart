@@ -226,6 +226,26 @@ Future saveFcmToken(String fcmToken) async {
     LocalStorage.setFCMToken(fcmToken);
   }
 }
+
+/// Notification timeFormat:
+// String displayChatTimeFromTimestamp(DateTime timestamp) {
+//   var v = DateTime.now().difference(timestamp);
+//   if (v.inHours < 24) {
+//     return "${"today".tr} ${timeFormat(timestamp)}";
+//   } else {
+//     var outputFormat = DateFormat('MM-dd-yyyy');
+//     var outputDate = outputFormat.format(timestamp);
+//     return outputDate;
+//   }
+// }
+String displayChatTimeFromTimestamp(String day) {
+  var localDate = DateTime.parse(day).toLocal();
+  var inputFormat = DateFormat("yyyy-MM-dd hh:mm:ss");
+  var inputDate = inputFormat.parse(localDate.toString());
+  var outputFormat = DateFormat("dd MMM yyyy hh:mm a");
+  var outputDate = outputFormat.format(inputDate);
+  return outputDate;
+}
 //the birthday's date
 // final birthday = DateTime(1967, 10, 12);
 // final date2 = DateTime.now();

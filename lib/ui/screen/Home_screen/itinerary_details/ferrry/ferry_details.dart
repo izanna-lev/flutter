@@ -48,7 +48,6 @@ class _FerryDetailsState extends State<FerryDetails> {
                 ),
                 detailTitle(text: "Outbound"),
                 detailText(
-
                   text:
                       "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].arrivalLocation}",
                 ),
@@ -223,7 +222,6 @@ class _FerryDetailsState extends State<FerryDetails> {
                 const Divider(thickness: 1),
                 detailTitle(text: "Outbound"),
                 detailText(
-
                   text:
                       "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].departLocation}",
                 ),
@@ -236,7 +234,7 @@ class _FerryDetailsState extends State<FerryDetails> {
                       children: [
                         detailTitle(text: "Depart"),
                         detailText(
-                          text: flightDepartDateAndTimeConverter(
+                          text: flightDepartArriveTimeConverter(
                             itineraryDetailScreenController
                                 .itineraryDetailsListModel!
                                 .itinerary[widget.index]
@@ -251,7 +249,7 @@ class _FerryDetailsState extends State<FerryDetails> {
                       children: [
                         detailTitle(text: "Arrive"),
                         detailText(
-                          text: flightDepartDateAndTimeConverter(
+                          text: flightDepartArriveTimeConverter(
                             itineraryDetailScreenController
                                 .itineraryDetailsListModel!
                                 .itinerary[widget.index]

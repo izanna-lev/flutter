@@ -54,8 +54,6 @@ void main() async {
     providers: [ChangeNotifierProvider.value(value: GlobalStateNotifier())],
     child: const MyApp(),
   ));
-
-  // runApp(MyApp());
 }
 
 getInitialRoute() async {

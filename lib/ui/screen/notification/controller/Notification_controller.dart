@@ -5,7 +5,6 @@ import 'package:tralever_module/models/notifications_model/traveller_notificatio
 import 'package:tralever_module/services/notification_repo/notifications_repo.dart';
 
 import '../../../../models/notifications_model/notifications_model.dart';
-import '../../../../models/notifications_model/traveller_notification_seen.dart';
 import '../../../../services/api_routes.dart';
 
 class NotificationScreenController extends GetxController {
@@ -27,17 +26,6 @@ class NotificationScreenController extends GetxController {
   set travellerDetailsNotificationList(
       List<TravellerDetailsNotificationList> value) {
     _travellerDetailsNotificationList = value;
-    update();
-  }
-
-  TravellerNotificationSeenDetailsModel? _travellerNotificationSeenDetailsModel;
-  TravellerNotificationSeenDetailsModel?
-      get travellerNotificationSeenDetailsModel =>
-          _travellerNotificationSeenDetailsModel;
-
-  set travellerNotificationSeenDetailsModel(
-      TravellerNotificationSeenDetailsModel? value) {
-    _travellerNotificationSeenDetailsModel = value;
     update();
   }
 
@@ -83,17 +71,5 @@ class NotificationScreenController extends GetxController {
       return travellerDetailsNotificationList;
     }
     return [];
-  }
-
-  Future<TravellerNotificationSeenDetailsModel?> travellerNotificationSeen(
-      {required String notificationRef}) async {
-    TravellerNotificationSeenModel? travellerNotificationSeenModel =
-        await NotificationRepo.travellerNotificationDSeen(
-            notificationRef: notificationRef);
-    if (travellerNotificationSeenModel != null) {
-      travellerNotificationSeenDetailsModel =
-          travellerNotificationSeenModel.data;
-    }
-    return travellerNotificationSeenDetailsModel;
   }
 }

@@ -107,7 +107,7 @@ String getItineraryTime(String time) {
   var inputFormat = DateFormat('yyyy-MM-dd');
   var inputTime = inputFormat.parse(localTime.toString());
 
-  var outputFormat = DateFormat('hh:mm');
+  var outputFormat = DateFormat('HH:mm');
   var outputTime = outputFormat.format(localTime);
   print('OUTPUT_TIME--->${outputTime}');
   return outputTime.toString();
@@ -225,26 +225,6 @@ Future saveFcmToken(String fcmToken) async {
   if (LocalStorage.getFCMToken().isEmpty) {
     LocalStorage.setFCMToken(fcmToken);
   }
-}
-
-/// Notification timeFormat:
-// String displayChatTimeFromTimestamp(DateTime timestamp) {
-//   var v = DateTime.now().difference(timestamp);
-//   if (v.inHours < 24) {
-//     return "${"today".tr} ${timeFormat(timestamp)}";
-//   } else {
-//     var outputFormat = DateFormat('MM-dd-yyyy');
-//     var outputDate = outputFormat.format(timestamp);
-//     return outputDate;
-//   }
-// }
-String displayChatTimeFromTimestamp(String day) {
-  var localDate = DateTime.parse(day).toLocal();
-  var inputFormat = DateFormat("yyyy-MM-dd hh:mm:ss");
-  var inputDate = inputFormat.parse(localDate.toString());
-  var outputFormat = DateFormat("dd MMM yyyy hh:mm a");
-  var outputDate = outputFormat.format(inputDate);
-  return outputDate;
 }
 //the birthday's date
 // final birthday = DateTime(1967, 10, 12);

@@ -28,7 +28,7 @@ void main() async {
   await Firebase.initializeApp();
   print('-- main: Firebase.initializeApp');
   await GetStorage.init();
-  // await getInitialRoute();
+  await getInitialRoute();
   globalVerbInit();
   requestPermission();
   // fcmToken = await FirebaseMessaging.instance.getToken();
@@ -54,6 +54,8 @@ void main() async {
     providers: [ChangeNotifierProvider.value(value: GlobalStateNotifier())],
     child: const MyApp(),
   ));
+
+  // runApp(MyApp());
 }
 
 getInitialRoute() async {

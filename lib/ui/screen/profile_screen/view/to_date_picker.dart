@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -31,7 +30,6 @@ class ToDatePickerState extends State<ToDemoDatePiker> {
     return Scaffold(
         body: TextFormField(
       controller: myTransactionsController.toDateController,
-      style: TextStyle(fontSize: 9),
       decoration: const InputDecoration(
         border: InputBorder.none,
         filled: true,
@@ -44,9 +42,10 @@ class ToDatePickerState extends State<ToDemoDatePiker> {
         //      borderSide: const BorderSide(color: AppColors.appBlueColor),
         //     borderRadius: BorderRadius.circular(5)),
         contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+
         hintText: 'DD-MM-YYYY',
         hintStyle: TextStyle(
-          fontSize: 9,
+          fontSize: 10,
           fontWeight: FontWeight.w500,
         ),
 

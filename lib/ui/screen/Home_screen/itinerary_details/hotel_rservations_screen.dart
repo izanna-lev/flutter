@@ -97,7 +97,11 @@ class _HotelReservationsScreenState extends State<HotelReservationsScreen> {
                               '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].coordinates[0]}',
                               '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].coordinates[1]}',
                               '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].location}',
-                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].name}'
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].name}',
+                              itineraryDetailScreenController
+                                  .itineraryDetailsListModel!
+                                  .itinerary[widget.index]
+                                  .detailType
                             ],
                           );
                         },

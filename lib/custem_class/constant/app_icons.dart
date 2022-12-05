@@ -94,8 +94,4 @@ class AppIcons {
   //Activity map details:
   static const String markerIcon =
       "assets/images/itinerary_details_images/ic_location.png";
-
-  //admin notification:
-  static const String adminNotificationIcon =
-      "assets/images/base_screen_icon/ic_admin_notification.png";
 }

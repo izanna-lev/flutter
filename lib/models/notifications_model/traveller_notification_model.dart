@@ -64,10 +64,10 @@ class TravellerDetailsNotificationList {
   });
 
   String id;
-  String userRef;
+  UserRef userRef;
   String text;
   int type;
-  String sourceRef;
+  SourceRef sourceRef;
   String image;
   NotificationFrom notificationFrom;
   bool seen;
@@ -79,10 +79,11 @@ class TravellerDetailsNotificationList {
           Map<String, dynamic> json) =>
       TravellerDetailsNotificationList(
         id: json["_id"] ?? "",
-        userRef: json["userRef"] ?? "",
+        userRef: userRefValues.map[json["userRef"]] ?? UserRef.values[0],
         text: json["text"] ?? "",
         type: json["type"] ?? 0,
-        sourceRef: json["sourceRef"] ?? "",
+        sourceRef:
+            sourceRefValues.map[json["sourceRef"]] ?? SourceRef.values[0],
         image: json["image"] ?? "",
         notificationFrom:
             notificationFromValues.map[json["notificationFrom"]] ??
@@ -95,10 +96,10 @@ class TravellerDetailsNotificationList {
 
   Map<String, dynamic> toJson() => {
         "_id": id,
-        "userRef": userRef,
+        "userRef": userRefValues.reverse[userRef],
         "text": text,
         "type": type,
-        "sourceRef": sourceRef,
+        "sourceRef": sourceRefValues.reverse[sourceRef],
         "image": image,
         "notificationFrom": notificationFromValues.reverse[notificationFrom],
         "seen": seen,

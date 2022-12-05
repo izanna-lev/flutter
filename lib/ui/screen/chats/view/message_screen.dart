@@ -10,6 +10,7 @@ import 'package:tralever_module/ui/screen/chats/controller/message_screen_contro
 import 'package:tralever_module/ui/screen/chats/view/post_details_bottom_view.dart';
 import 'package:tralever_module/ui/screen/chats/view/report_screen.dart';
 import 'package:tralever_module/ui/screen/chats/view/soket_managet.dart';
+
 import '../../../../custem_class/constant/app_functions.dart';
 import '../../../../custem_class/utils/globle.dart';
 import '../../../shared/bottomsheet.dart';
@@ -19,9 +20,13 @@ class MessageScreen extends StatefulWidget {
   static const String routeName = "/MessageScreen";
 
   MessageScreen({Key? key}) : super(key: key);
-  String channelRef = Get.arguments["channelRef"] ?? "";
-  String otherUserRef = Get.arguments["specialistRef"] ?? "";
-  String otherUsername = Get.arguments["specialistName"] ?? "";
+  // String channelRef = Get.arguments["channelRef"] ?? "";
+  // String otherUserRef = Get.arguments["specialistRef"] ?? "";
+  // String otherUsername = Get.arguments["specialistName"] ?? "";
+  String channelRef = Get.arguments;
+  String otherUserRef = Get.arguments;
+  String otherUsername = Get.arguments;
+  String sourceRef = Get.arguments;
 
   @override
   State<MessageScreen> createState() => _MessageScreenState();
@@ -40,6 +45,7 @@ class _MessageScreenState extends State<MessageScreen> {
     SocketManager.channelRef = widget.channelRef;
     SocketManager.subscribeChannel();
     SocketManager.subscribeUser();
+    SocketManager.channelRef = widget.sourceRef;
     super.initState();
   }
 

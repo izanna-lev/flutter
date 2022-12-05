@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:pagination_view/pagination_view.dart';
 import 'package:tralever_module/models/notifications_model/traveller_notification_model.dart';
 import 'package:tralever_module/services/notification_repo/notifications_repo.dart';
 
 import '../../../../models/notifications_model/notifications_model.dart';
+import '../../../../models/notifications_model/traveller_notification_seen.dart';
 import '../../../../services/api_routes.dart';
 
 class NotificationScreenController extends GetxController {
@@ -27,6 +27,17 @@ class NotificationScreenController extends GetxController {
   set travellerDetailsNotificationList(
       List<TravellerDetailsNotificationList> value) {
     _travellerDetailsNotificationList = value;
+    update();
+  }
+
+  TravellerNotificationSeenDetailsModel? _travellerNotificationSeenDetailsModel;
+  TravellerNotificationSeenDetailsModel?
+      get travellerNotificationSeenDetailsModel =>
+          _travellerNotificationSeenDetailsModel;
+
+  set travellerNotificationSeenDetailsModel(
+      TravellerNotificationSeenDetailsModel? value) {
+    _travellerNotificationSeenDetailsModel = value;
     update();
   }
 
@@ -74,20 +85,15 @@ class NotificationScreenController extends GetxController {
     return [];
   }
 
-  notificationDateAndTime(DateTime timestamp) {
-    var v = DateTime.now().difference(timestamp);
-    if (v.inHours < 24) {
-      return "${"today".tr} ${timeFormat(timestamp)}";
-    } else {
-      var outputFormat = DateFormat('dd-MMM-yyyy');
-      var outputDate = outputFormat.format(timestamp);
-      return outputDate;
+  Future<TravellerNotificationSeenDetailsModel?> travellerNotificationSeen(
+      {required String notificationRef}) async {
+    TravellerNotificationSeenModel? travellerNotificationSeenModel =
+        await NotificationRepo.travellerNotificationDSeen(
+            notificationRef: notificationRef);
+    if (travellerNotificationSeenModel != null) {
+      travellerNotificationSeenDetailsModel =
+          travellerNotificationSeenModel.data;
     }
-  }
-
-  timeFormat(DateTime timestamp) {
-    var outputFormat = DateFormat('h:mm a');
-    var outputDate = outputFormat.format(timestamp);
-    return outputDate;
+    return travellerNotificationSeenDetailsModel;
   }
 }

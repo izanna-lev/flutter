@@ -407,6 +407,7 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                           .itineraryDetailsListModel!
                           .itinerary[index]
                           .description;
+                      var notes = "Required Information";
                       // var location = itineraryDetailScreenController
                       //             .itineraryDetailsListModel!
                       //             .itinerary[index]
@@ -676,7 +677,7 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                                             : type == 3
                                                 ? name
                                                 : type == 8
-                                                    ? description
+                                                    ? notes
                                                     : type == 6
                                                         ? location
                                                         : type == 5

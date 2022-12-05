@@ -3,11 +3,13 @@ import 'package:get/get.dart';
 import 'package:tralever_module/custem_class/constant/app_colors.dart';
 import 'package:tralever_module/custem_class/constant/app_settings.dart';
 import 'package:tralever_module/models/notifications_model/traveller_notification_model.dart';
+import 'package:tralever_module/ui/screen/chats/view/message_screen.dart';
 import 'package:tralever_module/ui/screen/notification/controller/Notification_controller.dart';
 
+import '../../../../custem_class/constant/app_icons.dart';
+import '../../../../custem_class/utils/globle.dart';
 import '../../../../services/api_routes.dart';
 import '../../Home_screen/itinerary_details/itinerary_detailes_screen.dart';
-import '../../chats/view/chats_screen.dart';
 
 class NotificationView extends StatefulWidget {
   TravellerDetailsNotificationList travellerDetailsNotificationList;
@@ -25,43 +27,49 @@ class _NotificationViewState extends State<NotificationView> {
 
   @override
   Widget build(BuildContext context) {
-
     return GetBuilder(
       builder: (NotificationScreenController notificationScreenController) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
           child: GestureDetector(
             onTap: () {
-              print(
-                  ' widget.travellerDetailsNotificationList.type===>${widget.travellerDetailsNotificationList.type}');
-              widget.travellerDetailsNotificationList.type == 1
-                  ? widget.travellerDetailsNotificationList.type = 1
-                  : widget.travellerDetailsNotificationList.type == 2
-                      ? Get.toNamed(ChatsScreen.routeName)
-                      : widget.travellerDetailsNotificationList.type == 3
-                          ? Get.toNamed(ItineraryDetailScreen.routeName,
-                              arguments: widget
-                                  .travellerDetailsNotificationList.sourceRef)
-                          : widget.travellerDetailsNotificationList.type == 4
-                              ? Get.toNamed(ItineraryDetailScreen.routeName,
-                                  arguments: widget
-                                      .travellerDetailsNotificationList
-                                      .sourceRef)
-                              : widget.travellerDetailsNotificationList.type ==
-                                      5
-                                  ? Get.toNamed(ItineraryDetailScreen.routeName,
-                                      arguments: widget
-                                          .travellerDetailsNotificationList
-                                          .sourceRef)
-                                  : widget.travellerDetailsNotificationList
-                                              .type ==
-                                          6
-                                      ? Get.toNamed(
-                                          ItineraryDetailScreen.routeName,
-                                          arguments: widget
-                                              .travellerDetailsNotificationList
-                                              .sourceRef)
-                                      : const SizedBox();
+              setState(() {
+                widget.travellerDetailsNotificationList.seen == true;
+                print(
+                    ' widget.travellerDetailsNotificationList.type===>${widget.travellerDetailsNotificationList.type}');
+                widget.travellerDetailsNotificationList.type == 1
+                    ? widget.travellerDetailsNotificationList.type = 1
+                    : widget.travellerDetailsNotificationList.type == 2
+                        ? Get.toNamed(MessageScreen.routeName,
+                            arguments: widget
+                                .travellerDetailsNotificationList.sourceRef)
+                        : widget.travellerDetailsNotificationList.type == 3
+                            ? Get.toNamed(ItineraryDetailScreen.routeName,
+                                arguments: widget
+                                    .travellerDetailsNotificationList.sourceRef)
+                            : widget.travellerDetailsNotificationList.type == 4
+                                ? Get.toNamed(ItineraryDetailScreen.routeName,
+                                    arguments: widget
+                                        .travellerDetailsNotificationList
+                                        .sourceRef)
+                                : widget.travellerDetailsNotificationList.type ==
+                                        5
+                                    ? Get.toNamed(
+                                        ItineraryDetailScreen.routeName,
+                                        arguments: widget
+                                            .travellerDetailsNotificationList
+                                            .sourceRef)
+                                    : widget.travellerDetailsNotificationList
+                                                .type ==
+                                            6
+                                        ? Get.toNamed(
+                                            ItineraryDetailScreen.routeName,
+                                            arguments: widget
+                                                .travellerDetailsNotificationList
+                                                .sourceRef)
+                                        : const SizedBox();
+                notificationScreenController.update();
+              });
             },
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -80,20 +88,26 @@ class _NotificationViewState extends State<NotificationView> {
                               width: 41,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
-                                image: DecorationImage(
-                                  image: NetworkImage(imageUrl +
-                                          widget
-                                              .travellerDetailsNotificationList
-                                              .image
-                                      // "https://images.allthingsnature.org/moss-on-stones-around-a-waterfall.jpg",
+                                image: widget.travellerDetailsNotificationList
+                                            .type ==
+                                        1
+                                    ? const DecorationImage(
+                                        image: AssetImage(
+                                            AppIcons.adminNotificationIcon))
+                                    : DecorationImage(
+                                        image: NetworkImage(imageUrl +
+                                                widget
+                                                    .travellerDetailsNotificationList
+                                                    .image
+                                            // "https://images.allthingsnature.org/moss-on-stones-around-a-waterfall.jpg",
+                                            ),
+                                        fit: BoxFit.cover,
                                       ),
-                                  fit: BoxFit.cover,
-                                ),
                               ),
                             ),
-                            widget.travellerDetailsNotificationList.seen ==
-                                    false
-                                ? Container(
+                            widget.travellerDetailsNotificationList.seen == true
+                                ? const SizedBox()
+                                : Container(
                                     height: 10,
                                     width: 10,
                                     decoration: BoxDecoration(
@@ -101,8 +115,7 @@ class _NotificationViewState extends State<NotificationView> {
                                       color: AppColors.appBlueColor,
                                       // color: const Color(0xffC90E0E),
                                     ),
-                                  )
-                                : const SizedBox()
+                                  ),
                           ]),
                       const SizedBox(width: 10),
                       Expanded(
@@ -125,7 +138,7 @@ class _NotificationViewState extends State<NotificationView> {
                   children: [
                     Spacer(),
                     Text(
-                      notificationScreenController.notificationDateAndTime(
+                      displayChatTimeFromTimestamp(
                           widget.travellerDetailsNotificationList.createdOn),
                       // "2 May 2021, 2:30 PM",
                       style: const TextStyle(

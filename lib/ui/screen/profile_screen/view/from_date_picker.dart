@@ -1,4 +1,5 @@
 import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -30,6 +31,7 @@ class FormDatePickerState extends State<FormDemoDatePiker> {
     return Scaffold(
         body: TextFormField(
       controller: myTransactionsController.fromDateController,
+      style: TextStyle(fontSize: 9),
       decoration: const InputDecoration(
         border: InputBorder.none,
         filled: true,
@@ -45,7 +47,7 @@ class FormDatePickerState extends State<FormDemoDatePiker> {
 
         hintText: 'DD-MM-YYYY',
         hintStyle: TextStyle(
-          fontSize: 10,
+          fontSize: 9,
           fontWeight: FontWeight.w500,
         ),
 
@@ -56,6 +58,7 @@ class FormDatePickerState extends State<FormDemoDatePiker> {
       readOnly: true,
       onTap: () async {
         DateTime? pickedDate = await showDatePicker(
+          // fieldHintText: 'DD-MM-YYYY',
           context: context,
           initialDate: DateTime.now(),
           firstDate: DateTime(2000),

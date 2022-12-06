@@ -111,6 +111,7 @@ class _ActivityMapDetailsState extends State<ActivityMapDetails> {
     var locationCordinates = widget.data[2];
     var locationLong = widget.data[1];
     var hotelAppbarName = widget.data[5];
+
     print('image===>${image}');
     print('locationName===>${locationName}');
     print('activityName===>${activityName}');
@@ -156,77 +157,113 @@ class _ActivityMapDetailsState extends State<ActivityMapDetails> {
                             'LATITUDE===>${double.parse('${widget.data[2]}')}');
                         print(
                             'LONGITUDE===>${double.parse('${widget.data[1]}')}');
-                      },
-                      icon: markerIcon,
-                    )
-                  },
-                  myLocationEnabled: true,
-                  mapType: MapType.terrain,
-                  onMapCreated: (GoogleMapController controller) {
-                    _controller.complete(controller);
-                  },
-                  initialCameraPosition: CameraPosition(
-                    zoom: 13,
-                    target: LatLng(
-                        // 21.1702, 72.8311
-                        double.parse('${widget.data[2]}'),
-                        double.parse('${widget.data[1]}')),
-                    // LatLng(37.422131, -122.08480),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 50, horizontal: kDefaultPadding),
-                  child: Container(
-                    height: 180,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        image: DecorationImage(
-                          image: NetworkImage(imageUrl + widget.data[0]
-                              // "https://www.hlimg.com/images/things2do/738X538/dumas-beach_1506004479t.jpg"
-                              ),
-                          fit: BoxFit.cover,
-                        )),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Container(
-                          width: double.infinity,
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(20),
-                              bottomLeft: Radius.circular(20),
-                            ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  widget.data[4] ?? "Radisson Blu Hotel",
-                                  // ?? "Seco Island - Full Day Tour",
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                    widget.data[3] ?? "Cebu City, Philippines"),
-                              ],
-                            ),
-                          ),
+
+    return GetBuilder(
+      builder:
+          (ItineraryDetailScreenController itineraryDetailScreenController) {
+        return Scaffold(
+            backgroundColor: Colors.white,
+            appBar: commonAppbar(
+              titleText: widget.data[5] == 1
+                  ? "Hotel Reservations"
+                  : widget.data[5] == 2
+                      ? "Restaurant Reservations"
+                      : "Activity Details",
+            ),
+            body: GetBuilder(
+              builder: (ItineraryDetailScreenController
+                  itineraryDetailScreenController) {
+                return Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: [
+                    GoogleMap(
+                      // zoomControlsEnabled: false,
+                      markers: {
+                        Marker(
+                          markerId: const MarkerId("onsite"),
+                          position: LatLng(
+                              // 21.1702, 72.8311
+                              double.parse('${widget.data[2]}'),
+                              double.parse('${widget.data[1]}')),
+                          draggable: true,
+                          onTap: () {
+                            print(
+                                'LATITUDE===>${double.parse('${widget.data[2]}')}');
+                            print(
+                                'LONGITUDE===>${double.parse('${widget.data[1]}')}');
+                          },
+                          icon: markerIcon,
                         )
-                      ],
+                      },
+                      myLocationEnabled: true,
+                      mapType: MapType.terrain,
+                      onMapCreated: (GoogleMapController controller) {
+                        _controller.complete(controller);
+                      },
+                      initialCameraPosition: CameraPosition(
+                        zoom: 13,
+                        target: LatLng(
+                            // 21.1702, 72.8311
+                            double.parse('${widget.data[2]}'),
+                            double.parse('${widget.data[1]}')),
+                        // LatLng(37.422131, -122.08480),
+                      ),
                     ),
-                  ),
-                )
-              ],
-            );
-            // : const AppLoader();
-          },
-        ));
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 50, horizontal: kDefaultPadding),
+                      child: Container(
+                        height: 180,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            image: DecorationImage(
+                              image: NetworkImage(imageUrl + widget.data[0]
+                                  // "https://www.hlimg.com/images/things2do/738X538/dumas-beach_1506004479t.jpg"
+                                  ),
+                              fit: BoxFit.cover,
+                            )),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              width: double.infinity,
+                              decoration: const BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                  bottomRight: Radius.circular(20),
+                                  bottomLeft: Radius.circular(20),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      widget.data[4] ?? "Radisson Blu Hotel",
+                                      // ?? "Seco Island - Full Day Tour",
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(widget.data[3] ??
+                                        "Cebu City, Philippines"),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                );
+                // : const AppLoader();
+              },
+            ));
+      },
+    );
   }
 }

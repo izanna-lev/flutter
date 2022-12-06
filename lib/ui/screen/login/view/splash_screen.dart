@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:tralever_module/ui/screen/login/view/onboarding_screen.dart';
 
@@ -21,7 +21,8 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Timer(const Duration(seconds: 2), () async {
+    super.initState();
+    Timer(const Duration(seconds: 1), () async {
       if (LocalStorage.getOnBoarding()) {
         if (LocalStorage.getUserDetail()) {
           Get.offAllNamed(BaseScreen.routeName);
@@ -32,7 +33,6 @@ class _SplashScreenState extends State<SplashScreen> {
         Get.offAllNamed(OnBoardingScreen.routeName);
       }
     });
-    super.initState();
   }
   // void initState() {
   //   super.initState();
@@ -43,21 +43,17 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      extendBody: false,
-      body: Container(
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-          image: AssetImage(AppImages.splashScreenBackgroundImage),
-          fit: BoxFit.cover,
-        )),
-        child: Center(
-          child: Image.asset(
-            AppImages.splashScreenLogo,
-            height: 79,
-            width: 252,
-          ),
+    return Container(
+      decoration: const BoxDecoration(
+          image: DecorationImage(
+        image: AssetImage(AppImages.splashScreenBackgroundImage),
+        fit: BoxFit.fill,
+      )),
+      child: Center(
+        child: Image.asset(
+          AppImages.splashScreenLogo,
+          height: 79,
+          width: 252,
         ),
       ),
     );

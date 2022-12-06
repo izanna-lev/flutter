@@ -85,6 +85,94 @@ class _HotelReservationsScreenState extends State<HotelReservationsScreen> {
                                     .checkOutDateTime)),
                     detailTitle(text: "Contact Number"),
                     detailText(
+=======
+      body: SingleChildScrollView(
+        child: GetBuilder(
+          builder: (ItineraryDetailScreenController
+              itineraryDetailScreenController) {
+            return Column(
+              children: [
+                imageContainer(
+                  context: context,
+                  img:
+                      '$imageUrl${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].image}',
+                  text: itineraryDetailScreenController
+                      .itineraryDetailsListModel!.itinerary[widget.index].name,
+                ),
+                const SizedBox(height: 35),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Divider(thickness: 1.5),
+                      detailTitle(text: "Check In Date & Time"),
+                      detailText(
+                          text: hotelDateAndTimeConverter(
+                              itineraryDetailScreenController
+                                  .itineraryDetailsListModel!
+                                  .itinerary[widget.index]
+                                  .checkInDateTime)),
+                      detailTitle(text: "Check Out Date & Time"),
+                      detailText(
+                          text: itineraryDetailScreenController
+                                  .itineraryDetailsListModel!
+                                  .itinerary[widget.index]
+                                  .checkOutDateTime
+                                  .isEmpty
+                              ? ""
+                              : hotelDateAndTimeConverter(
+                                  itineraryDetailScreenController
+                                      .itineraryDetailsListModel!
+                                      .itinerary[widget.index]
+                                      .checkOutDateTime)),
+                      detailTitle(text: "Contact Number"),
+                      detailText(
+                          text: itineraryDetailScreenController
+                                  .itineraryDetailsListModel
+                                  ?.itinerary[widget.index]
+                                  .contactNumber
+                                  .toString() ??
+                              "+62 361 769 2220"),
+                      detailTitle(text: "Location"),
+                      GestureDetector(
+                        onTap: () {
+                          Get.toNamed(
+                            ActivityMapDetails.routeName,
+                            arguments: [
+                              itineraryDetailScreenController
+                                  .itineraryDetailsListModel
+                                  ?.itinerary[widget.index]
+                                  .image,
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].coordinates[0]}',
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].coordinates[1]}',
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].location}',
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].name}',
+                              itineraryDetailScreenController
+                                  .itineraryDetailsListModel!
+                                  .itinerary[widget.index]
+                                  .detailType
+                            ],
+                          );
+                        },
+                        child: Container(
+                          color: Colors.transparent,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              detailText(
+                                  text: itineraryDetailScreenController
+                                      .itineraryDetailsListModel!
+                                      .itinerary[widget.index]
+                                      .location),
+                              Image.asset(AppIcons.gpsIcon, height: 21),
+                            ],
+                          ),
+                        ),
+                      ),
+                      detailTitle(text: "Description"),
+                      detailText(
                         text: itineraryDetailScreenController
                                 .itineraryDetailsListModel
                                 ?.itinerary[widget.index]

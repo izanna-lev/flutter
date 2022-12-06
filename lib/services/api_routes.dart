@@ -42,8 +42,6 @@ class APIRoutes {
   static const String rowndSignIn = "${url}traveller/signin";
   static const String travellerNotificationList =
       "${url}notification/travellerList";
-  static const String travellerNotificationSeen =
-      "http://44.209.25.93:3000/api/notification/seen";
 }
 
 const resourceAPIPaginationStart = 1;

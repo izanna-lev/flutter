@@ -30,7 +30,7 @@ class _TrainDetailsState extends State<TrainDetails> {
           builder: (ItineraryDetailScreenController
               itineraryDetailScreenController) {
             print(
-                'TRAIN_NAME===>${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].airline}');
+                'TRAIN_NAME===>${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].airline}');
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -134,7 +134,7 @@ class _TrainDetailsState extends State<TrainDetails> {
                           children: [
                             detailTitle(
                               text:
-                                  '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].airline}',
+                                  '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].airline}',
                             ),
                             // const Text(
                             //   "SQ221",

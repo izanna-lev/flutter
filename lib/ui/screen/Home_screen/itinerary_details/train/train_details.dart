@@ -229,7 +229,7 @@ class _TrainDetailsState extends State<TrainDetails> {
                       children: [
                         detailTitle(text: "Depart"),
                         detailText(
-                          text: flightDepartArriveTimeConverter(
+                          text: flightDepartDateAndTimeConverter(
                             itineraryDetailScreenController
                                 .itineraryDetailsListModel!
                                 .itinerary[widget.index]
@@ -244,7 +244,7 @@ class _TrainDetailsState extends State<TrainDetails> {
                       children: [
                         detailTitle(text: "Arrive"),
                         detailText(
-                          text: flightDepartArriveTimeConverter(
+                          text: flightDepartDateAndTimeConverter(
                             itineraryDetailScreenController
                                 .itineraryDetailsListModel!
                                 .itinerary[widget.index]

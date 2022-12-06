@@ -110,11 +110,13 @@ class _ActivityMapDetailsState extends State<ActivityMapDetails> {
     var activityName = widget.data[3];
     var locationCordinates = widget.data[2];
     var locationLong = widget.data[1];
+    var hotelAppbarName = widget.data[5];
     print('image===>${image}');
     print('locationName===>${locationName}');
     print('activityName===>${activityName}');
     print('location_LATITUDE===>${locationCordinates}');
     print('location_LONGITUDE===>${locationLong}');
+    print('hotelAppbarName===>${hotelAppbarName}');
     // addCustomIcon();
     // _getCurrentPosition();
     // currentPosition;
@@ -126,7 +128,13 @@ class _ActivityMapDetailsState extends State<ActivityMapDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: commonAppbar(titleText: "Activity Details"),
+        appBar: commonAppbar(
+          titleText: widget.data[5] == 1
+              ? "Hotel Reservations"
+              : widget.data[5] == 2
+                  ? "Restaurant Reservations"
+                  : "Activity Details",
+        ),
         body: GetBuilder(
           builder: (ItineraryDetailScreenController
               itineraryDetailScreenController) {

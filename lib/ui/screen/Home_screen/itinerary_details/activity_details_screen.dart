@@ -27,6 +27,9 @@ class _ActivityDetailsScreenState extends State<ActivityDetailsScreen> {
   void initState() {
     widget.index;
     print('ACTIVITY_DETAILS_INDEX---->${widget.index}');
+    print(
+        'ACTIVITY_DETAILS_INDEX----> Description${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].day}');
+
     super.initState();
   }
 
@@ -44,7 +47,7 @@ class _ActivityDetailsScreenState extends State<ActivityDetailsScreen> {
                 imageContainer(
                   context: context,
                   img: imageUrl +
-                      '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].image}',
+                      '${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].image}',
                   // ?? "https://storage.googleapis.com/fvallimages/uploads/blog/best-beaches-in-malaysia-2699.jpg",
                   text: itineraryDetailScreenController
                           .itineraryDetailsListModel
@@ -81,7 +84,11 @@ class _ActivityDetailsScreenState extends State<ActivityDetailsScreen> {
                               '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].coordinates[0]}',
                               '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].coordinates[1]}',
                               '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].location}',
-                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].name}'
+                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].name}',
+                              itineraryDetailScreenController
+                                  .itineraryDetailsListModel!
+                                  .itinerary[widget.index]
+                                  .detailType
                             ],
                           );
                         },
@@ -103,10 +110,9 @@ class _ActivityDetailsScreenState extends State<ActivityDetailsScreen> {
                       detailTitle(text: "Description"),
                       detailText(
                         text: itineraryDetailScreenController
-                                .itineraryDetailsListModel
-                                ?.itinerary[widget.index]
-                                .description ??
-                            "Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text.",
+                            .itineraryDetailsListModel!
+                            .itinerary[widget.index]
+                            .description,
                       ),
                     ],
                   ),

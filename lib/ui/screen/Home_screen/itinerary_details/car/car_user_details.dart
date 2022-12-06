@@ -27,8 +27,6 @@ class _CarUserDetailsScreenState extends State<CarUserDetailsScreen> {
         child: GetBuilder(
           builder: (ItineraryDetailScreenController
               itineraryDetailScreenController) {
-            print(
-                'bhfbgbdbvdfvd${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].userCarDetails!.driverName.length}');
             return
                 // ListView.builder(
                 //   itemCount: itineraryDetailScreenController

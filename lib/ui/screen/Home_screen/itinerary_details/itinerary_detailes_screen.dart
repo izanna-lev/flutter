@@ -404,6 +404,9 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                           .itinerary[index]
                           .description;
 
+                      var notes = "Required Information";
+
+
                       return TimelineTile(
                         isFirst: index == 0 ? true : false,
                         isLast: index == true,

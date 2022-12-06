@@ -127,37 +127,6 @@ class _ActivityMapDetailsState extends State<ActivityMapDetails> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: commonAppbar(
-          titleText: widget.data[5] == 1
-              ? "Hotel Reservations"
-              : widget.data[5] == 2
-                  ? "Restaurant Reservations"
-                  : "Activity Details",
-        ),
-        body: GetBuilder(
-          builder: (ItineraryDetailScreenController
-              itineraryDetailScreenController) {
-            return Stack(
-              alignment: Alignment.bottomCenter,
-              children: [
-                GoogleMap(
-                  // zoomControlsEnabled: false,
-                  markers: {
-                    Marker(
-                      markerId: const MarkerId("onsite"),
-                      position: LatLng(
-                          // 21.1702, 72.8311
-                          double.parse('${widget.data[2]}'),
-                          double.parse('${widget.data[1]}')),
-                      draggable: true,
-                      onTap: () {
-                        print(
-                            'LATITUDE===>${double.parse('${widget.data[2]}')}');
-                        print(
-                            'LONGITUDE===>${double.parse('${widget.data[1]}')}');
-
     return GetBuilder(
       builder:
           (ItineraryDetailScreenController itineraryDetailScreenController) {

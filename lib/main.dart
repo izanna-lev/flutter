@@ -13,7 +13,8 @@ import 'package:tralever_module/custem_class/constant/app_settings.dart';
 import 'package:tralever_module/custem_class/utils/bindinges.dart';
 import 'package:tralever_module/custem_class/utils/local_storage.dart';
 import 'package:tralever_module/ui/screen/base_screen/view/base_screen.dart';
-import 'package:tralever_module/ui/screen/login/view/splash_screen.dart';
+import 'package:tralever_module/ui/screen/login/view/login_screen.dart';
+import 'package:tralever_module/ui/screen/login/view/onboarding_screen.dart';
 import 'package:tralever_module/ui/screen/notification/notification_utills.dart';
 
 import 'custem_class/utils/globle.dart';
@@ -28,7 +29,7 @@ void main() async {
   await Firebase.initializeApp();
   print('-- main: Firebase.initializeApp');
   await GetStorage.init();
-  await getInitialRoute();
+  // await getInitialRoute();
   globalVerbInit();
   requestPermission();
   // fcmToken = await FirebaseMessaging.instance.getToken();
@@ -50,27 +51,31 @@ void main() async {
       await saveFcmToken(token);
     }
   });
+
+  if (LocalStorage.isUserSignIn() && LocalStorage.getUserDetail() != null) {
+    userController.rowndSignInModel = LocalStorage.getUserDetail();
+  }
   runApp(MultiProvider(
     providers: [ChangeNotifierProvider.value(value: GlobalStateNotifier())],
     child: const MyApp(),
   ));
-
+  // FlutterNativeSplash.remove();
   // runApp(MyApp());
 }
 
-getInitialRoute() async {
-  if (LocalStorage.isUserSignIn()) {
-    LocalStorage.getUserDetail();
-
-    if (userController.rowndSignInModel?.data.traveller != null) {
-      initialRoute = BaseScreen.routeName;
-    } else {
-      initialRoute = SplashScreen.routeName;
-    }
-  } else {
-    initialRoute = SplashScreen.routeName;
-  }
-}
+// getInitialRoute() async {
+//   if (LocalStorage.isUserSignIn()) {
+//     LocalStorage.getUserDetail();
+//
+//     // if (userController.rowndSignInModel?.data != null) {
+//     //   initialRoute = SplashScreen.routeName;
+//     // } else {
+//     //   initialRoute = BaseScreen.routeName;
+//     // }
+//   } else {
+//     initialRoute = SplashScreen.routeName;
+//   }
+// }
 
 Future<Map<Permission, PermissionStatus>> requestPermission() async {
   Map<Permission, PermissionStatus> statuses =
@@ -102,7 +107,11 @@ class _MyAppState extends State<MyApp> {
       translations: LocalizationService(context),
       locale: LocalizationService.locale,
       fallbackLocale: LocalizationService.fallbackLocale,
-      initialRoute: initialRoute,
+      initialRoute: LocalStorage.isUserSignIn()
+          ? userController.rowndSignInModel != null
+              ? BaseScreen.routeName
+              : LoginScreen.routeName
+          : OnBoardingScreen.routeName,
       getPages: routes,
       theme: ThemeData(
         backgroundColor: Colors.black,

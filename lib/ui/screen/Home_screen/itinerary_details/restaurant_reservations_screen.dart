@@ -133,12 +133,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tralever_module/custem_class/constant/app_settings.dart';
-import 'package:tralever_module/custem_class/utils/globle.dart';
 import 'package:tralever_module/services/api_routes.dart';
 import 'package:tralever_module/ui/screen/Home_screen/controller/itinerary_detaile_screen%20_controller.dart';
 import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/hotel_rservations_screen.dart';
 
 import '../../../../custem_class/constant/app_icons.dart';
+import '../../../../custem_class/utils/globle.dart';
 import '../../../shared/appbar.dart';
 import 'activity_map_details_screen.dart';
 
@@ -165,6 +165,8 @@ class _RestaurantReservationsScreenState
         'DESCRIPTION---->${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].description}');
     print(
         'contactNumber---->${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[1].contactNumber}');
+    print(
+        'date---->${hotelDateAndTimeConverter(itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].date)}');
     super.initState();
   }
 
@@ -197,13 +199,14 @@ class _RestaurantReservationsScreenState
                       detailTitle(text: "Date & Time"),
                       detailText(
                           text: hotelDateAndTimeConverter(
-                              '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].date.toString()}')),
+                              itineraryDetailScreenController
+                                  .itineraryDetailsListModel!
+                                  .itinerary[widget.index]
+                                  .date)),
                       detailTitle(text: "Contact Number"),
                       detailText(
-                        text: itineraryDetailScreenController
-                            .itineraryDetailsListModel!
-                            .itinerary[widget.index]
-                            .contactNumber,
+                        text:
+                            "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].phoneCode} ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].contactNumber}",
                       ),
                       detailTitle(text: "Location"),
                       GestureDetector(

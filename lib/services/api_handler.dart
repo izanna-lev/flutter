@@ -7,15 +7,19 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart' as mimeee;
 import 'package:mime_type/mime_type.dart';
+import 'package:rownd_flutter_plugin/rownd.dart';
 import 'package:tralever_module/custem_class/utils/globle.dart';
 
 import '../custem_class/constant/app_functions.dart';
+import '../custem_class/utils/local_storage.dart';
+import '../ui/screen/login/view/login_screen.dart';
 import 'over&loding.dart';
 
 enum RequestType { Get, Post }
 
 class API {
   static late http.Response response;
+  static final _rownd = RowndPlugin();
 
   static Future<Map<String, dynamic>?> apiHandler({
     required String url,
@@ -61,8 +65,70 @@ class API {
             }
             return res;
           } else if (res["code"] == 401) {
+            logoutFromApp();
           } else {
             flutterToast(res["message"]);
+            return null;
+          }
+        } else {
+          return null;
+        }
+      } else {
+        flutterToast('check_your_connection'.tr);
+        return null;
+      }
+    } catch (e) {
+      debugPrint("ERROR FROM API CLASS $e");
+    }
+  }
+
+  static Future<Map<String, dynamic>?> itinearyAPIHandler({
+    required String url,
+    RequestType requestType = RequestType.Post,
+    bool showLoader = true,
+    Map<String, String>? header,
+    bool showToast = false,
+    dynamic body,
+  }) async {
+    try {
+      if (await checkConnection()) {
+        if (showLoader) LoadingOverlay.of().show();
+        // Map<String, String> header = {'Content-Type': 'application/json'};
+        if (userController.rowndSignInDetailsModel != null) {
+          if (header!["Authorization"] == null) {
+            header?.addAll({
+              "Authorization": userController.rowndSignInModel!.data.accessToken
+            });
+          }
+          print(
+              'USER-TOKEN${userController.rowndSignInModel!.data.accessToken}');
+        }
+
+        log("URl ===> $url");
+        log("HEADER ===> $header");
+        log("BODY ===> $body");
+        if (requestType == RequestType.Get) {
+          response = await http.get(
+            Uri.parse(url),
+            headers: header,
+          );
+        } else {
+          response =
+              await http.post(Uri.parse(url), headers: header, body: body);
+        }
+        log("RESPONSE $url  RETURN RESPONSE BODY CREATE ======> ${response.body}");
+        if (showLoader) LoadingOverlay.of().hide();
+        if (response.body.isNotEmpty) {
+          var res = jsonDecode(response.body);
+          if (res["code"] == 100) {
+            if (showToast) {
+              flutterToast(res["message"]);
+            }
+            return res;
+          } else if (res["code"] == 401) {
+            logoutFromApp();
+          } else {
+            // flutterToast(res["message"]);
             return null;
           }
         } else {
@@ -182,6 +248,7 @@ class API {
 
           return resDecode;
         } else if (resDecode["code"] == 401) {
+          logoutFromApp();
         } else {
           if (showLoader) LoadingOverlay.of().hide();
           debugPrint("erroe $resDecode");
@@ -196,5 +263,15 @@ class API {
     } catch (e) {
       return null;
     }
+  }
+
+  static logoutFromApp() {
+    if (_rownd.state().state.auth?.isAuthenticated ?? false) {
+      _rownd.signOut();
+      print("Sign Out====>${_rownd.signOut}");
+      LocalStorage.clearData();
+      print('CLEAER_DATA${LocalStorage.clearData}');
+    }
+    Get.offAllNamed(LoginScreen.routeName);
   }
 }

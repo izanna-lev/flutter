@@ -22,13 +22,14 @@ class LocalStorage {
     // LocalStorage.saveUserToken();
   }
 
-  static bool getUserDetail() {
+  static RowndSignInModel? getUserDetail() {
     Map<String, dynamic>? rowndSignInModel = prefs.read("USER_DETAIL");
     if (rowndSignInModel != null) {
       userController.rowndSignInModel =
           RowndSignInModel.fromJson(rowndSignInModel);
     }
-    return userController.rowndSignInModel == null ? false : true;
+    // return userController.rowndSignInModel == null ? false : true;
+    return null;
   }
 
   static saveUserToken() {

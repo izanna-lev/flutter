@@ -3,8 +3,10 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:tralever_module/models/chats/chat_list_model.dart';
+
 import '../../../../custem_class/utils/globle.dart';
 import '../../../../services/api_routes.dart';
+import '../../base_screen/controller/base_screen_controller.dart';
 import '../controller/chat_screen_controller.dart';
 import '../controller/message_screen_controller.dart';
 
@@ -12,10 +14,13 @@ import '../controller/message_screen_controller.dart';
 class SocketManager {
   static IO.Socket? socket;
   static String channelRef = "";
+  static List<String> channelRefList = [];
   static MessageScreenController messageScreenController =
       Get.find<MessageScreenController>();
   static ChatScreenController chatScreenController =
       Get.find<ChatScreenController>();
+  static BaseScreenController baseScreenController =
+      Get.find<BaseScreenController>();
   static void connectSocket() {
     if (userController.rowndSignInModel == null) {
       print("USER NOT FOUND");
@@ -59,9 +64,23 @@ class SocketManager {
   //   }
   // }
 
-  static void subscribeChannel() {
+  static void subscribeChannel(MessageScreenController controller) {
+    messageScreenController = controller;
     if (socket!.connected) {
-      socket!.emit("subscribe_channel", {
+      int index = channelRefList.indexWhere((element) => element == channelRef);
+      if (index == -1) {
+        socket!.emit("subscribe_channel", {
+          "channelRef": channelRef,
+          "id": userController.rowndSignInModel!.data.traveller.id
+        });
+      }
+    }
+  }
+
+  static void unsubscribeChannel() {
+    if (socket!.connected) {
+      print("unsubscribeChannel Success");
+      socket!.emit("unsubscribe_channel", {
         "channelRef": channelRef,
         "id": userController.rowndSignInModel!.data.traveller.id
       });
@@ -70,8 +89,10 @@ class SocketManager {
 
   static void subscribeUser() {
     if (socket!.connected) {
-      socket!.emit("subscribe_user",
-          {"userRef": userController.rowndSignInModel!.data.traveller.id});
+      socket!.emit("subscribe_user", {
+        "userRef": userController.rowndSignInModel!.data.traveller.id,
+        "channelRef": channelRef
+      });
     }
   }
   // static void subscribeUser() {
@@ -82,6 +103,7 @@ class SocketManager {
   // }
 
   static void sendMessage(Map message) {
+    print("Emit sendMessage: ${message}");
     if (socket!.connected) {
       print("Emit Message: ${message}");
       socket!.emit('message', message);
@@ -92,19 +114,21 @@ class SocketManager {
     print("getMessagesListener}");
     SocketManager.socket!.on('message', (data) {
       debugPrint("GET message $data");
-
+      debugPrint("ChannelRef $channelRef");
       Message newMsg = Message.fromJson(data);
+
       if (newMsg.channelRef == channelRef) {
         updateMessageList(newMsg);
       }
       updateChatList(newMsg);
-      print("===========================>${data}");
     });
   }
 
   static void updateMessageList(Message msg) {
+    print("updateMessageList");
     messageScreenController.messageList.insert(0, msg);
     messageScreenController.update();
+    messageScreenController.messageListKey.currentState?.refresh();
   }
 
   static void updateChatList(Message msg) {
@@ -115,16 +139,31 @@ class SocketManager {
     print("Index $index");
     if (index != -1) {
       tempData[index].message = msg;
+      tempData[index].unseenMessages = true;
+    } else {
+      tempData[index].unseenMessages = false;
     }
     tempData.sort((msg1, msg2) {
       if (msg1.message.createdOn.isNotEmpty &&
           msg2.message.createdOn.isNotEmpty) {
-        return DateTime.parse(msg1.message.createdOn)
-            .compareTo(DateTime.parse(msg2.message.createdOn));
+        return DateTime.parse(msg2.message.createdOn)
+            .compareTo(DateTime.parse(msg1.message.createdOn));
       }
       return 0;
     });
 
     chatScreenController.chatData = tempData;
+    chatScreenController.update();
+    chatScreenController.chatListKey.currentState?.refresh();
+
+    Future.delayed(const Duration(seconds: 2), () {
+      int count = 0;
+      for (int i = 0; i < chatScreenController.chatData.length; i++) {
+        if (chatScreenController.chatData[i].unseenMessages) {
+          count++;
+        }
+      }
+      baseScreenController.chatUnreadCount = count;
+    });
   }
 }

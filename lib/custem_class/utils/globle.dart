@@ -13,13 +13,14 @@ import 'package:tralever_module/ui/screen/settings_screen/view/settings_screen.d
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../ui/screen/Home_screen/view/home_screen.dart';
-import '../../ui/screen/login/view/splash_screen.dart';
 import '../../ui/shared/image_picker_controller.dart';
 import '../../ui/shared/user_controller.dart';
 import '../constant/app_icons.dart';
 
 UserController userController = Get.put(UserController());
-String initialRoute = SplashScreen.routeName;
+// String initialRoute = SplashScreen.routeName;
+// String initialRoute =
+//     LocalStorage.getUserDetail() ? BaseScreen.routeName : LoginScreen.routeName;
 late AppImagePicker appImagePicker;
 String? currentTimezone;
 int initialTab = 0;
@@ -52,8 +53,41 @@ class NavigationTabContainModel {
   });
 }
 
+enum TypeOFNOTIFICATIONS {
+  ADMIN,
+  MESSAGE,
+  CANCEL_REQUEST,
+  ITINERARY_EDITED,
+  ASSIGN_SPECIALIST,
+  ITINERARY_SUBMITTED
+}
+
+extension TypeOfNOTIFICATIONSExtension on TypeOFNOTIFICATIONS {
+  int? get notificationType {
+    switch (this) {
+      case TypeOFNOTIFICATIONS.ADMIN:
+        return 1;
+      case TypeOFNOTIFICATIONS.MESSAGE:
+        return 2;
+      case TypeOFNOTIFICATIONS.CANCEL_REQUEST:
+        return 3;
+      case TypeOFNOTIFICATIONS.ITINERARY_EDITED:
+        return 4;
+      case TypeOFNOTIFICATIONS.ASSIGN_SPECIALIST:
+        return 5;
+      case TypeOFNOTIFICATIONS.ITINERARY_SUBMITTED:
+        return 6;
+      default:
+        return null;
+    }
+  }
+}
+
 ///using this format
 String chatListDate(String day) {
+  if (day.isEmpty) {
+    return "";
+  }
   var localDate = DateTime.parse(day);
   var inputFormat = DateFormat("yyyy-MM-dd hh:mm:ss");
   var inputDate = inputFormat.parse(localDate.toString());
@@ -135,19 +169,19 @@ String dateAndTimeConverter(String date) {
   return outputDate;
 }
 
-String flightDepartDateAndTimeConverter(String date) {
-  var localDate = DateTime.parse(date);
+flightDepartDateAndTimeConverter(DateTime date) {
+  var localDate = date;
   // .toLocal();
   var inputFormat = DateFormat("yyyy-MM-dd hh:mm:ss");
   var inputDate = inputFormat.parse(localDate.toString());
-  var outputFormat = DateFormat("dd-MMM-yyyy | hh:mm\na");
+  var outputFormat = DateFormat("dd-MMM-yyyy | hh:mm \na");
   // .add_jm()
   var outputDate = outputFormat.format(inputDate);
   return outputDate;
 }
 
-String flightDepartArriveTimeConverter(String date) {
-  var localDate = DateTime.parse(date);
+flightDepartArriveTimeConverter(DateTime date) {
+  var localDate = date;
   // .toLocal();
   var inputFormat = DateFormat("yyyy-MM-dd hh:mm:ss");
   var inputDate = inputFormat.parse(localDate.toString());
@@ -159,8 +193,8 @@ String flightDepartArriveTimeConverter(String date) {
 
 ///* Hotel,Restaurant and activity Date-Time:
 
-String hotelDateAndTimeConverter(String day) {
-  var localDate = DateTime.parse(day).toLocal();
+String hotelDateAndTimeConverter(DateTime date) {
+  var localDate = date;
   var inputFormat = DateFormat("yyyy-MM-dd hh:mm:ss");
   var inputDate = inputFormat.parse(localDate.toString());
   var outputFormat = DateFormat("dd-MMM-yyyy |  h:mm a");
@@ -227,8 +261,8 @@ Future saveFcmToken(String fcmToken) async {
   }
 }
 
-String displayChatTimeFromTimestamp(String day) {
-  var localDate = DateTime.parse(day).toLocal();
+displayNotificationTimeFromTimestamp(DateTime date) {
+  var localDate = date.toLocal();
   var inputFormat = DateFormat("yyyy-MM-dd hh:mm:ss");
   var inputDate = inputFormat.parse(localDate.toString());
   var outputFormat = DateFormat("dd MMM yyyy hh:mm a");
@@ -290,7 +324,8 @@ extension DateTimeFormatExtension on DateTimeFormat {
     }
   }
 
-  static String displayMSGTimeFromTimestamp(DateTime date) {
+  static String displayMSGTimeFromTimestamp(String strDate) {
+    var date = DateTime.parse(strDate);
     var v = DateTime.now().difference(date);
     if (v.inHours < 24) {
       return timeFormat(date.toLocal());

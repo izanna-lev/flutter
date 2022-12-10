@@ -12,6 +12,22 @@ class BaseScreenController extends GetxController {
     });
   }
 
+  int _index = 0;
+
+  int get index => _index;
+
+  set index(int value) {
+    _index = value;
+    update();
+  }
+
+  int _chatUnreadCount = 0;
+  int get chatUnreadCount => _chatUnreadCount;
+  set chatUnreadCount(int value) {
+    _chatUnreadCount = value;
+    update();
+  }
+
   int _current = initialTab;
   int get currentTab => _current;
   set currentTab(int value) {

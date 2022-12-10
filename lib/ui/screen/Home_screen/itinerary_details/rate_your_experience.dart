@@ -8,6 +8,7 @@ import 'package:tralever_module/ui/shared/appbar.dart';
 import 'package:tralever_module/ui/shared/dilog_box.dart';
 import 'package:tralever_module/ui/shared/material_button.dart';
 
+import '../../../../custem_class/constant/app_functions.dart';
 import '../../../../custem_class/utils/size_config.dart';
 
 class RateYourExperience extends StatefulWidget {
@@ -128,15 +129,24 @@ class _RateYourExperienceState extends State<RateYourExperience> {
                     materialButton(
                       onTap: () async {
                         // var response =
-                        itineraryDetailScreenController.ratingDetails(
-                            itineraryRef: widget.data,
-                            experience:
-                                itineraryDetailScreenController.overallRating!,
-                            specialist: itineraryDetailScreenController
-                                .specialistRating!,
-                            value:
-                                itineraryDetailScreenController.valueRating!);
-                        dialogBox();
+                        if (itineraryDetailScreenController.overallRating !=
+                                null ||
+                            itineraryDetailScreenController.specialistRating !=
+                                null ||
+                            itineraryDetailScreenController.valueRating !=
+                                null) {
+                          itineraryDetailScreenController.ratingDetails(
+                              itineraryRef: widget.data,
+                              experience: itineraryDetailScreenController
+                                  .overallRating!,
+                              specialist: itineraryDetailScreenController
+                                  .specialistRating!,
+                              value:
+                                  itineraryDetailScreenController.valueRating!);
+                          dialogBox();
+                        } else {
+                          flutterToast("Please select some ratings.");
+                        }
 
                         // if (response != null) {
                         //   dialogBox();

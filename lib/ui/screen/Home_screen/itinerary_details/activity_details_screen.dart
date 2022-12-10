@@ -28,7 +28,7 @@ class _ActivityDetailsScreenState extends State<ActivityDetailsScreen> {
     widget.index;
     print('ACTIVITY_DETAILS_INDEX---->${widget.index}');
     print(
-        'ACTIVITY_DETAILS_INDEX----> Description${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].day}');
+        'ACTIVITY_DETAILS_INDEX----> Description${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].description}');
 
     super.initState();
   }
@@ -67,10 +67,9 @@ class _ActivityDetailsScreenState extends State<ActivityDetailsScreen> {
                       detailText(
                           text: hotelDateAndTimeConverter(
                               itineraryDetailScreenController
-                                      .itineraryDetailsListModel
-                                      ?.itinerary[widget.index]
-                                      .date ??
-                                  "13-Nov-2022 | 12:00 PM")),
+                                  .itineraryDetailsListModel!
+                                  .itinerary[widget.index]
+                                  .date)),
                       detailTitle(text: "Location"),
                       GestureDetector(
                         onTap: () {

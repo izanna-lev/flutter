@@ -63,8 +63,7 @@ class _FerryDetailsState extends State<FerryDetails> {
                             itineraryDetailScreenController
                                 .itineraryDetailsListModel!
                                 .itinerary[widget.index]
-                                .departDateTime
-                                .toString(),
+                                .departDateTime,
                           ),
                         ),
                       ],
@@ -78,8 +77,7 @@ class _FerryDetailsState extends State<FerryDetails> {
                             itineraryDetailScreenController
                                 .itineraryDetailsListModel!
                                 .itinerary[widget.index]
-                                .arrivalDateTime
-                                .toString(),
+                                .arrivalDateTime,
                           ),
                         ),
                       ],
@@ -137,10 +135,9 @@ class _FerryDetailsState extends State<FerryDetails> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            detailTitle(
-                              text:
-                                  '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].airline}',
-                            ),
+                            detailTitle(text: ""
+                                // '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].airline}',
+                                ),
                             // const Text(
                             //   "SQ221",
                             //   style: TextStyle(
@@ -162,8 +159,7 @@ class _FerryDetailsState extends State<FerryDetails> {
                                     itineraryDetailScreenController
                                         .itineraryDetailsListModel!
                                         .itinerary[widget.index]
-                                        .departDateTime
-                                        .toString(),
+                                        .departDateTime,
                                   ),
                                 ),
                                 const SizedBox(height: 70),
@@ -172,8 +168,7 @@ class _FerryDetailsState extends State<FerryDetails> {
                                     itineraryDetailScreenController
                                         .itineraryDetailsListModel!
                                         .itinerary[widget.index]
-                                        .arrivalDateTime
-                                        .toString(),
+                                        .arrivalDateTime,
                                   ),
                                 ),
                               ],
@@ -238,8 +233,7 @@ class _FerryDetailsState extends State<FerryDetails> {
                             itineraryDetailScreenController
                                 .itineraryDetailsListModel!
                                 .itinerary[widget.index]
-                                .departDateTime
-                                .toString(),
+                                .departDateTime,
                           ),
                         ),
                       ],
@@ -253,8 +247,7 @@ class _FerryDetailsState extends State<FerryDetails> {
                             itineraryDetailScreenController
                                 .itineraryDetailsListModel!
                                 .itinerary[widget.index]
-                                .arrivalDateTime
-                                .toString(),
+                                .arrivalDateTime,
                           ),
                         ),
                       ],

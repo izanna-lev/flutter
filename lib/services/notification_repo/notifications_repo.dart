@@ -32,7 +32,8 @@ class NotificationRepo {
       {required int page}) async {
     var responseBody = await API.apiHandler(
         header: {
-          'Authorization': userController.rowndSignInModel!.data.accessToken
+          'Authorization': userController.rowndSignInModel!.data.accessToken,
+          'Content-Type': 'application/json'
         },
         url: APIRoutes.travellerNotificationList,
         showLoader: false,

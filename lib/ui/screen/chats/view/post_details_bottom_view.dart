@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 import '../../../shared/textfild_common.dart';
 
 class PostDetailsBottomView extends StatelessWidget {
@@ -24,15 +24,10 @@ class PostDetailsBottomView extends StatelessWidget {
       color: Colors.white,
       child: Column(
         children: [
-          Container(
-            height: 0.2,
-            width: Get.width,
-            color: const Color(0xff707070).withOpacity(0.7),
-          ),
-          const SizedBox(height: 13),
+          const SizedBox(height: 10),
           // getHeightSizedBox(h: 13),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 5),
             child: CustomTextField2(
               comment: comment,
               hintText: hintText,

@@ -3,11 +3,11 @@ import 'package:get/get.dart';
 import 'package:tralever_module/custem_class/constant/app_icons.dart';
 import 'package:tralever_module/services/api_routes.dart';
 import 'package:tralever_module/ui/screen/Home_screen/controller/itinerary_detaile_screen%20_controller.dart';
-import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/activity_map_details_screen.dart';
 
 import '../../../../custem_class/constant/app_settings.dart';
 import '../../../../custem_class/utils/globle.dart';
 import '../../../shared/appbar.dart';
+import 'activity_map_details_screen.dart';
 
 class HotelReservationsScreen extends StatefulWidget {
   static const String routeName = "/HotelReservationsScreen";
@@ -28,7 +28,9 @@ class _HotelReservationsScreenState extends State<HotelReservationsScreen> {
     widget.index;
     print('HOTEL_RESERVATION_INDEX==>${widget.index}');
     print(
-        'DESCRIPTION---->${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].description}');
+        'checkOutDateTime---->${hotelDateAndTimeConverter(itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].checkOutDateTime)}');
+    print(
+        'checkInDateTime---->${hotelDateAndTimeConverter(itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].checkInDateTime)}');
     super.initState();
   }
 
@@ -66,28 +68,24 @@ class _HotelReservationsScreenState extends State<HotelReservationsScreen> {
                                 .checkInDateTime)),
                     detailTitle(text: "Check Out Date & Time"),
                     detailText(
-                        text: itineraryDetailScreenController
+                        text: hotelDateAndTimeConverter(
+                            itineraryDetailScreenController
                                 .itineraryDetailsListModel!
                                 .itinerary[widget.index]
-                                .checkOutDateTime
-                                .isEmpty
-                            ? ""
-                            : hotelDateAndTimeConverter(
-                                itineraryDetailScreenController
-                                    .itineraryDetailsListModel!
-                                    .itinerary[widget.index]
-                                    .checkOutDateTime)),
+                                .checkOutDateTime)),
                     detailTitle(text: "Contact Number"),
                     detailText(
-                        text: itineraryDetailScreenController
-                                .itineraryDetailsListModel
-                                ?.itinerary[widget.index]
-                                .contactNumber
-                                .toString() ??
-                            "+62 361 769 2220"),
+                      text:
+                          "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].phoneCode} ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].contactNumber}",
+                    ),
                     detailTitle(text: "Location"),
                     GestureDetector(
                       onTap: () {
+                        // MapUtils.openMap(
+                        //     double.parse(
+                        //         '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].coordinates[0]}'),
+                        //     double.parse(
+                        //         '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].coordinates[1]}'));
                         Get.toNamed(
                           ActivityMapDetails.routeName,
                           arguments: [
@@ -124,55 +122,10 @@ class _HotelReservationsScreenState extends State<HotelReservationsScreen> {
                     detailTitle(text: "Description"),
                     detailText(
                         text: itineraryDetailScreenController
-                                .itineraryDetailsListModel
-                                ?.itinerary[widget.index]
-                                .contactNumber
-                                .toString() ??
-                            "+62 361 769 2220"),
-                    detailTitle(text: "Location"),
-                    GestureDetector(
-                      onTap: () {
-                        Get.toNamed(
-                          ActivityMapDetails.routeName,
-                          arguments: [
-                            itineraryDetailScreenController
-                                .itineraryDetailsListModel
-                                ?.itinerary[widget.index]
-                                .image,
-                            '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].coordinates[0]}',
-                            '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].coordinates[1]}',
-                            '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].location}',
-                            '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].name}',
-                            itineraryDetailScreenController
-                                .itineraryDetailsListModel!
-                                .itinerary[widget.index]
-                                .detailType
-                          ],
-                        );
-                      },
-                      child: Container(
-                        color: Colors.transparent,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            detailText(
-                                text: itineraryDetailScreenController
-                                    .itineraryDetailsListModel!
-                                    .itinerary[widget.index]
-                                    .location),
-                            Image.asset(AppIcons.gpsIcon, height: 21),
-                          ],
-                        ),
-                      ),
-                    ),
-                    detailTitle(text: "Description"),
-                    detailText(
-                      text: itineraryDetailScreenController
-                              .itineraryDetailsListModel
-                              ?.itinerary[widget.index]
-                              .description ??
-                          "Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text.",
-                    )
+                            .itineraryDetailsListModel!
+                            .itinerary[widget.index]
+                            .description
+                            .toString()),
                   ],
                 ),
               ),

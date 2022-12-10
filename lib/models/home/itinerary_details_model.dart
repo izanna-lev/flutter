@@ -156,7 +156,7 @@ class Itinerary {
   String createdAt;
   String updatedAt;
   int v;
-  String date;
+  DateTime date;
   int detailType;
   String airline;
   int flightClass;
@@ -170,13 +170,13 @@ class Itinerary {
   int trainClass;
   String contactNumber;
   String phoneCode;
-  String checkInDateTime;
-  String checkOutDateTime;
+  DateTime checkInDateTime;
+  DateTime checkOutDateTime;
   List<double> coordinates;
   String departLocation;
   String arrivalLocation;
-  String departDateTime;
-  String arrivalDateTime;
+  DateTime departDateTime;
+  DateTime arrivalDateTime;
   String transportDuration;
   UserCarDetails? userCarDetails;
 
@@ -190,7 +190,7 @@ class Itinerary {
         createdAt: json["createdAt"] ?? "",
         updatedAt: json["updatedAt"] ?? "",
         v: json["__v"] ?? 0,
-        date: json["date"] ?? "",
+        date: DateTime.parse(json["date"] ?? DateTime.now().toString()),
         detailType: json["detailType"] ?? 0,
         airline: json["airline"] ?? "",
         flightClass: json["flightClass"] ?? 0,
@@ -205,14 +205,18 @@ class Itinerary {
         contactNumber: json["contactNumber"] ?? "",
         trainClass: json["trainClass"] ?? 0,
         phoneCode: json["phoneCode"] ?? "",
-        checkInDateTime: json["checkInDateTime"] ?? "",
-        checkOutDateTime: json["checkOutDateTime"] ?? "",
+        checkInDateTime: DateTime.parse(
+            json["checkInDateTime"] ?? DateTime.now().toString()),
+        checkOutDateTime: DateTime.parse(
+            json["checkOutDateTime"] ?? DateTime.now().toString()),
         coordinates: List<double>.from(
             (json["coordinates"] ?? []).map((x) => x.toDouble())),
         departLocation: json["departLocation"] ?? "",
         arrivalLocation: json["arrivalLocation"] ?? "",
-        arrivalDateTime: json["arrivalDateTime"] ?? "",
-        departDateTime: json["departDateTime"] ?? "",
+        arrivalDateTime: DateTime.parse(
+            json["arrivalDateTime"] ?? DateTime.now().toString()),
+        departDateTime:
+            DateTime.parse(json["departDateTime"] ?? DateTime.now().toString()),
         transportDuration: json["transportDuration"] ?? "",
         userCarDetails: json["userCarDetails"] == null
             ? null

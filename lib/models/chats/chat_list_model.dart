@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import '../home/itinerary_details_model.dart';
-
 ChatModel chatModelFromJson(String str) => ChatModel.fromJson(json.decode(str));
 
 String chatModelToJson(ChatModel data) => json.encode(data.toJson());
@@ -14,7 +12,6 @@ class ChatModel {
     required this.page,
     required this.limit,
     required this.size,
-    required this.hasMore,
   });
 
   int code;
@@ -23,7 +20,6 @@ class ChatModel {
   int page;
   int limit;
   int size;
-  bool hasMore;
 
   factory ChatModel.fromJson(Map<String, dynamic> json) => ChatModel(
         code: json["code"],
@@ -33,7 +29,6 @@ class ChatModel {
         page: json["page"],
         limit: json["limit"],
         size: json["size"],
-        hasMore: json["hasMore"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -43,7 +38,6 @@ class ChatModel {
         "page": page,
         "limit": limit,
         "size": size,
-        "hasMore": hasMore,
       };
 }
 
@@ -115,10 +109,11 @@ class Location {
   List<double> coordinates;
 
   factory Location.fromJson(Map<String, dynamic> json) => Location(
-        location: json["location"],
-        type: json["type"],
-        coordinates:
-            List<double>.from(json["coordinates"].map((x) => x.toDouble())),
+        location: json["location"] ?? "",
+        type: json["type"] ?? "",
+        coordinates: (json["coordinates"] == null)
+            ? []
+            : List<double>.from(json["coordinates"].map((x) => x.toDouble())),
       );
 
   Map<String, dynamic> toJson() => {
@@ -151,7 +146,7 @@ class Message {
 
   factory Message.fromJson(Map<String, dynamic> json) => Message(
         id: json["_id"] ?? "",
-        userRef: json["userRef"] ?? "",
+        userRef: json["userRef"] ?? json["userId"] ?? "",
         channelRef: json["channelRef"] ?? "",
         message: json["message"] ?? "",
         messageType: json["messageType"] ?? 0,
@@ -204,13 +199,13 @@ class MessageDataResponse {
   });
 
   List<Message> messages;
-  Itinerary itinerary;
+  ItineraryMessageModel itinerary;
 
   factory MessageDataResponse.fromJson(Map<String, dynamic> json) =>
       MessageDataResponse(
         messages: List<Message>.from(
             json["messages"].map((x) => Message.fromJson(x))),
-        itinerary: Itinerary.fromJson(json["itinerary"] ?? {}),
+        itinerary: ItineraryMessageModel.fromJson(json["itinerary"] ?? {}),
       );
 
   Map<String, dynamic> toJson() => {
@@ -219,23 +214,68 @@ class MessageDataResponse {
       };
 }
 
+class ItineraryMessageModel {
+  ItineraryMessageModel({
+    required this.id,
+    required this.location,
+    required this.itineraryStatus,
+    required this.image,
+    required this.fromDate,
+    required this.toDate,
+    required this.otherUserName,
+  });
+
+  String id;
+  Location location;
+  int itineraryStatus;
+  String image;
+  String fromDate;
+  String toDate;
+  String otherUserName;
+
+  factory ItineraryMessageModel.fromJson(Map<String, dynamic> json) =>
+      ItineraryMessageModel(
+        id: json["_id"] ?? "",
+        location: Location.fromJson(json["location"] ?? {}),
+        itineraryStatus: json["itineraryStatus"] ?? 0,
+        image: json["image"] ?? "",
+        fromDate: json["fromDate"] ?? "",
+        toDate: json["toDate"] ?? "",
+        otherUserName: json["otherUserName"] ?? "",
+      );
+
+  Map<String, dynamic> toJson() => {
+        "_id": id,
+        "location": location.toJson(),
+        "itineraryStatus": itineraryStatus,
+        "image": image,
+        "fromDate": fromDate,
+        "toDate": toDate,
+        "otherUserName": otherUserName,
+      };
+}
+
 class SuccessResponse {
   SuccessResponse({
     required this.code,
     required this.message,
+    required this.data,
   });
 
   int code;
   String message;
+  int data;
 
   factory SuccessResponse.fromJson(Map<String, dynamic> json) =>
       SuccessResponse(
         code: json["code"] ?? 0,
         message: json["message"] ?? "",
+        data: json["data"] ?? 0,
       );
 
   Map<dynamic, dynamic> toJson() => {
         "code": code,
         "message": message,
+        "data": data,
       };
 }

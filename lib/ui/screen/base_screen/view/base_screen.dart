@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tralever_module/custem_class/constant/app_colors.dart';
 import 'package:tralever_module/custem_class/constant/app_icons.dart';
+import 'package:tralever_module/ui/screen/notification/controller/Notification_controller.dart';
 
 import '../../../../custem_class/constant/app_functions.dart';
 import '../../../../custem_class/constant/app_settings.dart';
@@ -20,6 +21,8 @@ class BaseScreen extends StatefulWidget {
 
 class _BaseScreenState extends State<BaseScreen> {
   BaseScreenController baseScreenController = Get.find<BaseScreenController>();
+  NotificationScreenController notificationScreenController =
+      Get.find<NotificationScreenController>();
   DateTime? currentBackPressTime;
   Future<bool> onWillPop() {
     DateTime now = DateTime.now();
@@ -35,6 +38,7 @@ class _BaseScreenState extends State<BaseScreen> {
   @override
   void initState() {
     baseScreenController.update();
+    notificationScreenController.update();
     super.initState();
   }
 
@@ -64,34 +68,43 @@ class _BaseScreenState extends State<BaseScreen> {
             GetBuilder(
               builder: (BaseScreenController baseScreenController) {
                 if (baseScreenController.selectedTab == 0) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 12),
-                    child: Stack(
-                      //alignment: Alignment.topRight,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            Get.toNamed(NotificationScreen.routeName);
-                          },
-                          child: Image.asset(
-                            AppIcons.notificationIcon,
-                            scale: 3.5,
-                          ),
-                        ),
-                        const Positioned(
-                          top: 2,
-                          right: 5,
-                          child: Center(
-                            child: Icon(
-                              Icons.circle,
-                              color: AppColors.appBlueColor,
-                              size: 10,
+                  return GetBuilder(
+                    builder: (NotificationScreenController
+                        notificationScreenController) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 12),
+                        child: Stack(
+                          //alignment: Alignment.topRight,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Get.toNamed(NotificationScreen.routeName);
+                              },
+                              child: Image.asset(
+                                AppIcons.notificationIcon,
+                                scale: 3.5,
+                              ),
                             ),
-                          ),
-                        )
-                      ],
-                    ),
+                            notificationScreenController
+                                    .travellerNotificationListModel
+                                    .unseenNotifications
+                                ? const Positioned(
+                                    top: 2,
+                                    right: 5,
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.circle,
+                                        color: AppColors.appBlueColor,
+                                        size: 10,
+                                      ),
+                                    ),
+                                  )
+                                : const SizedBox()
+                          ],
+                        ),
+                      );
+                    },
                   );
                 } else {
                   return const SizedBox();
@@ -121,9 +134,7 @@ class _BaseScreenState extends State<BaseScreen> {
           boxShadow: [
             BoxShadow(
               color: Colors.grey,
-
               blurRadius: 2.5,
-
             ),
           ],
         ),
@@ -152,6 +163,8 @@ class _BaseScreenState extends State<BaseScreen> {
                               children: [
                                 const SizedBox(height: 5),
                                 Stack(
+                                  clipBehavior: Clip.none,
+                                  alignment: Alignment.topRight,
                                   children: [
                                     SizedBox(
                                       height: 25,
@@ -165,6 +178,34 @@ class _BaseScreenState extends State<BaseScreen> {
                                             : Colors.grey.shade700,
                                       ),
                                     ),
+                                    (value.name == "Chats" &&
+                                            baseScreenController
+                                                    .chatUnreadCount >
+                                                0)
+                                        ? Positioned(
+                                            left: 15,
+                                            bottom: 15,
+                                            // bottom: 15,
+                                            child: Container(
+                                              height: 15,
+                                              width: 15,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  color:
+                                                      AppColors.appBlueColor),
+                                              child: Text(
+                                                baseScreenController
+                                                    .chatUnreadCount
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 8),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
+                                          )
+                                        : const SizedBox()
                                   ],
                                 ),
                                 Text(

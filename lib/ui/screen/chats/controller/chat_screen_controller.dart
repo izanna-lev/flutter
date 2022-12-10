@@ -1,13 +1,10 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:pagination_view/pagination_view.dart';
 import 'package:tralever_module/services/chats_repo/chat_repo.dart';
+import 'package:tralever_module/ui/screen/base_screen/controller/base_screen_controller.dart';
 
-import '../../../../custem_class/utils/globle.dart';
 import '../../../../models/chats/chat_list_model.dart';
-import '../../../../models/login/successModel.dart';
 import '../../../../services/api_routes.dart';
 import '../../../../services/chats_repo/chatRepo.dart';
 import '../../../shared/image_picker_controller.dart';
@@ -17,6 +14,8 @@ class ChatScreenController extends GetxController {
   GlobalKey<PaginationViewState> chatListKey = GlobalKey<PaginationViewState>();
   ImagePickerController imagePickerController =
       Get.find<ImagePickerController>();
+  BaseScreenController baseScreenController = Get.find<BaseScreenController>();
+
   List<ChatListModel> _chatData = [];
 
   List<ChatListModel> get chatData => _chatData;
@@ -45,28 +44,10 @@ class ChatScreenController extends GetxController {
     return [];
   }
 
-  travellerChatImage() async {
-    SuccessModel? successModel = await ChatRepo.travellerChatImage(
-        picture: imagePickerController.image.isEmpty
-            ? null
-            : File(imagePickerController.image));
-    if (successModel != null) {
-      return successModel;
+  getMessageUnreadCount() async {
+    SuccessResponse? response = await ChatRepo.getMessageUnreadCount();
+    if (response != null) {
+      baseScreenController.chatUnreadCount = response.data;
     }
   }
-
-// String businessRef = "";
-// String channelRef = "";
-// List<Message> getMessages = [];
-// final TextEditingController messageText = TextEditingController();
-// Future sendMessages() async {
-//   String msg = messageText.text.trim();
-//   messageText.clear();
-//   debugPrint("sendMessages");
-//   SocketManager.socket!.emit('message', {
-//     "channelRef": channelRef,
-//     "message": msg,
-//     "id": userController.userModel!.user.id
-//   });
-// }
 }

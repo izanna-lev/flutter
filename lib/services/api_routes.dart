@@ -4,6 +4,12 @@ const String imageUrl =
     "https://app-onsite.s3.amazonaws.com/development/images/small/";
 const String socketBaseUrl = "http://44.209.25.93:3000";
 
+///Staging server
+// const String url = "http://44.208.65.177:3000/api/";
+// const String imageUrl =
+//     "https://app-onsite.s3.amazonaws.com/staging/images/small/";
+// const String socketBaseUrl = "http://44.208.65.177:3000";
+
 ///ROWND APP KEY
 const String rowndAppKey = "d432a653-54bc-4c1d-a8c8-bf975187a5f8";
 

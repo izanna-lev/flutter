@@ -13,7 +13,7 @@ class ItineraryDetailsRepo {
     // required timezone,
     String? date,
   }) async {
-    var responseBody = await API.apiHandler(
+    var responseBody = await API.itinearyAPIHandler(
       url: APIRoutes.homeDetails,
       showLoader: false,
       requestType: RequestType.Post,

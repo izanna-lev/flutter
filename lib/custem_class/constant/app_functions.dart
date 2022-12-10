@@ -12,7 +12,7 @@ checkConnection() async {
       result == ConnectivityResult.wifi);
 }
 
-flutterToast(String msg) {
+Future flutterToast(String msg) {
   Fluttertoast.cancel();
   return Fluttertoast.showToast(
     msg: msg,

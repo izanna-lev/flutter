@@ -20,36 +20,38 @@ class _FlightUserDetailsState extends State<FlightUserDetails> {
       Get.find<ItineraryDetailScreenController>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-        child: GetBuilder(
-          builder: (ItineraryDetailScreenController
-              itineraryDetailScreenController) {
-            return ListView.builder(
-                itemCount: itineraryDetailScreenController
-                    .itineraryDetailsListModel?.itinerary[0].tickets.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return userDetails(
-                    name:
-                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[index].tickets[index].name}',
-                    // ?? "Smit Dhola"
-                    img: imageUrl +
-                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[index].tickets[index].image}',
-                    // itineraryDetailScreenController
-                    //         .itinerary?.tickets[index].image ??
-                    // "https://image.shutterstock.com/image-vector/pattern-airline-boarding-pass-ticket-260nw-375639655.jpg",
-                    ticketOnTap: () {
-                      Get.toNamed(FlightTicketPreviewScreen.routeName,
-                          arguments: itineraryDetailScreenController
-                              .itineraryDetailsListModel
-                              ?.itinerary[index]
-                              .tickets[index]
-                              .image);
-                    },
-                  );
-                });
-          },
+    return SafeArea(
+      child: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+          child: GetBuilder(
+            builder: (ItineraryDetailScreenController
+                itineraryDetailScreenController) {
+              return ListView.builder(
+                  itemCount: itineraryDetailScreenController
+                      .itineraryDetailsListModel?.itinerary[0].tickets.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return userDetails(
+                      name:
+                          '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[index].tickets[index].name}',
+                      // ?? "Smit Dhola"
+                      img: imageUrl +
+                          '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[index].tickets[index].image}',
+                      // itineraryDetailScreenController
+                      //         .itinerary?.tickets[index].image ??
+                      // "https://image.shutterstock.com/image-vector/pattern-airline-boarding-pass-ticket-260nw-375639655.jpg",
+                      ticketOnTap: () {
+                        Get.toNamed(FlightTicketPreviewScreen.routeName,
+                            arguments: itineraryDetailScreenController
+                                .itineraryDetailsListModel
+                                ?.itinerary[index]
+                                .tickets[index]
+                                .image);
+                      },
+                    );
+                  });
+            },
+          ),
         ),
       ),
     );

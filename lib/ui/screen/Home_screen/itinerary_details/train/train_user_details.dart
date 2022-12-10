@@ -21,33 +21,35 @@ class _TrainUserDetailsScreenState extends State<TrainUserDetailsScreen> {
       Get.find<ItineraryDetailScreenController>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-        child: GetBuilder(
-          builder: (ItineraryDetailScreenController
-              itineraryDetailScreenController) {
-            return ListView.builder(
-                itemCount: itineraryDetailScreenController
-                    .itineraryDetailsListModel?.itinerary[0].tickets.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return userDetails(
-                    name:
-                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[index].tickets[index].name}',
-                    img: imageUrl +
-                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[index].tickets[index].image}',
-                    // "https://image.shutterstock.com/image-vector/vector-train-ticket-rail-pass-260nw-1228205155.jpg",
-                    ticketOnTap: () {
-                      Get.toNamed(TrainTicketPreviewScreen.routeName,
-                          arguments: itineraryDetailScreenController
-                              .itineraryDetailsListModel
-                              ?.itinerary[index]
-                              .tickets[index]
-                              .image);
-                    },
-                  );
-                });
-          },
+    return SafeArea(
+      child: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+          child: GetBuilder(
+            builder: (ItineraryDetailScreenController
+                itineraryDetailScreenController) {
+              return ListView.builder(
+                  itemCount: itineraryDetailScreenController
+                      .itineraryDetailsListModel?.itinerary[0].tickets.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return userDetails(
+                      name:
+                          '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].tickets[index].name}',
+                      img: imageUrl +
+                          '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].tickets[index].image}',
+                      // "https://image.shutterstock.com/image-vector/vector-train-ticket-rail-pass-260nw-1228205155.jpg",
+                      ticketOnTap: () {
+                        Get.toNamed(TrainTicketPreviewScreen.routeName,
+                            arguments: itineraryDetailScreenController
+                                .itineraryDetailsListModel
+                                ?.itinerary[index]
+                                .tickets[index]
+                                .image);
+                      },
+                    );
+                  });
+            },
+          ),
         ),
       ),
     );

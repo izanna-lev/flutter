@@ -21,12 +21,28 @@ class NotificationScreenController extends GetxController {
     update();
   }
 
+  bool? _unseenNotifications;
+  bool? get unseenNotifications => _unseenNotifications;
+  set unseenNotifications(bool? value) {
+    _unseenNotifications = value;
+    update();
+  }
+
   List<TravellerDetailsNotificationList> _travellerDetailsNotificationList = [];
   List<TravellerDetailsNotificationList> get travellerDetailsNotificationList =>
       _travellerDetailsNotificationList;
   set travellerDetailsNotificationList(
       List<TravellerDetailsNotificationList> value) {
     _travellerDetailsNotificationList = value;
+    update();
+  }
+
+  TravellerNotificationListModel _travellerNotificationListModel =
+      TravellerNotificationListModel.fromJson({});
+  TravellerNotificationListModel get travellerNotificationListModel =>
+      _travellerNotificationListModel;
+  set travellerNotificationListModel(TravellerNotificationListModel value) {
+    _travellerNotificationListModel = value;
     update();
   }
 

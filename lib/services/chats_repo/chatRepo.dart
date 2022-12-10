@@ -114,6 +114,28 @@ class ChatRepo {
     }
   }
 
+  static Future<SuccessResponse?> getMessageUnreadCount() async {
+    var responseBody = await API.apiHandler(
+        url: APIRoutes.travellerUnread,
+        requestType: RequestType.Post,
+        showLoader: true,
+        header: {
+          'Authorization': userController.rowndSignInModel!.data.accessToken,
+          "Content-Type": 'application/json'
+        },
+        body: jsonEncode({}));
+    if (responseBody != null) {
+      SuccessResponse successResponse = SuccessResponse.fromJson(responseBody);
+      if (successResponse.code == 100) {
+        return successResponse;
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
+
   static Future<SuccessModel?> travellerChatImage(
       {File? picture, String? token}) async {
     Map<String, dynamic>? responseBody = await API.multiPartAPIHandler(
@@ -121,7 +143,7 @@ class ChatRepo {
         url: APIRoutes.travellerChatImage,
         field: {"data": jsonEncode({})},
         fileImage: picture == null ? null : [picture],
-        multiPartImageKeyName: "picture",
+        multiPartImageKeyName: "image",
         encoding: Encoding.getByName("utf-8"));
     return responseBody == null ? null : SuccessModel.fromJson(responseBody);
   }

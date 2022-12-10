@@ -5,7 +5,6 @@ import 'package:tralever_module/custem_class/constant/app_functions.dart';
 import 'package:tralever_module/custem_class/constant/app_icons.dart';
 import 'package:tralever_module/custem_class/constant/app_settings.dart';
 import 'package:tralever_module/custem_class/utils/globle.dart';
-import 'package:tralever_module/ui/screen/profile_screen/controller/add_card_controller.dart';
 import 'package:tralever_module/ui/screen/profile_screen/controller/my_transations_controller.dart';
 import 'package:tralever_module/ui/screen/profile_screen/view/to_date_picker.dart';
 import 'package:tralever_module/ui/shared/material_button.dart';
@@ -35,87 +34,89 @@ class _MyTransactionScreenState extends State<MyTransactionScreen> {
   Widget build(BuildContext context) {
     return GetBuilder(
       builder: (MyTransactionsController myTransactionsController) {
-        return Scaffold(
-          backgroundColor: Colors.white,
-          appBar: AppBar(
+        return SafeArea(
+          child: Scaffold(
             backgroundColor: Colors.white,
-            elevation: 0,
-            centerTitle: true,
-            leading: IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: const Icon(
-                Icons.arrow_back,
-                color: Colors.black,
-                size: 24,
-              ),
-            ),
-            title: const Text(
-              "My Transactions",
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            actions: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: GestureDetector(
-                  onTap: () {
-                    filter(myTransactionsController);
-                  },
-                  child: Image.asset(
-                    AppIcons.filterIcon,
-                    height: 24,
-                    width: 24,
-                  ),
+            appBar: AppBar(
+              backgroundColor: Colors.white,
+              elevation: 0,
+              centerTitle: true,
+              leading: IconButton(
+                onPressed: () {
+                  Get.back();
+                },
+                icon: const Icon(
+                  Icons.arrow_back,
+                  color: Colors.black,
+                  size: 24,
                 ),
               ),
-            ],
-          ),
-          body: ListView.builder(
-            itemCount: myTransactionsController.transactionListData.length,
-            itemBuilder: (BuildContext context, int index) {
-              return
-                  // myTransactionsController.transactionListData.isEmpty
-                  //   ? const Center(
-                  //       child: Text(
-                  //         "NO Data Found",
-                  //         style: TextStyle(color: Colors.pink),
-                  //       ),
-                  //     )
-                  //   :
-                  Column(
-                children: [
-                  myTransactionsController
-                              .transactionListData[index].transactionType ==
-                          1
-                      ? paidSell(
-                          countryName: myTransactionsController
-                              .transactionListData[index].name,
-                          cardNumber:
-                              "XXX-XXX-XXX-${myTransactionsController.transactionListData[index].lastDigitsCard}",
-                          date: myTransactionsDate(myTransactionsController
-                              .transactionListData[index].createdOn),
-                          price: myTransactionsController
-                              .transactionListData[index].price
-                              .toString(),
-                        )
-                      : cancelSell(
-                          countryName: myTransactionsController
-                              .transactionListData[index].name,
-                          cardNumber:
-                              "XXX-XXX-XXX-${myTransactionsController.transactionListData[index].lastDigitsCard}",
-                          date: myTransactionsDate(myTransactionsController
-                              .transactionListData[index].createdOn),
-                          price: myTransactionsController
-                              .transactionListData[index].price
-                              .toString(),
-                        ),
-                ],
-              );
-            },
+              title: const Text(
+                "My Transactions",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: GestureDetector(
+                    onTap: () {
+                      filter(myTransactionsController);
+                    },
+                    child: Image.asset(
+                      AppIcons.filterIcon,
+                      height: 24,
+                      width: 24,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            body: ListView.builder(
+              itemCount: myTransactionsController.transactionListData.length,
+              itemBuilder: (BuildContext context, int index) {
+                return
+                    // myTransactionsController.transactionListData.isEmpty
+                    //   ? const Center(
+                    //       child: Text(
+                    //         "NO Data Found",
+                    //         style: TextStyle(color: Colors.pink),
+                    //       ),
+                    //     )
+                    //   :
+                    Column(
+                  children: [
+                    myTransactionsController
+                                .transactionListData[index].transactionType ==
+                            1
+                        ? paidSell(
+                            countryName: myTransactionsController
+                                .transactionListData[index].name,
+                            cardNumber:
+                                "XXX-XXX-XXX-${myTransactionsController.transactionListData[index].lastDigitsCard}",
+                            date: myTransactionsDate(myTransactionsController
+                                .transactionListData[index].createdOn),
+                            price: myTransactionsController
+                                .transactionListData[index].price
+                                .toString(),
+                          )
+                        : cancelSell(
+                            countryName: myTransactionsController
+                                .transactionListData[index].name,
+                            cardNumber:
+                                "XXX-XXX-XXX-${myTransactionsController.transactionListData[index].lastDigitsCard}",
+                            date: myTransactionsDate(myTransactionsController
+                                .transactionListData[index].createdOn),
+                            price: myTransactionsController
+                                .transactionListData[index].price
+                                .toString(),
+                          ),
+                  ],
+                );
+              },
+            ),
           ),
         );
       },
@@ -353,7 +354,10 @@ class _MyTransactionScreenState extends State<MyTransactionScreen> {
                                 ),
                                 // SizedBox(width: 8),
                                 Expanded(
-                                  child: FormDemoDatePiker(),
+                                  child: Padding(
+                                    padding: EdgeInsets.only(top: 2),
+                                    child: FormDemoDatePiker(),
+                                  ),
                                 ),
                                 //SizedBox(width: 8),
                                 Text(
@@ -365,7 +369,10 @@ class _MyTransactionScreenState extends State<MyTransactionScreen> {
                                 ),
                                 // SizedBox(width: 8),
                                 Expanded(
-                                  child: ToDemoDatePiker(),
+                                  child: Padding(
+                                    padding: EdgeInsets.only(top: 2),
+                                    child: ToDemoDatePiker(),
+                                  ),
                                 ),
                                 // SizedBox(width: 8),
                               ],

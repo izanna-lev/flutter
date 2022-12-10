@@ -1,4 +1,5 @@
 import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -30,6 +31,7 @@ class FormDatePickerState extends State<FormDemoDatePiker> {
     return Scaffold(
         body: TextFormField(
       controller: myTransactionsController.fromDateController,
+      style: TextStyle(fontSize: 10),
       decoration: const InputDecoration(
         border: InputBorder.none,
         filled: true,

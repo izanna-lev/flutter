@@ -22,37 +22,39 @@ class _FerryUserDetailsState extends State<FerryUserDetails> {
       Get.find<ItineraryDetailScreenController>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-        child: GetBuilder(
-          builder: (ItineraryDetailScreenController
-              itineraryDetailScreenController) {
-            return ListView.builder(
-                itemCount: itineraryDetailScreenController
-                    .itineraryDetailsListModel!.itinerary[0].tickets.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return userDetails(
-                    name: itineraryDetailScreenController
-                        .itineraryDetailsListModel!
-                        .itinerary[0]
-                        .tickets[0]
-                        .name,
-                    img:
-                        '$imageUrl${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[0].tickets[0].image}',
-                    ticketOnTap: () {
-                      Get.toNamed(
-                        FerryTicketPreviewScreen.routeName,
-                        arguments: itineraryDetailScreenController
-                            .itineraryDetailsListModel!
-                            .itinerary[0]
-                            .tickets[0]
-                            .image,
-                      );
-                    },
-                  );
-                });
-          },
+    return SafeArea(
+      child: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+          child: GetBuilder(
+            builder: (ItineraryDetailScreenController
+                itineraryDetailScreenController) {
+              return ListView.builder(
+                  itemCount: itineraryDetailScreenController
+                      .itineraryDetailsListModel!.itinerary[0].tickets.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return userDetails(
+                      name: itineraryDetailScreenController
+                          .itineraryDetailsListModel!
+                          .itinerary[0]
+                          .tickets[index]
+                          .name,
+                      img:
+                          '$imageUrl${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[0].tickets[index].image}',
+                      ticketOnTap: () {
+                        Get.toNamed(
+                          FerryTicketPreviewScreen.routeName,
+                          arguments: itineraryDetailScreenController
+                              .itineraryDetailsListModel!
+                              .itinerary[index]
+                              .tickets[index]
+                              .image,
+                        );
+                      },
+                    );
+                  });
+            },
+          ),
         ),
       ),
     );

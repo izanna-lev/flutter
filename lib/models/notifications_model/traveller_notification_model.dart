@@ -7,15 +7,15 @@ String travellerNotificationListToJson(TravellerNotificationListModel data) =>
     json.encode(data.toJson());
 
 class TravellerNotificationListModel {
-  TravellerNotificationListModel({
-    required this.code,
-    required this.message,
-    required this.data,
-    required this.page,
-    required this.limit,
-    required this.size,
-    required this.hasMore,
-  });
+  TravellerNotificationListModel(
+      {required this.code,
+      required this.message,
+      required this.data,
+      required this.page,
+      required this.limit,
+      required this.size,
+      required this.hasMore,
+      required this.unseenNotifications});
 
   int code;
   String message;
@@ -24,6 +24,7 @@ class TravellerNotificationListModel {
   int limit;
   int size;
   bool hasMore;
+  bool unseenNotifications;
 
   factory TravellerNotificationListModel.fromJson(Map<String, dynamic> json) =>
       TravellerNotificationListModel(
@@ -35,6 +36,7 @@ class TravellerNotificationListModel {
         limit: json["limit"] ?? 0,
         size: json["size"] ?? 0,
         hasMore: json["hasMore"] ?? false,
+        unseenNotifications: json["unseenNotifications"] ?? false,
       );
 
   Map<String, dynamic> toJson() => {
@@ -45,6 +47,7 @@ class TravellerNotificationListModel {
         "limit": limit,
         "size": size,
         "hasMore": hasMore,
+        "unseenNotifications": unseenNotifications,
       };
 }
 
@@ -67,12 +70,12 @@ class TravellerDetailsNotificationList {
   UserRef userRef;
   String text;
   int type;
-  SourceRef sourceRef;
+  String sourceRef;
   String image;
   NotificationFrom notificationFrom;
   bool seen;
-  String createdOn;
-  String updatedOn;
+  DateTime createdOn;
+  DateTime updatedOn;
   int v;
 
   factory TravellerDetailsNotificationList.fromJson(
@@ -82,15 +85,16 @@ class TravellerDetailsNotificationList {
         userRef: userRefValues.map[json["userRef"]] ?? UserRef.values[0],
         text: json["text"] ?? "",
         type: json["type"] ?? 0,
-        sourceRef:
-            sourceRefValues.map[json["sourceRef"]] ?? SourceRef.values[0],
+        sourceRef: json["sourceRef"] ?? "",
         image: json["image"] ?? "",
         notificationFrom:
             notificationFromValues.map[json["notificationFrom"]] ??
                 NotificationFrom.values[0],
         seen: json["seen"] ?? false,
-        createdOn: json["createdOn"] ?? "",
-        updatedOn: json["updatedOn"] ?? "",
+        createdOn:
+            DateTime.parse(json["createdOn"] ?? DateTime.now().toString()),
+        updatedOn:
+            DateTime.parse(json["updatedOn"] ?? DateTime.now().toString()),
         v: json["__v"] ?? 0,
       );
 
@@ -99,7 +103,7 @@ class TravellerDetailsNotificationList {
         "userRef": userRefValues.reverse[userRef],
         "text": text,
         "type": type,
-        "sourceRef": sourceRefValues.reverse[sourceRef],
+        "sourceRef": sourceRef,
         "image": image,
         "notificationFrom": notificationFromValues.reverse[notificationFrom],
         "seen": seen,

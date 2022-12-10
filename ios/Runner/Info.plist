@@ -2,10 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>FirebaseScreenReportingEnabled</key>
-    <true/>
-    <key>FirebaseAppDelegateProxyEnabled</key>
-    <false/>
+	<key>FirebaseScreenReportingEnabled</key>
+	<true/>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -30,16 +30,12 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
-	<key>FirebaseAppDelegateProxyEnabled</key>
-	<false/>
-	<key>FirebaseScreenReportingEnabled</key>
-	<true/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>This app requires access to the camera to upload your profile photo, camera permission is also required for scanning QR codes provided from Onsite, so that you can earn points which you can redeem afterwards.</string>
 	<key>NSLocalNetworkUsageDescription</key>
-	<string>Allow Permission to Flutter </string>
+	<string>Allow Permission to Flutter</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Please give permission for the location , so that the user can get relevant information about the Sales Officer and will also be able to scan QR Codes provided by Onsite Team through which he can earn points &amp; redeem it.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
@@ -75,5 +71,9 @@
 	<false/>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
+	<key>UIStatusBarHidden</key>
+	<false/>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 </dict>
 </plist>

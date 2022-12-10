@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:tralever_module/custem_class/utils/globle.dart';
 import 'package:tralever_module/ui/screen/Home_screen/controller/itinerary_detaile_screen%20_controller.dart';
 
@@ -58,8 +57,7 @@ class _TrainDetailsState extends State<TrainDetails> {
                             itineraryDetailScreenController
                                 .itineraryDetailsListModel!
                                 .itinerary[widget.index]
-                                .departDateTime
-                                .toString(),
+                                .departDateTime,
                           ),
                         ),
                       ],
@@ -73,8 +71,7 @@ class _TrainDetailsState extends State<TrainDetails> {
                             itineraryDetailScreenController
                                 .itineraryDetailsListModel!
                                 .itinerary[widget.index]
-                                .arrivalDateTime
-                                .toString(),
+                                .arrivalDateTime,
                           ),
                         ),
                       ],
@@ -132,10 +129,9 @@ class _TrainDetailsState extends State<TrainDetails> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            detailTitle(
-                              text:
-                                  '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].airline}',
-                            ),
+                            detailTitle(text: ""
+                                // '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].airline}',
+                                ),
                             // const Text(
                             //   "SQ221",
                             //   style: TextStyle(
@@ -157,8 +153,7 @@ class _TrainDetailsState extends State<TrainDetails> {
                                     itineraryDetailScreenController
                                         .itineraryDetailsListModel!
                                         .itinerary[widget.index]
-                                        .departDateTime
-                                        .toString(),
+                                        .departDateTime,
                                   ),
                                 ),
                                 const SizedBox(height: 70),
@@ -167,8 +162,7 @@ class _TrainDetailsState extends State<TrainDetails> {
                                     itineraryDetailScreenController
                                         .itineraryDetailsListModel!
                                         .itinerary[widget.index]
-                                        .arrivalDateTime
-                                        .toString(),
+                                        .arrivalDateTime,
                                   ),
                                 ),
                               ],
@@ -233,8 +227,7 @@ class _TrainDetailsState extends State<TrainDetails> {
                             itineraryDetailScreenController
                                 .itineraryDetailsListModel!
                                 .itinerary[widget.index]
-                                .departDateTime
-                                .toString(),
+                                .departDateTime,
                           ),
                         ),
                       ],
@@ -248,8 +241,7 @@ class _TrainDetailsState extends State<TrainDetails> {
                             itineraryDetailScreenController
                                 .itineraryDetailsListModel!
                                 .itinerary[widget.index]
-                                .arrivalDateTime
-                                .toString(),
+                                .arrivalDateTime,
                           ),
                         ),
                       ],

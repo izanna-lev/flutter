@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../custem_class/constant/app_functions.dart';
 import '../../custem_class/constant/app_icons.dart';
 import '../../custem_class/constant/app_settings.dart';
-import '../screen/settings_screen/view/faq_screen.dart';
 
 final RegExp emailValidatorRegExp =
     RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
@@ -311,12 +311,15 @@ class CustomTextField2 extends StatelessWidget {
                   hintText: hintText),
             ),
           ),
-          IconButton(
-            //  onPressed: send, icon: buildWidget(AppImages.send, 20, 22))
-            onPressed: send,
-            icon: Image.asset(
-              AppIcons.chatSendIcon,
-              height: 40,
+          SizedBox(
+            height: 60,
+            width: 60,
+            child: IconButton(
+              //  onPressed: send, icon: buildWidget(AppImages.send, 20, 22))
+              onPressed: send,
+              icon: Image.asset(
+                AppIcons.chatSendIcon,
+              ),
             ),
           ),
         ],

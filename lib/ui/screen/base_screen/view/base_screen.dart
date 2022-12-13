@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:tralever_module/custem_class/constant/app_colors.dart';
 import 'package:tralever_module/custem_class/constant/app_icons.dart';
@@ -39,11 +40,34 @@ class _BaseScreenState extends State<BaseScreen> {
   void initState() {
     baseScreenController.update();
     notificationScreenController.update();
+    baseScreenController.selectedTab = 0;
+    // WidgetsBinding.instance.addObserver(this);
     super.initState();
   }
 
+  // @override
+  // void didChangeAppLifecycleState(AppLifecycleState state) {
+  //   print("NOTIFICATION didChangeAppLifecycleState");
+  //   switch (state) {
+  //     case AppLifecycleState.resumed:
+  //       checkNotificationUnreadCount();
+  //       print("app in resumed");
+  //       break;
+  //     case AppLifecycleState.inactive:
+  //       print("app in inactive");
+  //       break;
+  //     case AppLifecycleState.paused:
+  //       print("app in paused");
+  //       break;
+  //     case AppLifecycleState.detached:
+  //       print("app in detached");
+  //       break;
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
     return WillPopScope(
       onWillPop: onWillPop,
       child: Scaffold(
@@ -86,9 +110,7 @@ class _BaseScreenState extends State<BaseScreen> {
                                 scale: 3.5,
                               ),
                             ),
-                            notificationScreenController
-                                    .travellerNotificationListModel
-                                    .unseenNotifications
+                            baseScreenController.notiUnreadCount
                                 ? const Positioned(
                                     top: 2,
                                     right: 5,
@@ -234,6 +256,20 @@ class _BaseScreenState extends State<BaseScreen> {
         ),
       ),
     );
+  }
+
+  checkNotificationUnreadCount() {
+    int index = notificationScreenController.travellerDetailsNotificationList
+        .indexWhere((element) => element.seen == true);
+    if (index != -1) {
+      print(
+          "SELECTED NOTI ${notificationScreenController.travellerDetailsNotificationList[index!].toString()}");
+      notificationScreenController
+          .travellerNotificationListModel.unseenNotifications = true;
+    } else {
+      notificationScreenController
+          .travellerNotificationListModel.unseenNotifications = false;
+    }
   }
 }
 

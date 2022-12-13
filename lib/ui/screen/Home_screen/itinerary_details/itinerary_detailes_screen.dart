@@ -943,39 +943,37 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return SafeArea(
-      child: Scaffold(
-          backgroundColor: Colors.white,
-          appBar: commonAppbar(titleText: "Itinerary Details"),
-          body: GetBuilder(
-            builder: (ItineraryDetailScreenController
-                itineraryDetailScreenController) {
-              return itineraryDetailScreenController
-                          .itineraryDetailsListModel?.id !=
-                      null
-                  ? Stack(
-                      children: [
-                        imageContainer(),
-                        SingleChildScrollView(
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            child: Column(
-                              children: [
-                                const SizedBox(
-                                  height: 210,
-                                  width: double.infinity,
-                                ),
-                                imageContainerDetail(),
-                              ],
-                            ),
+    return Scaffold(
+        backgroundColor: Colors.white,
+        appBar: commonAppbar(titleText: "Itinerary Details"),
+        body: GetBuilder(
+          builder: (ItineraryDetailScreenController
+              itineraryDetailScreenController) {
+            return itineraryDetailScreenController
+                        .itineraryDetailsListModel?.id !=
+                    null
+                ? Stack(
+                    children: [
+                      imageContainer(),
+                      SingleChildScrollView(
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          child: Column(
+                            children: [
+                              const SizedBox(
+                                height: 210,
+                                width: double.infinity,
+                              ),
+                              imageContainerDetail(),
+                            ],
                           ),
                         ),
-                      ],
-                    )
-                  : const AppLoader();
-            },
-          )),
-    );
+                      ),
+                    ],
+                  )
+                : const AppLoader();
+          },
+        ));
   }
 
   imageContainer() {
@@ -1273,8 +1271,6 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
                           "";
                       // var itineraryId = widget.data;
                       print('widget.data====>${widget.data}');
-                      print(
-                          'itinerary_Id====>${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[index].id}');
                       var itineraryId = itineraryDetailScreenController
                           .itineraryDetailsListModel!.itinerary[index].id;
                       var location = itineraryDetailScreenController

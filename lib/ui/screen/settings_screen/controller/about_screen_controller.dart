@@ -24,7 +24,8 @@ class AboutScreenController extends GetxController {
   Future<void> deleteUser() async {
     DeleteAccountModel? deleteAccountModel =
         await ContactRepo.deleteAccountRepo(
-            userRef: userController.userModel!.user.id);
+            userRef: userController.rowndSignInDetailsModel!.traveller.id);
+
     if (deleteAccountModel != null) {
       return;
     }

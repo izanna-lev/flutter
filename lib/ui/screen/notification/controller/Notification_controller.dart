@@ -3,12 +3,15 @@ import 'package:get/get.dart';
 import 'package:pagination_view/pagination_view.dart';
 import 'package:tralever_module/models/notifications_model/traveller_notification_model.dart';
 import 'package:tralever_module/services/notification_repo/notifications_repo.dart';
+import 'package:tralever_module/ui/screen/base_screen/controller/base_screen_controller.dart';
 
 import '../../../../models/notifications_model/notifications_model.dart';
 import '../../../../models/notifications_model/traveller_notification_seen.dart';
 import '../../../../services/api_routes.dart';
 
 class NotificationScreenController extends GetxController {
+  BaseScreenController baseScreenController = Get.put(BaseScreenController());
+
   GlobalKey<PaginationViewState> notificationKey =
       GlobalKey<PaginationViewState>();
   // int start = resourceAPIPaginationStart;
@@ -96,6 +99,9 @@ class NotificationScreenController extends GetxController {
       } else {
         start += 1;
       }
+      travellerNotificationListModel.unseenNotifications;
+      baseScreenController.notiUnreadCount =
+          travellerNotificationListModel.unseenNotifications;
       return travellerDetailsNotificationList;
     }
     return [];

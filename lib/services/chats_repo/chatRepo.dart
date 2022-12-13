@@ -2,9 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:tralever_module/custem_class/constant/app_functions.dart';
+import 'package:tralever_module/custem_class/utils/globle.dart';
+import 'package:tralever_module/custem_class/utils/local_storage.dart';
+import 'package:tralever_module/models/chats/chat_list_model.dart';
 
-import '../../custem_class/utils/globle.dart';
-import '../../models/chats/chat_list_model.dart';
 import '../../models/chats/get_channel_model.dart';
 import '../../models/login/successModel.dart';
 import '../api_handler.dart';
@@ -115,6 +116,9 @@ class ChatRepo {
   }
 
   static Future<SuccessResponse?> getMessageUnreadCount() async {
+    if (LocalStorage.isUserSignIn()) {
+      return null;
+    }
     var responseBody = await API.apiHandler(
         url: APIRoutes.travellerUnread,
         requestType: RequestType.Post,
@@ -142,7 +146,7 @@ class ChatRepo {
         token: userController.rowndSignInModel!.data.accessToken,
         url: APIRoutes.travellerChatImage,
         field: {"data": jsonEncode({})},
-        fileImage: picture == null ? null : [picture],
+        fileImage: picture,
         multiPartImageKeyName: "image",
         encoding: Encoding.getByName("utf-8"));
     return responseBody == null ? null : SuccessModel.fromJson(responseBody);

@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:ui';
@@ -13,6 +12,7 @@ import 'package:get/get.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:tralever_module/custem_class/utils/local_storage.dart';
+import 'package:tralever_module/ui/screen/notification/controller/Notification_controller.dart';
 import 'package:tralever_module/ui/screen/notification/view/notification_screen.dart';
 
 class NotificationUtils {
@@ -222,6 +222,9 @@ class NotificationUtils {
     }
   }
 
+  NotificationScreenController notificationScreenController =
+      Get.put(NotificationScreenController());
+
   /// display a local notification
   void displayLocalNotification({
     required int id,
@@ -250,6 +253,14 @@ class NotificationUtils {
         ),
         payload: data.isNotEmpty ? jsonEncode(data) : null,
       );
+      // if (context != null) {
+      //   notificationScreenController.notificationKey.currentState!
+      //       .refresh()
+      //       .then((value) => notificationScreenController
+      //           .travellerNotificationListModel.unseenNotifications);
+      //   print(
+      //       'NOTIFICATION_KEY--->${notificationScreenController.notificationKey.currentState!.refresh()}');
+      // }
     }
   }
 
@@ -278,4 +289,3 @@ class NotificationUtils {
     // });
   }
 }
-

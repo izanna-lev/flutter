@@ -16,6 +16,7 @@ class ImagePickerController extends GetxController {
   String get image => _image;
   set image(String value) {
     _image = value;
+    // userController.updateProfilePic(image);
     update();
   }
 
@@ -45,27 +46,54 @@ class AppImagePicker {
 
   Future browseImage(ImageSource imageSource) async {
     try {
-      var pickedFile =
+      final pickedFile =
           await imagePicker.pickImage(source: imageSource, imageQuality: 50);
-      CroppedFile? file = await ImageCropper().cropImage(
-        sourcePath: pickedFile!.path,
-        aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
-        compressQuality: 100,
-        maxHeight: 700,
-        maxWidth: 700,
-        compressFormat: ImageCompressFormat.jpg,
-        uiSettings: [
-          AndroidUiSettings(
-            toolbarColor: Colors.white,
-            toolbarTitle: "Image Cropper",
-          )
-        ],
-      );
-      imagePickerController.image = file!.path;
+      if (pickedFile != null) {
+        CroppedFile? file = await ImageCropper().cropImage(
+            sourcePath: pickedFile.path,
+            aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
+            compressQuality: 100,
+            maxHeight: 700,
+            maxWidth: 700,
+            compressFormat: ImageCompressFormat.jpg,
+            uiSettings: [
+              AndroidUiSettings(
+                toolbarColor: Colors.white,
+                toolbarTitle: "Image Cropper",
+              ),
+            ]);
+        if (file != null) {
+          imagePickerController.image = file.path;
+        }
+      }
     } on Exception catch (e) {
       return Future.error(e);
     }
   }
+  //
+  // Future browseImage(ImageSource imageSource) async {
+  //   try {
+  //     var pickedFile =
+  //         await imagePicker.pickImage(source: imageSource, imageQuality: 50);
+  //     CroppedFile? file = await ImageCropper().cropImage(
+  //       sourcePath: pickedFile!.path,
+  //       aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
+  //       compressQuality: 100,
+  //       maxHeight: 700,
+  //       maxWidth: 700,
+  //       compressFormat: ImageCompressFormat.jpg,
+  //       uiSettings: [
+  //         AndroidUiSettings(
+  //           toolbarColor: Colors.white,
+  //           toolbarTitle: "Image Cropper",
+  //         )
+  //       ],
+  //     );
+  //     imagePickerController.image = file!.path;
+  //   } on Exception catch (e) {
+  //     return Future.error(e);
+  //   }
+  // }
 
   Future<void> openBottomSheet() async {
     if (Platform.isIOS) {

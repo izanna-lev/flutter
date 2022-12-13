@@ -325,6 +325,9 @@ extension DateTimeFormatExtension on DateTimeFormat {
   }
 
   static String displayMSGTimeFromTimestamp(String strDate) {
+    if (strDate.isEmpty) {
+      return "";
+    }
     var date = DateTime.parse(strDate);
     var v = DateTime.now().difference(date);
     if (v.inHours < 24) {

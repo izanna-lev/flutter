@@ -121,6 +121,7 @@ flutter_native_splash:
   android: true
   ios: true
   fullscreen: true
+  ios_content_mode: scaleToFill
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

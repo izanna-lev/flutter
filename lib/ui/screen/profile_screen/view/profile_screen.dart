@@ -45,15 +45,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: Stack(
         children: [
           profileDetails(context),
-          SingleChildScrollView(
-            child: GetBuilder(
-              builder: (ProfileController profileController) {
-                return Column(
-                  children: [
-                    Column(
+          GetBuilder(
+            builder: (ProfileController profileController) {
+              return Column(
+                children: [
+                  Expanded(
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        const SizedBox(height: 320),
+                        // const SizedBox(height: 5),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
@@ -138,10 +138,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                       ],
                     ),
-                  ],
-                );
-              },
-            ),
+                  ),
+                ],
+              );
+            },
           ),
         ],
       ),
@@ -155,7 +155,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         currImageUrl = imagePickerController.image;
 
         /// call api
-        profileController.editProfile();
+        profileController.editProfile(image: File(imagePickerController.image));
         print("CALL API");
       }
       return Column(

@@ -99,7 +99,10 @@ userDetails({
         ),
       ),
       const SizedBox(height: 10),
-      GestureDetector(onTap: ticketOnTap, child: Image.network(img)),
+      GestureDetector(
+          onTap: ticketOnTap,
+          child: Container(
+              height: 150, width: double.infinity, child: Image.network(img))),
       const SizedBox(height: 10),
     ],
   );

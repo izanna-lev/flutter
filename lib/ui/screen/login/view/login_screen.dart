@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:rownd_flutter_plugin/rownd.dart';
@@ -51,6 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
+    loginController.update();
 
     /// Rownd key
     /// e2f1fafb-228f-4eb7-85b7-8e784aa12567
@@ -75,6 +77,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+    WidgetsBinding.instance.addPostFrameCallback((_) {});
     return Scaffold(
       body: SafeArea(
         child: GetBuilder(
@@ -181,9 +185,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                           text: "Terms & Conditions".tr,
                                           recognizer: TapGestureRecognizer()
                                             ..onTap = () {
-                                              var url = (aboutScreenController
-                                                  .appDetailDataModel!
-                                                  .termsAndConditions);
+                                              var url = aboutScreenController
+                                                      .appDetailDataModel
+                                                      ?.termsAndConditions ??
+                                                  "";
                                               launch(url);
                                             },
                                           style: const TextStyle(
@@ -225,12 +230,21 @@ class _LoginScreenState extends State<LoginScreen> {
                                   // }
                                   return materialButton(
                                     onTap: () async {
+                                      disposeKeyboard();
+                                      // setState(() {
                                       if (loginController.loginKey.currentState!
                                           .validate()) {
-                                        disposeKeyboard();
                                         if (loginController.isChecked == true) {
                                           // if (rownd.state.auth?.isAuthenticated ??
                                           //     true) {
+                                          // if (userController
+                                          //         .rowndSignInModel?.code !=
+                                          //     100) {
+                                          //
+                                          // } else {
+                                          //   flutterToast(
+                                          //       "Your Account has been blocked by Admin");
+                                          // }
                                           if (rownd.state.auth?.accessToken !=
                                               null) {
                                             userController
@@ -240,22 +254,20 @@ class _LoginScreenState extends State<LoginScreen> {
                                                     fcmToken: LocalStorage
                                                         .getFCMToken())
                                                 .then((value) {
-                                              print(
-                                                  "ROWND-ACCESS-TOKEN----->${rownd.state.auth?.accessToken}");
-                                              userController.rowndAcessToken =
-                                                  rownd.state.auth?.accessToken;
-                                              print(
-                                                  "usercontroller token--->${userController.rowndAcessToken}");
-
-                                              Get.offAllNamed(
-                                                  BaseScreen.routeName);
+                                              if (value != null) {
+                                                print(
+                                                    "ROWND-ACCESS-TOKEN----->${rownd.state.auth?.accessToken}");
+                                                userController.rowndAcessToken =
+                                                    rownd.state.auth
+                                                        ?.accessToken;
+                                                print(
+                                                    "usercontroller token--->${userController.rowndAcessToken}");
+                                                Get.offAllNamed(
+                                                    BaseScreen.routeName);
+                                              }
                                             });
                                           } else {
                                             signin()?.then((value) {
-                                              // Navigator.pop(context);
-                                              // Navigator.pop(context);
-                                              // if (rownd.state.auth?.accessToken !=
-                                              //     null) {
                                               userController
                                                   .rowndSignIn(
                                                       token:
@@ -273,6 +285,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                               "Please agree Terms and conditions");
                                         }
                                       }
+                                      // });
                                     },
                                     text: 'Get Started',
                                   );

@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:pagination_view/pagination_view.dart';
 import 'package:tralever_module/models/chats/chat_list_model.dart';
 import 'package:tralever_module/ui/screen/chats/view/soket_managet.dart';
@@ -67,11 +66,10 @@ class MessageScreenController extends GetxController {
     return [];
   }
 
-  Future<SuccessModel?> uploadTravellerChatImage(XFile image) async {
+  Future<SuccessModel?> uploadTravellerChatImage(File image) async {
     if (image != null) {
-      File newImage = File(image.path);
       SuccessModel? successModel =
-          await ChatRepo.travellerChatImage(picture: newImage);
+          await ChatRepo.travellerChatImage(picture: image);
       if (successModel != null) {
         return successModel;
       }

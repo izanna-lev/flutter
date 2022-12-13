@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:tralever_module/custem_class/constant/app_functions.dart';
 import 'package:tralever_module/models/login/rownd_sign_in_model.dart';
 import 'package:tralever_module/services/login_repo/login_repo.dart';
 
@@ -37,16 +38,21 @@ class UserController extends GetxController {
     RowndSignInModel? rowndSignInModel =
         await LoginRepo.rowndSignIn(token: token, fcmToken: fcmToken);
     if (rowndSignInModel != null) {
-      LocalStorage.setUserDetail(rowndSignInModel);
-      rowndSignInDetailsModel = rowndSignInModel.data;
+      if (rowndSignInModel.code == 100) {
+        LocalStorage.setUserDetail(rowndSignInModel);
+        rowndSignInDetailsModel = rowndSignInModel.data;
+        return rowndSignInDetailsModel;
+      } else {
+        flutterToast(rowndSignInModel.message);
+      }
     }
-    return rowndSignInDetailsModel;
+    return null;
   }
 
   updateProfilePic(dynamic url) {
     userModel?.user.image = url;
     print("-------------->${url}");
-    // LocalStorage.saveUserDetails();
+    // LocalStorage.setUserDetail(rowndSignInModel);
     update();
   }
 

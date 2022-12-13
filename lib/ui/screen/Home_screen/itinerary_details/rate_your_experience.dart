@@ -129,28 +129,27 @@ class _RateYourExperienceState extends State<RateYourExperience> {
                     materialButton(
                       onTap: () async {
                         // var response =
-                        if (itineraryDetailScreenController.overallRating !=
+                        if (itineraryDetailScreenController.overallRating ==
                                 null ||
-                            itineraryDetailScreenController.specialistRating !=
+                            itineraryDetailScreenController.specialistRating ==
                                 null ||
-                            itineraryDetailScreenController.valueRating !=
+                            itineraryDetailScreenController.valueRating ==
                                 null) {
-                          itineraryDetailScreenController.ratingDetails(
-                              itineraryRef: widget.data,
-                              experience: itineraryDetailScreenController
-                                  .overallRating!,
-                              specialist: itineraryDetailScreenController
-                                  .specialistRating!,
-                              value:
-                                  itineraryDetailScreenController.valueRating!);
-                          dialogBox();
-                        } else {
                           flutterToast("Please select some ratings.");
+                          print('else  rating');
+                        } else {
+                          itineraryDetailScreenController
+                              .ratingDetails(
+                                  itineraryRef: widget.data,
+                                  experience: itineraryDetailScreenController
+                                      .overallRating!,
+                                  specialist: itineraryDetailScreenController
+                                      .specialistRating!,
+                                  value: itineraryDetailScreenController
+                                      .valueRating!)
+                              .then((value) => dialogBox());
+                          print('if rating');
                         }
-
-                        // if (response != null) {
-                        //   dialogBox();
-                        // }
                       },
                       text: "Submit",
                     ),

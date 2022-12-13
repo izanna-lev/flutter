@@ -17,9 +17,7 @@ class ChatScreenController extends GetxController {
   BaseScreenController baseScreenController = Get.find<BaseScreenController>();
 
   List<ChatListModel> _chatData = [];
-
   List<ChatListModel> get chatData => _chatData;
-
   set chatData(List<ChatListModel> value) {
     _chatData = value;
     update();

@@ -142,9 +142,7 @@ class _SettingScreenState extends State<SettingScreen> {
           LocalStorage.clearData();
           print('CLEAER_DATA${LocalStorage.clearData}');
         }
-        // signout();
         Get.offAllNamed(LoginScreen.routeName);
-        // Get.offAllNamed(LoginScreen.routeName)?.then((value) => signout());
       },
       color: AppColors.appBlueColor,
       okText: "YES",
@@ -193,30 +191,33 @@ class _SettingScreenState extends State<SettingScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  const SizedBox(width: 10),
-                  Image.asset(
-                    img,
-                    height: 25,
-                    width: 25,
-                    color: AppColors.appBlueColor,
-                  ),
-                  const SizedBox(width: 15),
-                  Text(
-                    text.tr,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
+              child: Container(
+                color: Colors.transparent,
+                child: Row(
+                  children: [
+                    const SizedBox(width: 10),
+                    Image.asset(
+                      img,
+                      height: 25,
+                      width: 25,
+                      color: AppColors.appBlueColor,
                     ),
-                  ),
-                  const Spacer(),
-                  Icon(
-                    icon,
-                    size: 35,
-                    color: Colors.black45,
-                  ),
-                ],
+                    const SizedBox(width: 15),
+                    Text(
+                      text.tr,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const Spacer(),
+                    Icon(
+                      icon,
+                      size: 35,
+                      color: Colors.black45,
+                    ),
+                  ],
+                ),
               ),
             ),
             const SizedBox(height: 10),

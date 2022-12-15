@@ -16,6 +16,7 @@ class ChatScreenController extends GetxController {
       Get.find<ImagePickerController>();
   BaseScreenController baseScreenController = Get.find<BaseScreenController>();
 
+  bool isUpdateMessage = false;
   List<ChatListModel> _chatData = [];
   List<ChatListModel> get chatData => _chatData;
   set chatData(List<ChatListModel> value) {
@@ -24,6 +25,9 @@ class ChatScreenController extends GetxController {
   }
 
   Future<List<ChatListModel>> userChatListData(int offset) async {
+    if (offset == 0 && isUpdateMessage) {
+      return chatData;
+    }
     if (offset == 0) start = resourceAPIPaginationStart;
     if (start == 0) return [];
     ChatModel? chatModel = await ChatScreenRepo.chatScreenRepo(

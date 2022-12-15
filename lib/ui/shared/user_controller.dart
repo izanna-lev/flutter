@@ -43,6 +43,7 @@ class UserController extends GetxController {
         rowndSignInDetailsModel = rowndSignInModel.data;
         return rowndSignInDetailsModel;
       } else {
+        print("rownd signIn response");
         flutterToast(rowndSignInModel.message);
       }
     }

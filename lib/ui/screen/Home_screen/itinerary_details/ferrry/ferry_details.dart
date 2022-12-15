@@ -254,6 +254,9 @@ class _FerryDetailsState extends State<FerryDetails> {
                     ),
                   ],
                 ),
+                SizedBox(
+                  height: 40,
+                )
               ],
             );
           },

@@ -18,6 +18,7 @@ class MessageScreenController extends GetxController {
   GlobalKey<PaginationViewState> messageListKey =
       GlobalKey<PaginationViewState>();
 
+  bool isUpdateMessage = false;
   int start = resourceAPIPaginationStart;
 
   List<Message> _messageList = [];
@@ -46,6 +47,9 @@ class MessageScreenController extends GetxController {
   // }
 
   Future<List<Message>> getMessageList(int offset) async {
+    if (offset == 0 && isUpdateMessage) {
+      return messageList;
+    }
     if (offset == 0) start = resourceAPIPaginationStart;
     if (start == 0) return [];
     MessageDataResponse? response = await ChatRepo.getAllChatList(

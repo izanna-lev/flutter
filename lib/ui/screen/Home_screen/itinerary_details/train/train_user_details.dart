@@ -30,19 +30,22 @@ class _TrainUserDetailsScreenState extends State<TrainUserDetailsScreen> {
                 itineraryDetailScreenController) {
               return ListView.builder(
                   itemCount: itineraryDetailScreenController
-                      .itineraryDetailsListModel?.itinerary[0].tickets.length,
+                      .itineraryDetailsListModel
+                      ?.itinerary[widget.index]
+                      .tickets
+                      .length,
                   itemBuilder: (BuildContext context, int index) {
                     return userDetails(
                       name:
-                          '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].tickets[index].name}',
+                          '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].tickets[index].name}',
                       img: imageUrl +
-                          '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].tickets[index].image}',
+                          '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].tickets[index].image}',
                       // "https://image.shutterstock.com/image-vector/vector-train-ticket-rail-pass-260nw-1228205155.jpg",
                       ticketOnTap: () {
                         Get.toNamed(TrainTicketPreviewScreen.routeName,
                             arguments: itineraryDetailScreenController
                                 .itineraryDetailsListModel
-                                ?.itinerary[index]
+                                ?.itinerary[widget.index]
                                 .tickets[index]
                                 .image);
                       },

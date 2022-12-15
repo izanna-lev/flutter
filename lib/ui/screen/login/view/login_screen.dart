@@ -264,6 +264,21 @@ class _LoginScreenState extends State<LoginScreen> {
                                                     "usercontroller token--->${userController.rowndAcessToken}");
                                                 Get.offAllNamed(
                                                     BaseScreen.routeName);
+                                              } else {
+                                                rownd.state.auth?.accessToken =
+                                                    null;
+                                                userController.rowndAcessToken =
+                                                    null;
+                                                if (_rownd
+                                                        .state()
+                                                        .state
+                                                        .auth
+                                                        ?.isAuthenticated ??
+                                                    false) {
+                                                  print("rownd signOut");
+                                                  _rownd.signOut();
+                                                  LocalStorage.clearData();
+                                                }
                                               }
                                             });
                                           } else {

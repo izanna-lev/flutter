@@ -157,57 +157,67 @@ class _FlightDetailState extends State<FlightDetail> {
                         ),
                         const SizedBox(height: 8),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Column(
+                            Row(
                               children: [
-                                flightText(
-                                  text: flightDepartArriveTimeConverter(
-                                    itineraryDetailScreenController
-                                        .itineraryDetailsListModel!
-                                        .itinerary[widget.index]
-                                        .departDateTime,
-                                  ),
-                                ),
-                                const SizedBox(height: 70),
-                                flightText(
-                                  text: flightDepartArriveTimeConverter(
-                                    itineraryDetailScreenController
-                                        .itineraryDetailsListModel!
-                                        .itinerary[widget.index]
-                                        .arrivalDateTime,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Image.asset(AppIcons.startFlightIcon,
-                                    height: 17),
-                                Container(
-                                  height: 75,
-                                  width: 1.5,
-                                  color: Colors.grey,
-                                ),
-                                Image.asset(AppIcons.ebdFlightIcon, height: 17),
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                flightText(
-                                    text:
-                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].departLocation}'
-                                    // "Flight depart from canada"
+                                Column(
+                                  children: [
+                                    flightText(
+                                      text: flightDepartArriveTimeConverter(
+                                        itineraryDetailScreenController
+                                            .itineraryDetailsListModel!
+                                            .itinerary[widget.index]
+                                            .departDateTime,
+                                      ),
                                     ),
-                                const SizedBox(height: 70),
-                                flightText(
-                                    text:
-                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].arrivalLocation}')
+                                    const SizedBox(height: 70),
+                                    flightText(
+                                      text: flightDepartArriveTimeConverter(
+                                        itineraryDetailScreenController
+                                            .itineraryDetailsListModel!
+                                            .itinerary[widget.index]
+                                            .arrivalDateTime,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      right: 10, left: 10),
+                                  child: Column(
+                                    children: [
+                                      Image.asset(AppIcons.startFlightIcon,
+                                          height: 17),
+                                      Container(
+                                        height: 75,
+                                        width: 1.5,
+                                        color: Colors.grey,
+                                      ),
+                                      Image.asset(AppIcons.ebdFlightIcon,
+                                          height: 17),
+                                    ],
+                                  ),
+                                ),
                               ],
+                            ),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  flightText(
+                                      text:
+                                          '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].departLocation}'
+                                      // "Flight depart from canada"
+                                      ),
+                                  const SizedBox(height: 70),
+                                  flightText(
+                                      text:
+                                          '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].arrivalLocation}')
+                                ],
+                              ),
                             ),
                           ],
-                        )
+                        ),
                       ],
                     ),
                   ),

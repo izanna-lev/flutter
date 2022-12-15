@@ -11,7 +11,7 @@ class FerryTicketDetailsScreen extends StatefulWidget {
   static const String routeName = "/FerryTicketDetailsScreen";
 
   FerryTicketDetailsScreen({Key? key}) : super(key: key);
-  var data = Get.arguments;
+  var index = Get.arguments;
 
   @override
   State<FerryTicketDetailsScreen> createState() =>
@@ -23,8 +23,8 @@ class _FerryTicketDetailsScreenState extends State<FerryTicketDetailsScreen>
   late TabController controller;
   @override
   void initState() {
-    widget.data;
-    print('DATA${widget.data}');
+    widget.index;
+    print('DATA${widget.index}');
     controller = TabController(vsync: this, length: 2);
     super.initState();
   }
@@ -81,8 +81,8 @@ class _FerryTicketDetailsScreenState extends State<FerryTicketDetailsScreen>
             child: TabBarView(
               controller: controller,
               children: [
-                FerryDetails(index: widget.data),
-                FerryUserDetails(index: widget.data),
+                FerryDetails(index: widget.index),
+                FerryUserDetails(index: widget.index),
               ],
             ),
           ),

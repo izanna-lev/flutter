@@ -18,4 +18,6 @@ class AppImages {
   //
   static const String baseScreenPendingImage =
       "assets/images/onboarding_images/ic_nothing-found.png";
+  static const String placeHolderImage =
+      "assets/images/base_screen_icon/ic_placeholder.png";
 }

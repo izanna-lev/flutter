@@ -42,108 +42,128 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Stack(
-        children: [
-          profileDetails(context),
-          GetBuilder(
-            builder: (ProfileController profileController) {
-              return Column(
-                children: [
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        // const SizedBox(height: 5),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                appImagePicker.openBottomSheet();
-                              },
-                              child: Image.asset(
-                                AppIcons.editIcon,
-                                width: 50,
-                              ),
-                            ),
-                            const SizedBox(width: 20),
-                          ],
-                        ),
-                        const SizedBox(height: 10),
-                        Container(
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(20),
-                              topLeft: Radius.circular(20),
-                            ),
-                            color: Colors.white,
-                          ),
-                          width: double.infinity,
-                          child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: kDefaultPadding),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SizedBox(height: 20),
-                                  Text(
-                                    profileController.userProfileDetailsModel!
-                                            .name.isEmpty
-                                        ? ""
-                                        : profileController
-                                            .userProfileDetailsModel!.name,
-                                    // userController.userModel?.user.name ?? "",
+      body: GetBuilder(
+        builder: (ImagePickerController imagePickerController) {
+          if (currImageUrl != imagePickerController.image &&
+              imagePickerController.image.isNotEmpty) {
+            currImageUrl = imagePickerController.image;
 
-                                    // "Steve Walter",
-                                    style: const TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    profileController.userProfileDetailsModel!
-                                            .email.isEmpty
-                                        ? ""
-                                        : profileController
-                                            .userProfileDetailsModel!.email,
-                                    // '${userController.rowndSignInDetailsModel?.traveller.email}',
-                                    // "example@gmail.com",
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 25),
-                                  profileSell(
-                                    img: AppIcons.manageCardIcon,
-                                    text: "Manage Payment Methods",
-                                    onTap: () {
-                                      Get.toNamed(
-                                          ManagePaymentScreen.routeName);
-                                    },
-                                    icon: Icons.navigate_next_sharp,
-                                  ),
-                                  const SizedBox(height: 10),
-                                  profileSell(
-                                    img: AppIcons.transactionsIcon,
-                                    text: "My Transactions",
-                                    onTap: () {
-                                      Get.toNamed(
-                                          MyTransactionScreen.routeName);
-                                    },
-                                    icon: Icons.navigate_next_sharp,
-                                  ),
-                                  const SizedBox(height: 20),
-                                ],
-                              )),
+            /// call api
+            profileController.editProfile(
+                image: File(imagePickerController.image));
+            print("CALL API");
+          }
+          return Container(
+            decoration: BoxDecoration(
+                image: imagePickerController.image.isEmpty
+                    ? DecorationImage(
+                        image: AssetImage(currImageUrl), fit: BoxFit.cover)
+                    : DecorationImage(
+                        image: FileImage(
+                          File(imagePickerController.image),
                         ),
-                      ],
+                        fit: BoxFit.cover,
+                      )),
+            child: GetBuilder(
+              builder: (ProfileController profileController) {
+                return Column(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          // const SizedBox(height: 5),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  appImagePicker.openBottomSheet();
+                                },
+                                child: Image.asset(
+                                  AppIcons.editIcon,
+                                  width: 50,
+                                ),
+                              ),
+                              const SizedBox(width: 20),
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                          Container(
+                            decoration: const BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(20),
+                                topLeft: Radius.circular(20),
+                              ),
+                              color: Colors.white,
+                            ),
+                            width: double.infinity,
+                            child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: kDefaultPadding),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const SizedBox(height: 20),
+                                    Text(
+                                      profileController.userProfileDetailsModel!
+                                              .name.isEmpty
+                                          ? ""
+                                          : profileController
+                                              .userProfileDetailsModel!.name,
+                                      // userController.userModel?.user.name ?? "",
+
+                                      // "Steve Walter",
+                                      style: const TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      profileController.userProfileDetailsModel!
+                                              .email.isEmpty
+                                          ? ""
+                                          : profileController
+                                              .userProfileDetailsModel!.email,
+                                      // '${userController.rowndSignInDetailsModel?.traveller.email}',
+                                      // "example@gmail.com",
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 25),
+                                    profileSell(
+                                      img: AppIcons.manageCardIcon,
+                                      text: "Manage Payment Methods",
+                                      onTap: () {
+                                        Get.toNamed(
+                                            ManagePaymentScreen.routeName);
+                                      },
+                                      icon: Icons.navigate_next_sharp,
+                                    ),
+                                    const SizedBox(height: 10),
+                                    profileSell(
+                                      img: AppIcons.transactionsIcon,
+                                      text: "My Transactions",
+                                      onTap: () {
+                                        Get.toNamed(
+                                            MyTransactionScreen.routeName);
+                                      },
+                                      icon: Icons.navigate_next_sharp,
+                                    ),
+                                    const SizedBox(height: 20),
+                                  ],
+                                )),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              );
-            },
-          ),
-        ],
+                  ],
+                );
+              },
+            ),
+          );
+        },
       ),
     );
   }

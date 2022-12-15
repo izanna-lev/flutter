@@ -153,7 +153,7 @@ class _RateYourExperienceState extends State<RateYourExperience> {
                       },
                       text: "Submit",
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 60),
                   ],
                 );
               },

@@ -8,7 +8,9 @@
 const String url = "http://44.208.65.177:3000/api/";
 const String imageUrl =
     "https://app-onsite.s3.amazonaws.com/staging/images/small/";
-const String socketBaseUrl = "http://44.208.65.177:3000";
+const String socketBaseUrl =
+    // "https://5550-210-16-82-128.in.ngrok.io";
+    "http://44.208.65.177:3000";
 
 ///ROWND APP KEY
 const String rowndAppKey = "d432a653-54bc-4c1d-a8c8-bf975187a5f8";
@@ -48,8 +50,7 @@ class APIRoutes {
   static const String rowndSignIn = "${url}traveller/signin";
   static const String travellerNotificationList =
       "${url}notification/travellerList";
-  static const String travellerNotificationSeen =
-      "http://44.209.25.93:3000/api/notification/seen";
+  static const String travellerNotificationSeen = "${url}notification/seen";
 }
 
 const resourceAPIPaginationStart = 1;

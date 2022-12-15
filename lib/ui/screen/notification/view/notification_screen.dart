@@ -37,10 +37,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
     super.initState();
   }
 
-  refreshKey() {
-    notificationScreenController.notificationKey.currentState!.refresh();
-  }
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -95,8 +91,12 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     travellerDetailsNotificationList.seen = true;
 
                     setState(() {
-                      notificationScreenController.travellerNotificationSeen(
-                          notificationRef: travellerDetailsNotificationList.id);
+                      notificationScreenController
+                          .travellerNotificationSeen(
+                              notificationRef:
+                                  travellerDetailsNotificationList.id)
+                          .then((value) => notificationRedirection(
+                              travellerDetailsNotificationList));
                       int index = notificationScreenController
                           .travellerDetailsNotificationList
                           .indexWhere((element) => element.seen == false);
@@ -105,43 +105,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       //     travellerDetailsNotificationList.seen = true);
                       print(
                           ' widget.travellerDetailsNotificationList.sourceRef===>${travellerDetailsNotificationList.sourceRef}');
-                      travellerDetailsNotificationList.type == 1
-                          ? travellerDetailsNotificationList.type = 1
-                          : travellerDetailsNotificationList.type == 2
-                              ? Get.toNamed(MessageScreen.routeName,
-                                  arguments: {
-                                      "channelRef":
-                                          travellerDetailsNotificationList
-                                              .sourceRef,
-                                    })
-                              : travellerDetailsNotificationList.type == 3
-                                  ? Get.toNamed(ItineraryDetailScreen.routeName,
-                                      arguments: travellerDetailsNotificationList
-                                          .sourceRef)
-                                  : travellerDetailsNotificationList.type == 4
-                                      ? Get.toNamed(
-                                          ItineraryDetailScreen.routeName,
-                                          arguments:
-                                              travellerDetailsNotificationList
-                                                  .sourceRef)
-                                      : travellerDetailsNotificationList.type ==
-                                              5
-                                          ? Get.toNamed(
-                                              ItineraryDetailScreen.routeName,
-                                              arguments:
-                                                  travellerDetailsNotificationList
-                                                      .sourceRef)
-                                          : travellerDetailsNotificationList
-                                                      .type ==
-                                                  6
-                                              ? Get.toNamed(
-                                                  ItineraryDetailScreen
-                                                      .routeName,
-                                                  arguments:
-                                                      travellerDetailsNotificationList
-                                                          .sourceRef)
-                                              : const SizedBox();
-                      notificationScreenController.update();
+
+                      // notificationScreenController.update();
                     });
                   },
                   child: Column(
@@ -339,6 +304,31 @@ class _NotificationScreenState extends State<NotificationScreen> {
           // ),
           ),
     );
+  }
+
+  notificationRedirection(
+      TravellerDetailsNotificationList travellerDetailsNotificationList) {
+    travellerDetailsNotificationList.type == 1
+        ? travellerDetailsNotificationList.type = 1
+        : travellerDetailsNotificationList.type == 2
+            ? Get.toNamed(MessageScreen.routeName, arguments: {
+                "channelRef": travellerDetailsNotificationList.sourceRef,
+              })
+            : travellerDetailsNotificationList.type == 3
+                ? Get.toNamed(ItineraryDetailScreen.routeName,
+                    arguments: travellerDetailsNotificationList.sourceRef)
+                : travellerDetailsNotificationList.type == 4
+                    ? Get.toNamed(ItineraryDetailScreen.routeName,
+                        arguments: travellerDetailsNotificationList.sourceRef)
+                    : travellerDetailsNotificationList.type == 5
+                        ? Get.toNamed(ItineraryDetailScreen.routeName,
+                            arguments:
+                                travellerDetailsNotificationList.sourceRef)
+                        : travellerDetailsNotificationList.type == 6
+                            ? Get.toNamed(ItineraryDetailScreen.routeName,
+                                arguments:
+                                    travellerDetailsNotificationList.sourceRef)
+                            : const SizedBox();
   }
 
   checkNotificationUnreadCount() {

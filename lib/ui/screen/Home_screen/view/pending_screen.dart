@@ -30,12 +30,6 @@ class _PendingScreenState extends State<PendingScreen> {
   ];
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: GetBuilder(
@@ -55,9 +49,7 @@ class _PendingScreenState extends State<PendingScreen> {
                     arguments: homeController.travelPlansData[index].id,
                   );
                 },
-                image:
-                    // imageUrl +
-                    homeController.travelPlansData[index].image,
+                image: homeController.travelPlansData[index].image,
                 day: homeController.travelPlansData[index].duration.toString(),
                 please: homeController.travelPlansData[index].name,
                 price: homeController.travelPlansData[index].price.toString(),
@@ -154,7 +146,6 @@ class _PendingScreenState extends State<PendingScreen> {
   text({required String pleaseName}) {
     return Text(
       pleaseName,
-      // maxLines: 2,p
       style: const TextStyle(
         fontWeight: FontWeight.w600,
         fontSize: 16,

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tralever_module/custem_class/constant/app_icons.dart';
 import 'package:tralever_module/custem_class/constant/app_settings.dart';
+import 'package:tralever_module/services/api_routes.dart';
 import 'package:tralever_module/ui/screen/profile_screen/controller/profile_controller.dart';
 import 'package:tralever_module/ui/screen/profile_screen/view/manage_payment_screen.dart';
 import 'package:tralever_module/ui/screen/profile_screen/view/my_transactions_screen.dart';
@@ -31,15 +32,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     profileController.userProfile();
     profileController.update();
     super.initState();
-
-    // currImageUrl = imageUrl + userController.userModel!.user.image;
     currImageUrl = AppImages.loginBackgroundImage;
   }
 
   @override
   Widget build(BuildContext context) {
-    // final user =    Provider.of<GlobalStateNotifier>(context, listen: false);
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: GetBuilder(
@@ -53,166 +50,129 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 image: File(imagePickerController.image));
             print("CALL API");
           }
-          return Container(
-            decoration: BoxDecoration(
-                image: imagePickerController.image.isEmpty
-                    ? DecorationImage(
-                        image: AssetImage(currImageUrl), fit: BoxFit.cover)
-                    : DecorationImage(
-                        image: FileImage(
-                          File(imagePickerController.image),
-                        ),
-                        fit: BoxFit.cover,
-                      )),
-            child: GetBuilder(
-              builder: (ProfileController profileController) {
-                return Column(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          // const SizedBox(height: 5),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  appImagePicker.openBottomSheet();
-                                },
-                                child: Image.asset(
-                                  AppIcons.editIcon,
-                                  width: 50,
+          return GetBuilder(
+            builder: (ProfileController profileController) {
+              return Container(
+                  decoration: BoxDecoration(
+                      image: imagePickerController.image.isEmpty
+                          ? profileController.userProfileDetailsModel!.image ==
+                                  ""
+                              ? DecorationImage(
+                                  image: AssetImage(currImageUrl),
+                                  fit: BoxFit.cover)
+                              : DecorationImage(
+                                  image: NetworkImage(profileController
+                                          .userProfileDetailsModel!
+                                          .image
+                                          .isEmpty
+                                      ? ""
+                                      : imageUrl +
+                                          profileController
+                                              .userProfileDetailsModel!.image),
+                                  fit: BoxFit.cover,
+                                )
+                          : DecorationImage(
+                              image:
+                                  FileImage(File(imagePickerController.image)),
+                              fit: BoxFit.cover)),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    appImagePicker.openBottomSheet();
+                                  },
+                                  child: Image.asset(
+                                    AppIcons.editIcon,
+                                    width: 50,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(width: 20),
-                            ],
-                          ),
-                          const SizedBox(height: 10),
-                          Container(
-                            decoration: const BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(20),
-                                topLeft: Radius.circular(20),
-                              ),
-                              color: Colors.white,
+                                const SizedBox(width: 20),
+                              ],
                             ),
-                            width: double.infinity,
-                            child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: kDefaultPadding),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const SizedBox(height: 20),
-                                    Text(
-                                      profileController.userProfileDetailsModel!
-                                              .name.isEmpty
-                                          ? ""
-                                          : profileController
-                                              .userProfileDetailsModel!.name,
-                                      // userController.userModel?.user.name ?? "",
-
-                                      // "Steve Walter",
-                                      style: const TextStyle(
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.bold,
+                            const SizedBox(height: 10),
+                            Container(
+                              decoration: const BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(20),
+                                  topLeft: Radius.circular(20),
+                                ),
+                                color: Colors.white,
+                              ),
+                              width: double.infinity,
+                              child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: kDefaultPadding),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const SizedBox(height: 20),
+                                      Text(
+                                        profileController
+                                                .userProfileDetailsModel!
+                                                .name
+                                                .isEmpty
+                                            ? ""
+                                            : profileController
+                                                .userProfileDetailsModel!.name,
+                                        style: const TextStyle(
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      profileController.userProfileDetailsModel!
-                                              .email.isEmpty
-                                          ? ""
-                                          : profileController
-                                              .userProfileDetailsModel!.email,
-                                      // '${userController.rowndSignInDetailsModel?.traveller.email}',
-                                      // "example@gmail.com",
-                                      style: const TextStyle(
-                                        fontSize: 16,
+                                      Text(
+                                        profileController
+                                                .userProfileDetailsModel!
+                                                .email
+                                                .isEmpty
+                                            ? ""
+                                            : profileController
+                                                .userProfileDetailsModel!.email,
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                        ),
                                       ),
-                                    ),
-                                    const SizedBox(height: 25),
-                                    profileSell(
-                                      img: AppIcons.manageCardIcon,
-                                      text: "Manage Payment Methods",
-                                      onTap: () {
-                                        Get.toNamed(
-                                            ManagePaymentScreen.routeName);
-                                      },
-                                      icon: Icons.navigate_next_sharp,
-                                    ),
-                                    const SizedBox(height: 10),
-                                    profileSell(
-                                      img: AppIcons.transactionsIcon,
-                                      text: "My Transactions",
-                                      onTap: () {
-                                        Get.toNamed(
-                                            MyTransactionScreen.routeName);
-                                      },
-                                      icon: Icons.navigate_next_sharp,
-                                    ),
-                                    const SizedBox(height: 20),
-                                  ],
-                                )),
-                          ),
-                        ],
+                                      const SizedBox(height: 25),
+                                      profileSell(
+                                        img: AppIcons.manageCardIcon,
+                                        text: "Manage Payment Methods",
+                                        onTap: () {
+                                          Get.toNamed(
+                                              ManagePaymentScreen.routeName);
+                                        },
+                                        icon: Icons.navigate_next_sharp,
+                                      ),
+                                      const SizedBox(height: 10),
+                                      profileSell(
+                                        img: AppIcons.transactionsIcon,
+                                        text: "My Transactions",
+                                        onTap: () {
+                                          Get.toNamed(
+                                              MyTransactionScreen.routeName);
+                                        },
+                                        icon: Icons.navigate_next_sharp,
+                                      ),
+                                      const SizedBox(height: 20),
+                                    ],
+                                  )),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                );
-              },
-            ),
+                    ],
+                  ));
+            },
           );
         },
       ),
     );
-  }
-
-  Widget profileDetails(BuildContext context) {
-    return GetBuilder(builder: (ImagePickerController imagePickerController) {
-      if (currImageUrl != imagePickerController.image &&
-          imagePickerController.image.isNotEmpty) {
-        currImageUrl = imagePickerController.image;
-
-        /// call api
-        profileController.editProfile(image: File(imagePickerController.image));
-        print("CALL API");
-      }
-      return Column(
-        children: [
-          GestureDetector(
-            onTap: () {
-              appImagePicker.openBottomSheet();
-            },
-            child: imagePickerController.image.isEmpty
-                //     ? userController.userModel?.user.picture == ""
-                ? Image.asset(
-                    currImageUrl,
-                    height: 400,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  )
-                //     : CircleAvatar(
-                //   radius: 60,
-                //   backgroundColor: Colors.transparent,
-                //   backgroundImage: NetworkImage(currImageUrl),
-                // )
-                : Container(
-                    height: 400,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: FileImage(
-                          File(imagePickerController.image),
-                        ),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-          ),
-        ],
-      );
-    });
   }
 
   profileSell({

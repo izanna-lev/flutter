@@ -56,24 +56,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
     /// Rownd key
     /// e2f1fafb-228f-4eb7-85b7-8e784aa12567
-    // _rownd.configure(
-    //   "e2f1fafb-228f-4eb7-85b7-8e784aa12567",
-    // );
     _rownd.configure(rowndAppKey);
   }
-  //
-  // @override
-  // void dispose() {
-  //   disposed = true;
-  //   super.dispose();
-  // }
-  //
-  // @override
-  // void notifyListeners() {
-  //   if (!disposed) {
-  //     notifyListeners();
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -224,10 +208,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               builder: (context, child) {
                                 return Consumer<GlobalStateNotifier>(
                                     builder: (_, rownd, __) {
-                                  // if (rownd.state.auth?.accessToken != null) {
-                                  //   print("ROWND SIGNIn=====>");
-                                  //   Get.toNamed(BaseScreen.routeName);
-                                  // }
                                   return materialButton(
                                     onTap: () async {
                                       disposeKeyboard();
@@ -235,16 +215,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                       if (loginController.loginKey.currentState!
                                           .validate()) {
                                         if (loginController.isChecked == true) {
-                                          // if (rownd.state.auth?.isAuthenticated ??
-                                          //     true) {
-                                          // if (userController
-                                          //         .rowndSignInModel?.code !=
-                                          //     100) {
-                                          //
-                                          // } else {
-                                          //   flutterToast(
-                                          //       "Your Account has been blocked by Admin");
-                                          // }
                                           if (rownd.state.auth?.accessToken !=
                                               null) {
                                             userController

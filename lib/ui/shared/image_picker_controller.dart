@@ -120,7 +120,6 @@ class AppImagePicker {
               ),
               onPressed: () async {
                 await browseImage(ImageSource.gallery);
-
                 Get.back();
               },
             ),

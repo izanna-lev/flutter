@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:tralever_module/custem_class/constant/app_colors.dart';
 
@@ -24,123 +25,121 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
     SizeConfig.init(context);
     LocalStorage.saveOnBoarding();
     return Scaffold(
-      body: SafeArea(
-        child: GetBuilder(
-          builder: (OnBoardingController onBoardingController) {
-            return Column(
-              children: [
-                Expanded(
-                  flex: 6,
-                  child: PageView(
-                    controller: onBoardingController.pageController,
-                    onPageChanged: (val) {
-                      onBoardingController.index = val;
-                    },
-                    children: [
-                      Column(
-                        children: [
-                          //Spacer(),
-                          const SizedBox(height: 46),
-                          onBodingImg(img: AppImages.onBoardingImage1),
-                          // Spacer(),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          // Spacer(),
-                          const SizedBox(height: 30),
+      body: GetBuilder(
+        builder: (OnBoardingController onBoardingController) {
+          return Column(
+            children: [
+              Expanded(
+                flex: 6,
+                child: PageView(
+                  controller: onBoardingController.pageController,
+                  onPageChanged: (val) {
+                    onBoardingController.index = val;
+                  },
+                  children: [
+                    Column(
+                      children: [
+                        //Spacer(),
+                        const SizedBox(height: 46),
+                        onBodingImg(img: AppImages.onBoardingImage1),
+                        // Spacer(),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        // Spacer(),
+                        const SizedBox(height: 30),
 
-                          onBodingImg(img: AppImages.onBoardingImage2),
-                          //Spacer(),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          //Spacer(),
-                          const SizedBox(height: 36),
-                          onBodingImg(img: AppImages.onBoardingImage3),
-                          //Spacer(),
-                        ],
-                      ),
-                    ],
-                  ),
+                        onBodingImg(img: AppImages.onBoardingImage2),
+                        //Spacer(),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        //Spacer(),
+                        const SizedBox(height: 36),
+                        onBodingImg(img: AppImages.onBoardingImage3),
+                        //Spacer(),
+                      ],
+                    ),
+                  ],
                 ),
-                Expanded(
-                  flex: 3,
-                  child: Column(
-                    children: [
-                      onBoardingController.index == 3 - 1
-                          ? onBodingTextCommon(
-                              title:
-                                  "Chat with the specialist for the perfect travel plans",
-                            )
-                          : onBoardingController.index == 2 - 1
-                              ? onBodingTextCommon(
-                                  title:
-                                      "Get match with a specialist from your desired destination",
-                                )
-                              : onBodingTextCommon(
-                                  title:
-                                      "Submit a trip request to your desired destination",
-                                ),
-                      const Spacer(),
-                      buildPagination(),
-                      const Spacer(),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: onBoardingController.index == 3 - 1
-                            ? materialButton(
-                                onTap: () {
-                                  Get.toNamed(LoginScreen.routeName);
-                                },
-                                text: 'Get Started',
+              ),
+              Expanded(
+                flex: 3,
+                child: Column(
+                  children: [
+                    onBoardingController.index == 3 - 1
+                        ? onBodingTextCommon(
+                            title:
+                                "Chat with the specialist for the perfect travel plans",
+                          )
+                        : onBoardingController.index == 2 - 1
+                            ? onBodingTextCommon(
+                                title:
+                                    "Get match with a specialist from your desired destination",
                               )
-                            : Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: materialButtonWithBorder(
-                                      onTap: () {
-                                        onBoardingController.pageController
-                                            .nextPage(
-                                          duration:
-                                              kOnBoardingPageAnimationDuration,
-                                          curve: Curves.ease,
-                                        );
-                                        Get.toNamed(LoginScreen.routeName);
-                                      },
-                                      text: "Skip",
-                                    ),
-                                  ),
-                                  const SizedBox(width: 13),
-                                  Expanded(
-                                    child: materialButton(
-                                      onTap: () {
-                                        onBoardingController.pageController
-                                            .nextPage(
-                                          duration:
-                                              kOnBoardingPageAnimationDuration,
-                                          curve: Curves.ease,
-                                        );
-                                      },
-                                      text: "Next",
-                                    ),
-                                  ),
-                                ],
+                            : onBodingTextCommon(
+                                title:
+                                    "Submit a trip request to your desired destination",
                               ),
-                      ),
-                      const SizedBox(height: 20),
-                    ],
-                  ),
+                    const Spacer(),
+                    buildPagination(),
+                    const Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: onBoardingController.index == 3 - 1
+                          ? materialButton(
+                              onTap: () {
+                                Get.toNamed(LoginScreen.routeName);
+                              },
+                              text: 'Get Started',
+                            )
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: materialButtonWithBorder(
+                                    onTap: () {
+                                      onBoardingController.pageController
+                                          .nextPage(
+                                        duration:
+                                            kOnBoardingPageAnimationDuration,
+                                        curve: Curves.ease,
+                                      );
+                                      Get.toNamed(LoginScreen.routeName);
+                                    },
+                                    text: "Skip",
+                                  ),
+                                ),
+                                const SizedBox(width: 13),
+                                Expanded(
+                                  child: materialButton(
+                                    onTap: () {
+                                      onBoardingController.pageController
+                                          .nextPage(
+                                        duration:
+                                            kOnBoardingPageAnimationDuration,
+                                        curve: Curves.ease,
+                                      );
+                                    },
+                                    text: "Next",
+                                  ),
+                                ),
+                              ],
+                            ),
+                    ),
+                    const SizedBox(height: 40),
+                  ],
                 ),
-              ],
-            );
-          },
-        ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

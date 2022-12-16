@@ -12,7 +12,7 @@ import flutter_local_notifications
     FlutterLocalNotificationsPlugin.setPluginRegistrantCallback { (registry) in
       GeneratedPluginRegistrant.register(with: registry)
     }
-    GMSServices.provideAPIKey("AIzaSyDHjhlpmdcmHJKD8-3JwSbDz8PfaFNHnKk")
+    GMSServices.provideAPIKey("AIzaSyBZ3ddGTzrn0L5eC37tAR2J1G2aD2ixuOk")
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }

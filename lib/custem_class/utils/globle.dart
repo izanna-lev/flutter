@@ -22,6 +22,7 @@ UserController userController = Get.put(UserController());
 // String initialRoute =
 //     LocalStorage.getUserDetail() ? BaseScreen.routeName : LoginScreen.routeName;
 late AppImagePicker appImagePicker;
+bool isFromItineraray = false;
 String? currentTimezone;
 int initialTab = 0;
 // bool isGuestUser = false;
@@ -325,6 +326,9 @@ extension DateTimeFormatExtension on DateTimeFormat {
   }
 
   static String displayMSGTimeFromTimestamp(String strDate) {
+    if (strDate.isEmpty) {
+      return "";
+    }
     var date = DateTime.parse(strDate);
     var v = DateTime.now().difference(date);
     if (v.inHours < 24) {

@@ -1,13 +1,11 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:tralever_module/custem_class/constant/app_colors.dart';
 import 'package:tralever_module/services/api_routes.dart';
 import 'package:tralever_module/ui/screen/Home_screen/view/current_screen.dart';
 import 'package:tralever_module/ui/screen/Home_screen/view/past_screen.dart';
 import 'package:tralever_module/ui/screen/Home_screen/view/pending_screen.dart';
-import 'package:tralever_module/ui/screen/notification/controller/Notification_controller.dart';
 
 import '../../../../custem_class/constant/app_settings.dart';
 import '../../chats/view/soket_managet.dart';
@@ -24,8 +22,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   late TabController controller;
-  NotificationScreenController notificationScreenController =
-      Get.find<NotificationScreenController>();
+
   @override
   void initState() {
     Future.delayed(const Duration(milliseconds: 5), () {

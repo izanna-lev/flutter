@@ -12,6 +12,7 @@ class HomeScreenRepo {
     required int listType,
     // required int itineraryStatus,
   }) async {
+    print("API CALL FOR HOME");
     var responseBody = await API.apiHandler(
       url: APIRoutes.homeList,
       showLoader: false,

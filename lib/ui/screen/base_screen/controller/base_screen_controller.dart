@@ -28,6 +28,15 @@ class BaseScreenController extends GetxController {
     update();
   }
 
+  bool _notiUnreadCount = false;
+
+  bool get notiUnreadCount => _notiUnreadCount;
+
+  set notiUnreadCount(bool value) {
+    _notiUnreadCount = value;
+    update();
+  }
+
   int _current = initialTab;
   int get currentTab => _current;
   set currentTab(int value) {

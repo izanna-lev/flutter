@@ -28,13 +28,13 @@ class _PendingScreenState extends State<PendingScreen> {
     "https://images.unsplash.com/photo-1615391778726-4ef126b46850?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
     "https://images.allthingsnature.org/moss-on-stones-around-a-waterfall.jpg",
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: GetBuilder(
         builder: (HomeController homeController) {
           return PaginationView(
-
             key: homeController.pendingKey,
             scrollDirection: Axis.vertical,
             physics: const AlwaysScrollableScrollPhysics(),
@@ -49,9 +49,7 @@ class _PendingScreenState extends State<PendingScreen> {
                     arguments: homeController.travelPlansData[index].id,
                   );
                 },
-                image:
-                    // imageUrl +
-                    homeController.travelPlansData[index].image,
+                image: homeController.travelPlansData[index].image,
                 day: homeController.travelPlansData[index].duration.toString(),
                 please: homeController.travelPlansData[index].name,
                 price: homeController.travelPlansData[index].price.toString(),
@@ -148,7 +146,6 @@ class _PendingScreenState extends State<PendingScreen> {
   text({required String pleaseName}) {
     return Text(
       pleaseName,
-      // maxLines: 2,p
       style: const TextStyle(
         fontWeight: FontWeight.w600,
         fontSize: 16,

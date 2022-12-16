@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:rownd_flutter_plugin/rownd.dart';
+import 'package:tralever_module/custem_class/utils/local_storage.dart';
 import 'package:tralever_module/models/login/rownd_sign_in_model.dart';
 
 import '../api_handler.dart';
@@ -28,6 +30,8 @@ class LoginRepo {
     }
   }
 
+  static final _rownd = RowndPlugin();
+
   static Future<RowndSignInModel?> rowndSignIn(
       {String? fcmToken, required String token}) async {
     var responseBody = await API.apiHandler(
@@ -47,6 +51,13 @@ class LoginRepo {
     );
     if (responseBody != null) {
       return RowndSignInModel.fromJson(responseBody);
+    } else {
+      print("rownd signIn apiHandler response");
+      if (_rownd.state().state.auth?.isAuthenticated ?? false) {
+        print("rownd signOut");
+        _rownd.signOut();
+        LocalStorage.clearData();
+      }
     }
     return null;
   }

@@ -54,7 +54,7 @@
             android:name="flutterEmbedding"
             android:value="2" />
        <meta-data android:name="com.google.android.geo.API_KEY"
-           android:value="AIzaSyClmeTlYQvwTDihDCj61_bAGko_YJVhpnc"/>
+           android:value="AIzaSyBX_-CpkK4_rEZgpbZuroQmnUy-di4aB_E"/>
 <!--        <meta-data-->
 <!--            android:name="com.google.firebase.messaging.default_notification_channel_id"-->
 <!--            android:value="onsite_notification" />-->

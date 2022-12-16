@@ -9,14 +9,13 @@ import '../api_handler.dart';
 import '../api_routes.dart';
 
 class EditProfileRepo {
-  static Future<EditProfileModel?> editProfile(
-      {File? picture, String? token}) async {
+  static Future<EditProfileModel?> editProfile({File? image}) async {
     Map<String, dynamic>? responseBody = await API.multiPartAPIHandler(
         token: userController.rowndSignInModel!.data.accessToken,
         url: APIRoutes.editProfile,
-        // field: {"image": picture.toString()},
-        fileImage: picture == null ? null : [picture],
-        multiPartImageKeyName: "picture",
+        field: {},
+        fileImage: image,
+        multiPartImageKeyName: "image",
         encoding: Encoding.getByName("utf-8"));
     return responseBody == null
         ? null

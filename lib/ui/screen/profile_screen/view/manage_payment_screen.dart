@@ -3,12 +3,11 @@ import 'package:get/get.dart';
 import 'package:tralever_module/custem_class/constant/app_colors.dart';
 import 'package:tralever_module/custem_class/constant/app_icons.dart';
 import 'package:tralever_module/custem_class/constant/app_settings.dart';
-import 'package:tralever_module/models/profile/manage_payment_methods_model.dart';
 import 'package:tralever_module/ui/screen/profile_screen/controller/add_card_controller.dart';
 import 'package:tralever_module/ui/screen/profile_screen/view/add_card_screen.dart';
 import 'package:tralever_module/ui/shared/appbar.dart';
 
-import '../../../../services/over&loding.dart';
+import '../../../../custem_class/utils/globle.dart';
 
 class ManagePaymentScreen extends StatefulWidget {
   static const String routeName = "/ManagePaymentScreen";
@@ -108,6 +107,7 @@ class _ManagePaymentScreenState extends State<ManagePaymentScreen> {
                       const EdgeInsets.symmetric(horizontal: kDefaultPadding),
                   child: GestureDetector(
                     onTap: () {
+                      isFromItineraray = false;
                       Get.toNamed(AddCardScreen.routeName);
                     },
                     child: Row(

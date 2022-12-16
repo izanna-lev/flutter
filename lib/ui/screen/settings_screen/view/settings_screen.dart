@@ -4,6 +4,7 @@ import 'package:rownd_flutter_plugin/rownd.dart';
 import 'package:rownd_flutter_plugin/state/global_state.dart';
 import 'package:tralever_module/custem_class/constant/app_colors.dart';
 import 'package:tralever_module/services/api_routes.dart';
+import 'package:tralever_module/ui/screen/profile_screen/controller/profile_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../custem_class/constant/app_icons.dart';
@@ -28,6 +29,7 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
   AboutScreenController aboutScreenController =
       Get.find<AboutScreenController>();
+  ProfileController profileController = Get.find<ProfileController>();
 
   // @override
   // void initState() {
@@ -125,7 +127,7 @@ class _SettingScreenState extends State<SettingScreen> {
     );
   }
 
-  logoutBox() {
+  Future<void> logoutBox() {
     return showCustomDialogLogOut(
       context: context,
       title: "Logout".tr,
@@ -141,10 +143,9 @@ class _SettingScreenState extends State<SettingScreen> {
           print("Sign Out====>${_rownd.signOut}");
           LocalStorage.clearData();
           print('CLEAER_DATA${LocalStorage.clearData}');
+          profileController.userProfileDetailsModel!.image = "";
         }
-        // signout();
         Get.offAllNamed(LoginScreen.routeName);
-        // Get.offAllNamed(LoginScreen.routeName)?.then((value) => signout());
       },
       color: AppColors.appBlueColor,
       okText: "YES",
@@ -193,30 +194,33 @@ class _SettingScreenState extends State<SettingScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  const SizedBox(width: 10),
-                  Image.asset(
-                    img,
-                    height: 25,
-                    width: 25,
-                    color: AppColors.appBlueColor,
-                  ),
-                  const SizedBox(width: 15),
-                  Text(
-                    text.tr,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
+              child: Container(
+                color: Colors.transparent,
+                child: Row(
+                  children: [
+                    const SizedBox(width: 10),
+                    Image.asset(
+                      img,
+                      height: 25,
+                      width: 25,
+                      color: AppColors.appBlueColor,
                     ),
-                  ),
-                  const Spacer(),
-                  Icon(
-                    icon,
-                    size: 35,
-                    color: Colors.black45,
-                  ),
-                ],
+                    const SizedBox(width: 15),
+                    Text(
+                      text.tr,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const Spacer(),
+                    Icon(
+                      icon,
+                      size: 35,
+                      color: Colors.black45,
+                    ),
+                  ],
+                ),
               ),
             ),
             const SizedBox(height: 10),

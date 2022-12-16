@@ -1,34 +1,57 @@
 {
   "project_info": {
-    "project_number": "911789361273",
-    "project_id": "onsite-51cb1",
-    "storage_bucket": "onsite-51cb1.appspot.com"
+    "project_number": "757245140014",
+    "project_id": "onsite-travel",
+    "storage_bucket": "onsite-travel.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:911789361273:android:e1360a30c0e44f846faca8",
+        "mobilesdk_app_id": "1:757245140014:android:8a12937de9036e88a593bf",
         "android_client_info": {
           "package_name": "com.flutter.onsite"
         }
       },
       "oauth_client": [
         {
-          "client_id": "911789361273-v0rdi3diqihe2t1h3dubeieh43ocfeos.apps.googleusercontent.com",
+          "client_id": "757245140014-pmf9f6o0g2o31vk2otc6p6lq5mt5v9gv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flutter.onsite",
+            "certificate_hash": "3d0991234c136d1f7b88d681394df6626c625106"
+          }
+        },
+        {
+          "client_id": "757245140014-ue9es4hahcq67e3vnck66qvk71j08c4a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flutter.onsite",
+            "certificate_hash": "02dd54cad9700496ad7e30760762b9154ace3615"
+          }
+        },
+        {
+          "client_id": "757245140014-kvdl265krvkf46cea7r5hog8bugog1qo.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyClmeTlYQvwTDihDCj61_bAGko_YJVhpnc"
+          "current_key": "AIzaSyBX_-CpkK4_rEZgpbZuroQmnUy-di4aB_E"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "911789361273-v0rdi3diqihe2t1h3dubeieh43ocfeos.apps.googleusercontent.com",
+              "client_id": "757245140014-kvdl265krvkf46cea7r5hog8bugog1qo.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "757245140014-uqe6u5jugj6uajvmokrj2utj6a3a5ac5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.flutter.onsite"
+              }
             }
           ]
         }

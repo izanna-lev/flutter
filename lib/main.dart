@@ -59,23 +59,7 @@ void main() async {
     providers: [ChangeNotifierProvider.value(value: GlobalStateNotifier())],
     child: const MyApp(),
   ));
-  // FlutterNativeSplash.remove();
-  // runApp(MyApp());
 }
-
-// getInitialRoute() async {
-//   if (LocalStorage.isUserSignIn()) {
-//     LocalStorage.getUserDetail();
-//
-//     // if (userController.rowndSignInModel?.data != null) {
-//     //   initialRoute = SplashScreen.routeName;
-//     // } else {
-//     //   initialRoute = BaseScreen.routeName;
-//     // }
-//   } else {
-//     initialRoute = SplashScreen.routeName;
-//   }
-// }
 
 Future<Map<Permission, PermissionStatus>> requestPermission() async {
   Map<Permission, PermissionStatus> statuses =

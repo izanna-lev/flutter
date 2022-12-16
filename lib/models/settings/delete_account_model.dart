@@ -21,7 +21,7 @@ class DeleteAccountModel {
       DeleteAccountModel(
         code: json["code"],
         message: json["message"],
-        format: json["format"],
+        format: json["format"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {

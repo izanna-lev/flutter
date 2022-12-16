@@ -39,20 +39,23 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                 //     ))
                 //   :
                 SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 15),
-                  Text(
-                    aboutScreenController.appDetailDataModel?.aboutUs
-                            .toString() ??
-                        "",
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 50),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 15),
+                    Text(
+                      aboutScreenController.appDetailDataModel?.aboutUs
+                              .toString() ??
+                          "",
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             );
           },

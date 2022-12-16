@@ -127,21 +127,27 @@ class SocketManager {
   static void updateMessageList(Message msg) {
     print("updateMessageList");
     messageScreenController.messageList.insert(0, msg);
+    messageScreenController.isUpdateMessage = true;
     messageScreenController.update();
     messageScreenController.messageListKey.currentState?.refresh();
+    Future.delayed(const Duration(milliseconds: 2), () {
+      messageScreenController.isUpdateMessage = false;
+    });
   }
 
   static void updateChatList(Message msg) {
     print("updateChatList $msg");
     List<ChatListModel> tempData = chatScreenController.chatData;
+
     final int index =
-        tempData.indexWhere((element) => element.channelRef == channelRef);
-    print("Index $index");
+        tempData.indexWhere((element) => element.channelRef == msg.channelRef);
     if (index != -1) {
       tempData[index].message = msg;
-      tempData[index].unseenMessages = true;
-    } else {
-      tempData[index].unseenMessages = false;
+      if (msg.channelRef == channelRef) {
+        tempData[index].unseenMessages = false;
+      } else {
+        tempData[index].unseenMessages = true;
+      }
     }
     tempData.sort((msg1, msg2) {
       if (msg1.message.createdOn.isNotEmpty &&
@@ -151,11 +157,13 @@ class SocketManager {
       }
       return 0;
     });
-
     chatScreenController.chatData = tempData;
+    chatScreenController.isUpdateMessage = true;
     chatScreenController.update();
     chatScreenController.chatListKey.currentState?.refresh();
-
+    Future.delayed(const Duration(milliseconds: 2), () {
+      chatScreenController.isUpdateMessage = false;
+    });
     Future.delayed(const Duration(seconds: 2), () {
       int count = 0;
       for (int i = 0; i < chatScreenController.chatData.length; i++) {

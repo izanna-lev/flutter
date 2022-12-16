@@ -34,47 +34,48 @@ class _MyTransactionScreenState extends State<MyTransactionScreen> {
   Widget build(BuildContext context) {
     return GetBuilder(
       builder: (MyTransactionsController myTransactionsController) {
-        return SafeArea(
-          child: Scaffold(
+        return Scaffold(
+          backgroundColor: Colors.white,
+          appBar: AppBar(
             backgroundColor: Colors.white,
-            appBar: AppBar(
-              backgroundColor: Colors.white,
-              elevation: 0,
-              centerTitle: true,
-              leading: IconButton(
-                onPressed: () {
-                  Get.back();
-                },
-                icon: const Icon(
-                  Icons.arrow_back,
-                  color: Colors.black,
-                  size: 24,
-                ),
+            elevation: 0,
+            centerTitle: true,
+            leading: IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.black,
+                size: 24,
               ),
-              title: const Text(
-                "My Transactions",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w600,
-                ),
+            ),
+            title: const Text(
+              "My Transactions",
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w600,
               ),
-              actions: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: GestureDetector(
-                    onTap: () {
-                      filter(myTransactionsController);
-                    },
-                    child: Image.asset(
-                      AppIcons.filterIcon,
-                      height: 24,
-                      width: 24,
-                    ),
+            ),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: GestureDetector(
+                  onTap: () {
+                    filter(myTransactionsController);
+                  },
+                  child: Image.asset(
+                    AppIcons.filterIcon,
+                    height: 24,
+                    width: 24,
                   ),
                 ),
-              ],
-            ),
-            body: ListView.builder(
+              ),
+            ],
+          ),
+          body: Padding(
+            padding: const EdgeInsets.only(bottom: 50),
+            child: ListView.builder(
               itemCount: myTransactionsController.transactionListData.length,
               itemBuilder: (BuildContext context, int index) {
                 return

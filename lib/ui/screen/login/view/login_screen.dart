@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:rownd_flutter_plugin/rownd.dart';
@@ -51,30 +52,17 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
+    loginController.update();
 
     /// Rownd key
     /// e2f1fafb-228f-4eb7-85b7-8e784aa12567
-    // _rownd.configure(
-    //   "e2f1fafb-228f-4eb7-85b7-8e784aa12567",
-    // );
     _rownd.configure(rowndAppKey);
   }
-  //
-  // @override
-  // void dispose() {
-  //   disposed = true;
-  //   super.dispose();
-  // }
-  //
-  // @override
-  // void notifyListeners() {
-  //   if (!disposed) {
-  //     notifyListeners();
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+    WidgetsBinding.instance.addPostFrameCallback((_) {});
     return Scaffold(
       body: SafeArea(
         child: GetBuilder(
@@ -181,9 +169,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                           text: "Terms & Conditions".tr,
                                           recognizer: TapGestureRecognizer()
                                             ..onTap = () {
-                                              var url = (aboutScreenController
-                                                  .appDetailDataModel!
-                                                  .termsAndConditions);
+                                              var url = aboutScreenController
+                                                      .appDetailDataModel
+                                                      ?.termsAndConditions ??
+                                                  "";
                                               launch(url);
                                             },
                                           style: const TextStyle(
@@ -219,18 +208,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               builder: (context, child) {
                                 return Consumer<GlobalStateNotifier>(
                                     builder: (_, rownd, __) {
-                                  // if (rownd.state.auth?.accessToken != null) {
-                                  //   print("ROWND SIGNIn=====>");
-                                  //   Get.toNamed(BaseScreen.routeName);
-                                  // }
                                   return materialButton(
                                     onTap: () async {
+                                      disposeKeyboard();
+                                      // setState(() {
                                       if (loginController.loginKey.currentState!
                                           .validate()) {
-                                        disposeKeyboard();
                                         if (loginController.isChecked == true) {
-                                          // if (rownd.state.auth?.isAuthenticated ??
-                                          //     true) {
                                           if (rownd.state.auth?.accessToken !=
                                               null) {
                                             userController
@@ -240,22 +224,35 @@ class _LoginScreenState extends State<LoginScreen> {
                                                     fcmToken: LocalStorage
                                                         .getFCMToken())
                                                 .then((value) {
-                                              print(
-                                                  "ROWND-ACCESS-TOKEN----->${rownd.state.auth?.accessToken}");
-                                              userController.rowndAcessToken =
-                                                  rownd.state.auth?.accessToken;
-                                              print(
-                                                  "usercontroller token--->${userController.rowndAcessToken}");
-
-                                              Get.offAllNamed(
-                                                  BaseScreen.routeName);
+                                              if (value != null) {
+                                                print(
+                                                    "ROWND-ACCESS-TOKEN----->${rownd.state.auth?.accessToken}");
+                                                userController.rowndAcessToken =
+                                                    rownd.state.auth
+                                                        ?.accessToken;
+                                                print(
+                                                    "usercontroller token--->${userController.rowndAcessToken}");
+                                                Get.offAllNamed(
+                                                    BaseScreen.routeName);
+                                              } else {
+                                                rownd.state.auth?.accessToken =
+                                                    null;
+                                                userController.rowndAcessToken =
+                                                    null;
+                                                if (_rownd
+                                                        .state()
+                                                        .state
+                                                        .auth
+                                                        ?.isAuthenticated ??
+                                                    false) {
+                                                  print("rownd signOut");
+                                                  _rownd.signOut();
+                                                  LocalStorage.clearData();
+                                                }
+                                              }
                                             });
                                           } else {
                                             signin()?.then((value) {
-                                              // Navigator.pop(context);
-                                              // Navigator.pop(context);
-                                              // if (rownd.state.auth?.accessToken !=
-                                              //     null) {
                                               userController
                                                   .rowndSignIn(
                                                       token:
@@ -273,6 +270,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                               "Please agree Terms and conditions");
                                         }
                                       }
+                                      // });
                                     },
                                     text: 'Get Started',
                                   );

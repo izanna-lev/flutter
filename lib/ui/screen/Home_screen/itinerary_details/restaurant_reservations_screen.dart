@@ -160,13 +160,6 @@ class _RestaurantReservationsScreenState
   @override
   void initState() {
     widget.index;
-    print('RESTAURANT_RESERVATIONS_INDEX===>${widget.index}');
-    print(
-        'DESCRIPTION---->${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].description}');
-    print(
-        'contactNumber---->${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[1].contactNumber}');
-    print(
-        'date---->${hotelDateAndTimeConverter(itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].date)}');
     super.initState();
   }
 

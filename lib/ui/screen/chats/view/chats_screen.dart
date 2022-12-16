@@ -40,159 +40,164 @@ class _ChatsScreenState extends State<ChatsScreen> {
         padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
         child: GetBuilder(
           builder: (ChatScreenController chatScreenController) {
-            return PaginationView(
-              key: chatScreenController.chatListKey,
-              scrollDirection: Axis.vertical,
-              physics: const AlwaysScrollableScrollPhysics(),
-              pullToRefresh: true,
-              bottomLoader: const AppLoader(),
-              itemBuilder: (BuildContext context, ChatListModel chatListModel,
-                  int index) {
-                return GestureDetector(
-                  onTap: () {
-                    chatScreenController.chatData[index].unseenMessages = false;
-                    int count = 0;
-                    for (int i = 0;
-                        i < chatScreenController.chatData.length;
-                        i++) {
-                      if (chatScreenController.chatData[i].unseenMessages) {
-                        count++;
+            return Container(
+              height: double.infinity,
+              color: Colors.white,
+              child: PaginationView(
+                key: chatScreenController.chatListKey,
+                scrollDirection: Axis.vertical,
+                physics: const AlwaysScrollableScrollPhysics(),
+                pullToRefresh: true,
+                bottomLoader: const AppLoader(),
+                itemBuilder: (BuildContext context, ChatListModel chatListModel,
+                    int index) {
+                  return GestureDetector(
+                    onTap: () {
+                      chatScreenController.chatData[index].unseenMessages =
+                          false;
+                      int count = 0;
+                      for (int i = 0;
+                          i < chatScreenController.chatData.length;
+                          i++) {
+                        if (chatScreenController.chatData[i].unseenMessages) {
+                          count++;
+                        }
                       }
-                    }
-                    baseScreenController.chatUnreadCount = count;
+                      baseScreenController.chatUnreadCount = count;
 
-                    Get.toNamed(MessageScreen.routeName, arguments: {
-                      "channelRef":
-                          chatScreenController.chatData[index].channelRef,
-                      "specialistRef":
-                          chatScreenController.chatData[index].specialistRef,
-                      "specialistName":
-                          chatScreenController.chatData[index].specialistName
-                    });
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        color: Colors.transparent,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Stack(
-                                clipBehavior: Clip.none,
-                                alignment: Alignment.topRight,
-                                children: [
-                                  Container(
-                                    height: 41,
-                                    width: 41,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      image: DecorationImage(
-                                        image: NetworkImage(
-                                          imageUrl +
-                                              chatScreenController
-                                                  .chatData[index].image,
+                      Get.toNamed(MessageScreen.routeName, arguments: {
+                        "channelRef":
+                            chatScreenController.chatData[index].channelRef,
+                        "specialistRef":
+                            chatScreenController.chatData[index].specialistRef,
+                        "specialistName":
+                            chatScreenController.chatData[index].specialistName
+                      });
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          color: Colors.transparent,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Stack(
+                                  clipBehavior: Clip.none,
+                                  alignment: Alignment.topRight,
+                                  children: [
+                                    Container(
+                                      height: 41,
+                                      width: 41,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        image: DecorationImage(
+                                          image: NetworkImage(
+                                            imageUrl +
+                                                chatScreenController
+                                                    .chatData[index].image,
+                                          ),
+                                          fit: BoxFit.cover,
                                         ),
-                                        fit: BoxFit.cover,
                                       ),
                                     ),
-                                  ),
 
-                                  /// blue dot
-                                  chatScreenController
-                                          .chatData[index].unseenMessages
-                                      ? Container(
-                                          height: 10,
-                                          width: 10,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            color: AppColors.appBlueColor,
-                                            // color: const Color(0xffC90E0E),
-                                          ),
-                                        )
-                                      : const SizedBox(),
-                                ]),
-                            const SizedBox(width: 10),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    chatListDate(
-                                      chatScreenController
-                                          .chatData[index].fromDate
-                                          .toString(),
-                                    ),
-                                    style: const TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  Text(
+                                    /// blue dot
                                     chatScreenController
-                                        .chatData[index].location.location,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                      fontSize: 13,
+                                            .chatData[index].unseenMessages
+                                        ? Container(
+                                            height: 10,
+                                            width: 10,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color: AppColors.appBlueColor,
+                                              // color: const Color(0xffC90E0E),
+                                            ),
+                                          )
+                                        : const SizedBox(),
+                                  ]),
+                              const SizedBox(width: 10),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      chatListDate(
+                                        chatScreenController
+                                            .chatData[index].fromDate
+                                            .toString(),
+                                      ),
+                                      style: const TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Text(
-                              DateTimeFormatExtension
-                                  .displayMSGTimeFromTimestamp(
+                                    Text(
                                       chatScreenController
-                                          .chatData[index].message.createdOn),
-                              style: const TextStyle(
-                                color: Colors.grey,
-                                fontSize: 12,
+                                          .chatData[index].location.location,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                        fontSize: 13,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Text(
+                                DateTimeFormatExtension
+                                    .displayMSGTimeFromTimestamp(
+                                        chatScreenController
+                                            .chatData[index].message.createdOn),
+                                style: const TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                      ],
+                    ),
+                  );
+                },
+                pageFetch: chatScreenController.userChatListData,
+                onEmpty: chatScreenController.chatData.isEmpty
+                    ? const Center(child: Text("No data found"))
+                    : Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                chatScreenController.chatListKey.currentState!
+                                    .refresh();
+                              },
+                              icon: const Icon(
+                                Icons.refresh,
+                                color: Colors.white,
                               ),
                             ),
+                            const Text("No data found"),
                           ],
                         ),
                       ),
-                      const SizedBox(height: 20),
-                    ],
-                  ),
-                );
-              },
-              pageFetch: chatScreenController.userChatListData,
-              onEmpty: chatScreenController.chatData.isEmpty
-                  ? const Center(child: Text("No data found"))
-                  : Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              chatScreenController.chatListKey.currentState!
-                                  .refresh();
-                            },
-                            icon: const Icon(
-                              Icons.refresh,
-                              color: Colors.white,
-                            ),
-                          ),
-                          const Text("No data found"),
-                        ],
+                onError: (error) {
+                  return const Center(
+                    child: Text("No comments here yet."),
+                  );
+                },
+                initialLoader: GetPlatform.isAndroid
+                    ? const Center(
+                        child: AppLoader(),
+                      )
+                    : const Center(
+                        child: CupertinoActivityIndicator(),
                       ),
-                    ),
-              onError: (error) {
-                return const Center(
-                  child: Text("No comments here yet."),
-                );
-              },
-              initialLoader: GetPlatform.isAndroid
-                  ? const Center(
-                      child: AppLoader(),
-                    )
-                  : const Center(
-                      child: CupertinoActivityIndicator(),
-                    ),
+              ),
             );
           },
         ),

@@ -24,7 +24,6 @@ import '../../ui/screen/Home_screen/itinerary_details/train/train_ticket_preview
 import '../../ui/screen/Home_screen/view/Itinerary_request_form_screen.dart';
 import '../../ui/screen/Home_screen/view/home_screen.dart';
 import '../../ui/screen/base_screen/view/base_screen.dart';
-import '../../ui/screen/chats/view/chat_room_screen.dart';
 import '../../ui/screen/chats/view/chats_screen.dart';
 import '../../ui/screen/chats/view/message_screen.dart';
 import '../../ui/screen/chats/view/report_screen.dart';

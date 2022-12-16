@@ -20,6 +20,7 @@ class FerryUserDetails extends StatefulWidget {
 class _FerryUserDetailsState extends State<FerryUserDetails> {
   ItineraryDetailScreenController itineraryDetailScreenController =
       Get.find<ItineraryDetailScreenController>();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -29,30 +30,40 @@ class _FerryUserDetailsState extends State<FerryUserDetails> {
           child: GetBuilder(
             builder: (ItineraryDetailScreenController
                 itineraryDetailScreenController) {
-              return ListView.builder(
-                  itemCount: itineraryDetailScreenController
-                      .itineraryDetailsListModel!.itinerary[0].tickets.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return userDetails(
-                      name: itineraryDetailScreenController
+              print(
+                  'FERRY----->${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].tickets}');
+              return itineraryDetailScreenController.itineraryDetailsListModel!
+                      .itinerary[widget.index].tickets.isNotEmpty
+                  ? ListView.builder(
+                      itemCount: itineraryDetailScreenController
                           .itineraryDetailsListModel!
-                          .itinerary[0]
-                          .tickets[index]
-                          .name,
-                      img:
-                          '$imageUrl${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[0].tickets[index].image}',
-                      ticketOnTap: () {
-                        Get.toNamed(
-                          FerryTicketPreviewScreen.routeName,
-                          arguments: itineraryDetailScreenController
+                          .itinerary[widget.index]
+                          .tickets
+                          .length,
+                      itemBuilder: (BuildContext context, int index) {
+                        print(
+                            'FERRY-LENGTH--->${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].tickets[index].name}');
+                        return userDetails(
+                          name: itineraryDetailScreenController
                               .itineraryDetailsListModel!
-                              .itinerary[index]
+                              .itinerary[widget.index]
                               .tickets[index]
-                              .image,
+                              .name,
+                          img:
+                              '$imageUrl${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].tickets[index].image}',
+                          ticketOnTap: () {
+                            Get.toNamed(
+                              FerryTicketPreviewScreen.routeName,
+                              arguments: itineraryDetailScreenController
+                                  .itineraryDetailsListModel!
+                                  .itinerary[widget.index]
+                                  .tickets[index]
+                                  .image,
+                            );
+                          },
                         );
-                      },
-                    );
-                  });
+                      })
+                  : Center(child: Text("No data found"));
             },
           ),
         ),

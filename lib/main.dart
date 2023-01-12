@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -28,16 +27,12 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   print('-- main: Firebase.initializeApp');
+  await FirebaseMessaging.instance.getToken();
   await GetStorage.init();
   // await getInitialRoute();
   globalVerbInit();
   requestPermission();
-  // fcmToken = await FirebaseMessaging.instance.getToken();
-  // FirebaseMessaging.instance.requestPermission();
-  // await FirebaseMessaging.instance.getInitialMessage().then((value) async => {
-  //       if (value != null)
-  //         {NotificationUtils().handleNotificationData(value.data)}
-  //     });
+
   GetLocalTimezone.currentTimeZone = DateTime.now().timeZoneName;
   GetLocalTimezone.currentTimeZoneName =
       await FlutterNativeTimezone.getLocalTimezone();
@@ -85,7 +80,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: "Traveler Module",
+      title: "Onsite",
       debugShowCheckedModeBanner: false,
       initialBinding: BaseBinding(),
       translations: LocalizationService(context),

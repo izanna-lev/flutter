@@ -29,9 +29,7 @@ class BaseScreenController extends GetxController {
   }
 
   bool _notiUnreadCount = false;
-
   bool get notiUnreadCount => _notiUnreadCount;
-
   set notiUnreadCount(bool value) {
     _notiUnreadCount = value;
     update();

@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:tralever_module/custem_class/constant/app_functions.dart';
 import 'package:tralever_module/models/login/rownd_sign_in_model.dart';
@@ -34,9 +35,10 @@ class UserController extends GetxController {
   }
 
   Future<RowndSignInDetailsModel?> rowndSignIn(
-      {required String token, String? fcmToken}) async {
+      {required String token}) async {
+    String newFcmToken = await FirebaseMessaging.instance.getToken() ?? "";
     RowndSignInModel? rowndSignInModel =
-        await LoginRepo.rowndSignIn(token: token, fcmToken: fcmToken);
+        await LoginRepo.rowndSignIn(token: token, fcmToken: newFcmToken);
     if (rowndSignInModel != null) {
       if (rowndSignInModel.code == 100) {
         LocalStorage.setUserDetail(rowndSignInModel);
@@ -50,9 +52,9 @@ class UserController extends GetxController {
     return null;
   }
 
-  updateProfilePic(dynamic url) {
-    userModel?.user.image = url;
-    print("-------------->${url}");
+  updateProfilePic(UserData userData) {
+    userModel?.user = userData;
+    print("-------------->${userData}");
     // LocalStorage.setUserDetail(rowndSignInModel);
     update();
   }

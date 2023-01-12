@@ -1,79 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-	<dict>
-		<key>FirebaseScreenReportingEnabled</key>
-		<true/>
-		<key>FirebaseAppDelegateProxyEnabled</key>
-		<false/>
-		<key>CADisableMinimumFrameDurationOnPhone</key>
-		<true/>
-		<key>CFBundleDevelopmentRegion</key>
-		<string>$(DEVELOPMENT_LANGUAGE)</string>
-		<key>CFBundleDisplayName</key>
-		<string>Onsite</string>
-		<key>CFBundleDocumentTypes</key>
-		<array/>
-		<key>CFBundleExecutable</key>
-		<string>$(EXECUTABLE_NAME)</string>
-		<key>CFBundleIdentifier</key>
-		<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-		<key>CFBundleInfoDictionaryVersion</key>
-		<string>6.0</string>
-		<key>CFBundleName</key>
-		<string>Onsite_Travel_Planning</string>
-		<key>CFBundlePackageType</key>
-		<string>APPL</string>
-		<key>CFBundleShortVersionString</key>
-		<string>$(FLUTTER_BUILD_NAME)</string>
-		<key>CFBundleSignature</key>
-		<string>????</string>
-		<key>CFBundleVersion</key>
-		<string>$(FLUTTER_BUILD_NUMBER)</string>
-		<key>LSRequiresIPhoneOS</key>
-		<true/>
-		<key>NSCameraUsageDescription</key>
-		<string>This app requires access to the camera to upload your profile photo, camera permission is also required for scanning QR codes provided from Onsite, so that you can earn points which you can redeem afterwards.</string>
-		<key>NSLocalNetworkUsageDescription</key>
-		<string>Allow Permission to Flutter</string>
-		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-		<string>Please give permission for the location , so that the user can get relevant information about the Sales Officer and will also be able to scan QR Codes provided by Onsite Team through which he can earn points &amp; redeem it.</string>
-		<key>NSLocationAlwaysUsageDescription</key>
-		<string>Please give permission for the location , so that the user can get relevant information about the Sales Officer and will also be able to scan QR Codes provided by Onsite Team through which he can earn points &amp; redeem it.</string>
-		<key>NSLocationUsageDescription</key>
-		<string>Please give permission for the location , so that the user can get relevant information about the Sales Officer and will also be able to scan QR Codes provided by Onsite Team through which he can earn points &amp; redeem it.</string>
-		<key>NSLocationWhenInUseUsageDescription</key>
-		<string>Please give permission for the location , so that the user can get relevant information about the Sales Officer and will also be able to scan QR Codes provided by Onsite Team through which he can earn points &amp; redeem it.</string>
-		<key>NSPhotoLibraryUsageDescription</key>
-		<string>This app requires access to the photo library to upload your profile photo.</string>
-		<key>UIBackgroundModes</key>
-		<array>
-			<string>fetch</string>
-			<string>location</string>
-			<string>remote-notification</string>
-		</array>
-		<key>UILaunchStoryboardName</key>
-		<string>LaunchScreen</string>
-		<key>UIMainStoryboardFile</key>
-		<string>Main</string>
-		<key>UISupportedInterfaceOrientations</key>
-		<array>
-			<string>UIInterfaceOrientationPortrait</string>
-		</array>
-		<key>UISupportedInterfaceOrientations~ipad</key>
-		<array>
-			<string>UIInterfaceOrientationPortrait</string>
-			<string>UIInterfaceOrientationPortraitUpsideDown</string>
-			<string>UIInterfaceOrientationLandscapeLeft</string>
-			<string>UIInterfaceOrientationLandscapeRight</string>
-		</array>
-		<key>UIViewControllerBasedStatusBarAppearance</key>
-		<false/>
-		<key>io.flutter.embedded_views_preview</key>
-		<true/>
-		<key>UIStatusBarHidden</key>
-		<true/>
-		<key>UIUserInterfaceStyle</key>
-		<string>Light</string>
-	</dict>
+<dict>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>Onsite</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>Onsite</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(FLUTTER_BUILD_NAME)</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.529721310478-8tsme2udijbdhjg9ueuilfkoim7se4ft</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.flutter.onsite</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>onsite.rownd.link</string>
+			</array>
+		</dict>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
+	<key>FirebaseScreenReportingEnabled</key>
+	<true/>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>This app requires access to the camera to upload your profile photo, camera permission is also required for scanning QR codes provided from Onsite, so that you can earn points which you can redeem afterwards.</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Allow Permission to Flutter</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Please give permission for the location , so that the user can get relevant information about the Sales Officer and will also be able to scan QR Codes provided by Onsite Team through which he can earn points &amp; redeem it.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Please give permission for the location , so that the user can get relevant information about the Sales Officer and will also be able to scan QR Codes provided by Onsite Team through which he can earn points &amp; redeem it.</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Please give permission for the location , so that the user can get relevant information about the Sales Officer and will also be able to scan QR Codes provided by Onsite Team through which he can earn points &amp; redeem it.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Please give permission for the location , so that the user can get relevant information about the Sales Officer and will also be able to scan QR Codes provided by Onsite Team through which he can earn points &amp; redeem it.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app requires access to the camera to record video and send in chat.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app requires access to the photo library to upload your profile photo.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>location</string>
+		<string>remote-notification</string>
+	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
+	<key>UIStatusBarHidden</key>
+	<true/>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+	<key>io.flutter.embedded_views_preview</key>
+	<true/>
+</dict>
 </plist>

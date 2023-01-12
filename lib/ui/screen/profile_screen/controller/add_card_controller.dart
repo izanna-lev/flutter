@@ -4,6 +4,7 @@ import 'package:tralever_module/models/profile/add_card_model.dart';
 import 'package:tralever_module/models/profile/manage_payment_methods_model.dart';
 import 'package:tralever_module/services/over&loding.dart';
 import 'package:tralever_module/services/profile_repo/manage_payment_methoda_repo.dart';
+import '../../../../custem_class/utils/local_storage.dart';
 import '../../../../models/login/successModel.dart';
 import '../../../../models/profile/add_card_detaile_model.dart';
 import '../view/cars_added_successfully.dart';
@@ -73,6 +74,7 @@ class AddCardController extends GetxController {
         monthController.clear();
         yearController.clear();
         cvvController.clear();
+        LocalStorage.setCardAdded(true);
         Get.toNamed(CardAddedSuccessfully.routeName);
       });
     }
@@ -98,10 +100,13 @@ class AddCardController extends GetxController {
           break;
         }
       }
+      LocalStorage.setCardAdded(true);
       int index = cardList.indexWhere((element) => element.defaultCard == true);
       if (index == -1) {
         cardList[0].selectedCard = true;
       }
+    }else{
+      LocalStorage.setCardAdded(false);
     }
     update();
   }

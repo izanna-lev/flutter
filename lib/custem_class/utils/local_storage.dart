@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tralever_module/models/login/rownd_sign_in_model.dart';
 
@@ -86,14 +87,22 @@ class LocalStorage {
     return prefs.read("filter") ?? 0;
   }
 
+  static setCardAdded(bool value) {
+    prefs.write("CARD_ADD", value);
+  }
+
+  static bool isCardAdded() {
+    return prefs.read("CARD_ADD") ?? false;
+  }
+
   // saveUserDetails(UserModel data) {
 
   static clearData() {
-    // prefs.erase();
-    // prefs.remove("USER_FCM_TOKEN");
+    accessTokenBackup = null;
     prefs.remove("USER_DETAIL");
     prefs.remove("IS_USER_SIGNIN");
     print('CLEAR_USER_DATA${clearData}');
+    FirebaseMessaging.instance.deleteToken();
   }
 }
 

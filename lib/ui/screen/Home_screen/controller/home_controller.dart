@@ -16,10 +16,31 @@ class HomeController extends GetxController {
   GlobalKey<PaginationViewState> currentKey = GlobalKey<PaginationViewState>();
   GlobalKey<PaginationViewState> pastKey = GlobalKey<PaginationViewState>();
 
-  List<TravelPlansListModel> _travelPlansData = [];
-  List<TravelPlansListModel> get travelPlansData => _travelPlansData;
-  set travelPlansData(List<TravelPlansListModel> value) {
-    _travelPlansData = value;
+  // List<TravelPlansListModel> _travelPlansData = [];
+  // List<TravelPlansListModel> get travelPlansData => _travelPlansData;
+  // set travelPlansData(List<TravelPlansListModel> value) {
+  //   _travelPlansData = value;
+  //   update();
+  // }
+
+  List<TravelPlansListModel> _currentPlansData = [];
+  List<TravelPlansListModel> get currentPlansData => _currentPlansData;
+  set currentPlansData(List<TravelPlansListModel> value) {
+    _currentPlansData = value;
+    update();
+  }
+
+  List<TravelPlansListModel> _pendingPlansData = [];
+  List<TravelPlansListModel> get pendingPlansData => _pendingPlansData;
+  set pendingPlansData(List<TravelPlansListModel> value) {
+    _pendingPlansData = value;
+    update();
+  }
+
+  List<TravelPlansListModel> _pastPlansData = [];
+  List<TravelPlansListModel> get pastPlansData => _pastPlansData;
+  set pastPlansData(List<TravelPlansListModel> value) {
+    _pastPlansData = value;
     update();
   }
 
@@ -34,13 +55,13 @@ class HomeController extends GetxController {
       // itineraryStatus: 1,
     );
     if (travelPlansModel != null) {
-      travelPlansData = travelPlansModel.data;
+      currentPlansData = travelPlansModel.data;
       if (travelPlansModel.size < travelPlansModel.limit) {
         start = 0;
       } else {
         start += 1;
       }
-      return travelPlansData;
+      return currentPlansData;
     }
 
     return [];
@@ -59,13 +80,13 @@ class HomeController extends GetxController {
       // itineraryStatus: 2,
     );
     if (travelPlansModel != null) {
-      travelPlansData = travelPlansModel.data;
+      pendingPlansData = travelPlansModel.data;
       if (travelPlansModel.size < travelPlansModel.limit) {
         start = 0;
       } else {
         start += 1;
       }
-      return travelPlansData;
+      return pendingPlansData;
     }
     return [];
   }
@@ -82,13 +103,13 @@ class HomeController extends GetxController {
       // itineraryStatus: 3,
     );
     if (travelPlansModel != null) {
-      travelPlansData = travelPlansModel.data;
+      pastPlansData = travelPlansModel.data;
       if (travelPlansModel.size < travelPlansModel.limit) {
         start = 0;
       } else {
         start += 1;
       }
-      return travelPlansData;
+      return pastPlansData;
     }
 
     return [];

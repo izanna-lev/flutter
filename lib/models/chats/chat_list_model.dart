@@ -12,6 +12,7 @@ class ChatModel {
     required this.page,
     required this.limit,
     required this.size,
+    required this.totalUnseenChats,
   });
 
   int code;
@@ -20,6 +21,7 @@ class ChatModel {
   int page;
   int limit;
   int size;
+  int totalUnseenChats;
 
   factory ChatModel.fromJson(Map<String, dynamic> json) => ChatModel(
         code: json["code"],
@@ -29,6 +31,7 @@ class ChatModel {
         page: json["page"],
         limit: json["limit"],
         size: json["size"],
+        totalUnseenChats: json["totalUnseenChats"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -38,6 +41,7 @@ class ChatModel {
         "page": page,
         "limit": limit,
         "size": size,
+        "totalUnseenChats": totalUnseenChats,
       };
 }
 
@@ -65,7 +69,7 @@ class ChatListModel {
   String fromDate;
   String toDate;
   String image;
-  Location location;
+  String location;
   bool unseenMessages;
 
   factory ChatListModel.fromJson(Map<String, dynamic> json) => ChatListModel(
@@ -78,7 +82,7 @@ class ChatListModel {
         fromDate: json["fromDate"] ?? "",
         toDate: json["toDate"] ?? "",
         image: json["image"] ?? "",
-        location: Location.fromJson(json["location"] ?? {}),
+        location: json["location"] ?? "",
         unseenMessages: json["unseenMessages"] ?? false,
       );
 
@@ -92,12 +96,12 @@ class ChatListModel {
         "fromDate": fromDate,
         "toDate": toDate,
         "image": image,
-        "location": location.toJson(),
+        "location": location,
         "unseenMessages": unseenMessages,
       };
 }
 
-class Location {
+/*class Location {
   Location({
     required this.location,
     required this.type,
@@ -121,7 +125,7 @@ class Location {
         "type": type,
         "coordinates": List<dynamic>.from(coordinates.map((x) => x)),
       };
-}
+}*/
 
 class Message {
   Message({
@@ -133,6 +137,8 @@ class Message {
     required this.deleted,
     required this.createdOn,
     required this.updatedOn,
+    required this.specialist,
+    required this.admin,
   });
 
   String id;
@@ -143,6 +149,8 @@ class Message {
   bool deleted;
   String createdOn;
   String updatedOn;
+  SpecialistChatModel specialist;
+  SpecialistChatModel admin;
 
   factory Message.fromJson(Map<String, dynamic> json) => Message(
         id: json["_id"] ?? "",
@@ -153,6 +161,8 @@ class Message {
         deleted: json["deleted"] ?? false,
         createdOn: json["createdOn"] ?? "",
         updatedOn: json["updatedOn"] ?? "",
+        specialist: SpecialistChatModel.fromJson(json["specialist"] ?? {}),
+        admin: SpecialistChatModel.fromJson(json["admin"] ?? {}),
       );
 
   Map<String, dynamic> toJson() => {
@@ -164,7 +174,29 @@ class Message {
         "deleted": deleted,
         "createdOn": createdOn,
         "updatedOn": updatedOn,
+        "specialist": specialist.toJson(),
+        "admin": admin.toJson(),
       };
+}
+
+class SpecialistChatModel {
+  SpecialistChatModel({
+    required this.name,
+    required this.image,
+  });
+
+  String name;
+  String image;
+
+  factory SpecialistChatModel.fromJson(Map<String, dynamic> json) => SpecialistChatModel(
+    name: json["name"] ?? "",
+    image: json["image"] ?? "",
+  );
+
+  Map<String, dynamic> toJson() => {
+    "name": name,
+    "image": image,
+  };
 }
 
 class MessageListResponse {
@@ -226,7 +258,7 @@ class ItineraryMessageModel {
   });
 
   String id;
-  Location location;
+  String location;
   int itineraryStatus;
   String image;
   String fromDate;
@@ -236,7 +268,7 @@ class ItineraryMessageModel {
   factory ItineraryMessageModel.fromJson(Map<String, dynamic> json) =>
       ItineraryMessageModel(
         id: json["_id"] ?? "",
-        location: Location.fromJson(json["location"] ?? {}),
+        location: json["location"] ?? "",
         itineraryStatus: json["itineraryStatus"] ?? 0,
         image: json["image"] ?? "",
         fromDate: json["fromDate"] ?? "",
@@ -246,7 +278,7 @@ class ItineraryMessageModel {
 
   Map<String, dynamic> toJson() => {
         "_id": id,
-        "location": location.toJson(),
+        "location": location,
         "itineraryStatus": itineraryStatus,
         "image": image,
         "fromDate": fromDate,

@@ -41,6 +41,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       backgroundColor: Colors.white,
       body: GetBuilder(
         builder: (ImagePickerController imagePickerController) {
+          print("AMISHA imagePickerController.image ${imagePickerController.image}");
           if (currImageUrl != imagePickerController.image &&
               imagePickerController.image.isNotEmpty) {
             currImageUrl = imagePickerController.image;
@@ -48,15 +49,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
             /// call api
             profileController.editProfile(
                 image: File(imagePickerController.image));
-            print("CALL API");
           }
           return GetBuilder(
             builder: (ProfileController profileController) {
+              print("AMISHA profileController.userProfileDetailsModel!.image ${profileController.userProfileDetailsModel?.image}");
+              print("AMISHA currImageUrl ${currImageUrl}");
               return Container(
                   decoration: BoxDecoration(
                       image: imagePickerController.image.isEmpty
-                          ? profileController.userProfileDetailsModel!.image ==
-                                  ""
+                          ? (profileController.userProfileDetailsModel == null || profileController.userProfileDetailsModel!.image ==
+                                  "")
                               ? DecorationImage(
                                   image: AssetImage(currImageUrl),
                                   fit: BoxFit.cover)
@@ -115,10 +117,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     children: [
                                       const SizedBox(height: 20),
                                       Text(
-                                        profileController
+                                        (profileController
+                                            .userProfileDetailsModel == null || profileController
                                                 .userProfileDetailsModel!
                                                 .name
-                                                .isEmpty
+                                                .isEmpty)
                                             ? ""
                                             : profileController
                                                 .userProfileDetailsModel!.name,
@@ -128,10 +131,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         ),
                                       ),
                                       Text(
-                                        profileController
-                                                .userProfileDetailsModel!
-                                                .email
-                                                .isEmpty
+                                        (profileController
+                                            .userProfileDetailsModel == null || profileController
+                                            .userProfileDetailsModel!
+                                            .email
+                                            .isEmpty)
                                             ? ""
                                             : profileController
                                                 .userProfileDetailsModel!.email,

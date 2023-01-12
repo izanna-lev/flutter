@@ -8,6 +8,7 @@ import 'package:tralever_module/ui/screen/profile_screen/view/add_card_screen.da
 import 'package:tralever_module/ui/shared/appbar.dart';
 
 import '../../../../custem_class/utils/globle.dart';
+import '../../../../custem_class/utils/local_storage.dart';
 
 class ManagePaymentScreen extends StatefulWidget {
   static const String routeName = "/ManagePaymentScreen";
@@ -79,6 +80,7 @@ class _ManagePaymentScreenState extends State<ManagePaymentScreen> {
                                       .then((value) {
                                     addCardController.cardList.remove(
                                         addCardController.cardList[index]);
+                                    LocalStorage.setCardAdded(addCardController.cardList.length>0);
                                     addCardController.update();
                                   });
                                 });

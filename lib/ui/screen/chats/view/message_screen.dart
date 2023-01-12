@@ -70,6 +70,7 @@ class _MessageScreenState extends State<MessageScreen> {
               elevation: 0,
               leading: IconButton(
                   onPressed: () {
+                    SocketManager.channelRef = "";
                     Get.back();
                     print(
                         "-------?${chatScreenController.chatListKey.currentState!.refresh()}");
@@ -82,7 +83,7 @@ class _MessageScreenState extends State<MessageScreen> {
                   color: Colors.black,
                 ),
               ),
-              actions: [
+              actions: [(widget.otherUserRef == "") ? const SizedBox() :
                 (controller.itinerary.itineraryStatus == 3 ||
                         controller.itinerary.itineraryStatus == 5)
                     ? const SizedBox()
@@ -102,6 +103,7 @@ class _MessageScreenState extends State<MessageScreen> {
                     children: [
                       Column(
                         children: [
+                          SizedBox(height: 80,),
                           Expanded(
                               child: PaginationView(
                             reverse: true,
@@ -240,7 +242,7 @@ class _MessageScreenState extends State<MessageScreen> {
                                       Text(chatListDate(
                                           controller.itinerary.fromDate)),
                                       Text(controller
-                                          .itinerary.location.location),
+                                          .itinerary.location),
                                     ],
                                   )
                                 ]),
@@ -263,7 +265,7 @@ class _MessageScreenState extends State<MessageScreen> {
   messageBoxView({required Message message}) {
     if (message.userRef == userController.rowndSignInModel!.data.traveller.id) {
       // Right (my message)
-      return message.messageType == 1
+      return (message.messageType == 1 || message.messageType == 3)
           ? Padding(
               padding: const EdgeInsets.only(right: 10),
               child: Column(
@@ -350,12 +352,21 @@ class _MessageScreenState extends State<MessageScreen> {
     } else {
       // Left (defence message)
 
-      return message.messageType == 1
+      return (message.messageType == 1 || message.messageType == 3)
           ? Padding(
               padding: const EdgeInsets.only(left: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 7),
+                    child: Text(
+                      message.specialist.name.isNotEmpty ? message.specialist.name : message.admin.name.isNotEmpty ? message.admin.name : "",
+                      style: const TextStyle(
+                          color: AppColors.appBlueColor, fontSize: 11, fontWeight: FontWeight.w700),
+                    ),
+                  ),
+                  const SizedBox(height: 4),
                   Container(
                     decoration: BoxDecoration(
                         color: const Color(0xffF3F3F3),
@@ -395,7 +406,7 @@ class _MessageScreenState extends State<MessageScreen> {
                     ),
                   ),
                   // getHeightSizedBox(h: 4),
-                  const SizedBox(height: 4)
+                  const SizedBox(height: 10)
                 ],
               ),
             )
@@ -461,9 +472,12 @@ class _MessageScreenState extends State<MessageScreen> {
 
   Future browseImage(ImageSource imageSource) async {
     try {
-      final pickedFile =
-          await imagePicker.pickImage(source: imageSource, imageQuality: 50);
+      const dimension = 512.0;
+      XFile? pickedFile =
+          await imagePicker.pickImage(source: imageSource, maxHeight: dimension,
+            maxWidth: dimension);
       if (pickedFile != null) {
+        print("Image Picked");
         CroppedFile? file = await ImageCropper().cropImage(
             sourcePath: pickedFile.path,
             aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
@@ -482,6 +496,8 @@ class _MessageScreenState extends State<MessageScreen> {
             uploadImage(File(file.path));
           }
         });
+      }else{
+        print("Null Image");
       }
     } on Exception catch (e) {
       return Future.error(e);

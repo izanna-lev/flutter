@@ -5,7 +5,15 @@ import 'package:intl/intl.dart';
 import '../screen/Home_screen/controller/itinerary_request_form_controller.dart';
 
 class DemoDatePiker extends StatefulWidget {
-  const DemoDatePiker({super.key});
+
+  final String hintText;
+  final TextEditingController controller;
+  final VoidCallback? ontap;
+
+  const DemoDatePiker({super.key,
+    required this.hintText, required this.controller, required this.ontap});
+
+
 
   @override
   State<StatefulWidget> createState() {
@@ -29,8 +37,14 @@ class DatePickerState extends State<DemoDatePiker> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: TextFormField(
-      controller: itineraryRequestFormController.dateInput,
-      decoration: const InputDecoration(
+      controller: widget.controller,
+      style: TextStyle(
+        fontSize: 13
+      ),
+      decoration: InputDecoration(
+        hintStyle: TextStyle(
+          fontSize: 13
+        ),
         border: InputBorder.none,
         filled: true,
         fillColor: Color(0xffEDEDED),
@@ -41,33 +55,16 @@ class DatePickerState extends State<DemoDatePiker> {
         // focusedBorder: OutlineInputBorder(
         //      borderSide: const BorderSide(color: AppColors.appBlueColor),
         //     borderRadius: BorderRadius.circular(5)),
-        contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        contentPadding: EdgeInsets.only(left: 10, right: 0,top: 15,bottom: 10),
 
-        hintText: '12-may-2022',
+        hintText: widget.hintText,
 
         suffixIcon:
             Icon(Icons.calendar_today_sharp, color: Colors.black, size: 20),
         //icon of text fieldtext of field
       ),
       readOnly: true,
-      onTap: () async {
-        DateTime? pickedDate = await showDatePicker(
-          context: context,
-          initialDate: DateTime.now(),
-          firstDate: DateTime(1950),
-          lastDate: DateTime(2100),
-        );
-
-        if (pickedDate != null) {
-          log("$pickedDate"); //pickedDate output format => 2021-03-10 00:00:00.000
-          String formattedDate = DateFormat('yyyy-MMM-dd').format(pickedDate);
-          log(formattedDate); //formatted date output using intl package =>  2021-03-16
-          setState(() {
-            itineraryRequestFormController.dateInput.text =
-                formattedDate; //set output date to TextField value.
-          });
-        } else {}
-      },
+      onTap: widget.ontap
     ));
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tralever_module/custem_class/constant/app_colors.dart';
 import 'package:tralever_module/services/api_routes.dart';
 import 'package:tralever_module/ui/screen/Home_screen/view/current_screen.dart';
@@ -8,7 +9,11 @@ import 'package:tralever_module/ui/screen/Home_screen/view/past_screen.dart';
 import 'package:tralever_module/ui/screen/Home_screen/view/pending_screen.dart';
 
 import '../../../../custem_class/constant/app_settings.dart';
+import '../../../../models/home/travels_plans_model.dart';
 import '../../chats/view/soket_managet.dart';
+import '../../profile_screen/controller/add_card_controller.dart';
+import '../controller/home_controller.dart';
+import '../controller/itinerary_detaile_screen _controller.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = "/HomeScreen";
@@ -22,76 +27,89 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   late TabController controller;
-
+  AddCardController addCardController = Get.find<AddCardController>();
   @override
   void initState() {
     Future.delayed(const Duration(milliseconds: 5), () {
       SocketManager.connectSocket();
     });
     controller = TabController(vsync: this, length: 3, initialIndex: 1);
+    addCardController.cardListShow();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Stack(
+    return GetBuilder(
+      builder: (HomeController homeController) {
+        return Column(
           children: [
-            Row(
+            Stack(
               children: [
-                Expanded(
-                  child: Container(
-                    height: 48,
-                    decoration: const BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(color: Color(0xffd4d4d4), width: 2),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        height: 48,
+                        decoration: const BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(color: Color(0xffd4d4d4), width: 2),
+                          ),
+                        ),
                       ),
                     ),
+                  ],
+                ),
+                TabBar(
+                  controller: controller,
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  indicatorWeight: 3,
+                  labelColor: Colors.black,
+                  unselectedLabelColor: Colors.grey.shade700,
+                  indicatorColor: AppColors.appBlueColor,
+                  labelStyle: const TextStyle(
+                    fontFamily: kAppFont,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
                   ),
+                  tabs: [
+                    Tab(
+                      child: Text("Current"),
+                    ),
+                    Tab(
+                      child:  Text(getTabStatus(homeController.pendingPlansData)),
+                    ),
+                    Tab(
+                      child: Text("Past"),
+                    ),
+                  ],
                 ),
               ],
             ),
-            TabBar(
-              controller: controller,
-              indicatorSize: TabBarIndicatorSize.tab,
-              indicatorWeight: 3,
-              labelColor: Colors.black,
-              unselectedLabelColor: Colors.grey.shade700,
-              indicatorColor: AppColors.appBlueColor,
-              labelStyle: const TextStyle(
-                fontFamily: kAppFont,
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
+            const SizedBox(height: 10),
+            Expanded(
+              child: TabBarView(
+                physics: NeverScrollableScrollPhysics(),
+                controller: controller,
+                children: const [
+                  CurrentScreen(),
+                  PendingScreen(),
+                  PastScreen(),
+                ],
               ),
-              tabs: const [
-                Tab(
-                  child: Text("Current"),
-                ),
-                Tab(
-                  child: Text("Pending"),
-                ),
-                Tab(
-                  child: Text("Past"),
-                ),
-              ],
             ),
           ],
-        ),
-        const SizedBox(height: 10),
-        Expanded(
-          child: TabBarView(
-            physics: NeverScrollableScrollPhysics(),
-            controller: controller,
-            children: const [
-              CurrentScreen(),
-              PendingScreen(),
-              PastScreen(),
-            ],
-          ),
-        ),
-      ],
+        );
+      },
     );
+  }
+
+  String getTabStatus(List<TravelPlansListModel> data) {
+    int index = data.indexWhere((element) => element.approved == true);
+    if(index != -1) {
+      return "Upcoming";
+    }
+    return "Pending";
   }
 }
 

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -39,6 +41,8 @@ class SocketManager {
                 {"id": userController.rowndSignInModel!.data.traveller.id})
             .enableForceNew() // disable auto-connection
             .build());
+    // SecureSocket.connect("https://44.208.65.177", 4000);
+
     socket!.onConnect((_) {
       debugPrint(
           'socket connected ${userController.rowndSignInModel!.data.traveller.id}');
@@ -167,11 +171,14 @@ class SocketManager {
     Future.delayed(const Duration(seconds: 2), () {
       int count = 0;
       for (int i = 0; i < chatScreenController.chatData.length; i++) {
+        print("UPDATE CHAT: ${chatScreenController.chatData[i].toJson()}");
         if (chatScreenController.chatData[i].unseenMessages) {
           count++;
         }
       }
+      print("TOTAL Count: ${count}");
       baseScreenController.chatUnreadCount = count;
+      chatScreenController.unseenChats = count;
     });
   }
 }

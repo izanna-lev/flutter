@@ -136,7 +136,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
                                     ),
                                     Text(
                                       chatScreenController
-                                          .chatData[index].location.location,
+                                          .chatData[index].location,
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: const TextStyle(

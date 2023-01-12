@@ -16,9 +16,15 @@ class AboutScreenController extends GetxController {
   }
 
   getStaticData() async {
-    var request = await ContactRepo.getStaticData();
-    appDetailDataModel = request!.data;
-    update();
+    if(userController.rowndSignInModel?.data.accessToken == null) {
+      return;
+    }
+    var response = await ContactRepo.getStaticData();
+    if(response != null) {
+      appDetailDataModel = response!.data;
+      update();
+    }
+
   }
 
   Future<void> deleteUser() async {

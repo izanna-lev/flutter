@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 TravelPlansModel travelPlansModelFromJson(String str) =>
     TravelPlansModel.fromJson(json.decode(str));
@@ -61,6 +62,7 @@ class TravelPlansListModel {
     required this.itineraryStatus,
     required this.description,
     required this.image,
+    required this.approved,
   });
 
   String id;
@@ -70,6 +72,7 @@ class TravelPlansListModel {
   int itineraryStatus;
   String description;
   String image;
+  bool approved;
 
   factory TravelPlansListModel.fromJson(Map<String, dynamic> json) =>
       TravelPlansListModel(
@@ -80,6 +83,7 @@ class TravelPlansListModel {
         itineraryStatus: json["itineraryStatus"] ?? 0,
         description: json["description"] ?? "",
         image: json["image"] ?? "",
+        approved: json["approved"] ?? false,
       );
 
   Map<String, dynamic> toJson() => {
@@ -90,5 +94,6 @@ class TravelPlansListModel {
         "itineraryStatus": itineraryStatus,
         "description": description,
         "image": image,
+        "approved": approved,
       };
 }

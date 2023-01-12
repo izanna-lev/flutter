@@ -46,8 +46,10 @@ class AppImagePicker {
 
   Future browseImage(ImageSource imageSource) async {
     try {
-      final pickedFile =
-          await imagePicker.pickImage(source: imageSource, imageQuality: 50);
+      const dimension = 512.0;
+      XFile? pickedFile =
+      await imagePicker.pickImage(source: imageSource, maxHeight: dimension,
+          maxWidth: dimension);
       if (pickedFile != null) {
         CroppedFile? file = await ImageCropper().cropImage(
             sourcePath: pickedFile.path,

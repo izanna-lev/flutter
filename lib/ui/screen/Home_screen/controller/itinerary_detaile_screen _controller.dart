@@ -5,6 +5,7 @@ import 'package:tralever_module/services/chats_repo/chatRepo.dart';
 import 'package:tralever_module/services/home_repo/itinerary_approve_repo.dart';
 import 'package:tralever_module/services/home_repo/itinerary_details_repo.dart';
 import 'package:tralever_module/services/home_repo/rating_repo.dart';
+import 'package:tralever_module/ui/screen/Home_screen/controller/home_controller.dart';
 
 import '../../../../models/chats/get_channel_model.dart';
 import '../../../../models/home/itinerary_approve_model.dart';
@@ -118,6 +119,8 @@ class ItineraryDetailScreenController extends GetxController {
     update();
   }
 
+  HomeController homeController = Get.find<HomeController>();
+
   itineraryApprove({
     required String itineraryRef,
     required String cardRef,
@@ -129,6 +132,13 @@ class ItineraryDetailScreenController extends GetxController {
     );
     if (response != null) {
       itineraryApproveDataModel = response.data;
+      if(homeController.pendingPlansData.length > 0) {
+        int index = homeController.pendingPlansData.indexWhere((element) => element.id == itineraryRef);
+        if(index != -1) {
+          homeController.pendingPlansData[index].approved = true;
+          homeController.update();
+        }
+      }
     }
     update();
   }

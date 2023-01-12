@@ -308,27 +308,24 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
   notificationRedirection(
       TravellerDetailsNotificationList travellerDetailsNotificationList) {
-    travellerDetailsNotificationList.type == 1
-        ? travellerDetailsNotificationList.type = 1
-        : travellerDetailsNotificationList.type == 2
-            ? Get.toNamed(MessageScreen.routeName, arguments: {
-                "channelRef": travellerDetailsNotificationList.sourceRef,
-              })
-            : travellerDetailsNotificationList.type == 3
-                ? Get.toNamed(ItineraryDetailScreen.routeName,
-                    arguments: travellerDetailsNotificationList.sourceRef)
-                : travellerDetailsNotificationList.type == 4
-                    ? Get.toNamed(ItineraryDetailScreen.routeName,
-                        arguments: travellerDetailsNotificationList.sourceRef)
-                    : travellerDetailsNotificationList.type == 5
-                        ? Get.toNamed(ItineraryDetailScreen.routeName,
-                            arguments:
-                                travellerDetailsNotificationList.sourceRef)
-                        : travellerDetailsNotificationList.type == 6
-                            ? Get.toNamed(ItineraryDetailScreen.routeName,
-                                arguments:
-                                    travellerDetailsNotificationList.sourceRef)
-                            : const SizedBox();
+    if(travellerDetailsNotificationList.type == 1) {
+      //admin notification
+    }
+    else if(travellerDetailsNotificationList.type == 2) {
+      //chat notification
+      Get.toNamed(MessageScreen.routeName, arguments: {
+        "channelRef": travellerDetailsNotificationList.sourceRef,
+        "specialistRef":
+        travellerDetailsNotificationList.userDetails.id,
+        "specialistName":
+        travellerDetailsNotificationList.userDetails.name,
+      });
+    }
+    else if(travellerDetailsNotificationList.type == 3 || travellerDetailsNotificationList.type == 4 || travellerDetailsNotificationList.type == 5 || travellerDetailsNotificationList.type == 6) {
+      //Itinerary notification
+      Get.toNamed(ItineraryDetailScreen.routeName,
+          arguments: travellerDetailsNotificationList.sourceRef);
+    }
   }
 
   checkNotificationUnreadCount() {

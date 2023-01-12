@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:tralever_module/custem_class/constant/app_colors.dart';
 import 'package:tralever_module/ui/screen/Home_screen/controller/itinerary_request_form_controller.dart';
 import 'package:tralever_module/ui/shared/appbar.dart';
@@ -121,9 +124,84 @@ class _ItineraryFromScreenState extends State<ItineraryFromScreen> {
                         ),
                         textFieldTitle(
                             text: "When are you planning to travel?"),
-                        const SizedBox(
-                          height: 60,
-                          child: DemoDatePiker(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  dateText(text: "Start Date"),
+                                   SizedBox(height: 5,),
+                                   SizedBox(
+                                    height: 50,
+                                    child: DemoDatePiker(
+                                      ontap: () async {
+                                        DateTime? pickedDate = await showDatePicker(
+                                          context: context,
+                                          initialDate: DateTime.now(),
+                                          firstDate: DateTime(1950),
+                                          lastDate: DateTime(2100),
+                                        );
+
+                                        if (pickedDate != null) {
+                                          log("$pickedDate"); //pickedDate output format => 2021-03-10 00:00:00.000
+                                          String formattedDate = DateFormat('yyyy-MMM-dd').format(pickedDate);
+                                          log(formattedDate); //formatted date output using intl package =>  2021-03-16
+                                          setState(() {
+                                            itineraryRequestController.dateInput.text =
+                                                formattedDate; //set output date to TextField value.
+                                          });
+                                        } else {}
+                                      },
+                                      controller: itineraryRequestController.dateInput,
+                                      hintText: '',//'12-may-2022',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                 dateText(text: "End Date"),
+                                  SizedBox(height: 5,),
+                                   SizedBox(
+                                    height: 50,
+                                    child: DemoDatePiker(
+                                      controller: itineraryRequestController.endDateInput,
+                                      hintText: '',//'24-may-2022',
+                                      ontap: () async {
+                                        DateTime? pickedDate = await showDatePicker(
+                                      context: context,
+                                      initialDate: DateTime.now(),
+                                      firstDate: DateTime(1950),
+                                      lastDate: DateTime(2100),
+                                    );
+
+                                    if (pickedDate != null) {
+                                      log("$pickedDate"); //pickedDate output format => 2021-03-10 00:00:00.000
+                                      String formattedDate = DateFormat('yyyy-MMM-dd').format(pickedDate);
+                                      log(formattedDate); //formatted date output using intl package =>  2021-03-16
+                                      setState(() {
+                                        itineraryRequestController.endDateInput.text =
+                                            formattedDate; //set output date to TextField value.
+                                      });
+                                    } else {}
+                                    },
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
                         ),
                         textFieldTitle(
                             text: "How much you have already planned?"),
@@ -266,6 +344,17 @@ class _ItineraryFromScreenState extends State<ItineraryFromScreen> {
           fontWeight: FontWeight.w500,
         ),
       ),
+    );
+  }
+
+  dateText({required String text}) {
+    return Text(
+        text,
+        style: TextStyle(
+          fontSize: 15,
+          color: Colors.grey.shade600,
+          fontWeight: FontWeight.w500,
+        ),
     );
   }
 }

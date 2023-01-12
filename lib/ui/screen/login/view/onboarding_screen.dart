@@ -54,7 +54,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         // Spacer(),
                         const SizedBox(height: 30),
 
-                        onBodingImg(img: AppImages.onBoardingImage2),
+                        onBodingImg(img: AppImages.onBoardingImage3),
                         //Spacer(),
                       ],
                     ),
@@ -62,7 +62,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       children: [
                         //Spacer(),
                         const SizedBox(height: 36),
-                        onBodingImg(img: AppImages.onBoardingImage3),
+                        onBodingImg(img: AppImages.onBoardingImage2),
                         //Spacer(),
                       ],
                     ),
@@ -71,70 +71,95 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               ),
               Expanded(
                 flex: 3,
-                child: Column(
-                  children: [
-                    onBoardingController.index == 3 - 1
-                        ? onBodingTextCommon(
-                            title:
-                                "Chat with the specialist for the perfect travel plans",
-                          )
-                        : onBoardingController.index == 2 - 1
+                child: SizedBox.expand(
+                  child: GestureDetector(
+                    onPanUpdate: (details) {
+                      // Swiping in right direction.
+                      if (details.delta.dx > 0) {
+                        onBoardingController.pageController
+                            .previousPage(
+                          duration:
+                          kOnBoardingPageAnimationDuration,
+                          curve: Curves.ease,
+                        );
+                      }
+
+                      // Swiping in left direction.
+                      if (details.delta.dx < 0) {
+                        onBoardingController.pageController
+                            .nextPage(
+                          duration:
+                          kOnBoardingPageAnimationDuration,
+                          curve: Curves.ease,
+                        );
+                      }
+                    },
+                    child: Column(
+                      children: [
+                        onBoardingController.index == 3 - 1
                             ? onBodingTextCommon(
-                                title:
-                                    "Get match with a specialist from your desired destination",
-                              )
+                          title:
+                          "View all your personalized travel plans in one place",
+                        )
+                            : onBoardingController.index == 2 - 1
+                            ? onBodingTextCommon(
+                          title:
+                          "Get connected and chat with your personal travel concierge ",
+                        )
                             : onBodingTextCommon(
-                                title:
-                                    "Submit a trip request to your desired destination",
+                          title:
+                          "Submit a trip request to your desired destination",
+                        ),
+                        const Spacer(),
+                        buildPagination(),
+                        const Spacer(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: onBoardingController.index == 3 - 1
+                              ? materialButton(
+                            onTap: () {
+                              Get.toNamed(LoginScreen.routeName);
+                            },
+                            text: 'Get Started',
+                          )
+                              : Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: materialButtonWithBorder(
+                                  onTap: () {
+                                    onBoardingController.pageController
+                                        .nextPage(
+                                      duration:
+                                      kOnBoardingPageAnimationDuration,
+                                      curve: Curves.ease,
+                                    );
+                                    Get.toNamed(LoginScreen.routeName);
+                                  },
+                                  text: "Skip",
+                                ),
                               ),
-                    const Spacer(),
-                    buildPagination(),
-                    const Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: onBoardingController.index == 3 - 1
-                          ? materialButton(
-                              onTap: () {
-                                Get.toNamed(LoginScreen.routeName);
-                              },
-                              text: 'Get Started',
-                            )
-                          : Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  child: materialButtonWithBorder(
-                                    onTap: () {
-                                      onBoardingController.pageController
-                                          .nextPage(
-                                        duration:
-                                            kOnBoardingPageAnimationDuration,
-                                        curve: Curves.ease,
-                                      );
-                                      Get.toNamed(LoginScreen.routeName);
-                                    },
-                                    text: "Skip",
-                                  ),
+                              const SizedBox(width: 13),
+                              Expanded(
+                                child: materialButton(
+                                  onTap: () {
+                                    onBoardingController.pageController
+                                        .nextPage(
+                                      duration:
+                                      kOnBoardingPageAnimationDuration,
+                                      curve: Curves.ease,
+                                    );
+                                  },
+                                  text: "Next",
                                 ),
-                                const SizedBox(width: 13),
-                                Expanded(
-                                  child: materialButton(
-                                    onTap: () {
-                                      onBoardingController.pageController
-                                          .nextPage(
-                                        duration:
-                                            kOnBoardingPageAnimationDuration,
-                                        curve: Curves.ease,
-                                      );
-                                    },
-                                    text: "Next",
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 40),
+                      ],
                     ),
-                    const SizedBox(height: 40),
-                  ],
+                  ),
                 ),
               ),
             ],
@@ -146,9 +171,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   onBodingImg({required String img}) {
     return Image.asset(img, fit: BoxFit.cover
-        // height: getHeight(height),
-        // width: getWidth(width),
-        );
+      // height: getHeight(height),
+      // width: getWidth(width),
+    );
   }
 
   onBodingTextCommon({required String title, double? int}) {
@@ -187,21 +212,21 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(
           3,
-          (index) => AnimatedContainer(
-                duration: kOnBoardingPageAnimationDuration,
-                margin: EdgeInsets.only(right: index == 3 - 1 ? 0 : 10),
-                width: 14,
-                height: 14,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: AppColors.appBlueColor,
-                  ),
-                  color: index == onBoardingController.index
-                      ? AppColors.appBlueColor
-                      : Colors.white,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              )),
+              (index) => AnimatedContainer(
+            duration: kOnBoardingPageAnimationDuration,
+            margin: EdgeInsets.only(right: index == 3 - 1 ? 0 : 10),
+            width: 14,
+            height: 14,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: AppColors.appBlueColor,
+              ),
+              color: index == onBoardingController.index
+                  ? AppColors.appBlueColor
+                  : Colors.white,
+              borderRadius: BorderRadius.circular(8),
+            ),
+          )),
       //     children: List.generate(
       // 3,
       // (index) => AnimatedContainer(

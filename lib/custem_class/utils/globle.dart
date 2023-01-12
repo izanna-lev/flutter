@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator_android/geolocator_android.dart';
 import 'package:geolocator_apple/geolocator_apple.dart';
@@ -26,6 +27,7 @@ bool isFromItineraray = false;
 String? currentTimezone;
 int initialTab = 0;
 // bool isGuestUser = false;
+String? accessTokenBackup;
 
 globalVerbInit() {
   appImagePicker = AppImagePicker();
@@ -52,6 +54,28 @@ class NavigationTabContainModel {
     required this.icon,
     required this.name,
   });
+}
+
+enum SETTING_SCREEN {
+  ABOUT,
+  TERMS_CONDITION,
+  PRIVACY_POLICY
+}
+
+
+extension SETTING_SCREEN_Extension on SETTING_SCREEN {
+  int? get screenType {
+    switch (this) {
+      case SETTING_SCREEN.ABOUT:
+        return 1;
+      case SETTING_SCREEN.TERMS_CONDITION:
+        return 2;
+      case SETTING_SCREEN.PRIVACY_POLICY:
+        return 3;
+      default:
+        return null;
+    }
+  }
 }
 
 enum TypeOFNOTIFICATIONS {

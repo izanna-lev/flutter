@@ -71,7 +71,8 @@ class _ActivityDetailsScreenState extends State<ActivityDetailsScreen> {
                                   .itinerary[widget.index]
                                   .date)),
                       detailTitle(text: "Location"),
-                      GestureDetector(
+                      InkWell(
+                        splashColor: Colors.lightBlueAccent,
                         onTap: () {
                           Get.toNamed(
                             ActivityMapDetails.routeName,

@@ -15,10 +15,17 @@ import 'package:tralever_module/custem_class/utils/local_storage.dart';
 import 'package:tralever_module/ui/screen/notification/controller/Notification_controller.dart';
 import 'package:tralever_module/ui/screen/notification/view/notification_screen.dart';
 
+import '../Home_screen/controller/home_controller.dart';
+import '../Home_screen/itinerary_details/itinerary_detailes_screen.dart';
+import '../base_screen/controller/base_screen_controller.dart';
+import '../chats/view/message_screen.dart';
+
 class NotificationUtils {
   static const notificationChannelId = "onsite_notification";
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
+
+  BaseScreenController baseScreenController = Get.put(BaseScreenController());
 
   /// to create a single instance
   factory NotificationUtils() {
@@ -51,6 +58,7 @@ class NotificationUtils {
       provisional: false,
       sound: true,
     );
+    print('User granted permission: ${settings.authorizationStatus}');
 
     // initialize the notifications
     // if (!kIsWeb) {
@@ -75,6 +83,7 @@ class NotificationUtils {
             (NotificationResponse? payload) async {
       // notification tapped
       if (payload != null) {
+        print("");
         Map<String, dynamic> data = jsonDecode('${payload.payload}');
         print('PAYLOAD_ID----->${payload.id}');
         await handleNotificationData(data);
@@ -121,7 +130,7 @@ class NotificationUtils {
         actions: [
           CupertinoDialogAction(
             isDefaultAction: true,
-            child: Text('Ok'),
+            child: Text('OK'),
             onPressed: () async {
               Navigator.of(context, rootNavigator: true).pop();
               await Get.toNamed(NotificationScreen.routeName);
@@ -167,7 +176,7 @@ class NotificationUtils {
               fullScreenIntent: true,
               playSound: true,
               channelShowBadge: true,
-              icon: "appicon"),
+              icon: "@mipmap/launcher_icon"),
         ),
         payload: data.isNotEmpty ? jsonEncode(data) : null,
         androidAllowWhileIdle: true,
@@ -175,14 +184,14 @@ class NotificationUtils {
             UILocalNotificationDateInterpretation.absoluteTime);
   }
 
+
+
   Future<void> handleNewNotification(
       RemoteMessage message, bool fromBackground) async {
     // display the notification manually
 
     RemoteNotification? notification = message.notification;
-    AndroidNotification? android = message.notification?.android;
-    log("handleNewNotification $notification ");
-    log("handleNewNotification1 $android ");
+    log("handleNewNotification ${message.data} ");
     if (notification != null && GetPlatform.isAndroid) {
       // the push is from foreground
       // here we need to manually display the notification
@@ -219,6 +228,37 @@ class NotificationUtils {
     log(type.toString());
     if (LocalStorage.isUserSignIn()) {
       // Get.find<BottomNavigationController>().selectedIndex = 0;
+
+      if(type == 1) {
+        //admin notification
+      }
+      else if(type == 2) {
+        //chat notification
+        if(data["channelRef"] != null) {
+          Map<String, dynamic> user = jsonDecode(data["user"]);
+
+          Get.toNamed(MessageScreen.routeName, arguments: {
+            "channelRef":
+            data["channelRef"],
+            "specialistRef":
+            user["_id"],
+            "specialistName":
+            user["name"],
+          });
+        }
+      }
+      else if(type == 3 || type == 4 || type == 5 || type == 6) {
+        //Itinerary notification
+        if(data["itineraryRef"] != null) {
+          if(type == 6) {
+            HomeController homeController = Get.find<HomeController>();
+            homeController.pendingData(0);
+          }
+
+          Get.toNamed(ItineraryDetailScreen.routeName,
+              arguments: data["itineraryRef"]);
+        }
+      }
     }
   }
 
@@ -270,12 +310,14 @@ class NotificationUtils {
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
       await NotificationUtils().handleNotificationData(message.data);
     });
+
     // listen for foreground messages
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       // received the message while the app was foreground
       // here the notification is not shown automatically.
-
-      log("NOTIFICATION FirebaseMessaging.onMessage.listen $message.data");
+      baseScreenController.notiUnreadCount = true;
+      baseScreenController.update();
+      log("NOTIFICATION FirebaseMessaging.onMessage.listen ${message.data}");
       await NotificationUtils().handleNewNotification(message, false);
     });
     FirebaseMessaging.instance.getInitialMessage().then((value) async {

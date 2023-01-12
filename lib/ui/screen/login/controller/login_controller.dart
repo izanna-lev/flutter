@@ -19,18 +19,4 @@ class LoginController extends GetxController {
   }
 
   CurrentUserModel? currentUserModel;
-
-  Future userLogin() async {
-    var response = await LoginRepo.login(
-      email: emailTextController.text.trim(),
-    );
-    if (response != null) {
-      emailTextController.clear();
-      currentUserModel = CurrentUserModel.fromJson(response);
-      userController.userModel = currentUserModel!.data;
-
-      /// LocalStorage.saveUserDetails();
-      Get.toNamed(BaseScreen.routeName);
-    }
-  }
 }

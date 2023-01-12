@@ -112,7 +112,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
                         return null;
                       },
                     ),
-                    const SizedBox(height: 170),
+                    const SizedBox(height: 150),
                     materialButton(
                       onTap: () async {
                         if (addCardController.addCardKey.currentState!

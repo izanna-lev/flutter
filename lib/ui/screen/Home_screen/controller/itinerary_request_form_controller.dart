@@ -19,6 +19,7 @@ class ItineraryRequestFormController extends GetxController {
   TextEditingController locationController = TextEditingController();
   TextEditingController howManyAreTravelingController = TextEditingController();
   TextEditingController dateInput = TextEditingController();
+  TextEditingController endDateInput = TextEditingController();
   // TextEditingController dateController = TextEditingController();
   int _value1 = 1;
 
@@ -110,6 +111,7 @@ class ItineraryRequestFormController extends GetxController {
       contactNumber: contactNumberController.text.trim(),
       phoneCode: countryCode?.dialCode ?? "+63",
       plannedDate: dateInput.text,
+      endDate: endDateInput.text,
       location: locationController.text.trim(),
       travellers: int.parse(howManyAreTravelingController.text.trim()),
       plannedTraveller: _radioGroup,

@@ -49,7 +49,10 @@ class ContactRepo {
       },
       showLoader: false,
     );
-    return AppDetailModel.fromJson(responseBody!);
+    if(responseBody != null) {
+      return AppDetailModel.fromJson(responseBody);
+    }
+    return null;
   }
 
   static Future deleteAccountRepo({required String userRef}) async {

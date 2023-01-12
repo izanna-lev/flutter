@@ -41,6 +41,7 @@ class ItineraryAddListModel {
     required this.location,
     required this.travellers,
     required this.plannedDate,
+    required this.endDate,
     required this.plannedTraveller,
     required this.id,
   });
@@ -53,6 +54,7 @@ class ItineraryAddListModel {
   String location;
   int travellers;
   DateTime plannedDate;
+  DateTime endDate;
   int plannedTraveller;
   String id;
 
@@ -66,6 +68,7 @@ class ItineraryAddListModel {
         location: json["location"],
         travellers: json["travellers"],
         plannedDate: DateTime.parse(json["plannedDate"]),
+        endDate: DateTime.parse(json["endDate"]),
         plannedTraveller: json["plannedTraveller"],
         id: json["_id"],
       );
@@ -78,6 +81,7 @@ class ItineraryAddListModel {
         "phoneCode": phoneCode,
         "location": location,
         "travellers": travellers,
+        "endDate": endDate.toIso8601String(),
         "plannedDate": plannedDate.toIso8601String(),
         "plannedTraveller": plannedTraveller,
         "_id": id,

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:rownd_flutter_plugin/rownd.dart';
 import 'package:rownd_flutter_plugin/state/global_state.dart';
 import 'package:tralever_module/custem_class/constant/app_colors.dart';
+import 'package:tralever_module/custem_class/utils/globle.dart';
 import 'package:tralever_module/services/api_routes.dart';
 import 'package:tralever_module/ui/screen/profile_screen/controller/profile_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -29,6 +30,7 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
   AboutScreenController aboutScreenController =
       Get.find<AboutScreenController>();
+
   ProfileController profileController = Get.find<ProfileController>();
 
   // @override
@@ -46,6 +48,7 @@ class _SettingScreenState extends State<SettingScreen> {
   @override
   void initState() {
     _rownd.configure(rowndAppKey);
+    // aboutScreenController.getStaticData();
     super.initState();
     // Provider.of<GlobalStateNotifier>(context, listen: false);
   }
@@ -64,7 +67,12 @@ class _SettingScreenState extends State<SettingScreen> {
             text: "About Us",
             icon: Icons.navigate_next_sharp,
             onTap: () {
-              Get.toNamed(AboutUsScreen.routeName);
+              if(aboutScreenController.appDetailDataModel != null && aboutScreenController.appDetailDataModel!.aboutUs.isNotEmpty) {
+                SEETING_SCREEN_TYPE = SETTING_SCREEN.ABOUT;
+                Get.toNamed(AboutUsScreen.routeName);
+              }else{
+                aboutScreenController.getStaticData();
+              }
             },
           ),
           settingSell(
@@ -72,13 +80,11 @@ class _SettingScreenState extends State<SettingScreen> {
             text: "Terms & Conditions",
             icon: Icons.navigate_next_sharp,
             onTap: () async {
-              var url = aboutScreenController
-                      .appDetailDataModel?.termsAndConditions ??
-                  "";
-              if (await canLaunch(url)) {
-                await launch(url);
-              } else {
-                throw "Failed to open LinkedIn";
+              if(aboutScreenController.appDetailDataModel != null && aboutScreenController.appDetailDataModel!.termsAndConditions.isNotEmpty) {
+                SEETING_SCREEN_TYPE = SETTING_SCREEN.TERMS_CONDITION;
+                Get.toNamed(AboutUsScreen.routeName);
+              }else{
+                aboutScreenController.getStaticData();
               }
             },
           ),
@@ -87,9 +93,15 @@ class _SettingScreenState extends State<SettingScreen> {
             text: "Privacy Policy",
             icon: Icons.navigate_next_sharp,
             onTap: () {
-              launch(
-                aboutScreenController.appDetailDataModel?.privacyPolicy ?? "",
-              );
+              if(aboutScreenController.appDetailDataModel != null && aboutScreenController.appDetailDataModel!.privacyPolicy.isNotEmpty) {
+                SEETING_SCREEN_TYPE = SETTING_SCREEN.PRIVACY_POLICY;
+                Get.toNamed(AboutUsScreen.routeName);
+              }else{
+                aboutScreenController.getStaticData();
+              }
+              // launch(
+              //   aboutScreenController.appDetailDataModel?.privacyPolicy ?? "",
+              // );
             },
           ),
           settingSell(
@@ -143,6 +155,7 @@ class _SettingScreenState extends State<SettingScreen> {
           print("Sign Out====>${_rownd.signOut}");
           LocalStorage.clearData();
           print('CLEAER_DATA${LocalStorage.clearData}');
+
           profileController.userProfileDetailsModel!.image = "";
         }
         Get.offAllNamed(LoginScreen.routeName);

@@ -63,7 +63,7 @@ class TravellerDetailsNotificationList {
     required this.seen,
     required this.createdOn,
     required this.updatedOn,
-    required this.v,
+    required this.userDetails,
   });
 
   String id;
@@ -76,7 +76,7 @@ class TravellerDetailsNotificationList {
   bool seen;
   DateTime createdOn;
   DateTime updatedOn;
-  int v;
+  NotificationUserDetails userDetails;
 
   factory TravellerDetailsNotificationList.fromJson(
           Map<String, dynamic> json) =>
@@ -95,7 +95,7 @@ class TravellerDetailsNotificationList {
             DateTime.parse(json["createdOn"] ?? DateTime.now().toString()),
         updatedOn:
             DateTime.parse(json["updatedOn"] ?? DateTime.now().toString()),
-        v: json["__v"] ?? 0,
+        userDetails: NotificationUserDetails.fromJson(json["userDetails"] ?? {}),
       );
 
   Map<String, dynamic> toJson() => {
@@ -109,8 +109,28 @@ class TravellerDetailsNotificationList {
         "seen": seen,
         "createdOn": createdOn,
         "updatedOn": updatedOn,
-        "__v": v,
+        "userDetails": userDetails,
       };
+}
+
+class NotificationUserDetails {
+  NotificationUserDetails({
+    required this.id,
+    required this.name,
+  });
+
+  String id;
+  String name;
+
+  factory NotificationUserDetails.fromJson(Map<String, dynamic> json) => NotificationUserDetails(
+    id: json["id"] ?? "",
+    name: json["name"] ?? "",
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "name": name,
+  };
 }
 
 enum NotificationFrom { THE_62_F60_E8_B6_ACB2442_CA7_BAA69 }

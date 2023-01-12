@@ -36,6 +36,8 @@ class ProfileController extends GetxController {
   }
 
   Future editProfile({File? image}) async {
+    print("CALL API");
+
     EditProfileModel? response = await EditProfileRepo.editProfile(
       image: imagePickerController.image.isEmpty
           ? null
@@ -44,8 +46,10 @@ class ProfileController extends GetxController {
 
     if (response != null) {
       imagePickerController.resetImage();
+      Get.find<ProfileController>().userProfileDetailsModel?.image = response.data.image;
       userController.updateProfilePic(response.data);
       userController.updateUser(response.data);
+
     }
   }
 

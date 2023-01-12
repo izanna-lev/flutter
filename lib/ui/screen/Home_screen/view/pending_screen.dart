@@ -32,114 +32,104 @@ class _PendingScreenState extends State<PendingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GetBuilder(
-        builder: (HomeController homeController) {
-          return PaginationView(
-            key: homeController.pendingKey,
-            scrollDirection: Axis.vertical,
-            physics: const AlwaysScrollableScrollPhysics(),
-            pullToRefresh: true,
-            bottomLoader: const AppLoader(),
-            itemBuilder: (BuildContext context,
-                TravelPlansListModel travelPlansListModel, int index) {
-              return homeScreenCommonCell(
-                onTap: () {
-                  Get.toNamed(
-                    ItineraryDetailScreen.routeName,
-                    arguments: homeController.travelPlansData[index].id,
-                  );
-                },
-                image: homeController.travelPlansData[index].image,
-                day: homeController.travelPlansData[index].duration.toString(),
-                please: homeController.travelPlansData[index].name,
-                price: homeController.travelPlansData[index].price.toString(),
-                pleaseDetail: homeController.travelPlansData[index].description,
+      body: PaginationView(
+        key: homeController.pendingKey,
+        scrollDirection: Axis.vertical,
+        physics: const AlwaysScrollableScrollPhysics(),
+        pullToRefresh: true,
+        bottomLoader: const AppLoader(),
+        itemBuilder: (BuildContext context,
+            TravelPlansListModel travelPlansListModel, int index) {
+          return homeScreenCommonCell(
+            onTap: () {
+              Get.toNamed(
+                ItineraryDetailScreen.routeName,
+                arguments: homeController.pendingPlansData[index].id,
               );
             },
-            pageFetch: homeController.pendingData,
-            onEmpty: homeController.travelPlansData.isEmpty
-                ? Center(
-                    child: Column(
-                      children: [
-                        const Spacer(),
-                        Image.asset(
-                          AppImages.baseScreenPendingImage,
-                          width: 198,
-                          height: 200,
-                        ),
-                        const SizedBox(height: 20),
-                        const Text(
-                          "Request New Itinerary",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 40),
-                          child: Text(
-                            "Click the icon to submit your itinerary request. Once received, you will be matched with a specialist to create your travel plans. They will appear here.",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 14,
-                            ),
-                          ),
-                        ),
-                        const Spacer(),
-                      ],
-                    ),
-                  )
-                : Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            homeController.pendingKey.currentState!.refresh();
-                          },
-                          icon: const Icon(
-                            Icons.refresh,
-                            color: Colors.white,
-                          ),
-                        ),
-                        const Text("No data found"),
-                      ],
-                    ),
-                  ),
-            onError: (error) {
-              return const Center(
-                child: Text("No comments here yet."),
-              );
-            },
-            initialLoader: GetPlatform.isAndroid
-                ? const Center(
-                    child: AppLoader(),
-                  )
-                : const Center(
-                    child: CupertinoActivityIndicator(),
-                  ),
+            image: homeController.pendingPlansData[index].image,
+            day: homeController.pendingPlansData[index].duration.toString(),
+            please: homeController.pendingPlansData[index].name,
+            price: homeController.pendingPlansData[index].price.toString(),
+            pleaseDetail: homeController.pendingPlansData[index].description,
           );
         },
+        pageFetch: homeController.pendingData,
+        onEmpty: homeController.pendingPlansData.isEmpty
+            ? Center(
+          child: Column(
+            children: [
+              const Spacer(),
+              Image.asset(
+                AppImages.baseScreenPendingImage,
+                width: 198,
+                height: 200,
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                "Request New Itinerary",
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                ),
+              ),
+              const SizedBox(height: 10),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 40),
+                child: Text(
+                  "Click the icon to submit your itinerary request. Once received, you will be matched with a specialist to create your travel plans. They will appear here.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+              const Spacer(),
+            ],
+          ),
+        )
+            : Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                onPressed: () {
+                  homeController.pendingKey.currentState!.refresh();
+                },
+                icon: const Icon(
+                  Icons.refresh,
+                  color: Colors.white,
+                ),
+              ),
+              const Text("No data found"),
+            ],
+          ),
+        ),
+        onError: (error) {
+          return const Center(
+            child: Text("No comments here yet."),
+          );
+        },
+        initialLoader: GetPlatform.isAndroid
+            ? const Center(
+          child: AppLoader(),
+        )
+            : const Center(
+          child: CupertinoActivityIndicator(),
+        ),
       ),
       floatingActionButton:
           // homeController.travelPlansData.isEmpty
           //     ?
-          GetBuilder(
-        builder: (HomeController homeController) {
-          return homeController.travelPlansData.isEmpty
-              ? GestureDetector(
-                  onTap: () {
-                    Get.toNamed(ItineraryFromScreen.routeName);
-                  },
-                  child: Image.asset(
-                    AppIcons.floatingActionButtonIcon,
-                    height: 50,
-                  ),
-                )
-              : const SizedBox();
+      GestureDetector(
+        onTap: () {
+          Get.toNamed(ItineraryFromScreen.routeName);
         },
-      ),
+        child: Image.asset(
+          AppIcons.floatingActionButtonIcon,
+          height: 50,
+        ),
+      )
     );
   }
 

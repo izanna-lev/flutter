@@ -46,6 +46,7 @@ class ChatRepo {
           "page": page,
           "channelId": channelId,
         }));
+
     if (responseBody != null) {
       MessageListResponse messageListResponse =
           MessageListResponse.fromJson(responseBody);

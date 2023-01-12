@@ -10,12 +10,12 @@ import '../../../../services/chats_repo/chatRepo.dart';
 import '../../../shared/image_picker_controller.dart';
 
 class ChatScreenController extends GetxController {
+  int unseenChats = 0;
   int start = resourceAPIPaginationStart;
   GlobalKey<PaginationViewState> chatListKey = GlobalKey<PaginationViewState>();
   ImagePickerController imagePickerController =
       Get.find<ImagePickerController>();
   BaseScreenController baseScreenController = Get.find<BaseScreenController>();
-
   bool isUpdateMessage = false;
   List<ChatListModel> _chatData = [];
   List<ChatListModel> get chatData => _chatData;
@@ -23,6 +23,7 @@ class ChatScreenController extends GetxController {
     _chatData = value;
     update();
   }
+
 
   Future<List<ChatListModel>> userChatListData(int offset) async {
     if (offset == 0 && isUpdateMessage) {
@@ -40,6 +41,7 @@ class ChatScreenController extends GetxController {
       } else {
         start += 1;
       }
+      unseenChats = chatModel.totalUnseenChats;
       return chatData;
     }
 

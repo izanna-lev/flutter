@@ -32,10 +32,9 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   LoginController loginController = Get.find<LoginController>();
-  AboutScreenController aboutScreenController =
-      Get.find<AboutScreenController>();
   bool disposed = false;
-
+  String _platformVersion = 'Unknown';
+  RowndPlugin _rownd = RowndPlugin();
   DateTime? currentBackPressTime;
   Future<bool> onWillPop() {
     DateTime now = DateTime.now();
@@ -48,15 +47,45 @@ class _LoginScreenState extends State<LoginScreen> {
     return Future.value(true);
   }
 
-  final _rownd = RowndPlugin();
+
   @override
   void initState() {
     super.initState();
     loginController.update();
-
+    print("CHECK ==ROWND== LOGIN");
+    if (_rownd.state().state.auth?.isAuthenticated ?? false) {
+      print("SIGN OUT FROM ==ROWND==");
+      _rownd.signOut();
+      _rownd.state().state.auth?.accessToken = null;
+    }
     /// Rownd key
     /// e2f1fafb-228f-4eb7-85b7-8e784aa12567
+    initPlatformState();
     _rownd.configure(rowndAppKey);
+    // _rownd.configure("5b445042-7c8e-4c84-b451-e25c608e8bc0",
+    //     "https://api.us-east-2.dev.rownd.io", "https://hub.dev.rownd.io");
+  }
+
+  // Platform messages are asynchronous, so we initialize in an async method.
+  Future<void> initPlatformState() async {
+    String platformVersion;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    // We also handle the message potentially returning null.
+    try {
+      platformVersion = await _rownd.getPlatformVersion() ??
+          'Unknown platform version';
+    } on PlatformException {
+      platformVersion = 'Failed to get platform version.';
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+    setState(() {
+      _platformVersion = platformVersion;
+    });
   }
 
   @override
@@ -95,111 +124,111 @@ class _LoginScreenState extends State<LoginScreen> {
                           topRight: Radius.circular(10),
                           topLeft: Radius.circular(10),
                         ),
-                        color: Colors.white),
+                        color: Colors.transparent),
                     child: Form(
                       key: loginController.loginKey,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const SizedBox(height: 20),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: kDefaultPadding),
-                            child: Text(
-                              "Email",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: kDefaultPadding),
-                            child: FormInputTextfield(
-                              focusNode: FocusNode(
-                                  canRequestFocus: false,
-                                  descendantsAreFocusable: false),
-                              formFieldType: FormFieldType.email,
-                              textCapitalization: TextCapitalization.none,
-                              textInputAction: TextInputAction.done,
-                              controller: loginController.emailTextController,
-                              validator: (val) => validateEmail(val?.trim()),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
-                            child: Row(
-                              children: [
-                                Theme(
-                                  data: ThemeData(
-                                    checkboxTheme: CheckboxThemeData(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4)),
-                                      checkColor:
-                                          MaterialStateProperty.resolveWith(
-                                        (_) => AppColors.appBlueColor,
-                                      ),
-                                      fillColor:
-                                          MaterialStateProperty.resolveWith(
-                                              (_) => Colors.transparent),
-                                      side: AlwaysActiveBorderSide(),
-                                    ),
-                                  ),
-                                  child: Checkbox(
-                                      value: loginController.isChecked,
-                                      onChanged: (bool? value) {
-                                        loginController.isChecked = value!;
-                                      }),
-                                ),
-                                Expanded(
-                                  child: RichText(
-                                    text: TextSpan(
-                                      text: "I agree to the ".tr,
-                                      style: const TextStyle(
-                                        fontFamily: kAppFont,
-                                        fontSize: 14,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                      children: <TextSpan>[
-                                        TextSpan(
-                                          text: "Terms & Conditions".tr,
-                                          recognizer: TapGestureRecognizer()
-                                            ..onTap = () {
-                                              var url = aboutScreenController
-                                                      .appDetailDataModel
-                                                      ?.termsAndConditions ??
-                                                  "";
-                                              launch(url);
-                                            },
-                                          style: const TextStyle(
-                                            fontFamily: kAppFont,
-                                            fontSize: 14,
-                                            decoration:
-                                                TextDecoration.underline,
-                                            color: AppColors.appBlueColor,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                        TextSpan(
-                                          text: " of Onsite.".tr,
-                                          style: const TextStyle(
-                                            fontFamily: kAppFont,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w500,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                          // const Padding(
+                          //   padding: EdgeInsets.symmetric(
+                          //       horizontal: kDefaultPadding),
+                          //   child: Text(
+                          //     "Email",
+                          //     style: TextStyle(
+                          //       fontWeight: FontWeight.w600,
+                          //       fontSize: 16,
+                          //     ),
+                          //   ),
+                          // ),
+                          // const SizedBox(height: 20),
+                          // Padding(
+                          //   padding: const EdgeInsets.symmetric(
+                          //       horizontal: kDefaultPadding),
+                          //   child: FormInputTextfield(
+                          //     focusNode: FocusNode(
+                          //         canRequestFocus: false,
+                          //         descendantsAreFocusable: false),
+                          //     formFieldType: FormFieldType.email,
+                          //     textCapitalization: TextCapitalization.none,
+                          //     textInputAction: TextInputAction.done,
+                          //     controller: loginController.emailTextController,
+                          //     validator: (val) => validateEmail(val?.trim()),
+                          //   ),
+                          // ),
+                          // Padding(
+                          //   padding: const EdgeInsets.symmetric(horizontal: 8),
+                          //   child: Row(
+                          //     children: [
+                          //       Theme(
+                          //         data: ThemeData(
+                          //           checkboxTheme: CheckboxThemeData(
+                          //             shape: RoundedRectangleBorder(
+                          //                 borderRadius:
+                          //                     BorderRadius.circular(4)),
+                          //             checkColor:
+                          //                 MaterialStateProperty.resolveWith(
+                          //               (_) => AppColors.appBlueColor,
+                          //             ),
+                          //             fillColor:
+                          //                 MaterialStateProperty.resolveWith(
+                          //                     (_) => Colors.transparent),
+                          //             side: AlwaysActiveBorderSide(),
+                          //           ),
+                          //         ),
+                          //         child: Checkbox(
+                          //             value: loginController.isChecked,
+                          //             onChanged: (bool? value) {
+                          //               loginController.isChecked = value!;
+                          //             }),
+                          //       ),
+                          //       Expanded(
+                          //         child: RichText(
+                          //           text: TextSpan(
+                          //             text: "I agree to the ".tr,
+                          //             style: const TextStyle(
+                          //               fontFamily: kAppFont,
+                          //               fontSize: 14,
+                          //               color: Colors.black,
+                          //               fontWeight: FontWeight.w500,
+                          //             ),
+                          //             children: <TextSpan>[
+                          //               TextSpan(
+                          //                 text: "Terms & Conditions".tr,
+                          //                 recognizer: TapGestureRecognizer()
+                          //                   ..onTap = () {
+                          //                     var url = aboutScreenController
+                          //                             .appDetailDataModel
+                          //                             ?.termsAndConditions ??
+                          //                         "";
+                          //                     launch(url);
+                          //                   },
+                          //                 style: const TextStyle(
+                          //                   fontFamily: kAppFont,
+                          //                   fontSize: 14,
+                          //                   decoration:
+                          //                       TextDecoration.underline,
+                          //                   color: AppColors.appBlueColor,
+                          //                   fontWeight: FontWeight.w600,
+                          //                 ),
+                          //               ),
+                          //               TextSpan(
+                          //                 text: " of Onsite.".tr,
+                          //                 style: const TextStyle(
+                          //                   fontFamily: kAppFont,
+                          //                   fontSize: 14,
+                          //                   fontWeight: FontWeight.w500,
+                          //                   color: Colors.black,
+                          //                 ),
+                          //               ),
+                          //             ],
+                          //           ),
+                          //         ),
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
                           Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: kDefaultPadding),
@@ -208,71 +237,81 @@ class _LoginScreenState extends State<LoginScreen> {
                               builder: (context, child) {
                                 return Consumer<GlobalStateNotifier>(
                                     builder: (_, rownd, __) {
+                                    if(accessTokenBackup == null && rownd.state.auth?.accessToken !=
+                                        null) {
+                                      print("KEYUR INSIDE");
+                                      accessTokenBackup = rownd.state.auth?.accessToken;
+                                      userController
+                                          .rowndSignIn(
+                                          token:
+                                          "${rownd.state.auth?.accessToken}")
+                                          .then((value) {
+
+                                        if (value != null) {
+                                          print(
+                                              "ROWND-ACCESS-TOKEN----->${rownd.state.auth?.accessToken}");
+                                          userController.rowndAcessToken =
+                                              rownd.state.auth
+                                                  ?.accessToken;
+                                          print(
+                                              "usercontroller token--->${userController.rowndAcessToken}");
+
+                                          Get.offAllNamed(
+                                              BaseScreen.routeName);
+                                          Future.delayed(Duration(seconds: 4), () {
+                                            accessTokenBackup =null;
+                                          });
+                                        } else {
+                                          rownd.state.auth?.accessToken =
+                                          null;
+                                          userController.rowndAcessToken =
+                                          null;
+                                          if (_rownd
+                                              .state()
+                                              .state
+                                              .auth
+                                              ?.isAuthenticated ??
+                                              false) {
+                                            print("rownd signOut");
+                                            _rownd.signOut();
+                                            LocalStorage.clearData();
+                                          }
+                                        }
+
+                                      });
+                                    }
+
                                   return materialButton(
                                     onTap: () async {
                                       disposeKeyboard();
                                       // setState(() {
                                       if (loginController.loginKey.currentState!
                                           .validate()) {
-                                        if (loginController.isChecked == true) {
+                                        // if (loginController.isChecked == true) {
                                           if (rownd.state.auth?.accessToken !=
                                               null) {
-                                            userController
-                                                .rowndSignIn(
-                                                    token:
-                                                        "${rownd.state.auth?.accessToken}",
-                                                    fcmToken: LocalStorage
-                                                        .getFCMToken())
-                                                .then((value) {
-                                              if (value != null) {
-                                                print(
-                                                    "ROWND-ACCESS-TOKEN----->${rownd.state.auth?.accessToken}");
-                                                userController.rowndAcessToken =
-                                                    rownd.state.auth
-                                                        ?.accessToken;
-                                                print(
-                                                    "usercontroller token--->${userController.rowndAcessToken}");
-                                                Get.offAllNamed(
-                                                    BaseScreen.routeName);
-                                              } else {
-                                                rownd.state.auth?.accessToken =
-                                                    null;
-                                                userController.rowndAcessToken =
-                                                    null;
-                                                if (_rownd
-                                                        .state()
-                                                        .state
-                                                        .auth
-                                                        ?.isAuthenticated ??
-                                                    false) {
-                                                  print("rownd signOut");
-                                                  _rownd.signOut();
-                                                  LocalStorage.clearData();
-                                                }
-                                              }
-                                            });
                                           } else {
+                                            accessTokenBackup = null;
                                             signin()?.then((value) {
-                                              userController
-                                                  .rowndSignIn(
-                                                      token:
-                                                          "${rownd.state.auth?.accessToken}",
-                                                      fcmToken: LocalStorage
-                                                          .getFCMToken())
-                                                  .then((value) =>
-                                                      Get.offAllNamed(BaseScreen
-                                                          .routeName));
-                                              // }
+                                              // userController
+                                              //     .rowndSignIn(
+                                              //         token:
+                                              //             "${rownd.state.auth?.accessToken}",
+                                              //         fcmToken: LocalStorage
+                                              //             .getFCMToken())
+                                              //     .then((value) =>
+                                              //         Get.offAllNamed(BaseScreen
+                                              //             .routeName));
                                             });
                                           }
-                                        } else {
-                                          flutterToast(
-                                              "Please agree Terms and conditions");
-                                        }
+                                        // } else {
+                                        //   flutterToast(
+                                        //       "Please agree Terms and conditions");
+                                        // }
                                       }
                                       // });
                                     },
-                                    text: 'Get Started',
+                                    text: 'Continue',
                                   );
                                 });
                               },
@@ -328,8 +367,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future? signin() {
     RowndSignInOptions signInOpts = RowndSignInOptions();
+    // signInOpts.postSignInRedirect = "https://app.onsiteplanning.com";
+    signInOpts.postSignInRedirect = "NATIVE_APP";
     _rownd.requestSignIn(signInOpts);
-    signInOpts.postSignInRedirect = "https://www.google.com";
   }
 }
 

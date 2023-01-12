@@ -123,7 +123,7 @@ class _RequestFormTextfieldState extends State<RequestFormTextfield> {
         // ),
 
         labelText: getLabel(),
-        hintText: getHintText(),
+        hintText: "",//getHintText(),
         suffixText: widget.suffixText,
         filled: true,
         fillColor: const Color(0xffEDEDED),

@@ -137,7 +137,7 @@ class _ActivityMapDetailsState extends State<ActivityMapDetails> {
                   ? "Hotel Reservations"
                   : widget.data[5] == 2
                       ? "Restaurant Reservations"
-                      : "Activity Details",
+                      : "Activity Details"
             ),
             body: GetBuilder(
               builder: (ItineraryDetailScreenController

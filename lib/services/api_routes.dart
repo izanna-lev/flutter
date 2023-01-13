@@ -7,12 +7,13 @@ import 'package:tralever_module/custem_class/utils/globle.dart';
 // const String socketBaseUrl = "http://44.209.25.93:3000";
 
 ///Staging server
-const String url = "http://44.208.65.177:3000/api/";
+// const String url = "http://44.208.65.177:3000/api/";
+const String url = "https://api.onsiteplanning.com/api/";
 const String imageUrl =
     "https://app-onsite.s3.amazonaws.com/staging/images/small/";
-const String socketBaseUrl = "http://44.208.65.177:3000";
+// const String socketBaseUrl = "http://44.208.65.177:3000";
+const String socketBaseUrl = "https://api.onsiteplanning.com";
 
-// const String socketBaseUrl = "https://44.208.65.177:4000";
 
 ///ROWND APP KEY
 const String rowndAppKey = "d432a653-54bc-4c1d-a8c8-bf975187a5f8";

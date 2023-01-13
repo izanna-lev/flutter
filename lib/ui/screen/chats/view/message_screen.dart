@@ -351,103 +351,171 @@ class _MessageScreenState extends State<MessageScreen> {
             );
     } else {
       // Left (defence message)
-
-      return (message.messageType == 1 || message.messageType == 3)
-          ? Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 7),
-                    child: Text(
-                      message.specialist.name.isNotEmpty ? message.specialist.name : message.admin.name.isNotEmpty ? message.admin.name : "",
-                      style: const TextStyle(
-                          color: AppColors.appBlueColor, fontSize: 11, fontWeight: FontWeight.w700),
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: const Color(0xffF3F3F3),
-                        borderRadius: BorderRadius.circular(22)),
-                    margin: const EdgeInsets.only(right: 50),
-                    padding: const EdgeInsets.all(15),
-
-                    child: Linkify(
-                      onOpen: (link) async {
-                        if (await canLaunch(link.url)) {
-                          await launch(link.url);
-                        } else {
-                          throw 'Could not launch $link';
-                        }
-                      },
-                      text: message.message,
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                      ),
-                      linkStyle: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                      ),
-                    ),
-                    // margin: const EdgeInsets.only(left: 10.0),
-                  ),
-                  // getHeightSizedBox(h: 7),
-                  const SizedBox(height: 7),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 7),
-                    child: Text(
-                      DateTimeFormatExtension.displayMSGTimeFromTimestamp(
-                          message.createdOn),
-                      style: const TextStyle(
-                          color: Color(0xff7C8392), fontSize: 11),
-                    ),
-                  ),
-                  // getHeightSizedBox(h: 4),
-                  const SizedBox(height: 10)
-                ],
+      if(message.messageType == 1) {
+        return Padding(
+          padding: const EdgeInsets.only(left: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 7),
+                child: Text(
+                  message.specialist.name.isNotEmpty ? message.specialist.name : message.admin.name.isNotEmpty ? message.admin.name : "",
+                  style: const TextStyle(
+                      color: AppColors.appBlueColor, fontSize: 11, fontWeight: FontWeight.w700),
+                ),
               ),
-            )
-          : Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 80),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: AppColors.appBlueColor,
-                        borderRadius: BorderRadius.circular(10)),
-                    padding: const EdgeInsets.all(2),
-                    child: SizedBox(
-                        width: double.infinity,
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.network(
-                              imageUrl + message.message,
-                              fit: BoxFit.cover,
-                            ))),
+              const SizedBox(height: 4),
+              Container(
+                decoration: BoxDecoration(
+                    color: const Color(0xffF3F3F3),
+                    borderRadius: BorderRadius.circular(22)),
+                margin: const EdgeInsets.only(right: 50),
+                padding: const EdgeInsets.all(15),
+
+                child: Linkify(
+                  onOpen: (link) async {
+                    if (await canLaunch(link.url)) {
+                      await launch(link.url);
+                    } else {
+                      throw 'Could not launch $link';
+                    }
+                  },
+                  text: message.message,
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
+                  ),
+                  linkStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
                   ),
                 ),
-                // getHeightSizedBox(h: 7),
-                const SizedBox(height: 7),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Text(
-                    DateTimeFormatExtension.displayMSGTimeFromTimestamp(
-                        message.createdOn),
-                    style:
-                        const TextStyle(color: Color(0xff7C8392), fontSize: 11),
+                // margin: const EdgeInsets.only(left: 10.0),
+              ),
+              // getHeightSizedBox(h: 7),
+              const SizedBox(height: 7),
+              Padding(
+                padding: const EdgeInsets.only(right: 7),
+                child: Text(
+                  DateTimeFormatExtension.displayMSGTimeFromTimestamp(
+                      message.createdOn),
+                  style: const TextStyle(
+                      color: Color(0xff7C8392), fontSize: 11),
+                ),
+              ),
+              // getHeightSizedBox(h: 4),
+              const SizedBox(height: 10)
+            ],
+          ),
+        );
+      }
+      else if(message.messageType == 2) {
+        return Column(
+  crossAxisAlignment: CrossAxisAlignment.start,
+  children: [
+    Padding(
+      padding: const EdgeInsets.only(left: 10, right: 80),
+      child: Container(
+        decoration: BoxDecoration(
+            color: AppColors.appBlueColor,
+            borderRadius: BorderRadius.circular(10)),
+        padding: const EdgeInsets.all(2),
+        child: SizedBox(
+            width: double.infinity,
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  imageUrl + message.message,
+                  fit: BoxFit.cover,
+                ))),
+      ),
+    ),
+    // getHeightSizedBox(h: 7),
+    const SizedBox(height: 7),
+    Padding(
+      padding: const EdgeInsets.only(left: 10),
+      child: Text(
+        DateTimeFormatExtension.displayMSGTimeFromTimestamp(
+            message.createdOn),
+        style:
+        const TextStyle(color: Color(0xff7C8392), fontSize: 11),
+      ),
+    ),
+    // getHeightSizedBox(h: 4),
+    const SizedBox(height: 4)
+  ],
+);
+      }
+      else if(message.messageType == 3) {
+        return Padding(
+          padding: const EdgeInsets.only(left: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 7),
+                child: Text(
+                  message.specialist.name.isNotEmpty ? message.specialist.name : message.admin.name.isNotEmpty ? message.admin.name : "",
+                  style: const TextStyle(
+                      color: AppColors.appBlueColor, fontSize: 11, fontWeight: FontWeight.w700),
+                ),
+              ),
+              const SizedBox(height: 4),
+              Container(
+                decoration: BoxDecoration(
+                    color: const Color(0xffF3F3F3),
+                    borderRadius: BorderRadius.circular(22)),
+                margin: const EdgeInsets.only(right: 50),
+                padding: const EdgeInsets.all(15),
+
+                child: Linkify(
+                  onOpen: (link) async {
+                    if (await canLaunch(link.url)) {
+                      await launch(link.url);
+                    } else {
+                      throw 'Could not launch $link';
+                    }
+                  },
+                  text: generateMessageWithLink(message.message),
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
+                  ),
+                  linkStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
                   ),
                 ),
-                // getHeightSizedBox(h: 4),
-                const SizedBox(height: 4)
-              ],
-            );
+                // margin: const EdgeInsets.only(left: 10.0),
+              ),
+              // getHeightSizedBox(h: 7),
+              const SizedBox(height: 7),
+              Padding(
+                padding: const EdgeInsets.only(right: 7),
+                child: Text(
+                  DateTimeFormatExtension.displayMSGTimeFromTimestamp(
+                      message.createdOn),
+                  style: const TextStyle(
+                      color: Color(0xff7C8392), fontSize: 11),
+                ),
+              ),
+              // getHeightSizedBox(h: 4),
+              const SizedBox(height: 10)
+            ],
+          ),
+        );
+      }
     }
   }
 
+  String generateMessageWithLink(String msg) {
+    String newMsg = msg;
+    if(!newMsg.contains("http://") || !newMsg.contains("https://")) {
+      newMsg = "http://$newMsg";
+    }
+    return newMsg;
+  }
   showMoreOption() async {
     disposeKeyboard();
     openBottomSheet(

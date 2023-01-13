@@ -107,7 +107,7 @@ class SocketManager {
   // }
 
   static void sendMessage(Map message) {
-    print("Emit sendMessage: ${message}");
+    // print("Emit sendMessage: ${message}");
     if (socket!.connected) {
       print("Emit Message: ${message}");
       socket!.emit('message', message);

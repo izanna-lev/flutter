@@ -52,7 +52,7 @@ class ContactRepo {
     if(responseBody != null) {
       return AppDetailModel.fromJson(responseBody);
     }
-    return null;
+    return AppDetailModel.fromJson({});
   }
 
   static Future deleteAccountRepo({required String userRef}) async {

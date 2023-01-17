@@ -51,6 +51,7 @@ class ChatListModel {
     required this.channelRef,
     required this.specialistRef,
     required this.specialistName,
+    required this.adminRef,
     required this.message,
     required this.itineraryStatus,
     required this.fromDate,
@@ -64,6 +65,7 @@ class ChatListModel {
   String channelRef;
   String specialistRef;
   String specialistName;
+  String adminRef;
   Message message;
   int itineraryStatus;
   String fromDate;
@@ -77,6 +79,7 @@ class ChatListModel {
         channelRef: json["channelRef"] ?? "",
         specialistRef: json["specialistRef"] ?? "",
         specialistName: json["specialistName"] ?? "",
+        adminRef: json["adminRef"],
         message: Message.fromJson(json["message"] ?? {}),
         itineraryStatus: json["itineraryStatus"] ?? 0,
         fromDate: json["fromDate"] ?? "",
@@ -91,6 +94,7 @@ class ChatListModel {
         "channelRef": channelRef,
         "specialistRef": specialistRef,
         "specialistName": specialistName,
+        "adminRef": adminRef,
         "message": message.toJson(),
         "itineraryStatus": itineraryStatus,
         "fromDate": fromDate,

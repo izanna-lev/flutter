@@ -37,6 +37,89 @@ class _CarDetailsState extends State<CarDetails> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Container(
+                  height: 180,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: const Color(0xffedf4f8),
+                  ),
+                  child: Padding(
+                    padding:
+                    const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            detailTitle(text: ""
+                              // '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].airline}'
+                            ),
+                            // const Text(
+                            //   "SQ221",
+                            //   style: TextStyle(
+                            //     fontSize: 16,
+                            //     color: Colors.black,
+                            //     fontWeight: FontWeight.w500,
+                            //   ),
+                            // ),
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              children: [
+                                flightText(
+                                  text: flightDepartArriveTimeConverter(
+                                    itineraryDetailScreenController
+                                        .itineraryDetailsListModel!
+                                        .itinerary[widget.data]
+                                        .departDateTime,
+                                  ),
+                                ),
+                                const SizedBox(height: 70),
+
+                                /// not come from backend
+                                // flightText(text: "06:30 PM"),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Image.asset(AppIcons.startFlightIcon,
+                                    height: 17),
+                                Container(
+                                  height: 75,
+                                  width: 1.5,
+                                  color: Colors.grey,
+                                ),
+                                Image.asset(AppIcons.ebdFlightIcon, height: 17),
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                flightText(
+                                    text: itineraryDetailScreenController
+                                        .itineraryDetailsListModel!
+                                        .itinerary[widget.index]
+                                        .departLocation),
+                                const SizedBox(height: 70),
+                                flightText(
+                                    text: itineraryDetailScreenController
+                                        .itineraryDetailsListModel!
+                                        .itinerary[widget.index]
+                                        .arrivalLocation)
+                              ],
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 15,),
                 const Text(
                   "Departure Car Details",
                   style: TextStyle(
@@ -109,88 +192,88 @@ class _CarDetailsState extends State<CarDetails> {
                 //   ],
                 // ),
                 // const SizedBox(height: 10),
-                Container(
-                  height: 180,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: const Color(0xffedf4f8),
-                  ),
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            detailTitle(text: ""
-                                // '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].airline}'
-                                ),
-                            // const Text(
-                            //   "SQ221",
-                            //   style: TextStyle(
-                            //     fontSize: 16,
-                            //     color: Colors.black,
-                            //     fontWeight: FontWeight.w500,
-                            //   ),
-                            // ),
-                          ],
-                        ),
-                        const SizedBox(height: 8),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              children: [
-                                flightText(
-                                  text: flightDepartArriveTimeConverter(
-                                    itineraryDetailScreenController
-                                        .itineraryDetailsListModel!
-                                        .itinerary[widget.data]
-                                        .departDateTime,
-                                  ),
-                                ),
-                                const SizedBox(height: 70),
-
-                                /// not come from backend
-                                // flightText(text: "06:30 PM"),
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Image.asset(AppIcons.startFlightIcon,
-                                    height: 17),
-                                Container(
-                                  height: 75,
-                                  width: 1.5,
-                                  color: Colors.grey,
-                                ),
-                                Image.asset(AppIcons.ebdFlightIcon, height: 17),
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                flightText(
-                                    text: itineraryDetailScreenController
-                                        .itineraryDetailsListModel!
-                                        .itinerary[widget.index]
-                                        .departLocation),
-                                const SizedBox(height: 70),
-                                flightText(
-                                    text: itineraryDetailScreenController
-                                        .itineraryDetailsListModel!
-                                        .itinerary[widget.index]
-                                        .arrivalLocation)
-                              ],
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+                // Container(
+                //   height: 180,
+                //   width: double.infinity,
+                //   decoration: BoxDecoration(
+                //     borderRadius: BorderRadius.circular(10),
+                //     color: const Color(0xffedf4f8),
+                //   ),
+                //   child: Padding(
+                //     padding:
+                //         const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+                //     child: Column(
+                //       children: [
+                //         Row(
+                //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //           children: [
+                //             detailTitle(text: ""
+                //                 // '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].airline}'
+                //                 ),
+                //             // const Text(
+                //             //   "SQ221",
+                //             //   style: TextStyle(
+                //             //     fontSize: 16,
+                //             //     color: Colors.black,
+                //             //     fontWeight: FontWeight.w500,
+                //             //   ),
+                //             // ),
+                //           ],
+                //         ),
+                //         const SizedBox(height: 8),
+                //         Row(
+                //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //           children: [
+                //             Column(
+                //               children: [
+                //                 flightText(
+                //                   text: flightDepartArriveTimeConverter(
+                //                     itineraryDetailScreenController
+                //                         .itineraryDetailsListModel!
+                //                         .itinerary[widget.data]
+                //                         .departDateTime,
+                //                   ),
+                //                 ),
+                //                 const SizedBox(height: 70),
+                //
+                //                 /// not come from backend
+                //                 // flightText(text: "06:30 PM"),
+                //               ],
+                //             ),
+                //             Column(
+                //               children: [
+                //                 Image.asset(AppIcons.startFlightIcon,
+                //                     height: 17),
+                //                 Container(
+                //                   height: 75,
+                //                   width: 1.5,
+                //                   color: Colors.grey,
+                //                 ),
+                //                 Image.asset(AppIcons.ebdFlightIcon, height: 17),
+                //               ],
+                //             ),
+                //             Column(
+                //               crossAxisAlignment: CrossAxisAlignment.start,
+                //               children: [
+                //                 flightText(
+                //                     text: itineraryDetailScreenController
+                //                         .itineraryDetailsListModel!
+                //                         .itinerary[widget.index]
+                //                         .departLocation),
+                //                 const SizedBox(height: 70),
+                //                 flightText(
+                //                     text: itineraryDetailScreenController
+                //                         .itineraryDetailsListModel!
+                //                         .itinerary[widget.index]
+                //                         .arrivalLocation)
+                //               ],
+                //             ),
+                //           ],
+                //         )
+                //       ],
+                //     ),
+                //   ),
+                // ),
                 // const SizedBox(height: 10),
                 // const Text(
                 //   "Departure Car Details",

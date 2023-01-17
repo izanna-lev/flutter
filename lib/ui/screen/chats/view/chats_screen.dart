@@ -71,7 +71,8 @@ class _ChatsScreenState extends State<ChatsScreen> {
                         "specialistRef":
                             chatScreenController.chatData[index].specialistRef,
                         "specialistName":
-                            chatScreenController.chatData[index].specialistName
+                            chatScreenController.chatData[index].specialistName.isEmpty? "Admin" :
+                            chatScreenController.chatData[index].specialistName,
                       });
                     },
                     child: Column(

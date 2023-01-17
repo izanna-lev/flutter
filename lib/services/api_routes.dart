@@ -1,18 +1,18 @@
 import 'package:tralever_module/custem_class/utils/globle.dart';
 
 ///development server
-// const String url = "http://44.209.25.93:3000/api/";
-// const String imageUrl =
-//     "https://app-onsite.s3.amazonaws.com/development/images/small/";
-// const String socketBaseUrl = "http://44.209.25.93:3000";
+const String url = "http://44.209.25.93:3000/api/";
+const String imageUrl =
+    "https://app-onsite.s3.amazonaws.com/development/images/small/";
+const String socketBaseUrl = "http://44.209.25.93:3000";
 
 ///Staging server
-// const String url = "http://44.208.65.177:3000/api/";
-const String url = "https://api.onsiteplanning.com/api/";
-const String imageUrl =
-    "https://app-onsite.s3.amazonaws.com/staging/images/small/";
-// const String socketBaseUrl = "http://44.208.65.177:3000";
-const String socketBaseUrl = "https://api.onsiteplanning.com";
+// // const String url = "http://44.208.65.177:3000/api/";
+// const String url = "https://api.onsiteplanning.com/api/";
+// const String imageUrl =
+//     "https://app-onsite.s3.amazonaws.com/staging/images/small/";
+// // const String socketBaseUrl = "http://44.208.65.177:3000";
+// const String socketBaseUrl = "https://api.onsiteplanning.com";
 
 
 

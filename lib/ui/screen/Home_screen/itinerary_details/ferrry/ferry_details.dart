@@ -206,6 +206,92 @@ class _FerryDetailsState extends State<FerryDetails> {
                 //   ),
                 // ),
                 // const SizedBox(height: 10),
+                const Text(
+                  "Departure Ferry Details",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                const Divider(thickness: 1),
+                detailTitle(text: "Outbound"),
+                detailText(
+                  text:
+                      "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].departLocation}",
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        detailTitle(text: "Depart"),
+                        detailText(
+                          text: flightDepartDateAndTimeConverter(
+                            itineraryDetailScreenController
+                                .itineraryDetailsListModel!
+                                .itinerary[widget.index]
+                                .departDateTime,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        detailTitle(text: "Arrive"),
+                        detailText(
+                          text: flightDepartDateAndTimeConverter(
+                            itineraryDetailScreenController
+                                .itineraryDetailsListModel!
+                                .itinerary[widget.index]
+                                .arrivalDateTime,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.watch_later_outlined,
+                      color: Colors.black54,
+                      size: 14,
+                    ),
+                    const SizedBox(width: 10),
+                    detailText(
+                      text: itineraryDetailScreenController
+                          .itineraryDetailsListModel!
+                          .itinerary[widget.index]
+                          .transportDuration,
+                    ),
+                    const SizedBox(width: 10),
+                    Image.asset(AppIcons.ferryTicketIcon, height: 14),
+                    const SizedBox(width: 10),
+                    detailText(
+                      text: itineraryDetailScreenController
+                          .itineraryDetailsListModel!
+                          .itinerary[widget.index]
+                          .trainClass ==
+                          1
+                          ? "Standard Class"
+                          : itineraryDetailScreenController
+                          .itineraryDetailsListModel!
+                          .itinerary[widget.index]
+                          .trainClass ==
+                          2
+                          ? "Business Class"
+                          : "",
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10,),
                 Container(
                   height: 180,
                   width: double.infinity,
@@ -291,58 +377,7 @@ class _FerryDetailsState extends State<FerryDetails> {
                     ),
                   ),
                 ),
-                SizedBox(height: 15),
-                const Text(
-                  "Departure Ferry Details",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                const Divider(thickness: 1),
-                detailTitle(text: "Outbound"),
-                detailText(
-                  text:
-                      "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].departLocation}",
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        detailTitle(text: "Depart"),
-                        detailText(
-                          text: flightDepartDateAndTimeConverter(
-                            itineraryDetailScreenController
-                                .itineraryDetailsListModel!
-                                .itinerary[widget.index]
-                                .departDateTime,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        detailTitle(text: "Arrive"),
-                        detailText(
-                          text: flightDepartDateAndTimeConverter(
-                            itineraryDetailScreenController
-                                .itineraryDetailsListModel!
-                                .itinerary[widget.index]
-                                .arrivalDateTime,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
+                SizedBox(height: 10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -388,41 +423,6 @@ class _FerryDetailsState extends State<FerryDetails> {
                               ),
                             ),
                           ],
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.watch_later_outlined,
-                          color: Colors.black54,
-                          size: 14,
-                        ),
-                        const SizedBox(width: 10),
-                        detailText(
-                          text: itineraryDetailScreenController
-                              .itineraryDetailsListModel!
-                              .itinerary[widget.index]
-                              .transportDuration,
-                        ),
-                        const SizedBox(width: 10),
-                        Image.asset(AppIcons.ferryTicketIcon, height: 14),
-                        const SizedBox(width: 10),
-                        detailText(
-                          text: itineraryDetailScreenController
-                              .itineraryDetailsListModel!
-                              .itinerary[widget.index]
-                              .trainClass ==
-                              1
-                              ? "Standard Class"
-                              : itineraryDetailScreenController
-                              .itineraryDetailsListModel!
-                              .itinerary[widget.index]
-                              .trainClass ==
-                              2
-                              ? "Business Class"
-                              : "",
                         ),
                       ],
                     ),

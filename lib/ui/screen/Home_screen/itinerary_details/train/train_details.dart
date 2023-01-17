@@ -200,6 +200,92 @@ class _TrainDetailsState extends State<TrainDetails> {
                 //   ),
                 // ),
                 // const SizedBox(height: 10),
+                const Text(
+                  "Departure Train Details",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                const Divider(thickness: 1),
+                detailTitle(text: "Outbound"),
+                detailText(
+                  text:
+                      "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].departLocation}",
+                ),
+                const SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          detailTitle(text: "Depart"),
+                          detailText(
+                            text: flightDepartDateAndTimeConverter(
+                              itineraryDetailScreenController
+                                  .itineraryDetailsListModel!
+                                  .itinerary[widget.index]
+                                  .departDateTime,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          detailTitle(text: "Arrive"),
+                          detailText(
+                            text: flightDepartDateAndTimeConverter(
+                              itineraryDetailScreenController
+                                  .itineraryDetailsListModel!
+                                  .itinerary[widget.index]
+                                  .arrivalDateTime,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.watch_later_outlined,
+                      color: Colors.black54,
+                      size: 14,
+                    ),
+                    const SizedBox(width: 10),
+                    detailText(
+                      text: itineraryDetailScreenController
+                          .itineraryDetailsListModel!
+                          .itinerary[widget.index]
+                          .transportDuration,
+                    ),
+                    const SizedBox(width: 10),
+                    Image.asset(AppIcons.trainTicketIcon, height: 14),
+                    const SizedBox(width: 10),
+                    detailText(
+                      text: itineraryDetailScreenController
+                          .itineraryDetailsListModel!
+                          .itinerary[widget.index]
+                          .trainClass ==
+                          1
+                          ? "Standard Class"
+                          : itineraryDetailScreenController
+                          .itineraryDetailsListModel!
+                          .itinerary[widget.index]
+                          .trainClass ==
+                          2
+                          ? "Business Class"
+                          : "",
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
                 Container(
                   height: 180,
                   width: double.infinity,
@@ -286,57 +372,6 @@ class _TrainDetailsState extends State<TrainDetails> {
                   ),
                 ),
                 SizedBox(height: 15),
-                const Text(
-                  "Departure Train Details",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                const Divider(thickness: 1),
-                detailTitle(text: "Outbound"),
-                detailText(
-                  text:
-                      "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].departLocation}",
-                ),
-                const SizedBox(height: 10),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 50),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          detailTitle(text: "Depart"),
-                          detailText(
-                            text: flightDepartDateAndTimeConverter(
-                              itineraryDetailScreenController
-                                  .itineraryDetailsListModel!
-                                  .itinerary[widget.index]
-                                  .departDateTime,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          detailTitle(text: "Arrive"),
-                          detailText(
-                            text: flightDepartDateAndTimeConverter(
-                              itineraryDetailScreenController
-                                  .itineraryDetailsListModel!
-                                  .itinerary[widget.index]
-                                  .arrivalDateTime,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -382,41 +417,6 @@ class _TrainDetailsState extends State<TrainDetails> {
                               ),
                             ),
                           ],
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.watch_later_outlined,
-                          color: Colors.black54,
-                          size: 14,
-                        ),
-                        const SizedBox(width: 10),
-                        detailText(
-                          text: itineraryDetailScreenController
-                              .itineraryDetailsListModel!
-                              .itinerary[widget.index]
-                              .transportDuration,
-                        ),
-                        const SizedBox(width: 10),
-                        Image.asset(AppIcons.trainTicketIcon, height: 14),
-                        const SizedBox(width: 10),
-                        detailText(
-                          text: itineraryDetailScreenController
-                              .itineraryDetailsListModel!
-                              .itinerary[widget.index]
-                              .trainClass ==
-                              1
-                              ? "Standard Class"
-                              : itineraryDetailScreenController
-                              .itineraryDetailsListModel!
-                              .itinerary[widget.index]
-                              .trainClass ==
-                              2
-                              ? "Business Class"
-                              : "",
                         ),
                       ],
                     ),

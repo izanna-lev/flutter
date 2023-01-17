@@ -37,6 +37,57 @@ class _CarDetailsState extends State<CarDetails> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(height: 15,),
+                const Text(
+                  "Departure Car Details",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+                detailTitle(text: "Outbound"),
+                detailText(
+                  text: itineraryDetailScreenController
+                      .itineraryDetailsListModel!
+                      .itinerary[widget.index]
+                      .departLocation,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        detailTitle(text: "Depart"),
+                        detailText(
+                          text: dateAndTimeConverter(
+                            itineraryDetailScreenController
+                                .itineraryDetailsListModel!
+                                .itinerary[widget.data]
+                                .departDateTime
+                                .toString(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    // Column(
+                    //   crossAxisAlignment: CrossAxisAlignment.start,
+                    //   children: [
+                    //     detailTitle(text: "Arrive"),
+                    //     detailText(
+                    //       text: flightDepartDateAndTimeConverter(
+                    //         itineraryDetailScreenController
+                    //             .itineraryDetailsListModel!
+                    //             .itinerary[widget.index]
+                    //             .departDateTime
+                    //             .toString(),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
+                  ],
+                ),
+                const SizedBox(height: 10),
                 Container(
                   height: 180,
                   width: double.infinity,
@@ -119,57 +170,6 @@ class _CarDetailsState extends State<CarDetails> {
                     ),
                   ),
                 ),
-                SizedBox(height: 15,),
-                const Text(
-                  "Departure Car Details",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
-                detailTitle(text: "Outbound"),
-                detailText(
-                  text: itineraryDetailScreenController
-                      .itineraryDetailsListModel!
-                      .itinerary[widget.index]
-                      .departLocation,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        detailTitle(text: "Depart"),
-                        detailText(
-                          text: dateAndTimeConverter(
-                            itineraryDetailScreenController
-                                .itineraryDetailsListModel!
-                                .itinerary[widget.data]
-                                .departDateTime
-                                .toString(),
-                          ),
-                        ),
-                      ],
-                    ),
-                    // Column(
-                    //   crossAxisAlignment: CrossAxisAlignment.start,
-                    //   children: [
-                    //     detailTitle(text: "Arrive"),
-                    //     detailText(
-                    //       text: flightDepartDateAndTimeConverter(
-                    //         itineraryDetailScreenController
-                    //             .itineraryDetailsListModel!
-                    //             .itinerary[widget.index]
-                    //             .departDateTime
-                    //             .toString(),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-                  ],
-                ),
-                const SizedBox(height: 10),
                 // Row(
                 //   children: [
                 //     const Icon(

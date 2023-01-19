@@ -30,6 +30,7 @@ class RequestFormTextfield extends StatefulWidget {
   final TextEditingController controller;
   final String password;
   final String suffixText;
+  final String hintText;
   final bool isSuffixIcon;
   final bool isPreffixIcon;
   final bool autoFocus;
@@ -58,6 +59,7 @@ class RequestFormTextfield extends StatefulWidget {
     required this.textInputAction,
     this.password = "",
     this.suffixText = "",
+    this.hintText = "",
     this.isSuffixIcon = false,
     this.isPreffixIcon = false,
     required this.controller,
@@ -123,7 +125,7 @@ class _RequestFormTextfieldState extends State<RequestFormTextfield> {
         // ),
 
         labelText: getLabel(),
-        hintText: "",//getHintText(),
+        hintText: widget.hintText,//getHintText(),
         suffixText: widget.suffixText,
         filled: true,
         fillColor: const Color(0xffEDEDED),

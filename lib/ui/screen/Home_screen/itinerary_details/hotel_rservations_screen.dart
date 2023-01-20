@@ -109,12 +109,17 @@ class _HotelReservationsScreenState extends State<HotelReservationsScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            detailText(
-                                text: itineraryDetailScreenController
-                                    .itineraryDetailsListModel!
-                                    .itinerary[widget.index]
-                                    .location),
-                            Image.asset(AppIcons.gpsIcon, height: 21),
+                            SizedBox(
+                              width: Get.width * 0.8,
+                              child: detailText(
+                                  text: //"Location"),
+                                  itineraryDetailScreenController
+                                      .itineraryDetailsListModel!
+                                      .itinerary[widget.index]
+                                      .location),
+                            ),
+                            Image.asset(AppIcons.gpsIcon, height: 21)
+
                           ],
                         ),
                       ),
@@ -210,11 +215,11 @@ detailTitle({required String text}) {
 
 detailText({required String text}) {
   return Text(
-    text,
-    style: const TextStyle(
-      fontSize: 15,
-      color: Colors.black54,
-      fontWeight: FontWeight.w500,
-    ),
+      text,
+      style: const TextStyle(
+        fontSize: 15,
+        color: Colors.black54,
+        fontWeight: FontWeight.w500,
+      ),
   );
 }

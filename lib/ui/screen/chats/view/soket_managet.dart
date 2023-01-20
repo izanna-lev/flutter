@@ -142,7 +142,7 @@ class SocketManager {
   static void updateChatList(Message msg) {
     print("updateChatList $msg");
     List<ChatListModel> tempData = chatScreenController.chatData;
-
+    bool isNewChat = false;
     final int index =
         tempData.indexWhere((element) => element.channelRef == msg.channelRef);
     if (index != -1) {
@@ -152,6 +152,8 @@ class SocketManager {
       } else {
         tempData[index].unseenMessages = true;
       }
+    }else{
+      isNewChat = true;
     }
     tempData.sort((msg1, msg2) {
       if (msg1.message.createdOn.isNotEmpty &&
@@ -176,9 +178,16 @@ class SocketManager {
           count++;
         }
       }
+      if(isNewChat){
+        count++;
+      }
       print("TOTAL Count: ${count}");
       baseScreenController.chatUnreadCount = count;
       chatScreenController.unseenChats = count;
     });
+
+    if(isNewChat) {
+      messageScreenController.messageListKey.currentState?.refresh();
+    }
   }
 }

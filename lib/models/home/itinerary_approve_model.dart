@@ -11,31 +11,23 @@ class ItineraryApproveModel {
     required this.code,
     required this.message,
     required this.data,
-    required this.format,
-    required this.timestamp,
   });
 
   int code;
   String message;
   ItineraryApproveDataModel data;
-  String format;
-  String timestamp;
 
   factory ItineraryApproveModel.fromJson(Map<String, dynamic> json) =>
       ItineraryApproveModel(
         code: json["code"],
         message: json["message"],
         data: ItineraryApproveDataModel.fromJson(json["data"]),
-        format: json["format"],
-        timestamp: json["timestamp"],
       );
 
   Map<String, dynamic> toJson() => {
         "code": code,
         "message": message,
         "data": data.toJson(),
-        "format": format,
-        "timestamp": timestamp,
       };
 }
 
@@ -137,7 +129,7 @@ class ItineraryApproveDataModel {
         formRef: json["formRef"] ?? "",
         email: json["email"] ?? "",
         isCancelRequest: json["isCancelRequest"] ?? false,
-        approved: json["approved"] ?? false,
+        approved: (json["approved"] is String) ? false : json["approved"] ?? false,
         submitted: json["submitted"] ?? false,
         cancellationRequest: json["cancellationRequest"] ?? "",
       );

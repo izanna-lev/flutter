@@ -258,8 +258,9 @@ class API {
 
         var resDecode = jsonDecode(res);
         log("MULTIPART RETURN RESPONSE BODY CREATE $url ====== $resDecode");
+        LoadingOverlay.of().hide();
         if (resDecode["code"] == 100) {
-          if (showLoader) LoadingOverlay.of().hide();
+
           flutterToast(resDecode["message"]);
 
           return resDecode;

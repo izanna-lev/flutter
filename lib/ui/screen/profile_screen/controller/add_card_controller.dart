@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:tralever_module/custem_class/constant/app_functions.dart';
 import 'package:tralever_module/models/profile/add_card_model.dart';
 import 'package:tralever_module/models/profile/manage_payment_methods_model.dart';
 import 'package:tralever_module/services/over&loding.dart';
@@ -77,6 +78,9 @@ class AddCardController extends GetxController {
         LocalStorage.setCardAdded(true);
         Get.toNamed(CardAddedSuccessfully.routeName);
       });
+    }else{
+      LoadingOverlay.of().hide();
+      flutterToast("Invalid Card Details");
     }
     return;
   }

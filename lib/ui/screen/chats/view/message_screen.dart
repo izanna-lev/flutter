@@ -71,9 +71,8 @@ class _MessageScreenState extends State<MessageScreen> {
               leading: IconButton(
                   onPressed: () {
                     SocketManager.channelRef = "";
+                    chatScreenController.chatListKey.currentState!.refresh();
                     Get.back();
-                    print(
-                        "-------?${chatScreenController.chatListKey.currentState!.refresh()}");
                   },
                   icon: const Icon(Icons.arrow_back, color: Colors.black)),
               centerTitle: true,
@@ -241,8 +240,11 @@ class _MessageScreenState extends State<MessageScreen> {
                                     children: [
                                       Text(chatListDate(
                                           controller.itinerary.fromDate)),
-                                      Text(controller
-                                          .itinerary.location),
+                                      SizedBox(
+                                        width: Get.width * 0.8,
+                                        child: Text(controller
+                                            .itinerary.location),
+                                      ),
                                     ],
                                   )
                                 ]),
@@ -258,10 +260,12 @@ class _MessageScreenState extends State<MessageScreen> {
     );
   }
 
-  // onClickOnBack() {
-  //   SocketManager.unsubscribeChannel();
-  //   disposeKeyboard();
-  // }
+  onClickOnBack() {
+    print("onClickOnBack");
+    SocketManager.channelRef = "";
+    chatScreenController.chatListKey.currentState!.refresh();
+    Get.back();
+  }
   messageBoxView({required Message message}) {
     if (message.userRef == userController.rowndSignInModel!.data.traveller.id) {
       // Right (my message)

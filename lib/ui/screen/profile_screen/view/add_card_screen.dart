@@ -42,7 +42,6 @@ class _AddCardScreenState extends State<AddCardScreen> {
                   children: [
                     addCardTitle(text: "Card Holder Name"),
                     RequestFormTextfield(
-                      hintText: "Steve Walter",
                       formFieldType: RequestFormFieldType.cardholdername,
                       textCapitalization: TextCapitalization.characters,
                       textInputAction: TextInputAction.next,
@@ -56,7 +55,6 @@ class _AddCardScreenState extends State<AddCardScreen> {
                     ),
                     addCardTitle(text: "Card Number"),
                     RequestFormTextfield(
-                      hintText: "XXX-XXX-XXX-1254",
                       formFieldType: RequestFormFieldType.cardnumber,
                       textCapitalization: TextCapitalization.none,
                       textInputAction: TextInputAction.next,
@@ -73,7 +71,6 @@ class _AddCardScreenState extends State<AddCardScreen> {
                       children: [
                         Expanded(
                             child: RequestFormTextfield(
-                              hintText: "Month",
                           formFieldType: RequestFormFieldType.month,
                           textCapitalization: TextCapitalization.none,
                           textInputAction: TextInputAction.next,
@@ -88,7 +85,6 @@ class _AddCardScreenState extends State<AddCardScreen> {
                         const SizedBox(width: 15),
                         Expanded(
                           child: RequestFormTextfield(
-                            hintText: "Year",
                             formFieldType: RequestFormFieldType.year,
                             textCapitalization: TextCapitalization.none,
                             textInputAction: TextInputAction.next,
@@ -105,7 +101,6 @@ class _AddCardScreenState extends State<AddCardScreen> {
                     ),
                     addCardTitle(text: "CVV"),
                     RequestFormTextfield(
-                      hintText: "XXX",
                       formFieldType: RequestFormFieldType.cvv,
                       textCapitalization: TextCapitalization.none,
                       textInputAction: TextInputAction.done,

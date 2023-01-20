@@ -46,6 +46,7 @@ class _ItineraryFromScreenState extends State<ItineraryFromScreen> {
                           formFieldType: RequestFormFieldType.firstname,
                           textCapitalization: TextCapitalization.sentences,
                           textInputAction: TextInputAction.next,
+                          isHideHint: true,
                           controller:
                               itineraryRequestController.firstnameController,
                           validator: (value) {
@@ -60,6 +61,7 @@ class _ItineraryFromScreenState extends State<ItineraryFromScreen> {
                           formFieldType: RequestFormFieldType.lastname,
                           textCapitalization: TextCapitalization.sentences,
                           textInputAction: TextInputAction.next,
+                          isHideHint: true,
                           controller:
                               itineraryRequestController.lastnameController,
                           validator: (value) {
@@ -83,6 +85,7 @@ class _ItineraryFromScreenState extends State<ItineraryFromScreen> {
                           formFieldType: RequestFormFieldType.contactNumber,
                           textCapitalization: TextCapitalization.none,
                           textInputAction: TextInputAction.next,
+                          isHideHint: true,
                           controller: itineraryRequestController
                               .contactNumberController,
                           validator: (value) {
@@ -98,6 +101,7 @@ class _ItineraryFromScreenState extends State<ItineraryFromScreen> {
                               RequestFormFieldType.wherewouldyouliketogo,
                           textCapitalization: TextCapitalization.sentences,
                           textInputAction: TextInputAction.next,
+                          isHideHint: true,
                           controller:
                               itineraryRequestController.locationController,
                           validator: (value) {
@@ -113,6 +117,7 @@ class _ItineraryFromScreenState extends State<ItineraryFromScreen> {
                               RequestFormFieldType.howmanyaretraveling,
                           textCapitalization: TextCapitalization.none,
                           textInputAction: TextInputAction.next,
+                          isHideHint: true,
                           controller: itineraryRequestController
                               .howManyAreTravelingController,
                           validator: (value) {

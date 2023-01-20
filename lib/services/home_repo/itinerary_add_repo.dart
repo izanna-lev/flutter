@@ -20,7 +20,7 @@ class ItineraryAddRepo {
   }) async {
     var responseBody = await API.apiHandler(
       url: APIRoutes.itineraryRequestAdd,
-      showLoader: false,
+      showLoader: true,
       requestType: RequestType.Post,
       header: {
         'Content-Type': 'application/json',

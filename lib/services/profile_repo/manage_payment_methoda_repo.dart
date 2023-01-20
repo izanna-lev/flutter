@@ -123,9 +123,7 @@ class CardRepo {
       requestType: RequestType.Post,
       header: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization':
-            "Bearer sk_test_51JF4vAG0ZIlqut04vVg4LRJ7MyjmN7CqaQdywJjXZXbLY6CtlZuZ1TJujDXMwtC4AELBySa3yyMC5R2yJdo4k8r600imjRSehB"
-        // "Bearer sk_test_51KGKwWDA20erhUuBurmQ2UPfeMpJI86n5mdiymPj5CWxD2CoG9ETYP22x6cuDXenNuUT4P7xQ0NPwFmRzW3N6fgC00iCcZNsae"
+        'Authorization': STRIPE_KEY
       },
       body: {
         "card[name]": cardHolderName,
@@ -137,6 +135,8 @@ class CardRepo {
     );
     if (responseBody != null) {
       return AddCard.fromJson(responseBody);
+    }else{
+      return null;
     }
   }
 

@@ -6,6 +6,7 @@ import 'package:tralever_module/custem_class/constant/app_settings.dart';
 import 'package:tralever_module/services/api_routes.dart';
 import 'package:tralever_module/ui/screen/base_screen/controller/base_screen_controller.dart';
 import 'package:tralever_module/ui/screen/chats/controller/chat_screen_controller.dart';
+import 'package:tralever_module/ui/screen/chats/view/soket_managet.dart';
 
 import '../../../../custem_class/constant/app_colors.dart';
 import '../../../../custem_class/utils/globle.dart';
@@ -64,6 +65,8 @@ class _ChatsScreenState extends State<ChatsScreen> {
                         }
                       }
                       baseScreenController.chatUnreadCount = count;
+                      SocketManager.baseScreenController.chatUnreadCount = count;
+                      SocketManager.chatScreenController.unseenChats = count;
 
                       Get.toNamed(MessageScreen.routeName, arguments: {
                         "channelRef":

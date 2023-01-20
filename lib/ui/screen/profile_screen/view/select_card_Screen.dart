@@ -7,7 +7,9 @@ import 'package:tralever_module/ui/screen/Home_screen/controller/itinerary_detai
 import 'package:tralever_module/ui/screen/profile_screen/controller/add_card_controller.dart';
 import 'package:tralever_module/ui/shared/appbar.dart';
 import '../../../../custem_class/constant/app_icons.dart';
+import '../../../../models/home/itinerary_approve_model.dart';
 import '../../../shared/material_button.dart';
+import '../../Home_screen/controller/home_controller.dart';
 
 class SelectCardScreen extends StatefulWidget {
   static const String routeName = "/SelectCardScreen";
@@ -29,6 +31,7 @@ class _SelectCardScreenState extends State<SelectCardScreen> {
   AddCardController addCardController = Get.find<AddCardController>();
   ItineraryDetailScreenController itineraryDetailScreenController =
       Get.find<ItineraryDetailScreenController>();
+  HomeController homeController = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -113,15 +116,24 @@ class _SelectCardScreenState extends State<SelectCardScreen> {
                       return;
                     }
                     // var response = await
-                    itineraryDetailScreenController.itineraryApprove(
+                    var response = await itineraryDetailScreenController.itineraryApprove(
                       itineraryRef: itineraryDetailScreenController
                           .itineraryDetailsListModel!.id
                           .toString(),
                       cardRef: addCardController.cardList[index].id,
                     );
-
-                    Get.back();
-                    Get.back();
+                    if(response != null) {
+                      if(homeController.pendingPlansData.length > 0) {
+                        int index = homeController.pendingPlansData.indexWhere((element) => element.id == itineraryDetailScreenController
+                            .itineraryDetailsListModel!.id);
+                        if(index != -1) {
+                          homeController.pendingPlansData[index].approved = true;
+                          homeController.update();
+                        }
+                      }
+                      Get.back();
+                      Get.back();
+                    }
                     // if (response != null) {
                     //   Get.back();
                     // }

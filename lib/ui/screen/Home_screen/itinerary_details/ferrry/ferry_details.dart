@@ -272,7 +272,7 @@ class _FerryDetailsState extends State<FerryDetails> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         detailTitle(
-                            text: "Specialist Note"
+                            text: "Notes"
                         ),
                         detailText(
                             text:  itineraryDetailScreenController

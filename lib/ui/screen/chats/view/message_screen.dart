@@ -58,213 +58,229 @@ class _MessageScreenState extends State<MessageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        disposeKeyboard();
-      },
-      child: GetBuilder(builder: (MessageScreenController controller) {
-        return Scaffold(
-            backgroundColor: Colors.white,
-            appBar: AppBar(
+    return WillPopScope(
+      onWillPop: onClickOnBack,
+      child: GestureDetector(
+        onTap: () {
+          disposeKeyboard();
+        },
+        child: GetBuilder(builder: (MessageScreenController controller) {
+          return Scaffold(
               backgroundColor: Colors.white,
-              elevation: 0,
-              leading: IconButton(
-                  onPressed: () {
-                    SocketManager.channelRef = "";
-                    chatScreenController.chatListKey.currentState!.refresh();
-                    Get.back();
-                  },
-                  icon: const Icon(Icons.arrow_back, color: Colors.black)),
-              centerTitle: true,
-              title: Text(
-                widget.otherUsername,
-                style: const TextStyle(
-                  color: Colors.black,
+              appBar: AppBar(
+                backgroundColor: Colors.white,
+                elevation: 0,
+                leading: IconButton(
+                    onPressed: () {
+                      final int index =
+                      chatScreenController.chatData.indexWhere((element) => element.channelRef == widget.channelRef);
+                      if(index != -1) {
+                        chatScreenController.chatData[index].unseenMessages = false;
+                      }
+                      SocketManager.channelRef = "";
+                      chatScreenController.update();
+                      Get.back();
+                    },
+                    icon: const Icon(Icons.arrow_back, color: Colors.black)),
+                centerTitle: true,
+                title: Text(
+                  widget.otherUsername,
+                  style: const TextStyle(
+                    color: Colors.black,
+                  ),
                 ),
+                actions: [(widget.otherUserRef == "") ? const SizedBox() :
+                  (controller.itinerary.itineraryStatus == 3 ||
+                          controller.itinerary.itineraryStatus == 5)
+                      ? const SizedBox()
+                      : IconButton(
+                          onPressed: () {
+                            showMoreOption();
+                          },
+                          icon: const Icon(Icons.more_vert, color: Colors.black))
+                ],
               ),
-              actions: [(widget.otherUserRef == "") ? const SizedBox() :
-                (controller.itinerary.itineraryStatus == 3 ||
-                        controller.itinerary.itineraryStatus == 5)
-                    ? const SizedBox()
-                    : IconButton(
-                        onPressed: () {
-                          showMoreOption();
-                        },
-                        icon: const Icon(Icons.more_vert, color: Colors.black))
-              ],
-            ),
-            body: widget.channelRef == "" && controller.messageList.isEmpty
-                ? GetPlatform.isAndroid
-                    ? const Center(
-                        child: CircularProgressIndicator(strokeWidth: 2))
-                    : const Center(child: CupertinoActivityIndicator())
-                : Stack(
-                    children: [
-                      Column(
-                        children: [
-                          SizedBox(height: 80,),
-                          Expanded(
-                              child: PaginationView(
-                            reverse: true,
-                            key: controller.messageListKey,
-                            scrollDirection: Axis.vertical,
-                            physics: const AlwaysScrollableScrollPhysics(),
-                            pullToRefresh: false,
-                            bottomLoader: const AppLoader(),
-                            itemBuilder: (BuildContext context, Message message,
-                                int index) {
-                              return messageBoxView(message: message);
-                            },
-                            pageFetch: controller.getMessageList,
-                            onEmpty: controller.messageList.isEmpty
-                                ? const Center(child: Text("No data found"))
-                                : Center(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        IconButton(
-                                          onPressed: () {
-                                            controller
-                                                .messageListKey.currentState!
-                                                .refresh();
-                                          },
-                                          icon: const Icon(
-                                            Icons.refresh,
-                                            color: Colors.white,
+              body: widget.channelRef == "" && controller.messageList.isEmpty
+                  ? GetPlatform.isAndroid
+                      ? const Center(
+                          child: CircularProgressIndicator(strokeWidth: 2))
+                      : const Center(child: CupertinoActivityIndicator())
+                  : Stack(
+                      children: [
+                        Column(
+                          children: [
+                            SizedBox(height: 80,),
+                            Expanded(
+                                child: PaginationView(
+                              reverse: true,
+                              key: controller.messageListKey,
+                              scrollDirection: Axis.vertical,
+                              physics: const AlwaysScrollableScrollPhysics(),
+                              pullToRefresh: false,
+                              bottomLoader: const AppLoader(),
+                              itemBuilder: (BuildContext context, Message message,
+                                  int index) {
+                                return messageBoxView(message: message);
+                              },
+                              pageFetch: controller.getMessageList,
+                              onEmpty: controller.messageList.isEmpty
+                                  ? const Center(child: Text("No data found"))
+                                  : Center(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          IconButton(
+                                            onPressed: () {
+                                              controller
+                                                  .messageListKey.currentState!
+                                                  .refresh();
+                                            },
+                                            icon: const Icon(
+                                              Icons.refresh,
+                                              color: Colors.white,
+                                            ),
                                           ),
-                                        ),
-                                        const Text("No data found"),
-                                      ],
-                                    ),
-                                  ),
-                            onError: (error) {
-                              return const Center(
-                                child: Text("No comments here yet."),
-                              );
-                            },
-                            initialLoader: GetPlatform.isAndroid
-                                ? const Center(
-                                    child: AppLoader(),
-                                  )
-                                : const Center(
-                                    child: CupertinoActivityIndicator(),
-                                  ),
-                          )),
-                          controller.itinerary.itineraryStatus == 3 ||
-                                  controller.itinerary.itineraryStatus == 5
-                              ? Container(
-                                  width: double.infinity,
-                                  color: const Color(0xffF8F8F8),
-                                  child: const Padding(
-                                    padding: EdgeInsets.only(
-                                        top: 10,
-                                        left: 10,
-                                        right: 10,
-                                        bottom: 20),
-                                    child: Text(
-                                      "Note: You cannot chat with agent once trip is completed",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                  ),
-                                )
-                              : SafeArea(
-                                  child: PostDetailsBottomView(
-                                      comment: controller.messageText,
-                                      send: () {
-                                        if (controller.messageText.text
-                                            .trim()
-                                            .isNotEmpty) {
-                                          Map message = {
-                                            "message": controller
-                                                .messageText.text
-                                                .trim(),
-                                            "channelRef": widget.channelRef,
-                                            "id": userController
-                                                .rowndSignInModel!
-                                                .data
-                                                .traveller
-                                                .id,
-                                            "messageType": 1,
-                                            "type": 2
-                                          };
-                                          SocketManager.sendMessage(message);
-                                          controller.messageText.text = "";
-                                        } else {
-                                          flutterToast("Please Enter Text");
-                                        }
-                                      },
-                                      attachFile: () {
-                                        //appImagePicker.tag = "message";
-                                        //appImagePicker.openBottomSheet();
-                                        bottomSheet();
-                                      },
-                                      hintText: 'Type Here'))
-                        ],
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 10),
-                            child: Container(
-                              width: double.infinity,
-                              color: const Color(0xffF8F8F8),
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    right: 10, top: 10, bottom: 10, left: 10),
-                                child: Row(children: [
-                                  Container(
-                                    height: 41,
-                                    width: 41,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      image: controller
-                                              .itinerary.image.isNotEmpty
-                                          ? DecorationImage(
-                                              image: NetworkImage(imageUrl +
-                                                  controller.itinerary.image),
-                                              fit: BoxFit.cover)
-                                          : DecorationImage(
-                                              image: AssetImage(AppImages
-                                                  .splashScreenBackgroundImage)),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 10),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(chatListDate(
-                                          controller.itinerary.fromDate)),
-                                      SizedBox(
-                                        width: Get.width * 0.8,
-                                        child: Text(controller
-                                            .itinerary.location),
+                                          const Text("No data found"),
+                                        ],
                                       ),
-                                    ],
+                                    ),
+                              onError: (error) {
+                                return const Center(
+                                  child: Text("No comments here yet."),
+                                );
+                              },
+                              initialLoader: GetPlatform.isAndroid
+                                  ? const Center(
+                                      child: AppLoader(),
+                                    )
+                                  : const Center(
+                                      child: CupertinoActivityIndicator(),
+                                    ),
+                            )),
+                            controller.itinerary.itineraryStatus == 3 ||
+                                    controller.itinerary.itineraryStatus == 5
+                                ? Container(
+                                    width: double.infinity,
+                                    color: const Color(0xffF8F8F8),
+                                    child: const Padding(
+                                      padding: EdgeInsets.only(
+                                          top: 10,
+                                          left: 10,
+                                          right: 10,
+                                          bottom: 20),
+                                      child: Text(
+                                        "Note: You cannot chat with agent once trip is completed",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ),
                                   )
-                                ]),
+                                : SafeArea(
+                                    child: PostDetailsBottomView(
+                                        comment: controller.messageText,
+                                        send: () {
+                                          if (controller.messageText.text
+                                              .trim()
+                                              .isNotEmpty) {
+                                            Map message = {
+                                              "message": controller
+                                                  .messageText.text
+                                                  .trim(),
+                                              "channelRef": widget.channelRef,
+                                              "id": userController
+                                                  .rowndSignInModel!
+                                                  .data
+                                                  .traveller
+                                                  .id,
+                                              "messageType": 1,
+                                              "type": 2
+                                            };
+                                            SocketManager.sendMessage(message);
+                                            controller.messageText.text = "";
+                                          } else {
+                                            flutterToast("Please Enter Text");
+                                          }
+                                        },
+                                        attachFile: () {
+                                          //appImagePicker.tag = "message";
+                                          //appImagePicker.openBottomSheet();
+                                          bottomSheet();
+                                        },
+                                        hintText: 'Type Here'))
+                          ],
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 10),
+                              child: Container(
+                                width: double.infinity,
+                                color: const Color(0xffF8F8F8),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      right: 10, top: 10, bottom: 10, left: 10),
+                                  child: Row(children: [
+                                    Container(
+                                      height: 41,
+                                      width: 41,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        image: controller
+                                                .itinerary.image.isNotEmpty
+                                            ? DecorationImage(
+                                                image: NetworkImage(imageUrl +
+                                                    controller.itinerary.image),
+                                                fit: BoxFit.cover)
+                                            : DecorationImage(
+                                                image: AssetImage(AppImages
+                                                    .splashScreenBackgroundImage)),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 10),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(chatListDate(
+                                            controller.itinerary.fromDate)),
+                                        SizedBox(
+                                          width: Get.width * 0.8,
+                                          child: Text(controller
+                                              .itinerary.location),
+                                        ),
+                                      ],
+                                    )
+                                  ]),
+                                ),
                               ),
                             ),
-                          ),
-                          Text("")
-                        ],
-                      )
-                    ],
-                  ));
-      }),
+                            Text("")
+                          ],
+                        )
+                      ],
+                    ));
+        }),
+      ),
     );
   }
 
-  onClickOnBack() {
+  Future<bool> onClickOnBack() {
     print("onClickOnBack");
+    final int index =
+    chatScreenController.chatData.indexWhere((element) => element.channelRef == widget.channelRef);
+    if(index != -1) {
+      chatScreenController.chatData[index].unseenMessages = false;
+    }
     SocketManager.channelRef = "";
-    chatScreenController.chatListKey.currentState!.refresh();
+    Future.delayed(Duration.zero,(){
+      chatScreenController.update();
+    });
     Get.back();
+    return Future.value(true);
   }
   messageBoxView({required Message message}) {
     if (message.userRef == userController.rowndSignInModel!.data.traveller.id) {

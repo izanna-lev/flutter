@@ -166,14 +166,13 @@ class SocketManager {
     chatScreenController.chatData = tempData;
     chatScreenController.isUpdateMessage = true;
     chatScreenController.update();
-    chatScreenController.chatListKey.currentState?.refresh();
+    // chatScreenController.chatListKey.currentState?.refresh();
     Future.delayed(const Duration(milliseconds: 2), () {
       chatScreenController.isUpdateMessage = false;
     });
     Future.delayed(const Duration(seconds: 2), () {
       int count = 0;
       for (int i = 0; i < chatScreenController.chatData.length; i++) {
-        print("UPDATE CHAT: ${chatScreenController.chatData[i].toJson()}");
         if (chatScreenController.chatData[i].unseenMessages) {
           count++;
         }

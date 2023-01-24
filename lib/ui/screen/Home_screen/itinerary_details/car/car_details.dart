@@ -152,17 +152,29 @@ class _CarDetailsState extends State<CarDetails> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                flightText(
-                                    text: itineraryDetailScreenController
-                                        .itineraryDetailsListModel!
-                                        .itinerary[widget.index]
-                                        .departLocation),
-                                const SizedBox(height: 70),
-                                flightText(
-                                    text: itineraryDetailScreenController
-                                        .itineraryDetailsListModel!
-                                        .itinerary[widget.index]
-                                        .arrivalLocation)
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 5),
+                                  child: SizedBox(
+                                    width: Get.width * 0.55,
+                                    child: flightText(
+                                      text: itineraryDetailScreenController
+                                          .itineraryDetailsListModel!
+                                          .itinerary[widget.index]
+                                          .departLocation),
+                                  ),
+                                ),
+                                const SizedBox(height: 60),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 5),
+                                  child: SizedBox(
+                                    width: Get.width * 0.55,
+                                    child: flightText(
+                                      text: itineraryDetailScreenController
+                                          .itineraryDetailsListModel!
+                                          .itinerary[widget.index]
+                                          .arrivalLocation)
+                                  ),
+                                )
                               ],
                             ),
                           ],

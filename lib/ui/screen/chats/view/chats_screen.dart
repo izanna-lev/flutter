@@ -67,7 +67,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
                       baseScreenController.chatUnreadCount = count;
                       SocketManager.baseScreenController.chatUnreadCount = count;
                       SocketManager.chatScreenController.unseenChats = count;
-
+                      chatScreenController.update();
                       Get.toNamed(MessageScreen.routeName, arguments: {
                         "channelRef":
                             chatScreenController.chatData[index].channelRef,

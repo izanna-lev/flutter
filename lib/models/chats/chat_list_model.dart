@@ -24,14 +24,14 @@ class ChatModel {
   int totalUnseenChats;
 
   factory ChatModel.fromJson(Map<String, dynamic> json) => ChatModel(
-        code: json["code"],
-        message: json["message"],
+        code: json["code"] ?? 0,
+        message: json["message"] ?? "",
         data: List<ChatListModel>.from(
-            json["data"].map((x) => ChatListModel.fromJson(x))),
-        page: json["page"],
-        limit: json["limit"],
-        size: json["size"],
-        totalUnseenChats: json["totalUnseenChats"],
+            json["data"].map((x) => ChatListModel.fromJson(x)) ?? {}),
+        page: json["page"]?? 0,
+        limit: json["limit"]?? 0,
+        size: json["size"]?? 0,
+        totalUnseenChats: json["totalUnseenChats"]?? 0,
       );
 
   Map<String, dynamic> toJson() => {
@@ -104,32 +104,6 @@ class ChatListModel {
         "unseenMessages": unseenMessages,
       };
 }
-
-/*class Location {
-  Location({
-    required this.location,
-    required this.type,
-    required this.coordinates,
-  });
-
-  String location;
-  String type;
-  List<double> coordinates;
-
-  factory Location.fromJson(Map<String, dynamic> json) => Location(
-        location: json["location"] ?? "",
-        type: json["type"] ?? "",
-        coordinates: (json["coordinates"] == null)
-            ? []
-            : List<double>.from(json["coordinates"].map((x) => x.toDouble())),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "location": location,
-        "type": type,
-        "coordinates": List<dynamic>.from(coordinates.map((x) => x)),
-      };
-}*/
 
 class Message {
   Message({

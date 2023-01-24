@@ -91,7 +91,7 @@ class API {
   static Future<Map<String, dynamic>?> itinearyAPIHandler({
     required String url,
     RequestType requestType = RequestType.Post,
-    bool showLoader = true,
+    bool showLoader = false,
     Map<String, String>? header,
     bool showToast = false,
     dynamic body,

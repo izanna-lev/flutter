@@ -196,28 +196,28 @@ class NotificationUtils {
     if(message.data.isNotEmpty) {
       int type = int.parse(message.data["type"] ?? "0");
       if(type == 2) {
-
         String channelRef = message.data["channelRef"] ?? "";
         print("channelRef : $channelRef");
-        if(channelRef != "") {
+        if(channelRef != "" && channelRef != SocketManager.channelRef) {
           final int index =
           SocketManager.chatScreenController.chatData.indexWhere((element) => element.channelRef == channelRef);
           print("index : $index");
           if(index == -1) {
             SocketManager.chatScreenController.chatListKey.currentState?.refresh();
           }else{
+
+            print("Update Chat screen");
             SocketManager.chatScreenController.chatData[index].unseenMessages = true;
 
             int count = 0;
             for (int i = 0; i < SocketManager.chatScreenController.chatData.length; i++) {
-              print("UPDATE CHAT: ${SocketManager.chatScreenController.chatData[i].toJson()}");
               if (SocketManager.chatScreenController.chatData[i].unseenMessages) {
                 count++;
               }
             }
             SocketManager.baseScreenController.chatUnreadCount = count;
             SocketManager.chatScreenController.unseenChats = count;
-            SocketManager.chatScreenController.chatListKey.currentState?.refresh();
+            SocketManager.chatScreenController.update();
           }
         }
       }

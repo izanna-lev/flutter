@@ -121,7 +121,7 @@ class ItineraryDetailScreenController extends GetxController {
 
   HomeController homeController = Get.find<HomeController>();
 
-  itineraryApprove({
+  Future<ItineraryApproveModel?> itineraryApprove({
     required String itineraryRef,
     required String cardRef,
   }) async {
@@ -141,6 +141,7 @@ class ItineraryDetailScreenController extends GetxController {
       }
     }
     update();
+    return response;
   }
 
   /////////////////////////////////////

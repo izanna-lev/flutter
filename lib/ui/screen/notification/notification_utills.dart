@@ -12,6 +12,7 @@ import 'package:get/get.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:tralever_module/custem_class/utils/local_storage.dart';
+import 'package:tralever_module/ui/screen/chats/view/soket_managet.dart';
 import 'package:tralever_module/ui/screen/notification/controller/Notification_controller.dart';
 import 'package:tralever_module/ui/screen/notification/view/notification_screen.dart';
 
@@ -192,6 +193,39 @@ class NotificationUtils {
 
     RemoteNotification? notification = message.notification;
     log("handleNewNotification ${message.data} ");
+    if(message.data.isNotEmpty) {
+      int type = int.parse(message.data["type"] ?? "0");
+      if(type == 2) {
+        String channelRef = message.data["channelRef"] ?? "";
+        print("channelRef : $channelRef");
+        if(channelRef != "" && channelRef != SocketManager.channelRef) {
+          final int index =
+          SocketManager.chatScreenController.chatData.indexWhere((element) => element.channelRef == channelRef);
+          print("index : $index");
+          if(index == -1) {
+            SocketManager.chatScreenController.chatListKey.currentState?.refresh();
+          }else{
+
+            print("Update Chat screen");
+            SocketManager.chatScreenController.chatData[index].unseenMessages = true;
+
+            int count = 0;
+            for (int i = 0; i < SocketManager.chatScreenController.chatData.length; i++) {
+              if (SocketManager.chatScreenController.chatData[i].unseenMessages) {
+                count++;
+              }
+            }
+            SocketManager.baseScreenController.chatUnreadCount = count;
+            SocketManager.chatScreenController.unseenChats = count;
+            SocketManager.chatScreenController.update();
+          }
+        }
+      }
+      else if(type == 4 || type == 6) {
+        HomeController homeController = Get.find<HomeController>();
+        homeController.pendingKey.currentState?.refresh();
+      }
+    }
     if (notification != null && GetPlatform.isAndroid) {
       // the push is from foreground
       // here we need to manually display the notification

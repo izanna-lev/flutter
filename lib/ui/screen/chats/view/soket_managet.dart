@@ -107,7 +107,7 @@ class SocketManager {
   // }
 
   static void sendMessage(Map message) {
-    print("Emit sendMessage: ${message}");
+    // print("Emit sendMessage: ${message}");
     if (socket!.connected) {
       print("Emit Message: ${message}");
       socket!.emit('message', message);
@@ -142,7 +142,7 @@ class SocketManager {
   static void updateChatList(Message msg) {
     print("updateChatList $msg");
     List<ChatListModel> tempData = chatScreenController.chatData;
-
+    bool isNewChat = false;
     final int index =
         tempData.indexWhere((element) => element.channelRef == msg.channelRef);
     if (index != -1) {
@@ -152,6 +152,8 @@ class SocketManager {
       } else {
         tempData[index].unseenMessages = true;
       }
+    }else{
+      isNewChat = true;
     }
     tempData.sort((msg1, msg2) {
       if (msg1.message.createdOn.isNotEmpty &&
@@ -164,21 +166,27 @@ class SocketManager {
     chatScreenController.chatData = tempData;
     chatScreenController.isUpdateMessage = true;
     chatScreenController.update();
-    chatScreenController.chatListKey.currentState?.refresh();
+    // chatScreenController.chatListKey.currentState?.refresh();
     Future.delayed(const Duration(milliseconds: 2), () {
       chatScreenController.isUpdateMessage = false;
     });
     Future.delayed(const Duration(seconds: 2), () {
       int count = 0;
       for (int i = 0; i < chatScreenController.chatData.length; i++) {
-        print("UPDATE CHAT: ${chatScreenController.chatData[i].toJson()}");
         if (chatScreenController.chatData[i].unseenMessages) {
           count++;
         }
+      }
+      if(isNewChat){
+        count++;
       }
       print("TOTAL Count: ${count}");
       baseScreenController.chatUnreadCount = count;
       chatScreenController.unseenChats = count;
     });
+
+    if(isNewChat) {
+      messageScreenController.messageListKey.currentState?.refresh();
+    }
   }
 }

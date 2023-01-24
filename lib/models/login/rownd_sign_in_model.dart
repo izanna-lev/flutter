@@ -11,31 +11,23 @@ class RowndSignInModel {
     required this.code,
     required this.message,
     required this.data,
-    required this.format,
-    required this.timestamp,
   });
 
   int code;
   String message;
   RowndSignInDetailsModel data;
-  String format;
-  String timestamp;
 
   factory RowndSignInModel.fromJson(Map<String, dynamic> json) =>
       RowndSignInModel(
         code: json["code"] ?? 0,
         message: json["message"] ?? "",
         data: RowndSignInDetailsModel.fromJson(json["data"]),
-        format: json["format"] ?? "",
-        timestamp: json["timestamp"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
         "code": code,
         "message": message,
         "data": data.toJson(),
-        "format": format,
-        "timestamp": timestamp,
       };
 }
 

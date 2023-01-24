@@ -91,7 +91,7 @@ class API {
   static Future<Map<String, dynamic>?> itinearyAPIHandler({
     required String url,
     RequestType requestType = RequestType.Post,
-    bool showLoader = true,
+    bool showLoader = false,
     Map<String, String>? header,
     bool showToast = false,
     dynamic body,
@@ -258,8 +258,9 @@ class API {
 
         var resDecode = jsonDecode(res);
         log("MULTIPART RETURN RESPONSE BODY CREATE $url ====== $resDecode");
+        LoadingOverlay.of().hide();
         if (resDecode["code"] == 100) {
-          if (showLoader) LoadingOverlay.of().hide();
+
           flutterToast(resDecode["message"]);
 
           return resDecode;

@@ -105,6 +105,7 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   String getTabStatus(List<TravelPlansListModel> data) {
+    print("getTabStatus");
     int index = data.indexWhere((element) => element.approved == true);
     if(index != -1) {
       return "Upcoming";

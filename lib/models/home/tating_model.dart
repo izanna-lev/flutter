@@ -10,26 +10,22 @@ class RatingModel {
     required this.code,
     required this.message,
     required this.data,
-    required this.format,
   });
 
   int code;
   String message;
   RatingData data;
-  dynamic format;
 
   factory RatingModel.fromJson(Map<String, dynamic> json) => RatingModel(
         code: json["code"],
         message: json["message"],
         data: RatingData.fromJson(json["data"]),
-        format: json["format"],
       );
 
   Map<String, dynamic> toJson() => {
         "code": code,
         "message": message,
         "data": data.toJson(),
-        "format": format,
       };
 }
 

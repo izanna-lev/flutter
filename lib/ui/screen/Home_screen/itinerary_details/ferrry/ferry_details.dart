@@ -40,17 +40,20 @@ class _FerryDetailsState extends State<FerryDetails> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  "Arrival Ferry Details",
+                  "Departure Ferry Details",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
                   ),
                 ),
+                const SizedBox(height: 10),
+                const Divider(thickness: 1),
                 detailTitle(text: "Outbound"),
                 detailText(
                   text:
-                      "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].arrivalLocation}",
+                      "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].departLocation}",
                 ),
+                const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -84,7 +87,9 @@ class _FerryDetailsState extends State<FerryDetails> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 10),
+                SizedBox(
+                  height: 10,
+                ),
                 Row(
                   children: [
                     const Icon(
@@ -104,22 +109,22 @@ class _FerryDetailsState extends State<FerryDetails> {
                     const SizedBox(width: 10),
                     detailText(
                       text: itineraryDetailScreenController
-                                  .itineraryDetailsListModel!
-                                  .itinerary[widget.index]
-                                  .trainClass ==
-                              1
+                          .itineraryDetailsListModel!
+                          .itinerary[widget.index]
+                          .trainClass ==
+                          1
                           ? "Standard Class"
                           : itineraryDetailScreenController
-                                      .itineraryDetailsListModel!
-                                      .itinerary[widget.index]
-                                      .trainClass ==
-                                  2
-                              ? "Business Class"
-                              : "",
+                          .itineraryDetailsListModel!
+                          .itinerary[widget.index]
+                          .trainClass ==
+                          2
+                          ? "Business Class"
+                          : "",
                     ),
                   ],
                 ),
-                const SizedBox(height: 10),
+                SizedBox(height: 10,),
                 Container(
                   height: 180,
                   width: double.infinity,
@@ -129,15 +134,15 @@ class _FerryDetailsState extends State<FerryDetails> {
                   ),
                   child: Padding(
                     padding:
-                        const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+                    const EdgeInsets.symmetric(horizontal: kDefaultPadding),
                     child: Column(
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             detailTitle(text: ""
-                                // '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].airline}',
-                                ),
+                              // '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].airline}',
+                            ),
                             // const Text(
                             //   "SQ221",
                             //   style: TextStyle(
@@ -188,15 +193,23 @@ class _FerryDetailsState extends State<FerryDetails> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                flightText(
-                                    text:
-                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].departLocation}'
-                                    // "Flight depart from canada"
-                                    ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 5),
+                                  child: SizedBox(
+                                    width: Get.width * 0.55,
+                                    child: flightText(
+                                        text: '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].departLocation}'),
+                                  ),
+                                ),
                                 const SizedBox(height: 70),
-                                flightText(
-                                    text:
-                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].arrivalLocation}')
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 5),
+                                  child: SizedBox(
+                                    width: Get.width * 0.55,
+                                    child: flightText(
+                                        text: '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].arrivalLocation}'),
+                                  ),
+                                )
                               ],
                             ),
                           ],
@@ -205,57 +218,72 @@ class _FerryDetailsState extends State<FerryDetails> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 10),
-                const Text(
-                  "Departure Ferry Details",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                const Divider(thickness: 1),
-                detailTitle(text: "Outbound"),
-                detailText(
-                  text:
-                      "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].departLocation}",
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                SizedBox(height: 10),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    const Text(
+                      "Arrival Ferry Details",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    detailTitle(text: "Inbound"),
+                    detailText(
+                      text:
+                      "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].arrivalLocation}",
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        detailTitle(text: "Depart"),
-                        detailText(
-                          text: flightDepartDateAndTimeConverter(
-                            itineraryDetailScreenController
-                                .itineraryDetailsListModel!
-                                .itinerary[widget.index]
-                                .departDateTime,
-                          ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            detailTitle(text: "Depart"),
+                            detailText(
+                              text: flightDepartDateAndTimeConverter(
+                                itineraryDetailScreenController
+                                    .itineraryDetailsListModel!
+                                    .itinerary[widget.index]
+                                    .departDateTime,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            detailTitle(text: "Arrive"),
+                            detailText(
+                              text: flightDepartDateAndTimeConverter(
+                                itineraryDetailScreenController
+                                    .itineraryDetailsListModel!
+                                    .itinerary[widget.index]
+                                    .arrivalDateTime,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
+                    SizedBox(height: 10),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        detailTitle(text: "Arrive"),
+                        detailTitle(
+                            text: "Specialist Note"
+                        ),
                         detailText(
-                          text: flightDepartDateAndTimeConverter(
-                            itineraryDetailScreenController
+                            text:  itineraryDetailScreenController
                                 .itineraryDetailsListModel!
                                 .itinerary[widget.index]
-                                .arrivalDateTime,
-                          ),
+                                .specialistNote.toString()
                         ),
                       ],
                     ),
+                    const SizedBox(height: 30),
                   ],
-                ),
-                SizedBox(
-                  height: 40,
                 )
               ],
             );

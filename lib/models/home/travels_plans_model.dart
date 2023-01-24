@@ -16,7 +16,6 @@ class TravelPlansModel {
     required this.limit,
     required this.size,
     required this.hasMore,
-    required this.format,
   });
 
   int code;
@@ -26,7 +25,6 @@ class TravelPlansModel {
   int limit;
   int size;
   bool hasMore;
-  String format;
 
   factory TravelPlansModel.fromJson(Map<String, dynamic> json) =>
       TravelPlansModel(
@@ -38,7 +36,6 @@ class TravelPlansModel {
         limit: json["limit"] ?? 0,
         size: json["size"] ?? 0,
         hasMore: json["hasMore"] ?? false,
-        format: json["format"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -49,7 +46,6 @@ class TravelPlansModel {
         "limit": limit,
         "size": size,
         "hasMore": hasMore,
-        "format": format,
       };
 }
 

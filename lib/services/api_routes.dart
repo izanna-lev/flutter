@@ -7,16 +7,30 @@ import 'package:tralever_module/custem_class/utils/globle.dart';
 // const String socketBaseUrl = "http://44.209.25.93:3000";
 
 ///Staging server
-const String url = "http://44.208.65.177:3000/api/";
+// const String url = "http://44.208.65.177:3000/api/";
+// const String socketBaseUrl = "http://44.208.65.177:3000";
+
+// const String url = "https://api.onsiteplanning.com/api/";
+// const String socketBaseUrl = "https://api.onsiteplanning.com";
+
+const String url = "https://stageapi.onsiteplanning.com/api/";
+const String socketBaseUrl = "https://stageapi.onsiteplanning.com";
 const String imageUrl =
     "https://app-onsite.s3.amazonaws.com/staging/images/small/";
-const String socketBaseUrl = "http://44.208.65.177:3000";
 
-// const String socketBaseUrl = "https://44.208.65.177:4000";
+//Production
+// const String url = "https://api.onsiteplanning.com/api/";
+// const String socketBaseUrl = "https://api.onsiteplanning.com";
+// const String imageUrl =
+//     "https://app-onsite.s3.amazonaws.com/production/images/small/";
 
 ///ROWND APP KEY
 const String rowndAppKey = "d432a653-54bc-4c1d-a8c8-bf975187a5f8";
 // const String rowndAppKey = "d7e2c6ec-99aa-4614-ad02-41baaa742fc6";
+
+///STRIPE KEY
+// const String STRIPE_KEY = "Bearer sk_test_51JF4vAG0ZIlqut04vVg4LRJ7MyjmN7CqaQdywJjXZXbLY6CtlZuZ1TJujDXMwtC4AELBySa3yyMC5R2yJdo4k8r600imjRSehB";
+const String STRIPE_KEY = "Bearer pk_live_51JF4vAG0ZIlqut04RBL90oqDBm7eO1hfZK8BNH2D42ovR21GhNsSv5zh4Kx573QlGPgHirytyv5TQ2mGdqvfjQ9F00B1BW1NMH";
 
 SETTING_SCREEN SEETING_SCREEN_TYPE = SETTING_SCREEN.ABOUT;
 

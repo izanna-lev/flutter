@@ -97,11 +97,14 @@ class _ActivityDetailsScreenState extends State<ActivityDetailsScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              detailText(
-                                  text: itineraryDetailScreenController
-                                      .itineraryDetailsListModel!
-                                      .itinerary[widget.index]
-                                      .location),
+                              SizedBox(
+                                width: Get.width * 0.8,
+                                child: detailText(
+                                    text: itineraryDetailScreenController
+                                        .itineraryDetailsListModel!
+                                        .itinerary[widget.index]
+                                        .location),
+                              ),
                               Image.asset(AppIcons.gpsIcon, height: 21),
                             ],
                           ),

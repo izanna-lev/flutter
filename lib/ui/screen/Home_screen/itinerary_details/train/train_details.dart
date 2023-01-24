@@ -34,51 +34,56 @@ class _TrainDetailsState extends State<TrainDetails> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  "Arrival Train Details",
+                  "Departure Train Details",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
                   ),
                 ),
+                const SizedBox(height: 10),
+                const Divider(thickness: 1),
                 detailTitle(text: "Outbound"),
                 detailText(
                   text:
-                      "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].arrivalLocation}",
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        detailTitle(text: "Depart"),
-                        detailText(
-                          text: flightDepartDateAndTimeConverter(
-                            itineraryDetailScreenController
-                                .itineraryDetailsListModel!
-                                .itinerary[widget.index]
-                                .departDateTime,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        detailTitle(text: "Arrive"),
-                        detailText(
-                          text: flightDepartDateAndTimeConverter(
-                            itineraryDetailScreenController
-                                .itineraryDetailsListModel!
-                                .itinerary[widget.index]
-                                .arrivalDateTime,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                      "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].departLocation}",
                 ),
                 const SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          detailTitle(text: "Depart"),
+                          detailText(
+                            text: flightDepartDateAndTimeConverter(
+                              itineraryDetailScreenController
+                                  .itineraryDetailsListModel!
+                                  .itinerary[widget.index]
+                                  .departDateTime,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          detailTitle(text: "Arrive"),
+                          detailText(
+                            text: flightDepartDateAndTimeConverter(
+                              itineraryDetailScreenController
+                                  .itineraryDetailsListModel!
+                                  .itinerary[widget.index]
+                                  .arrivalDateTime,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
                 Row(
                   children: [
                     const Icon(
@@ -98,18 +103,18 @@ class _TrainDetailsState extends State<TrainDetails> {
                     const SizedBox(width: 10),
                     detailText(
                       text: itineraryDetailScreenController
-                                  .itineraryDetailsListModel!
-                                  .itinerary[widget.index]
-                                  .trainClass ==
-                              1
+                          .itineraryDetailsListModel!
+                          .itinerary[widget.index]
+                          .trainClass ==
+                          1
                           ? "Standard Class"
                           : itineraryDetailScreenController
-                                      .itineraryDetailsListModel!
-                                      .itinerary[widget.index]
-                                      .trainClass ==
-                                  2
-                              ? "Business Class"
-                              : "",
+                          .itineraryDetailsListModel!
+                          .itinerary[widget.index]
+                          .trainClass ==
+                          2
+                          ? "Business Class"
+                          : "",
                     ),
                   ],
                 ),
@@ -123,15 +128,15 @@ class _TrainDetailsState extends State<TrainDetails> {
                   ),
                   child: Padding(
                     padding:
-                        const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+                    const EdgeInsets.symmetric(horizontal: kDefaultPadding),
                     child: Column(
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             detailTitle(text: ""
-                                // '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].airline}',
-                                ),
+                              // '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].airline}',
+                            ),
                             // const Text(
                             //   "SQ221",
                             //   style: TextStyle(
@@ -182,15 +187,23 @@ class _TrainDetailsState extends State<TrainDetails> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                flightText(
-                                    text:
-                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].departLocation}'
-                                    // "Flight depart from canada"
-                                    ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 5),
+                                  child: SizedBox(
+                                    width: Get.width * 0.55,
+                                    child: flightText(
+                                        text: '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].departLocation}'),
+                                  ),
+                                ),
                                 const SizedBox(height: 70),
-                                flightText(
-                                    text:
-                                        '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].arrivalLocation}')
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 5),
+                                  child: SizedBox(
+                                    width: Get.width * 0.55,
+                                    child: flightText(
+                                        text: '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].arrivalLocation}'),
+                                  ),
+                                )
                               ],
                             ),
                           ],
@@ -199,58 +212,73 @@ class _TrainDetailsState extends State<TrainDetails> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 10),
-                const Text(
-                  "Departure Train Details",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                const Divider(thickness: 1),
-                detailTitle(text: "Outbound"),
-                detailText(
-                  text:
-                      "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].departLocation}",
-                ),
-                const SizedBox(height: 10),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 50),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          detailTitle(text: "Depart"),
-                          detailText(
-                            text: flightDepartDateAndTimeConverter(
-                              itineraryDetailScreenController
-                                  .itineraryDetailsListModel!
-                                  .itinerary[widget.index]
-                                  .departDateTime,
-                            ),
-                          ),
-                        ],
+                SizedBox(height: 15),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Arrival Train Details",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          detailTitle(text: "Arrive"),
-                          detailText(
-                            text: flightDepartDateAndTimeConverter(
-                              itineraryDetailScreenController
-                                  .itineraryDetailsListModel!
-                                  .itinerary[widget.index]
-                                  .arrivalDateTime,
+                    ),
+                    detailTitle(text: "Inbound"),
+                    detailText(
+                      text:
+                      "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].arrivalLocation}",
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            detailTitle(text: "Depart"),
+                            detailText(
+                              text: flightDepartDateAndTimeConverter(
+                                itineraryDetailScreenController
+                                    .itineraryDetailsListModel!
+                                    .itinerary[widget.index]
+                                    .departDateTime,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            detailTitle(text: "Arrive"),
+                            detailText(
+                              text: flightDepartDateAndTimeConverter(
+                                itineraryDetailScreenController
+                                    .itineraryDetailsListModel!
+                                    .itinerary[widget.index]
+                                    .arrivalDateTime,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        detailTitle(
+                            text: "Specialist Note"
+                        ),
+                        detailText(
+                            text:  itineraryDetailScreenController
+                                .itineraryDetailsListModel!
+                                .itinerary[widget.index]
+                                .specialistNote.toString()
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 30),
+                  ],
+                )
               ],
             );
           },

@@ -52,18 +52,15 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     super.initState();
     loginController.update();
-    print("CHECK ==ROWND== LOGIN");
+    /// Signout from Rownd if login
     if (_rownd.state().state.auth?.isAuthenticated ?? false) {
       print("SIGN OUT FROM ==ROWND==");
       _rownd.signOut();
       _rownd.state().state.auth?.accessToken = null;
     }
-    /// Rownd key
-    /// e2f1fafb-228f-4eb7-85b7-8e784aa12567
+    /// Rownd setup
     initPlatformState();
     _rownd.configure(rowndAppKey);
-    // _rownd.configure("5b445042-7c8e-4c84-b451-e25c608e8bc0",
-    //     "https://api.us-east-2.dev.rownd.io", "https://hub.dev.rownd.io");
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -292,7 +289,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                               null) {
                                           } else {
                                             accessTokenBackup = null;
-                                            signin()?.then((value) {
+                                            rowndSignin()?.then((value) {
                                               // userController
                                               //     .rowndSignIn(
                                               //         token:
@@ -317,40 +314,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               },
                             ),
                           ),
-
-                          // Padding(
-                          //   padding: const EdgeInsets.symmetric(
-                          //       horizontal: kDefaultPadding),
-                          //   child: materialButton(
-                          //       onTap: () {
-                          //         if (loginController.loginKey.currentState!
-                          //             .validate()) {
-                          //           ///  rownd API
-                          //           if (rownd.state.auth?.isAuthenticated ??
-                          //               false) {
-                          //             _rownd.signOut();
-                          //           } else {
-                          //             RowndSignInOptions signInOpts =
-                          //                 RowndSignInOptions();
-                          //             signInOpts.postSignInRedirect =
-                          //                 loginController.userLogin().toString();
-                          //             // APIRoutes.login;
-                          //             //"https://deeplink.myapp.com";
-                          //             _rownd.requestSignIn(signInOpts);
-                          //           }
-                          //           disposeKeyboard();
-                          //           if (loginController.isChecked == true) {
-                          //             ///   loginController.userLogin();
-                          //
-                          //             Get.toNamed(BaseScreen.routeName);
-                          //           } else {
-                          //             flutterToast(
-                          //                 "Please agree Terms and conditions");
-                          //           }
-                          //         }
-                          //       },
-                          //       text: "Get Started"),
-                          // ),
                           const SizedBox(height: 20),
                         ],
                       ),
@@ -365,7 +328,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Future? signin() {
+  Future? rowndSignin() {
     RowndSignInOptions signInOpts = RowndSignInOptions();
     // signInOpts.postSignInRedirect = "https://app.onsiteplanning.com";
     signInOpts.postSignInRedirect = "NATIVE_APP";

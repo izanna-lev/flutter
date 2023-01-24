@@ -24,11 +24,8 @@ class _ActivityMapDetailsState extends State<ActivityMapDetails> {
   ItineraryDetailScreenController itineraryDetailScreenController =
       Get.find<ItineraryDetailScreenController>();
   BitmapDescriptor markerIcon = BitmapDescriptor.defaultMarker;
-  String? _currentAddress;
   Position? currentPosition;
 
-  final CameraPosition _initialPosition =
-      const CameraPosition(target: LatLng(37.422131, -122.08480));
   final Completer<GoogleMapController> _controller = Completer();
 
   void addCustomIcon() {

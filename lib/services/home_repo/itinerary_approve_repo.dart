@@ -12,7 +12,7 @@ class ItineraryApproveRepo {
   }) async {
     var responseBody = await API.apiHandler(
       url: APIRoutes.itineraryApprove,
-      showLoader: false,
+      showLoader: true,
       requestType: RequestType.Post,
       header: {
         'Content-Type': 'application/json',
@@ -24,8 +24,7 @@ class ItineraryApproveRepo {
       }),
     );
     if (responseBody != null) {
-      // return ItineraryApproveModel.fromJson(responseBody);
-
+      return ItineraryApproveModel.fromJson(responseBody);
     }
   }
 }

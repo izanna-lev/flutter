@@ -36,7 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: ^4.6.5
   fluttertoast: ^8.0.9
-  connectivity_plus: ^2.3.0
+  connectivity_plus: ^2.3.9
   country_picker: ^2.0.16
   intl: ^0.18.0
   pagination_view: ^2.0.0
@@ -78,7 +78,7 @@ dependencies:
   provider: ^6.0.3
   dio: ^4.0.6
   get_it: ^7.2.0
-  rownd_flutter_plugin: ^1.2.2
+  rownd_flutter_plugin: ^1.2.3
 
 
   #  notifications

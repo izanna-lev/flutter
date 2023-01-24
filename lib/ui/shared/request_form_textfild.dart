@@ -33,6 +33,7 @@ class RequestFormTextfield extends StatefulWidget {
   final bool isSuffixIcon;
   final bool isPreffixIcon;
   final bool autoFocus;
+  final bool isHideHint;
   FocusNode? focusNode;
   ValueSetter? onChanged;
   GestureTapCallback? onTap;
@@ -72,6 +73,7 @@ class RequestFormTextfield extends StatefulWidget {
     this.errorBorder,
     this.focusBorder,
     this.textCapitalization,
+    this.isHideHint = false,
   }) : super(key: key);
 
   @override
@@ -123,7 +125,7 @@ class _RequestFormTextfieldState extends State<RequestFormTextfield> {
         // ),
 
         labelText: getLabel(),
-        hintText: "",//getHintText(),
+        hintText: widget.isHideHint ? "" : getHintText(),
         suffixText: widget.suffixText,
         filled: true,
         fillColor: const Color(0xffEDEDED),

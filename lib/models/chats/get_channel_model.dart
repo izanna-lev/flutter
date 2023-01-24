@@ -12,27 +12,23 @@ class GetChannelModel {
     required this.code,
     required this.message,
     required this.data,
-    required this.format,
   });
 
   int code;
   String message;
   GetChannelModelId data;
-  String format;
 
   factory GetChannelModel.fromJson(Map<String, dynamic> json) =>
       GetChannelModel(
         code: json["code"] ?? 0,
         message: json["message"] ?? "",
         data: GetChannelModelId.fromJson(json["data"]),
-        format: json["format"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
         "code": code,
         "message": message,
         "data": data.toJson(),
-        "format": format,
       };
 }
 

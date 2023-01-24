@@ -10,30 +10,22 @@ class AddCardDetail {
     required this.code,
     required this.message,
     required this.data,
-    //  required this.format,
-    // required this.timestamp,
   });
 
   int code;
   String message;
   AddCardDetailData data;
-  //String format;
-//  String timestamp;
 
   factory AddCardDetail.fromJson(Map<String, dynamic> json) => AddCardDetail(
         code: json["code"],
         message: json["message"],
         data: AddCardDetailData.fromJson(json["data"]),
-        //  format: json["format"],
-        // timestamp: json["timestamp"],
       );
 
   Map<String, dynamic> toJson() => {
         "code": code,
         "message": message,
         "data": data.toJson(),
-        //"format": format,
-        //"timestamp": timestamp,
       };
 }
 

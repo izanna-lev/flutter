@@ -188,7 +188,7 @@ class _CarDetailsState extends State<CarDetails> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     detailTitle(
-                        text: "Specialist Note"
+                        text: "Notes"
                     ),
                     detailText(
                       text:  itineraryDetailScreenController

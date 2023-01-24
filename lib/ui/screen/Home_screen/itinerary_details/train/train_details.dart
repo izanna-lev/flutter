@@ -266,7 +266,7 @@ class _TrainDetailsState extends State<TrainDetails> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         detailTitle(
-                            text: "Specialist Note"
+                            text: "Notes"
                         ),
                         detailText(
                             text:  itineraryDetailScreenController

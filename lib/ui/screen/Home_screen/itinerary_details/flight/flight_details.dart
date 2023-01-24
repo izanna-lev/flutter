@@ -281,7 +281,7 @@ class _FlightDetailState extends State<FlightDetail> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         detailTitle(
-                            text: "Specialist Note"
+                            text: "Notes"
                         ),
                         detailText(
                             text:  itineraryDetailScreenController

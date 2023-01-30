@@ -7,30 +7,22 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:757245140014:android:8a12937de9036e88a593bf",
+        "mobilesdk_app_id": "1:757245140014:android:7be9c005912711e2a593bf",
         "android_client_info": {
           "package_name": "com.flutter.onsite"
         }
       },
       "oauth_client": [
         {
-          "client_id": "757245140014-pmf9f6o0g2o31vk2otc6p6lq5mt5v9gv.apps.googleusercontent.com",
+          "client_id": "757245140014-mo309qmm6igihcik1v0mthljss5omoj4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.flutter.onsite",
-            "certificate_hash": "3d0991234c136d1f7b88d681394df6626c625106"
+            "certificate_hash": "4474e8706ea73df8e04eb0188676b839c4a1395a"
           }
         },
         {
-          "client_id": "757245140014-ue9es4hahcq67e3vnck66qvk71j08c4a.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.flutter.onsite",
-            "certificate_hash": "02dd54cad9700496ad7e30760762b9154ace3615"
-          }
-        },
-        {
-          "client_id": "757245140014-kvdl265krvkf46cea7r5hog8bugog1qo.apps.googleusercontent.com",
+          "client_id": "757245140014-cnsj4nmn0a7bteimvst20u1kcpvh8vh8.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -43,7 +35,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "757245140014-kvdl265krvkf46cea7r5hog8bugog1qo.apps.googleusercontent.com",
+              "client_id": "757245140014-cnsj4nmn0a7bteimvst20u1kcpvh8vh8.apps.googleusercontent.com",
               "client_type": 3
             },
             {

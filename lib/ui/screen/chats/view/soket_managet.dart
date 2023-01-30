@@ -24,6 +24,7 @@ class SocketManager {
   static BaseScreenController baseScreenController =
       Get.find<BaseScreenController>();
   static void connectSocket() {
+    print("connectSocket");
     if (userController.rowndSignInModel == null) {
       print("USER NOT FOUND");
       return;

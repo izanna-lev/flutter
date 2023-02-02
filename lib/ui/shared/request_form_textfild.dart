@@ -189,9 +189,9 @@ class _RequestFormTextfieldState extends State<RequestFormTextfield> {
       case RequestFormFieldType.cvv:
         return "XXX".tr;
       case RequestFormFieldType.month:
-        return "Month".tr;
+        return "MM".tr;
       case RequestFormFieldType.year:
-        return "Year".tr;
+        return "YY".tr;
       case RequestFormFieldType.typehere:
         return "Type Here";
 

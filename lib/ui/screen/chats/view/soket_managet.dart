@@ -40,7 +40,7 @@ class SocketManager {
             })
             .setQuery(
                 {"id": userController.rowndSignInModel!.data.traveller.id})
-            .enableForceNew() // disable auto-connection
+            .enableForceNewConnection() // disable auto-connection
             .build());
     // SecureSocket.connect("https://44.208.65.177", 4000);
 

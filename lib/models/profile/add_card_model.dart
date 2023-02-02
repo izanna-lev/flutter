@@ -22,7 +22,7 @@ class AddCard {
   String clientIp;
   int created;
   bool livemode;
-  String type;
+  dynamic type;
   bool used;
 
   factory AddCard.fromJson(Map<String, dynamic> json) => AddCard(
@@ -69,7 +69,7 @@ class Card {
     required this.fingerprint,
     required this.funding,
     required this.last4,
-    required this.metadata,
+  //  required this.metadata,
     required this.name,
     required this.tokenizationMethod,
   });
@@ -90,10 +90,10 @@ class Card {
   dynamic dynamicLast4;
   int expMonth;
   int expYear;
-  String fingerprint;
+  dynamic fingerprint;
   String funding;
   String last4;
-  Metadata metadata;
+ // Metadata metadata;
   dynamic name;
   dynamic tokenizationMethod;
 
@@ -117,7 +117,7 @@ class Card {
         fingerprint: json["fingerprint"],
         funding: json["funding"],
         last4: json["last4"],
-        metadata: Metadata.fromJson(json["metadata"]),
+       // metadata: Metadata.fromJson(json["metadata"]),
         name: json["name"],
         tokenizationMethod: json["tokenization_method"],
       );
@@ -142,7 +142,7 @@ class Card {
         "fingerprint": fingerprint,
         "funding": funding,
         "last4": last4,
-        "metadata": metadata.toJson(),
+        // "metadata": metadata.toJson(),
         "name": name,
         "tokenization_method": tokenizationMethod,
       };

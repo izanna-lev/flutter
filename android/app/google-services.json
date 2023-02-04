@@ -1,45 +1,37 @@
 {
   "project_info": {
-    "project_number": "757245140014",
-    "project_id": "onsite-travel",
-    "storage_bucket": "onsite-travel.appspot.com"
+    "project_number": "529721310478",
+    "project_id": "onsite-planning",
+    "storage_bucket": "onsite-planning.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:757245140014:android:7be9c005912711e2a593bf",
+        "mobilesdk_app_id": "1:529721310478:android:c75d84978f53d113766b5f",
         "android_client_info": {
           "package_name": "com.flutter.onsite"
         }
       },
       "oauth_client": [
         {
-          "client_id": "757245140014-mo309qmm6igihcik1v0mthljss5omoj4.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.flutter.onsite",
-            "certificate_hash": "4474e8706ea73df8e04eb0188676b839c4a1395a"
-          }
-        },
-        {
-          "client_id": "757245140014-cnsj4nmn0a7bteimvst20u1kcpvh8vh8.apps.googleusercontent.com",
+          "client_id": "529721310478-57h5d6q6aeufodk8pc3rr7m1vupe4c8m.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBX_-CpkK4_rEZgpbZuroQmnUy-di4aB_E"
+          "current_key": "AIzaSyBmSwcQaSRwLJ36nJkKF4xMyo5ng4DpTb0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "757245140014-cnsj4nmn0a7bteimvst20u1kcpvh8vh8.apps.googleusercontent.com",
+              "client_id": "529721310478-57h5d6q6aeufodk8pc3rr7m1vupe4c8m.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "757245140014-uqe6u5jugj6uajvmokrj2utj6a3a5ac5.apps.googleusercontent.com",
+              "client_id": "529721310478-8tsme2udijbdhjg9ueuilfkoim7se4ft.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.flutter.onsite"

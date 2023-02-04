@@ -29,7 +29,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.529721310478-8tsme2udijbdhjg9ueuilfkoim7se4ft</string>
+				<string>com.googleusercontent.apps.757245140014-vs65a8akjeuteebedecbnc8qb141sdta</string>
 			</array>
 		</dict>
 		<dict>
@@ -59,6 +59,8 @@
 	<string>This app requires access to the camera to record video and send in chat.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app requires access to the photo library to upload your profile photo.</string>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
@@ -86,8 +88,6 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>io.flutter.embedded_views_preview</key>
-	<true/>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 </dict>
 </plist>

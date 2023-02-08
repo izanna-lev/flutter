@@ -38,7 +38,7 @@ Future<void> showCustomDialog({
                           style: const TextStyle(
                             fontFamily: kAppFont,
                             fontWeight: FontWeight.w700,
-                            fontSize: 15,
+                            fontSize: 20,
                           ),
                         ),
                   SizedBox(height: getHeight(16)),

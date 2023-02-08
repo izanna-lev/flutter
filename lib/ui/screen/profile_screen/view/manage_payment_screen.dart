@@ -3,12 +3,14 @@ import 'package:get/get.dart';
 import 'package:tralever_module/custem_class/constant/app_colors.dart';
 import 'package:tralever_module/custem_class/constant/app_icons.dart';
 import 'package:tralever_module/custem_class/constant/app_settings.dart';
+import 'package:tralever_module/ui/screen/Home_screen/itinerary_details/hotel_rservations_screen.dart';
 import 'package:tralever_module/ui/screen/profile_screen/controller/add_card_controller.dart';
 import 'package:tralever_module/ui/screen/profile_screen/view/add_card_screen.dart';
 import 'package:tralever_module/ui/shared/appbar.dart';
 
 import '../../../../custem_class/utils/globle.dart';
 import '../../../../custem_class/utils/local_storage.dart';
+import '../../../shared/dilog_box.dart';
 
 class ManagePaymentScreen extends StatefulWidget {
   static const String routeName = "/ManagePaymentScreen";
@@ -142,8 +144,11 @@ class _ManagePaymentScreenState extends State<ManagePaymentScreen> {
                   thickness: 5,
                   color: Color(0xffF3F6F7),
                 ),
-                // : const SizedBox(),
-
+                const SizedBox(height: 10),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
+                child: detailText(text: "Note: You can add Visa, Mastercard, American Express, Discover & Diners, China UnionPay, Japan Credit Bureau, Cartes Bancaires."),
+                ),
                 const SizedBox(height: 20),
               ],
             ),

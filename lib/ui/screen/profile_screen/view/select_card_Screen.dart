@@ -8,6 +8,7 @@ import 'package:tralever_module/ui/screen/profile_screen/controller/add_card_con
 import 'package:tralever_module/ui/shared/appbar.dart';
 import '../../../../custem_class/constant/app_icons.dart';
 import '../../../../models/home/itinerary_approve_model.dart';
+import '../../../shared/dilog_box.dart';
 import '../../../shared/material_button.dart';
 import '../../Home_screen/controller/home_controller.dart';
 
@@ -131,8 +132,7 @@ class _SelectCardScreenState extends State<SelectCardScreen> {
                           homeController.update();
                         }
                       }
-                      Get.back();
-                      Get.back();
+                      dialogBox();
                     }
                     // if (response != null) {
                     //   Get.back();
@@ -146,6 +146,21 @@ class _SelectCardScreenState extends State<SelectCardScreen> {
           },
         ),
       ),
+    );
+  }
+  dialogBox() {
+    return showCustomDialog(
+      title: "Payment Successful!",
+      context: context,
+      content: "You will be redirected to the home screen",
+      contentSize: 1,
+      onTap: () {
+        Get.back();
+        Get.back();
+        Get.back();
+      },
+      color: AppColors.appBlueColor,
+      okText: "OK",
     );
   }
 }

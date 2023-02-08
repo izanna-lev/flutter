@@ -15,6 +15,7 @@ import '../../../../services/api_routes.dart';
 import '../../Home_screen/itinerary_details/itinerary_detailes_screen.dart';
 import '../../base_screen/controller/base_screen_controller.dart';
 import '../../chats/view/message_screen.dart';
+import '../../profile_screen/view/my_transactions_screen.dart';
 import '../controller/Notification_controller.dart';
 
 class NotificationScreen extends StatefulWidget {

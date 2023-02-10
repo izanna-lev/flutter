@@ -109,7 +109,7 @@ class ItineraryRequestFormController extends GetxController {
       firstName: firstnameController.text.trim(),
       lastName: lastnameController.text.trim(),
       contactNumber: contactNumberController.text.trim(),
-      phoneCode: countryCode?.dialCode ?? "+63",
+      phoneCode: countryCode?.dialCode ?? "+1",
       plannedDate: dateInput.text,
       endDate: endDateInput.text,
       location: locationController.text.trim(),

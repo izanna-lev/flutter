@@ -312,7 +312,8 @@ class _ItineraryFromScreenState extends State<ItineraryFromScreen> {
   dialogBox() {
     return showCustomDialog(
       context: context,
-      content: "Your itinerary request has been submitted successfully.",
+      title: "Itinerary Request Submitted Successfully",
+      content: "Your travel concierge will reach out to you shortly.",
       contentSize: 1,
       onTap: () {
         Get.back();

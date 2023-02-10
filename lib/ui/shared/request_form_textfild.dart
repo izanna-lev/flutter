@@ -224,7 +224,7 @@ class _RequestFormTextfieldState extends State<RequestFormTextfield> {
               child: Row(
                 children: [
                   Text(itineraryRequestFormController.countryCode?.dialCode ??
-                      "+63"),
+                      "+1"),
                   const Icon(
                     Icons.keyboard_arrow_down_outlined,
                     color: Colors.black,

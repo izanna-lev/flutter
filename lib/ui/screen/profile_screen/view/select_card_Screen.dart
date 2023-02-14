@@ -152,7 +152,7 @@ class _SelectCardScreenState extends State<SelectCardScreen> {
     return showCustomDialog(
       title: "Payment Successful!",
       context: context,
-      content: "You will be redirected to the home screen",
+      content: "You will be redirected to the home page",
       contentSize: 1,
       onTap: () {
         Get.back();

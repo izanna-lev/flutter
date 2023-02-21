@@ -90,7 +90,8 @@ class _CarDetailsState extends State<CarDetails> {
                 ),
                 const SizedBox(height: 10),
                 Container(
-                  height: 180,
+               //   height: 180,
+                  padding: EdgeInsets.only(bottom: 24),
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),

@@ -11,6 +11,7 @@ import '../hotel_rservations_screen.dart';
 class FerryDetails extends StatefulWidget {
   int index;
   var data = Get.arguments;
+
   FerryDetails({Key? key, required this.index}) : super(key: key);
 
   @override
@@ -19,7 +20,8 @@ class FerryDetails extends StatefulWidget {
 
 class _FerryDetailsState extends State<FerryDetails> {
   ItineraryDetailScreenController itineraryDetailScreenController =
-      Get.find<ItineraryDetailScreenController>();
+  Get.find<ItineraryDetailScreenController>();
+
   @override
   void initState() {
     widget.index;
@@ -35,7 +37,7 @@ class _FerryDetailsState extends State<FerryDetails> {
       child: SingleChildScrollView(
         child: GetBuilder(
           builder: (ItineraryDetailScreenController
-              itineraryDetailScreenController) {
+          itineraryDetailScreenController) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -51,7 +53,11 @@ class _FerryDetailsState extends State<FerryDetails> {
                 detailTitle(text: "Outbound"),
                 detailText(
                   text:
-                      "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].departLocation}",
+                  "${itineraryDetailScreenController.itineraryDetailsListModel!
+                      .itinerary[widget.index]
+                      .airline} | ${itineraryDetailScreenController
+                      .itineraryDetailsListModel!.itinerary[widget.index]
+                      .departLocation}",
                 ),
                 const SizedBox(height: 10),
                 Row(
@@ -126,7 +132,8 @@ class _FerryDetailsState extends State<FerryDetails> {
                 ),
                 SizedBox(height: 10,),
                 Container(
-                  height: 180,
+                  // height: 180,
+                  padding: EdgeInsets.only(bottom: 24),
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
@@ -198,7 +205,10 @@ class _FerryDetailsState extends State<FerryDetails> {
                                   child: SizedBox(
                                     width: Get.width * 0.55,
                                     child: flightText(
-                                        text: '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].departLocation}'),
+                                        text: '${itineraryDetailScreenController
+                                            .itineraryDetailsListModel
+                                            ?.itinerary[widget.index]
+                                            .departLocation}'),
                                   ),
                                 ),
                                 const SizedBox(height: 70),
@@ -207,7 +217,10 @@ class _FerryDetailsState extends State<FerryDetails> {
                                   child: SizedBox(
                                     width: Get.width * 0.55,
                                     child: flightText(
-                                        text: '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].arrivalLocation}'),
+                                        text: '${itineraryDetailScreenController
+                                            .itineraryDetailsListModel
+                                            ?.itinerary[widget.index]
+                                            .arrivalLocation}'),
                                   ),
                                 )
                               ],
@@ -232,7 +245,11 @@ class _FerryDetailsState extends State<FerryDetails> {
                     detailTitle(text: "Inbound"),
                     detailText(
                       text:
-                      "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].arrivalLocation}",
+                      "${itineraryDetailScreenController
+                          .itineraryDetailsListModel!.itinerary[widget.index]
+                          .airline} | ${itineraryDetailScreenController
+                          .itineraryDetailsListModel!.itinerary[widget.index]
+                          .arrivalLocation}",
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -275,7 +292,7 @@ class _FerryDetailsState extends State<FerryDetails> {
                             text: "Notes"
                         ),
                         detailText(
-                            text:  itineraryDetailScreenController
+                            text: itineraryDetailScreenController
                                 .itineraryDetailsListModel!
                                 .itinerary[widget.index]
                                 .specialistNote.toString()

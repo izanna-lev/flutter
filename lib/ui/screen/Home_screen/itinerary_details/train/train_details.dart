@@ -11,6 +11,7 @@ import '../hotel_rservations_screen.dart';
 class TrainDetails extends StatefulWidget {
   int index;
   var data = Get.arguments;
+
   TrainDetails({Key? key, required this.index}) : super(key: key);
 
   @override
@@ -19,7 +20,8 @@ class TrainDetails extends StatefulWidget {
 
 class _TrainDetailsState extends State<TrainDetails> {
   ItineraryDetailScreenController itineraryDetailScreenController =
-      Get.find<ItineraryDetailScreenController>();
+  Get.find<ItineraryDetailScreenController>();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -27,9 +29,10 @@ class _TrainDetailsState extends State<TrainDetails> {
       child: SingleChildScrollView(
         child: GetBuilder(
           builder: (ItineraryDetailScreenController
-              itineraryDetailScreenController) {
+          itineraryDetailScreenController) {
             print(
-                'TRAIN_NAME===>${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[0].airline}');
+                'TRAIN_NAME===>${itineraryDetailScreenController
+                    .itineraryDetailsListModel?.itinerary[0].airline}');
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -45,7 +48,11 @@ class _TrainDetailsState extends State<TrainDetails> {
                 detailTitle(text: "Outbound"),
                 detailText(
                   text:
-                      "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].departLocation}",
+                  "${itineraryDetailScreenController.itineraryDetailsListModel!
+                      .itinerary[widget.index]
+                      .airline} | ${itineraryDetailScreenController
+                      .itineraryDetailsListModel!.itinerary[widget.index]
+                      .departLocation}",
                 ),
                 const SizedBox(height: 10),
                 Padding(
@@ -120,7 +127,8 @@ class _TrainDetailsState extends State<TrainDetails> {
                 ),
                 const SizedBox(height: 10),
                 Container(
-                  height: 180,
+                  //   height: 180,
+                  padding: EdgeInsets.only(bottom: 24),
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
@@ -192,7 +200,10 @@ class _TrainDetailsState extends State<TrainDetails> {
                                   child: SizedBox(
                                     width: Get.width * 0.55,
                                     child: flightText(
-                                        text: '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].departLocation}'),
+                                        text: '${itineraryDetailScreenController
+                                            .itineraryDetailsListModel
+                                            ?.itinerary[widget.index]
+                                            .departLocation}'),
                                   ),
                                 ),
                                 const SizedBox(height: 70),
@@ -201,7 +212,10 @@ class _TrainDetailsState extends State<TrainDetails> {
                                   child: SizedBox(
                                     width: Get.width * 0.55,
                                     child: flightText(
-                                        text: '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].arrivalLocation}'),
+                                        text: '${itineraryDetailScreenController
+                                            .itineraryDetailsListModel
+                                            ?.itinerary[widget.index]
+                                            .arrivalLocation}'),
                                   ),
                                 )
                               ],
@@ -226,7 +240,11 @@ class _TrainDetailsState extends State<TrainDetails> {
                     detailTitle(text: "Inbound"),
                     detailText(
                       text:
-                      "${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].airline} | ${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].arrivalLocation}",
+                      "${itineraryDetailScreenController
+                          .itineraryDetailsListModel!.itinerary[widget.index]
+                          .airline} | ${itineraryDetailScreenController
+                          .itineraryDetailsListModel!.itinerary[widget.index]
+                          .arrivalLocation}",
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -269,7 +287,7 @@ class _TrainDetailsState extends State<TrainDetails> {
                             text: "Notes"
                         ),
                         detailText(
-                            text:  itineraryDetailScreenController
+                            text: itineraryDetailScreenController
                                 .itineraryDetailsListModel!
                                 .itinerary[widget.index]
                                 .specialistNote.toString()

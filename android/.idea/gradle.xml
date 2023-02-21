@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="GradleMigrationSettings" migrationVersion="1" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
@@ -9,26 +8,26 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
+            <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/connectivity_plus-2.3.9/android" />
+            <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/firebase_core-2.6.1/android" />
+            <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/firebase_messaging-14.2.4/android" />
+            <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_local_notifications-13.0.0/android" />
+            <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_native_splash-2.2.16/android" />
+            <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_native_timezone-2.0.0/android" />
+            <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.7/android" />
+            <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/fluttertoast-8.2.0/android" />
+            <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/geocoding-2.0.5/android" />
+            <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/geolocator_android-4.1.7/android" />
+            <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/google_maps_flutter_android-2.4.5/android" />
+            <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/image_cropper-3.0.1/android" />
+            <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/image_picker_android-0.8.5+6/android" />
+            <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/path_provider_android-2.0.22/android" />
+            <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/permission_handler_android-10.2.0/android" />
+            <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/rownd_flutter_plugin-1.2.3/android" />
+            <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/shared_preferences_android-2.0.15/android" />
+            <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_android-6.0.23/android" />
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/../../../../../src/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity_plus-2.3.9/android" />
-            <option value="$PROJECT_DIR$/../../../../../src/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-2.4.1/android" />
-            <option value="$PROJECT_DIR$/../../../../../src/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_messaging-14.2.1/android" />
-            <option value="$PROJECT_DIR$/../../../../../src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_local_notifications-13.0.0/android" />
-            <option value="$PROJECT_DIR$/../../../../../src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_native_splash-2.2.16/android" />
-            <option value="$PROJECT_DIR$/../../../../../src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_native_timezone-2.0.0/android" />
-            <option value="$PROJECT_DIR$/../../../../../src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-2.0.7/android" />
-            <option value="$PROJECT_DIR$/../../../../../src/flutter/.pub-cache/hosted/pub.dartlang.org/fluttertoast-8.1.2/android" />
-            <option value="$PROJECT_DIR$/../../../../../src/flutter/.pub-cache/hosted/pub.dartlang.org/geocoding-2.0.5/android" />
-            <option value="$PROJECT_DIR$/../../../../../src/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_android-4.1.7/android" />
-            <option value="$PROJECT_DIR$/../../../../../src/flutter/.pub-cache/hosted/pub.dartlang.org/google_maps_flutter_android-2.4.3/android" />
-            <option value="$PROJECT_DIR$/../../../../../src/flutter/.pub-cache/hosted/pub.dartlang.org/image_cropper-3.0.1/android" />
-            <option value="$PROJECT_DIR$/../../../../../src/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_android-0.8.5+5/android" />
-            <option value="$PROJECT_DIR$/../../../../../src/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_android-2.0.22/android" />
-            <option value="$PROJECT_DIR$/../../../../../src/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler_android-10.2.0/android" />
-            <option value="$PROJECT_DIR$/../../../../../src/flutter/.pub-cache/hosted/pub.dartlang.org/rownd_flutter_plugin-1.2.3/android" />
-            <option value="$PROJECT_DIR$/../../../../../src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_android-2.0.15/android" />
-            <option value="$PROJECT_DIR$/../../../../../src/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_android-6.0.23/android" />
           </set>
         </option>
       </GradleProjectSettings>

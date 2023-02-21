@@ -199,7 +199,7 @@ flightDepartDateAndTimeConverter(DateTime date) {
   // .toLocal();
   var inputFormat = DateFormat("yyyy-MM-dd hh:mm:ss");
   var inputDate = inputFormat.parse(localDate.toString());
-  var outputFormat = DateFormat("dd-MMM-yyyy | hh:mm \na");
+  var outputFormat = DateFormat("dd-MMM-yyyy | hh:mm a");
   // .add_jm()
   var outputDate = outputFormat.format(inputDate);
   return outputDate;

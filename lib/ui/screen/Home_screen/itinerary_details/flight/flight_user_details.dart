@@ -10,6 +10,7 @@ import '../../controller/itinerary_detaile_screen _controller.dart';
 class FlightUserDetails extends StatefulWidget {
   int index;
   var data = Get.arguments;
+
   FlightUserDetails({Key? key, required this.index}) : super(key: key);
 
   @override
@@ -18,7 +19,8 @@ class FlightUserDetails extends StatefulWidget {
 
 class _FlightUserDetailsState extends State<FlightUserDetails> {
   ItineraryDetailScreenController itineraryDetailScreenController =
-      Get.find<ItineraryDetailScreenController>();
+  Get.find<ItineraryDetailScreenController>();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -27,7 +29,7 @@ class _FlightUserDetailsState extends State<FlightUserDetails> {
           padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
           child: GetBuilder(
             builder: (ItineraryDetailScreenController
-                itineraryDetailScreenController) {
+            itineraryDetailScreenController) {
               return ListView.builder(
                   itemCount: itineraryDetailScreenController
                       .itineraryDetailsListModel
@@ -36,11 +38,16 @@ class _FlightUserDetailsState extends State<FlightUserDetails> {
                       .length,
                   itemBuilder: (BuildContext context, int index) {
                     return userDetails(
+                      index: index + 1,
                       name:
-                          '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].tickets[index].name}',
+                      '${itineraryDetailScreenController
+                          .itineraryDetailsListModel?.itinerary[widget.index]
+                          .tickets[index].name}',
                       // ?? "Smit Dhola"
                       img: imageUrl +
-                          '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].tickets[index].image}',
+                          '${itineraryDetailScreenController
+                              .itineraryDetailsListModel?.itinerary[widget
+                              .index].tickets[index].image}',
                       // itineraryDetailScreenController
                       //         .itinerary?.tickets[index].image ??
                       // "https://image.shutterstock.com/image-vector/pattern-airline-boarding-pass-ticket-260nw-375639655.jpg",
@@ -63,6 +70,7 @@ class _FlightUserDetailsState extends State<FlightUserDetails> {
 }
 
 userDetails({
+  required int index,
   required String name,
   required String img,
   required void Function() ticketOnTap,
@@ -70,8 +78,7 @@ userDetails({
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      const Text(
-        "User 1 Details",
+      Text('Traveler $index Details',
         style: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 20,

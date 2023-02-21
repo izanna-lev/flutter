@@ -10,6 +10,7 @@ import '../flight/flight_user_details.dart';
 class TrainUserDetailsScreen extends StatefulWidget {
   int index;
   var data = Get.arguments;
+
   TrainUserDetailsScreen({Key? key, required this.index}) : super(key: key);
 
   @override
@@ -18,7 +19,8 @@ class TrainUserDetailsScreen extends StatefulWidget {
 
 class _TrainUserDetailsScreenState extends State<TrainUserDetailsScreen> {
   ItineraryDetailScreenController itineraryDetailScreenController =
-      Get.find<ItineraryDetailScreenController>();
+  Get.find<ItineraryDetailScreenController>();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -27,7 +29,7 @@ class _TrainUserDetailsScreenState extends State<TrainUserDetailsScreen> {
           padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
           child: GetBuilder(
             builder: (ItineraryDetailScreenController
-                itineraryDetailScreenController) {
+            itineraryDetailScreenController) {
               return ListView.builder(
                   itemCount: itineraryDetailScreenController
                       .itineraryDetailsListModel
@@ -36,10 +38,15 @@ class _TrainUserDetailsScreenState extends State<TrainUserDetailsScreen> {
                       .length,
                   itemBuilder: (BuildContext context, int index) {
                     return userDetails(
+                      index: index + 1,
                       name:
-                          '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].tickets[index].name}',
+                      '${itineraryDetailScreenController
+                          .itineraryDetailsListModel?.itinerary[widget.index]
+                          .tickets[index].name}',
                       img: imageUrl +
-                          '${itineraryDetailScreenController.itineraryDetailsListModel?.itinerary[widget.index].tickets[index].image}',
+                          '${itineraryDetailScreenController
+                              .itineraryDetailsListModel?.itinerary[widget
+                              .index].tickets[index].image}',
                       // "https://image.shutterstock.com/image-vector/vector-train-ticket-rail-pass-260nw-1228205155.jpg",
                       ticketOnTap: () {
                         Get.toNamed(TrainTicketPreviewScreen.routeName,

@@ -19,7 +19,7 @@ class FerryUserDetails extends StatefulWidget {
 
 class _FerryUserDetailsState extends State<FerryUserDetails> {
   ItineraryDetailScreenController itineraryDetailScreenController =
-      Get.find<ItineraryDetailScreenController>();
+  Get.find<ItineraryDetailScreenController>();
 
   @override
   Widget build(BuildContext context) {
@@ -29,40 +29,47 @@ class _FerryUserDetailsState extends State<FerryUserDetails> {
           padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
           child: GetBuilder(
             builder: (ItineraryDetailScreenController
-                itineraryDetailScreenController) {
+            itineraryDetailScreenController) {
               print(
-                  'FERRY----->${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].tickets}');
+                  'FERRY----->${itineraryDetailScreenController
+                      .itineraryDetailsListModel!.itinerary[widget.index]
+                      .tickets}');
               return itineraryDetailScreenController.itineraryDetailsListModel!
-                      .itinerary[widget.index].tickets.isNotEmpty
+                  .itinerary[widget.index].tickets.isNotEmpty
                   ? ListView.builder(
-                      itemCount: itineraryDetailScreenController
+                  itemCount: itineraryDetailScreenController
+                      .itineraryDetailsListModel!
+                      .itinerary[widget.index]
+                      .tickets
+                      .length,
+                  itemBuilder: (BuildContext context, int index) {
+                    print(
+                        'FERRY-LENGTH--->${itineraryDetailScreenController
+                            .itineraryDetailsListModel!.itinerary[widget.index]
+                            .tickets[index].name}');
+                    return userDetails(
+                      index: index + 1,
+                      name: itineraryDetailScreenController
                           .itineraryDetailsListModel!
                           .itinerary[widget.index]
-                          .tickets
-                          .length,
-                      itemBuilder: (BuildContext context, int index) {
-                        print(
-                            'FERRY-LENGTH--->${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].tickets[index].name}');
-                        return userDetails(
-                          name: itineraryDetailScreenController
+                          .tickets[index]
+                          .name,
+                      img:
+                      '$imageUrl${itineraryDetailScreenController
+                          .itineraryDetailsListModel!.itinerary[widget.index]
+                          .tickets[index].image}',
+                      ticketOnTap: () {
+                        Get.toNamed(
+                          FerryTicketPreviewScreen.routeName,
+                          arguments: itineraryDetailScreenController
                               .itineraryDetailsListModel!
                               .itinerary[widget.index]
                               .tickets[index]
-                              .name,
-                          img:
-                              '$imageUrl${itineraryDetailScreenController.itineraryDetailsListModel!.itinerary[widget.index].tickets[index].image}',
-                          ticketOnTap: () {
-                            Get.toNamed(
-                              FerryTicketPreviewScreen.routeName,
-                              arguments: itineraryDetailScreenController
-                                  .itineraryDetailsListModel!
-                                  .itinerary[widget.index]
-                                  .tickets[index]
-                                  .image,
-                            );
-                          },
+                              .image,
                         );
-                      })
+                      },
+                    );
+                  })
                   : Center(child: Text("No data found"));
             },
           ),

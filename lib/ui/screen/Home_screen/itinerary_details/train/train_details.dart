@@ -67,20 +67,20 @@ class _TrainDetailsState extends State<TrainDetails> {
                           ),
                         ],
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          detailTitle(text: "Arrive"),
-                          detailText(
-                            text: flightDepartDateAndTimeConverter(
-                              itineraryDetailScreenController
-                                  .itineraryDetailsListModel!
-                                  .itinerary[widget.index]
-                                  .arrivalDateTime,
-                            ),
-                          ),
-                        ],
-                      ),
+                      // Column(
+                      //   crossAxisAlignment: CrossAxisAlignment.start,
+                      //   children: [
+                      //     detailTitle(text: "Arrive"),
+                      //     detailText(
+                      //       text: flightDepartDateAndTimeConverter(
+                      //         itineraryDetailScreenController
+                      //             .itineraryDetailsListModel!
+                      //             .itinerary[widget.index]
+                      //             .arrivalDateTime,
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
                     ],
                   ),
                 ),
@@ -231,20 +231,20 @@ class _TrainDetailsState extends State<TrainDetails> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            detailTitle(text: "Depart"),
-                            detailText(
-                              text: flightDepartDateAndTimeConverter(
-                                itineraryDetailScreenController
-                                    .itineraryDetailsListModel!
-                                    .itinerary[widget.index]
-                                    .departDateTime,
-                              ),
-                            ),
-                          ],
-                        ),
+                        // Column(
+                        //   crossAxisAlignment: CrossAxisAlignment.start,
+                        //   children: [
+                        //     detailTitle(text: "Depart"),
+                        //     detailText(
+                        //       text: flightDepartDateAndTimeConverter(
+                        //         itineraryDetailScreenController
+                        //             .itineraryDetailsListModel!
+                        //             .itinerary[widget.index]
+                        //             .departDateTime,
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

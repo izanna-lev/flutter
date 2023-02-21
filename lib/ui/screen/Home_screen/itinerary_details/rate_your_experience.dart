@@ -73,7 +73,7 @@ class _RateYourExperienceState extends State<RateYourExperience> {
                       ],
                     ),
                     const SizedBox(height: 50),
-                    rateText(text: "Rate Specialist Experience"),
+                    rateText(text: "Rate Concierge Experience"),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

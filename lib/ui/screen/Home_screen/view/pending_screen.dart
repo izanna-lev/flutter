@@ -77,7 +77,7 @@ class _PendingScreenState extends State<PendingScreen> {
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 40),
                 child: Text(
-                  "Click the icon to submit your itinerary request. Once received, you will be matched with a specialist to create your travel plans. They will appear here.",
+                  "Click the icon to submit your itinerary request. Once received, you will be matched with a concierge to create your travel plans. They will appear here.",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 14,

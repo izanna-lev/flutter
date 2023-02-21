@@ -771,7 +771,7 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
       context: context,
       title: "Cancel Trip",
       content:
-          "Are you sure you want to request a cancellation? Different reservations will have different policies. Inform your specialist through chat.",
+          "Are you sure you want to request a cancellation? Different reservations will have different policies. Inform your concierge through chat.",
       policyText: "Cancellation Policy",
       contentSize: 1,
       policyTextOnTap: () {
@@ -800,7 +800,7 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
       context: context,
       title: "Are you sure you’re ready to approve?",
       content:
-          "By clicking approve, you are letting your specialist know that you are happy with the itinerary provided and ready to pay the amount listed. If you don’t have a payment method added, please click Confirm & Add Card below. Your selected payment method will be charged \$${itineraryDetailScreenController.itineraryDetailsListModel?.price} today and your specialist will proceed with bookings.",
+          "By clicking approve, you are letting your concierge know that you are happy with the itinerary provided and ready to pay the amount listed. If you don’t have a payment method added, please click Confirm & Add Card below. Your selected payment method will be charged \$${itineraryDetailScreenController.itineraryDetailsListModel?.price} today and your concierge will proceed with bookings.",
       contentSize: 1,
       noonTap: () {
         Get.back();
@@ -821,7 +821,7 @@ class _ItineraryDetailScreenState extends State<ItineraryDetailScreen> {
       context: context,
       title: "Are you sure you’re ready to approve?",
       content:
-          "By clicking approve, you are letting your specialist know that you are happy with the itinerary provided and ready to pay the amount listed. Your selected payment method will be charged\$${itineraryDetailScreenController.itineraryDetailsListModel?.price} today and your specialist will proceed with bookings. Please click Confirm & Pay to continue.",
+          "By clicking approve, you are letting your concierge know that you are happy with the itinerary provided and ready to pay the amount listed. Your selected payment method will be charged\$${itineraryDetailScreenController.itineraryDetailsListModel?.price} today and your concierge will proceed with bookings. Please click Confirm & Pay to continue.",
       contentSize: 1,
       noonTap: () {
         Get.back();

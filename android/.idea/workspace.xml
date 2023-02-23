@@ -4,17 +4,22 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="590e4762-4761-48c9-9101-89ec351549c7" name="Changes" comment="">
+    <list default="true" id="d04f9754-1fae-4363-a476-413385b939f2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/../.flutter-plugins" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/../.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Flutter_Plugins.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Dart_Packages.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ios/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Podfile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/ui/screen/Home_screen/itinerary_details/car/car_ticket_deatils_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/ui/screen/Home_screen/itinerary_details/car/car_ticket_deatils_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/ui/screen/Home_screen/itinerary_details/ferrry/ferry_ticket_deatils_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/ui/screen/Home_screen/itinerary_details/ferrry/ferry_ticket_deatils_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/ui/screen/Home_screen/itinerary_details/flight/flight_tickets_details_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/ui/screen/Home_screen/itinerary_details/flight/flight_tickets_details_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/ui/screen/Home_screen/itinerary_details/train/train_ticket_deatils_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/ui/screen/Home_screen/itinerary_details/train/train_ticket_deatils_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/ui/screen/notification/notification_utills.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/ui/screen/notification/notification_utills.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/ui/screen/notification/view/notification_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/ui/screen/notification/view/notification_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +35,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectId" id="2LzyAvdrzHeng23QJutm9XwGjHP" />
+  <component name="ProjectId" id="2M7rry7WOFBOuMpTA3ZISHxK0Fw" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -43,7 +48,7 @@
     "RunOnceActivity.cidr.known.project.marker": "true",
     "cidr.known.project.marker": "true",
     "dart.analysis.tool.window.visible": "false",
-    "memory.settings.postsync.last.time.stamp": "1676888104917",
+    "memory.settings.postsync.last.time.stamp": "1677129678763",
     "show.migrate.to.gradle.popup": "false"
   }
 }]]></component>
@@ -110,11 +115,11 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="590e4762-4761-48c9-9101-89ec351549c7" name="Changes" comment="" />
-      <created>1676888065408</created>
+      <changelist id="d04f9754-1fae-4363-a476-413385b939f2" name="Changes" comment="" />
+      <created>1677129664953</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1676888065408</updated>
+      <updated>1677129664953</updated>
     </task>
     <servers />
   </component>

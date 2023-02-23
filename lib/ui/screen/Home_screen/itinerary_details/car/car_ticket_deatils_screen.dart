@@ -69,7 +69,7 @@ class _CarTicketDetailsScreenState extends State<CarTicketDetailsScreen>
                     child: Text("Car Details"),
                   ),
                   Tab(
-                    child: Text("User Details"),
+                    child: Text("Traveler Details"),
                   ),
                 ],
               ),

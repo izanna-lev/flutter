@@ -74,7 +74,7 @@ class _FlightTicketsDetailsScreenState extends State<FlightTicketsDetailsScreen>
                     child: Text("Flight Details"),
                   ),
                   Tab(
-                    child: Text("User Details"),
+                    child: Text("Traveler Details"),
                   ),
                 ],
               ),

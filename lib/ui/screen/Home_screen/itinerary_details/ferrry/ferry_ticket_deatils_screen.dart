@@ -70,7 +70,7 @@ class _FerryTicketDetailsScreenState extends State<FerryTicketDetailsScreen>
                     child: Text("Ferry Details"),
                   ),
                   Tab(
-                    child: Text("User Details"),
+                    child: Text("Traveler Details"),
                   ),
                 ],
               ),

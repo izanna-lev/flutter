@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:ui';
-
+import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -343,12 +343,14 @@ class NotificationUtils {
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
       await NotificationUtils().handleNotificationData(message.data);
+      FlutterAppBadger.removeBadge();
     });
 
     // listen for foreground messages
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       // received the message while the app was foreground
       // here the notification is not shown automatically.
+      FlutterAppBadger.updateBadgeCount(1);
       baseScreenController.notiUnreadCount = true;
       baseScreenController.update();
       log("NOTIFICATION FirebaseMessaging.onMessage.listen ${message.data}");
@@ -359,9 +361,10 @@ class NotificationUtils {
         await NotificationUtils().handleNotificationData(value.data);
       }
     });
-    // FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
-    //   log("NOTIFICATION FirebaseMessaging.onMessage.listen $message.data");
-    //   await NotificationUtils().handleNewNotification(message, false);
-    // });
+    FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
+      log("NOTIFICATION FirebaseMessaging.onMessage.listen $message.data");
+      FlutterAppBadger.updateBadgeCount(2);
+      await NotificationUtils().handleNewNotification(message, true);
+    });
   }
 }

@@ -5,6 +5,7 @@ import 'package:pagination_view/pagination_view.dart';
 import 'package:tralever_module/custem_class/constant/app_images.dart';
 import 'package:tralever_module/models/notifications_model/traveller_notification_model.dart';
 import 'package:tralever_module/services/over&loding.dart';
+import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:tralever_module/ui/screen/chats/controller/chat_screen_controller.dart';
 
 import '../../../../custem_class/constant/app_colors.dart';
@@ -92,6 +93,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     travellerDetailsNotificationList.seen = true;
 
                     setState(() {
+                      FlutterAppBadger.removeBadge();
                       notificationScreenController
                           .travellerNotificationSeen(
                               notificationRef:

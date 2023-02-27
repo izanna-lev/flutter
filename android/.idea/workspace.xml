@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7afc0bbe-e47a-4cf5-a1fb-eb8f88a5f3e2" name="Changes" comment="">
+    <list default="true" id="cd6820f1-1388-4fb4-9c90-59c543648354" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/../.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/libraries/Dart_Packages.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/ui/screen/notification/notification_utills.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/ui/screen/notification/notification_utills.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/ui/screen/notification/view/notification_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/ui/screen/notification/view/notification_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -37,7 +34,7 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2MEHYSwHHFO4qYK4LCuTgYZsBPA" />
+  <component name="ProjectId" id="2MJBkK1H9oaL6guEJpsdI28Zpt9" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -45,14 +42,16 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ApkExportedModule": "android.app",
     "BundleExportedModule": "android.app",
+    "ExportApk.ApkPathForandroid.app": "/Users/nanditagandhi/StudioProjects/onsite_flutter1/android/app",
     "ExportBundle.BundlePathForandroid.app": "/Users/nanditagandhi/StudioProjects/onsite_flutter1/android/app",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "cidr.known.project.marker": "true",
     "dart.analysis.tool.window.visible": "false",
-    "memory.settings.postsync.last.time.stamp": "1677325900941",
+    "memory.settings.postsync.last.time.stamp": "1677475979171",
     "show.migrate.to.gradle.popup": "false"
   },
   "keyToStringList": {
@@ -124,11 +123,11 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="7afc0bbe-e47a-4cf5-a1fb-eb8f88a5f3e2" name="Changes" comment="" />
-      <created>1677325868664</created>
+      <changelist id="cd6820f1-1388-4fb4-9c90-59c543648354" name="Changes" comment="" />
+      <created>1677475946347</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1677325868664</updated>
+      <updated>1677475946347</updated>
     </task>
     <servers />
   </component>
